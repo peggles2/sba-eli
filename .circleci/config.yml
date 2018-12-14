@@ -100,11 +100,102 @@ jobs:
           paths:
             - node_modules
 
+  build:
+    docker:
+      - image: circleci/python:2.7-stretch
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo pip install awscli
+      - run:
+          name: Generate AWS ECR Login
+          command: |
+            echo "Configuring AWS..."
+            aws configure set default.region $AWS_DEFAULT_REGION
+            aws configure set default.output json
+            login="$(aws ecr get-login --no-include-email)"
+            ${login}
+      - run:
+          name: Build Images with Docker-Compose
+          command: |
+            docker-compose build
+          no_output_timeout: 30m
+      - run:
+          name: Tag Images
+          command: |
+            echo "Tagging images..."
+            images=$(cat docker-compose.yml | grep 'image: ' | cut -d':' -f 2 | tr -d '"')
+            git_hash=$(git rev-parse --short HEAD)
+            for image in $images
+            do
+              aws ecr create-repository --region "${AWS_DEFAULT_REGION}" --repository "${image}" || true
+              docker tag "${image}" "${image}":"${git_hash}"
+              docker tag "${image}":"${git_hash}" "${ECR_URI}"/"${image}":"${git_hash}"
+              docker tag "${image}" "${image}":unstable
+              docker tag "${image}":unstable "${ECR_URI}"/"${image}":unstable
+             done
+      - run:
+          name: Push Images
+          command: |
+            echo "Pushing images..."
+            images=$(cat docker-compose.yml | grep 'image: ' | cut -d':' -f 2 | tr -d '"')
+            git_hash=$(git rev-parse --short HEAD)
+            for image in $images
+            do
+              docker push "${ECR_URI}"/"${image}":"${git_hash}"
+              docker push "${ECR_URI}"/"${image}":unstable
+            done
+
+  deploy:
+    docker:
+      - image: circleci/python:2.7-stretch
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install ECS-Deploy
+          command: |
+            pip install ecs-deploy --user
+      - run:
+          name: Run Database Migration
+          command: |
+            /home/circleci/.local/bin/ecs run $ECS_CLUSTER $BACKEND_TASK -c $BACKEND_CONTAINER "bin/rails db:migrate RAILS_ENV=development"
+      - run:
+          name: Deploy Service Layer
+          command: |
+            /home/circleci/.local/bin/ecs deploy $ECS_CLUSTER $BACKEND_SERVICE --timeout 600
+      - run:
+          name: Deploy Front End
+          command: |
+            /home/circleci/.local/bin/ecs deploy $ECS_CLUSTER $FRONTEND_SERVICE --timeout 600
+
 
 workflows:
   version: 2
-  rubocop_and_rspec:
+  test_build_deploy:
     jobs:
       - rubocop
       - rspec
       - eslint
+      - build:
+          requires:
+            - rubocop
+            - rspec
+            - eslint
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - rubocop
+            - rspec
+            - eslint
+            - build
+          filters:
+            branches:
+              only: master

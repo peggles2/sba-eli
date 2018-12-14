@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Accordion, Icon } from "semantic-ui-react";
-import axios from "axios";
 import TopicEventList from "./TopicEventList";
 
 export default class TopicSideBar extends Component {
