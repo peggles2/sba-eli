@@ -6,6 +6,7 @@ import TopicSideBar from "../TopicSideBar/TopicSidebar";
 import TopicContentView from "../TopicContentView/TopicContentView";
 import LearningEvent from "../LearningEvent/LearningEvent";
 import LearningPathBreadCrumb from "./LearningPathBreadcrumb";
+import MetaTags from '../SEO/MetaTags'
 
 class LearningPath extends React.Component {
   state = {
@@ -100,6 +101,9 @@ class LearningPath extends React.Component {
 
     return (
       <div>
+        <MetaTags metaTitle={this.state.learningPath.name}
+                metaDescription={this.state.learningPath.description}
+                canonicalUrl={`https://sba.gov/learning_paths/${this.props.match.params.id}`}/>
         <LearningPathBreadCrumb
           pathName={this.state.learningPath.name}
           {...breadCrumbProps}

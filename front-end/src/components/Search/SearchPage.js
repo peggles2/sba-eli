@@ -6,6 +6,7 @@ import axios from "axios";
 import queryString from 'query-string';
 import SearchFacets from "./SearchFacets";
 import SearchResults from "./SearchResults";
+import MetaTags from '../SEO/MetaTags'
 
 export default class SearchPage extends Component {
 
@@ -151,6 +152,9 @@ export default class SearchPage extends Component {
 
     return (
         <Grid stackable className='search_page'>
+        <MetaTags metaTitle="SBA Search"
+                metaDescription="Description for the SBA Search"
+                canonicalUrl="https://sba.gov/search" />
           <Grid.Row centered className='search_page_header'>
               <Grid.Column width={12}>
                 <Header tabIndex="0" as='h1'>{this.searchText()}</Header>

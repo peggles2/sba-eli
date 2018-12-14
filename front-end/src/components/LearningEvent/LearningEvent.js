@@ -1,8 +1,10 @@
+
+import "./learningEvent.css";
 import React, { Component } from "react";
+import { Header, Container } from "semantic-ui-react";
 import axios from "axios";
 import LearningEventManager from "./LearningEventManager";
-import "./learningEvent.css";
-import { Header, Container } from "semantic-ui-react";
+import MetaTags from '../SEO/MetaTags'
 
 export default class LearningEvent extends Component {
   constructor(props) {
@@ -51,6 +53,9 @@ export default class LearningEvent extends Component {
 
     return (
       <Container>
+        <MetaTags metaTitle={event.title}
+                metaDescription={event.description}
+                canonicalUrl=""/>
         <Header as="h1">{event.title}</Header>
         <LearningEventManager event={event} />
       </Container>
