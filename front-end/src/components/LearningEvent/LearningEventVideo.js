@@ -8,7 +8,7 @@ import "./Slider.css"
 
 export default class LearningEventVideo extends Component {
   state = {
-    url: "http://movietrailers.apple.com/movies/marvel/avengers-endgame/avengers-endgame-trailer-1_h720p.mov",
+    url: "http://movietrailers.apple.com/movies/marvel/avengers-endgame/avengers-endgame-trailer-1_a720p.m4v",
     playing: false,
     volume: 0.8,
     muted: false,
@@ -17,7 +17,9 @@ export default class LearningEventVideo extends Component {
     loaded: 0,
     duration: 0,
     playbbackRate: 1.0,
-    loop: false
+    loop: false,
+    height: 480,
+    width: 848
   }
 
   playPause = () => {
@@ -64,23 +66,35 @@ export default class LearningEventVideo extends Component {
   }
 
   render() {
-    const learningObjective = "Learning Objective";
-    const title = this.props.title 
-    const { url, playing, volume, muted,  pip, played, loaded, duration, playbackRate, loop } = this.state
+    const { url, playing, volume, muted,  pip, played, loaded, duration, playbackRate, loop, height, width } = this.state
     const vidLength = <Duration seconds={duration} />;
 
+    const playerControlsStyle = {
+      width: width,
+      marginTop: '-5px',
+      overflow: 'auto',
+      padding: '15px 20px 15px 20px',
+      backgroundColor: '#000000',
+      opacity: 0.9
+    };
+
     const seekStyle = {
-      width: '640px'
+      width: '385px',
+      marginLeft: '20px'
     };
 
     const volStyle = {
       width: '50px'
     };
 
+    const durationStyle = {
+      marginLeft: '25px',
+      marginRight: '25px',
+      color: '#FFFFFF',
+    }
+
     return(
       <div>
-        <h3>{learningObjective}</h3>
-        <Header as="h1">{title}</Header>
         <em>Exercise ({vidLength} minutes)</em>
         <div className="player-wrapper">
           <ReactPlayer
@@ -92,12 +106,28 @@ export default class LearningEventVideo extends Component {
             playbackRate={playbackRate}
             volume={volume}
             muted={muted}
+            height={height}
+            width={width}
             onProgress={this.onProgress}
             onDuration={this.onDuration}
           />
         </div>
-        <div className="player-controls" style={{width: '640px'}}>
-          <div className="seek-controls">
+        <div className="player-controls" style={playerControlsStyle}>
+          <Button.Group basic color='black' icon>
+            <Button onClick={this.playPause} aria-label="play">
+              {playing ? <Icon name='pause' size='big' inverted color='grey'/> : <Icon name='play' size='big' inverted color='grey' />}
+            </Button>
+          <Button icon basic onClick={this.toggleMuted} aria-label="mute">
+            {muted ? <Icon name='volume off' size='big' inverted color='grey'/> : <Icon name='volume up' size='big' inverted color='grey'/>}
+          </Button>
+          </Button.Group>
+          <input type='range' min={0} max={1} step='any'
+            value={volume}
+            onChange={this.setVolume}
+            style={volStyle}
+            class="volumeSlider"
+          />
+          <span className="seek-bar" style={{ marginTop: '15px'}}>
             <input
               type='range' min={0} max={1} step='any'
               value={played}
@@ -107,34 +137,16 @@ export default class LearningEventVideo extends Component {
               style={seekStyle}
               class="slider"
             />
-          </div>
-          <div className="elapsed-time" style={{float: 'right'}}>
-            <Duration seconds={duration * played} />/<Duration seconds={duration} />
-          </div>
-          <div className="bottom-controls" style={{paddingTop: "30px"}}>
-            <Button.Group basic icon>
-              <Button onClick={this.playPause}>
-                {playing ? <Icon name='pause' size='big'/> : <Icon name='play' size='big' />}
-              </Button>
-            </Button.Group>
-            <Button icon basic onClick={this.toggleMuted}>
-              {muted ? <Icon name='volume off' size='big'/> : <Icon name='volume up' size='big'/>}
+            <span style={durationStyle}><b><Duration seconds={duration * played} /></b> / <Duration seconds={duration} /></span>
+          </span>
+          <Button.Group basic icon color='black' floated='right'>
+            <Button aria-label='closed captioning'>
+              <Icon name='closed captioning' size='big' color='orange'/>
             </Button>
-            <input type='range' min={0} max={1} step='any'
-              value={volume}
-              onChange={this.setVolume}
-              style={volStyle}
-              class="slider"
-            />
-            <Button.Group basic icon floated='right'>
-              <Button>
-                <Icon name='closed captioning outline' size='big'/>
-              </Button>
-              <Button onClick={this.onClickFullscreen}>
-                <Icon name='expand' size='big' />
-              </Button>
-            </Button.Group>
-          </div>
+            <Button onClick={this.onClickFullscreen} aria-label='fullscreen'>
+              <Icon name='expand' size='big' inverted color='grey' />
+            </Button>
+          </Button.Group>
         </div>
       </div>
     )

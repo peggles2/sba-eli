@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
+import LearningEventHeader from "./LearningEventHeader"
 import LearningEventManager from "./LearningEventManager";
+import LearningEventFooter from "./LearningEventFooter";
 import "./learningEvent.css";
-import { Header, Container } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 
 export default class LearningEvent extends Component {
   constructor(props) {
@@ -51,8 +53,9 @@ export default class LearningEvent extends Component {
 
     return (
       <Container>
-        <Header as="h1">{event.title}</Header>
+        <LearningEventHeader event={event}/>
         <LearningEventManager event={event} />
+        <LearningEventFooter />
       </Container>
     );
   }
