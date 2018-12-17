@@ -10,7 +10,7 @@ const Dashboard = () => {
     <div>
       <MetaTags metaTitle="SBA Dashboard"
                 metaDescription="Description for the dashboard"
-                canonicalUrl=""/>
+                canonicalUrl="https://sba.gov/eli"/>
       <DashboardSplash />
       <Divider hidden />
       <LearningPaths />
