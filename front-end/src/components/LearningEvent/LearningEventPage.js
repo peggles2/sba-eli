@@ -6,13 +6,11 @@ export default class LearningEventPage extends Component {
     const __html = this.props.event.eventContent.body;
 
     return (
-      <Container>
         <div
           dangerouslySetInnerHTML={{
             __html: __html
           }}
         />
-      </Container>
     );
   }
 }

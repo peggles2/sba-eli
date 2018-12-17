@@ -14,7 +14,7 @@ class LearningEventsController < ApplicationController
       params[:course_id],
       params[:module_id],
       params[:id],
-      params,
+      params, 
     )
     render json: @event, status: :ok
   end

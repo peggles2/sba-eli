@@ -67,6 +67,10 @@
 #  index_courses_on_template_course_id                 (template_course_id)
 #  index_courses_on_uuid                               (uuid)
 #  index_courses_on_wiki_id                            (wiki_id) WHERE (wiki_id IS NOT NULL)
+#  index_gin_trgm_courses_composite_search             ((((((COALESCE(lower((name)::text), ''::text) || ' '::text) || COALESCE(lower((sis_source_id)::text), ''::text)) || ' '::text) || COALESCE(lower((course_code)::text), ''::text))) gin_trgm_ops) USING gin
+#  index_trgm_courses_course_code                      (lower((course_code)::text) gist_trgm_ops) USING gist
+#  index_trgm_courses_name                             (lower((name)::text) gist_trgm_ops) USING gist
+#  index_trgm_courses_sis_source_id                    (lower((sis_source_id)::text) gist_trgm_ops) USING gist
 #
 # Foreign Keys
 #

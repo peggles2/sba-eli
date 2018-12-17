@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import LearningEventManager from "./LearningEventManager";
 import "./learningEvent.css";
-import { Header, Container } from "semantic-ui-react";
+import { Header, Container, Divider } from "semantic-ui-react";
 
 export default class LearningEvent extends Component {
   constructor(props) {
@@ -52,6 +52,7 @@ export default class LearningEvent extends Component {
     return (
       <Container>
         <Header as="h1">{event.title}</Header>
+        <Divider />
         <LearningEventManager event={event} />
       </Container>
     );
