@@ -18,8 +18,8 @@ export default class LearningEventVideo extends Component {
     duration: 0,
     playbbackRate: 1.0,
     loop: false,
-    height: 480,
-    width: 848
+    height: '100%',
+    width: '100%'
   }
 
   playPause = () => {
@@ -66,7 +66,7 @@ export default class LearningEventVideo extends Component {
   }
 
   render() {
-    const { url, playing, volume, muted,  pip, played, loaded, duration, playbackRate, loop, height, width } = this.state
+    const { url, playing, volume, muted,  pip, played, duration, playbackRate, loop, height, width } = this.state
     const vidLength = <Duration seconds={duration} />;
 
     const playerControlsStyle = {
@@ -79,7 +79,7 @@ export default class LearningEventVideo extends Component {
     };
 
     const seekStyle = {
-      width: '385px',
+      width: '450px',
       marginLeft: '20px'
     };
 
@@ -96,6 +96,9 @@ export default class LearningEventVideo extends Component {
     return(
       <div>
         <em>Exercise ({vidLength} minutes)</em>
+        <Button icon floated='right' as='a' href={url} download>
+          <Icon name='download' size='large'/>
+        </Button>
         <div className="player-wrapper">
           <ReactPlayer
             ref={this.ref}

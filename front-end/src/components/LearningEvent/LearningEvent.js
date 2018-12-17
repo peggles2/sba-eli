@@ -52,7 +52,7 @@ export default class LearningEvent extends Component {
     const event = this.state.learningEvent;
 
     return (
-      <Container>
+      <Container className="learning-event-container">
         <LearningEventHeader event={event}/>
         <LearningEventManager event={event} />
         <LearningEventFooter />
