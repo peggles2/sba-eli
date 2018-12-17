@@ -5,6 +5,17 @@
   border-radius: 0.28571429rem;
 }
 
+.topic-content-select {
+  padding-bottom: 2em !important;
+  padding-left: 1em !important;
+  padding-right: 1em !important;
+}
+
+/* TopicContentItem */
+.events-list-accordion-title {
+  display: none;
+}
+
 .topic-content-item-group {
   margin-top: 0 !important;
 }
@@ -26,14 +37,9 @@
   float: right;
   margin-right: 2% !important;
 }
-.topic-content-share-button-icon {
-  margin: 0 !important;
-}
 
-.topic-content-select {
-  padding-bottom: 2em !important;
-  padding-left: 1em !important;
-  padding-right: 1em !important;
+.topic-content-collapse-button {
+  float: left;
 }
 
 /* TopicContentEventList */

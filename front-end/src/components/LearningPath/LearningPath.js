@@ -114,7 +114,7 @@ export default class LearningPath extends React.Component {
           <Grid.Column mobile={15} tablet={15} computer={15}>
             <Header as="h2" className={"path-header"}>
               {this.state.learningPath.name}
-              <Button className={"path-header-share"}>
+              <Button className={"path-header-share mobile hidden"}>
                 Share &nbsp; <Icon name={"share"} />
               </Button>
             </Header>
@@ -131,7 +131,13 @@ export default class LearningPath extends React.Component {
           >
             <TopicSideBar {...sideBarProps} />
           </Grid.Column>
-          <Grid.Column mobile={15} tablet={11} computer={11} largeScreen={11} widescreen={11}>
+          <Grid.Column
+            mobile={15}
+            tablet={11}
+            computer={11}
+            largeScreen={11}
+            widescreen={11}
+          >
             {this.renderRightColumnContent()}
           </Grid.Column>
         </Grid.Row>

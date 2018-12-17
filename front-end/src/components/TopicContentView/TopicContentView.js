@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Item, Divider, Button, Icon, Dropdown } from "semantic-ui-react";
 import TopicContentEventList from "./TopicContentEventList";
 import "./topicContentView.css";
+import TopicContentItem from "./TopicContentItem";
 
 export default class TopicContentView extends Component {
-  topicListOptions() {
+  renderTopicSelect() {
     if (this.props.topicsList.length) {
       const topics = this.props.topicsList;
       const options = topics.map((topic, idx) => {
@@ -33,7 +34,7 @@ export default class TopicContentView extends Component {
 
   renderTopicsList(topicsList) {
     if (topicsList.length) {
-      return topicsList.map(topic => {
+      return topicsList.map((topic, idx) => {
         let ref = "topic" + topic.id.toString();
         this[ref] = React.createRef();
         return (
@@ -42,36 +43,7 @@ export default class TopicContentView extends Component {
             className={"topic-content-view"}
             ref={this[ref]}
           >
-            <Item.Group className={"topic-content-item-group"}>
-              <Item className="topic-content-item">
-                <Item.Image
-                  src="https://via.placeholder.com/400"
-                  className={"computer large screen widescreen only"}
-                />
-
-                <Item.Content>
-                  <Item.Header className={"topic-content-item-header"}>
-                    {topic.name}
-                  </Item.Header>
-                  <Item.Meta># of Learning Events (Time)</Item.Meta>
-                  <Item.Description>
-                    This is a desciption for the Topic: {topic.name}
-                  </Item.Description>
-                  <Divider />
-                  <Button className={"topic-content-share-button"}>
-                    <Icon
-                      className={"topic-content-share-button-icon"}
-                      name={"share"}
-                    />
-                  </Button>
-                </Item.Content>
-              </Item>
-            </Item.Group>
-
-            <TopicContentEventList
-              course_id={this.props.course_id}
-              module_id={topic.id}
-            />
+            <TopicContentItem topic={topic} course_id={this.props.course_id} />
           </div>
         );
       });
@@ -88,7 +60,7 @@ export default class TopicContentView extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.topicListOptions()}
+        {this.renderTopicSelect()}
         {this.renderTopicsList(this.props.topicsList)}
       </React.Fragment>
     );
