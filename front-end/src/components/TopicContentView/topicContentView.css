@@ -30,6 +30,7 @@
 
 .topic-content-item-header {
   padding-top: 20px !important;
+  font-size: 1.75em;
   color: #61656b !important;
 }
 
@@ -43,25 +44,33 @@
 }
 
 /* TopicContentEventList */
-.event-list-item-group {
+.topic-content-event-grid {
   margin-top: 0 !important;
-}
-
-.topic-content-event-item {
   margin: 0 !important;
   padding: 1em 2em !important;
   border-bottom: 1px solid rgba(34, 36, 38, 0.15) !important;
 }
 
-.topic-content-event-item:hover {
+.topic-content-event-grid:hover {
   background-color: #f2f3f4 !important;
 }
 
-.topic-content-event-item-header > a:hover {
+.topic-content-event-grid-icon {
+  color: #0b2f6b;
+  font-size: 45px !important;
+}
+
+.topic-content-event-grid-header {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.topic-content-event-grid-header:hover {
   color: #fe664c !important;
   text-decoration: underline;
 }
 
-.topic-content-event-item-meta {
+.topic-content-event-grid-meta {
+  color: #61656b;
   font-style: italic;
 }
