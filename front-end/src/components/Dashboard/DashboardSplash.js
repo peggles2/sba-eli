@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import { Grid, Header, Button } from "semantic-ui-react";
-import { connect } from "react-redux";
-
-import { toggleModal } from '../../actions/aboutModalActions'
 
 class DashboardSplash extends Component {
   render() {
@@ -32,17 +29,14 @@ class DashboardSplash extends Component {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Button size="huge" onClick={() => {
-              this.props.dispatch(toggleModal(true));            
-              this.props.history.push("/learning_paths");
-            }}>Begin Your Journey</Button>
-              
+          <Button size="huge" onClick={() => this.props.history.push({
+            pathname: "/learning_paths",
+            state: {showModal: true}
+            })}>Begin Your Journey</Button>
         </Grid.Row>
       </Grid>
     );
   }
 }
 
-export default connect((store) => {
-  return {}
-})(withRouter(DashboardSplash));
+export default withRouter(DashboardSplash);
