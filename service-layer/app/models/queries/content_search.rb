@@ -10,6 +10,8 @@ module Queries
 
     private
 
+    # This method prepares incoming peramters to be utilized in constructing the
+    # SQL to be executed.
     def prepare(params)
       check_like_value(:keywords, params)
       check_array_value(:subjects, params)
@@ -21,6 +23,7 @@ module Queries
       check_single_value(:workflow_state, params, "active")
     end
 
+    # Constructs the SQL to be executed.
     def sql
       <<-SQL
         -- Search learning paths
@@ -100,6 +103,8 @@ module Queries
       SQL
     end
 
+    # contructs the SQL to search for custom tags within the database. These are
+    # used for searching durations, media_types and subjects
     def construct_all_tags_serach(table, field)
       sql_array = [subjects, media_types, durations].map { |a| a if a.any? }.compact
       sql_strings = sql_array.map do |values|
@@ -108,10 +113,12 @@ module Queries
       "AND " + sql_strings.join(" AND ") unless sql_strings.empty?
     end
 
+    # Constructs sql to search a specific canvas account
     def construct_account_clause(table = "c")
       "AND #{table}.account_id = #{sanitize(account_id)}" if account_id.present?
     end
 
+    # Constructs sql to search for a given workflow status (active state 'available')
     def construct_course_worklow_clause
       if workflow_state == "active"
         "AND c.workflow_state = 'available'"
@@ -120,6 +127,7 @@ module Queries
       end
     end
 
+    # Constructs sql to search for a given workflow status (active state 'active')
     def construct_generic_workflow_clause(table)
       if workflow_state == "active"
         "AND #{table}.workflow_state = 'active'"
@@ -128,6 +136,7 @@ module Queries
       end
     end
 
+    # Generates SQL for non-casse sensitive search
     def construct_ilike_search(table, field, value, concat = "AND")
       "#{concat} #{table}.#{field} ILIKE '#{sanitize(value)}'" if value.present?
     end
@@ -136,6 +145,7 @@ module Queries
       construct_ilike_search(table, field, keywords)
     end
 
+    # Generates SQL to search for custom tags
     def construct_tag_search(table, field, values)
       values.map { |v| construct_ilike_search(table, field, v, "") }.join(" OR ")
     end

@@ -9,7 +9,7 @@
 #
 # For this query, you would not want to use the ActiveRecord find_by_sql method
 # because the result set would contain more than just one model type. Queryable
-# addressese this by letting you create a generic Ruby class and including the
+# addresses this by letting you create a generic Ruby class and including the
 # Querable concern. For example:
 #
 #   class Result
@@ -140,7 +140,7 @@ module Queryable
       end
     end
 
-    # Convenience method for sanitizin a SQL Statement
+    # Convenience method for sanitizing a SQL Statement
     def sanitize_sql(sql)
       ActiveRecord::Base.sanitize_sql(sql)
     end
