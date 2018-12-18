@@ -25,7 +25,7 @@ ShallowWrapper {
               <GridColumn
                 computer={16}
                 mobile={16}
-                tablet={8}
+                tablet={16}
               >
                 <NavigationDisplay />
               </GridColumn>
@@ -47,7 +47,7 @@ ShallowWrapper {
               <GridColumn
                 computer={16}
                 mobile={16}
-                tablet={8}
+                tablet={16}
               >
                 <NavigationDisplay />
               </GridColumn>
@@ -68,7 +68,7 @@ ShallowWrapper {
                 <GridColumn
                   computer={16}
                   mobile={16}
-                  tablet={8}
+                  tablet={16}
                 >
                   <NavigationDisplay />
                 </GridColumn>
@@ -96,7 +96,7 @@ ShallowWrapper {
                 <GridColumn
                   computer={16}
                   mobile={16}
-                  tablet={8}
+                  tablet={16}
                 >
                   <NavigationDisplay />
                 </GridColumn>
@@ -111,7 +111,7 @@ ShallowWrapper {
                 "children": <GridColumn
                   computer={16}
                   mobile={16}
-                  tablet={8}
+                  tablet={16}
                 >
                   <NavigationDisplay />
                 </GridColumn>,
@@ -125,7 +125,7 @@ ShallowWrapper {
                   "children": <NavigationDisplay />,
                   "computer": 16,
                   "mobile": 16,
-                  "tablet": 8,
+                  "tablet": 16,
                 },
                 "ref": null,
                 "rendered": Object {
@@ -164,7 +164,7 @@ ShallowWrapper {
                 <GridColumn
                   computer={16}
                   mobile={16}
-                  tablet={8}
+                  tablet={16}
                 >
                   <NavigationDisplay />
                 </GridColumn>
@@ -186,7 +186,7 @@ ShallowWrapper {
                 <GridColumn
                   computer={16}
                   mobile={16}
-                  tablet={8}
+                  tablet={16}
                 >
                   <NavigationDisplay />
                 </GridColumn>
@@ -207,7 +207,7 @@ ShallowWrapper {
                   <GridColumn
                     computer={16}
                     mobile={16}
-                    tablet={8}
+                    tablet={16}
                   >
                     <NavigationDisplay />
                   </GridColumn>
@@ -235,7 +235,7 @@ ShallowWrapper {
                   <GridColumn
                     computer={16}
                     mobile={16}
-                    tablet={8}
+                    tablet={16}
                   >
                     <NavigationDisplay />
                   </GridColumn>
@@ -250,7 +250,7 @@ ShallowWrapper {
                   "children": <GridColumn
                     computer={16}
                     mobile={16}
-                    tablet={8}
+                    tablet={16}
                   >
                     <NavigationDisplay />
                   </GridColumn>,
@@ -264,7 +264,7 @@ ShallowWrapper {
                     "children": <NavigationDisplay />,
                     "computer": 16,
                     "mobile": 16,
-                    "tablet": 8,
+                    "tablet": 16,
                   },
                   "ref": null,
                   "rendered": Object {
