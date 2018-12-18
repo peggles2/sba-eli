@@ -34,6 +34,7 @@ ShallowWrapper {
           </Header>
           <LearningPathAbout
             handleClose={[Function]}
+            open={false}
           />
         </Container>,
         <Divider
@@ -59,6 +60,7 @@ ShallowWrapper {
             </Header>,
             <LearningPathAbout
               handleClose={[Function]}
+              open={false}
             />,
           ],
           "textAlign": "center",
@@ -83,7 +85,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "handleClose": [Function],
-              "open": undefined,
+              "open": false,
             },
             "ref": null,
             "rendered": null,
@@ -142,6 +144,7 @@ ShallowWrapper {
             </Header>
             <LearningPathAbout
               handleClose={[Function]}
+              open={false}
             />
           </Container>,
           <Divider
@@ -167,6 +170,7 @@ ShallowWrapper {
               </Header>,
               <LearningPathAbout
                 handleClose={[Function]}
+                open={false}
               />,
             ],
             "textAlign": "center",
@@ -191,7 +195,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "handleClose": [Function],
-                "open": undefined,
+                "open": false,
               },
               "ref": null,
               "rendered": null,
