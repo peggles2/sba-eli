@@ -61,5 +61,6 @@
 
 .event-list-item-icon {
   color: #0b2f6b;
-  padding: 0 1.5em !important;
+  padding-right: 1.5em !important;
+  padding-left: 1em !important;
 }

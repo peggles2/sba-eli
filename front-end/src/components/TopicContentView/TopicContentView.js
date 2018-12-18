@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Item, Divider, Button, Icon, Dropdown } from "semantic-ui-react";
-import TopicContentEventList from "./TopicContentEventList";
+import { Dropdown } from "semantic-ui-react";
 import "./topicContentView.css";
 import TopicContentItem from "./TopicContentItem";
 

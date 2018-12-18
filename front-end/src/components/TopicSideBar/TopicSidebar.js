@@ -24,39 +24,39 @@ export default class TopicSideBar extends Component {
     const { activeIndex } = this.state;
 
     if (objectives.length) {
-      return objectives.map((objective, idx) => {
-        return (
-          <React.Fragment key={"topicSidebar" + idx}>
-            <Accordion.Title
-              active={activeIndex === idx}
-              index={idx}
-              onClick={this.handleClick}
-              className={"topic-accordion-title"}
-            >
-              <div className={"topic-number-circle"}>{idx + 1}</div>
-              {objective.name}
-            </Accordion.Title>
-            <Accordion.Content
-              active={activeIndex === idx}
-              className={"topic-accordion-content"}
-            >
-              <TopicEventList
-                course_id={this.props.course_id}
-                module_id={objective.id}
-              />
-            </Accordion.Content>
-          </React.Fragment>
-        );
-      });
+      return (
+        <Accordion className={"topic-accordion"}>
+          {objectives.map((objective, idx) => {
+            return (
+              <React.Fragment key={"topicSidebar" + idx}>
+                <Accordion.Title
+                  active={activeIndex === idx}
+                  index={idx}
+                  onClick={this.handleClick}
+                  className={"topic-accordion-title"}
+                >
+                  <div className={"topic-number-circle"}>{idx + 1}</div>
+                  {objective.name}
+                </Accordion.Title>
+                <Accordion.Content
+                  active={activeIndex === idx}
+                  className={"topic-accordion-content"}
+                >
+                  <TopicEventList
+                    course_id={this.props.course_id}
+                    module_id={objective.id}
+                  />
+                </Accordion.Content>
+              </React.Fragment>
+            );
+          })}
+        </Accordion>
+      );
     }
-    return <div />;
+    return null;
   }
 
   render() {
-    return (
-      <Accordion className={"topic-accordion"}>
-        {this.renderTopicsList(this.props.topicsList)}
-      </Accordion>
-    );
+    return this.renderTopicsList(this.props.topicsList);
   }
 }
