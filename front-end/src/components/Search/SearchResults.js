@@ -5,24 +5,24 @@ import {Link} from "react-router-dom";
 export default class SearchResults extends Component {
 
   constructUri(id, metadataObject) {
-    if (id === undefined
-        && metadataObject !== undefined) {
-
+    if (id && metadataObject) {
       let uri = '/learning_paths/'
-      if (metadataObject.learning_path_id !== undefined) {
+      if (metadataObject.learning_path_id) {
         uri += metadataObject.learning_path_id
-        if (metadataObject.learning_objective_id !== undefined) {
+        if (metadataObject.learning_objective_id) {
           uri += `/learning_objectives/` + metadataObject.learning_objective_id
-          uri += `/learning_events/` + id
-        } else {
-          uri += `/learning_objectives/` + id
-        }
-      } else {
-        uri += id
+          if (metadataObject.learning_event_id) {
+            uri += `/learning_events/` + metadataObject.learning_event_id
+          }
+        } 
       }
       return uri
     }
     return ''
+  }
+
+  getImage(thumbnail) {
+    return thumbnail ? thumbnail : "https://picsum.photos/200"
   }
 
   render() {
@@ -31,7 +31,7 @@ export default class SearchResults extends Component {
           <Grid.Column width={5}>
             <div className="search_result_image">
               <Link to={this.constructUri(sr.id, sr.meta_data)}>
-                <img className="search_result_image" src={sr.thumbnail} title={sr.name} alt={sr.name}/>
+                <img className="search_result_image" src={this.getImage(sr.thumbnail)} title={sr.name} alt={sr.name}/>
               </Link>
             </div>
           </Grid.Column>

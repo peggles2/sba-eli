@@ -23,14 +23,14 @@ describe('SearchPage', () => {
     const wrapper = shallow(<SearchPage location={urlString}/>);
 
     expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toEqual("No search term entered");
+    expect(wrapper.find(Header).render().text()).toEqual("All Results");
   });
 
   it('should display blank, without an error, if no search string is available', () => {
     const wrapper = shallow(<SearchPage location={{search: ''}}/>);
 
     expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toEqual("No search term entered");
+    expect(wrapper.find(Header).render().text()).toEqual("All Results");
   });
 
   it('should not execute script tags in the search input box', () => {
