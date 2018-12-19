@@ -7,7 +7,7 @@ export default class LearningPathBreadCrumb extends Component {
     return (
       <Breadcrumb>
         <Breadcrumb.Section href="/">Home</Breadcrumb.Section>
-        <Breadcrumb.Divider icon="right angle" />
+        <Breadcrumb.Divider icon="triangle right" />
         <Breadcrumb.Section href={`/learning_paths/${id}`}>
           {this.props.pathName}
         </Breadcrumb.Section>

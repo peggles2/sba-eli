@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "semantic-ui-react";
+import { Header, Grid } from "semantic-ui-react";
 import LearningPath from "../LearningPath";
 import LearningEvent from "../../LearningEvent/LearningEvent";
 import MetaTags from "../../SEO/MetaTags";
@@ -29,7 +29,7 @@ describe("LearningPath", () => {
     const match = { params: { id: 1 } };
     const wrapper = shallow(<LearningPath match={match} />);
 
-    expect(wrapper.find("div").length).toEqual(1);
+    expect(wrapper.find(Grid).exists()).toBe(true);
     expect(wrapper.find(Header).exists()).toBe(true);
     expect(wrapper.find(TopicContentView).exists()).toBe(true);
   });
@@ -39,7 +39,7 @@ describe("LearningPath", () => {
 
     const wrapper = shallow(<LearningPath match={match} />);
 
-    expect(wrapper.find("div").length).toEqual(1);
+    expect(wrapper.find(Grid).exists()).toBe(true);
     expect(wrapper.find(Header).exists()).toBe(true);
     expect(wrapper.find(LearningEvent).exists()).toBe(true);
   });
