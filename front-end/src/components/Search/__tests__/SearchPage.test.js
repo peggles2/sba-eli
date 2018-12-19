@@ -20,7 +20,7 @@ describe('SearchPage', () => {
     //TODO: add Canonical URL validation when we have final urls
   });
 
-  it('should render an <Header> that dislpays the search term', () => {
+  it('should render a <Header> that dislpays the search term', () => {
     let searchTerm = "leadership"
     let urlString = {search: "?mediaType=podcast&mediaType=assessment&mediaType=tools&searchTerm=" + searchTerm}
 
