@@ -12,6 +12,13 @@ export default class NavigationLearningEvent extends Component {
     };
   }
 
+  static getEventPath(course_id, module_id, event_id){
+      return (
+          `/learning_paths/${course_id}` +
+          `/learning_objectives/${module_id}` +
+          `/learning_events/${event_id}`)
+  }
+
   componentDidMount() {
     this.fetchData();
   }
@@ -40,10 +47,7 @@ export default class NavigationLearningEvent extends Component {
       const course_id = this.props.learningPathId;
       const module_id = this.props.learningObjectiveId;
       return learningEvents.map(event => {
-        const path =
-          `/learning_paths/${course_id}` +
-          `/learning_objectives/${module_id}` +
-          `/learning_events/${event.id}`;
+        const path = NavigationLearningEvent.getEventPath(course_id, module_id, event.id)
         return (
           <NavigationLearningEventItem
             key={event.id + course_id + module_id}
