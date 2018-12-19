@@ -1,0 +1,16 @@
+# Add configuration values here, as shown below.
+# Replace values with real values
+
+CANVAS_TOKEN: "canvas_token_here"
+CANVAS_ACCOUNT_ID: "1"
+CANVAS_NAMESPACE: "sba-eli-service"
+CANVAS_HOST: "http://example.canvas.com"
+CANVAS_URI: "http://localhost:3000/auth/canvas/callback"
+CANVAS_TOKEN: ""
+CANVAS_ACCOUNT_ID: ""
+CANVAS_API_URI: ""
+AWS_ACCESS_KEY_ID: "aws_access_key_id"
+AWS_SECRET_ACCESS_KEY: "aws_secret_access_key"
+AWS_REGION: "us-east-1"
+AWS_COGNITO_USER_POOL_ID: ""
+AWS_COGNITO_CLIENT_ID: ""

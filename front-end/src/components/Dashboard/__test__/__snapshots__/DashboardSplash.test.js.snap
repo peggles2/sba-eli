@@ -54,6 +54,7 @@ ShallowWrapper {
         <GridRow>
           <Button
             as="button"
+            onClick={[Function]}
             role="button"
             size="huge"
           >
@@ -171,6 +172,7 @@ ShallowWrapper {
         "props": Object {
           "children": <Button
             as="button"
+            onClick={[Function]}
             role="button"
             size="huge"
           >
@@ -185,6 +187,7 @@ ShallowWrapper {
           "props": Object {
             "as": "button",
             "children": "Begin Your Journey",
+            "onClick": [Function],
             "role": "button",
             "size": "huge",
           },
@@ -240,6 +243,7 @@ ShallowWrapper {
           <GridRow>
             <Button
               as="button"
+              onClick={[Function]}
               role="button"
               size="huge"
             >
@@ -357,6 +361,7 @@ ShallowWrapper {
           "props": Object {
             "children": <Button
               as="button"
+              onClick={[Function]}
               role="button"
               size="huge"
             >
@@ -371,6 +376,7 @@ ShallowWrapper {
             "props": Object {
               "as": "button",
               "children": "Begin Your Journey",
+              "onClick": [Function],
               "role": "button",
               "size": "huge",
             },
