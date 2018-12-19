@@ -21,8 +21,14 @@ export default class MetaTags extends Component {
 
     getCanonicalUrl(url) {
         return (url && url.startsWith("https://"))
-            ? <link rel="canonical" href={url} />
-            : ''
+            ? url
+            : 'https://sba.gov/eli'
+    }
+
+    getMetaImage(imageUrl) {
+        return imageUrl
+            ? imageUrl
+            : 'https://picsum.photos/200/300/?random'
     }
 
     render() {
@@ -31,7 +37,13 @@ export default class MetaTags extends Component {
                 <title>{this.getMetaTitle(this.props.metaTitle)}</title>
                 <meta name="description" content={this.getMetaDescription(this.props.metaDescription)} />
                 {this.getAuthor(this.props.metaAuthor)}
-                {this.getCanonicalUrl(this.props.canonicalUrl)}
+                <link rel="canonical" href={this.getCanonicalUrl(this.props.canonicalUrl)} />
+
+                <meta property="og:title" content={this.getMetaTitle(this.props.metaTitle)} />
+                <meta property="og:description" content={this.getMetaDescription(this.props.metaDescription)} />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={this.getMetaImage(this.props.metaImage)} /> 
+                <meta property="og:url" content={this.getCanonicalUrl(this.props.canonicalUrl)} />
             </Helmet>
         )
     }
