@@ -1,11 +1,24 @@
 import React from 'react';
 import {Header, Pagination} from "semantic-ui-react";
 import {shallow, mount} from 'enzyme';
+import MetaTags from '../../SEO/MetaTags';
 import SearchPage from "../SearchPage";
 import SearchFacets from "../SearchFacets";
 import SearchResults from "../SearchResults";
 
 describe('SearchPage', () => {
+  it("should render meta tags with Search specific information", () => {
+    const wrapper = shallow(<SearchPage location={{search: ''}}/>);
+
+    expect(wrapper.find(MetaTags).exists()).toBe(true);
+    const metaWrapper = wrapper.find(MetaTags).dive();
+
+    expect(metaWrapper.find('title').text()).toBe("SBA Search");
+    expect(metaWrapper.find("meta[name='author']").exists()).toBe(false);
+    expect(metaWrapper.find("meta[name='description']").exists()).toBe(true);
+    expect(metaWrapper.find("meta[name='description']").props().content).toBe("Description for the SBA Search");
+    //TODO: add Canonical URL validation when we have final urls
+  });
 
   it('should render an <Header> that dislpays the search term', () => {
     let searchTerm = "leadership"
