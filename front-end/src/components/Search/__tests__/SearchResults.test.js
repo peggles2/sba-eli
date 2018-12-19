@@ -2,6 +2,7 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import SearchResults from "../SearchResults";
+import { Header } from 'semantic-ui-react';
 
 describe('SearchResults', () => {
   it('should render the correct number of search results for the data that is passed in', () => {
@@ -44,15 +45,16 @@ describe('SearchResults', () => {
       "description": "Short description of the content",
       "meta_data": {
         "learning_path_id": 1,
-        "learning_objective_id": 1
+        "learning_objective_id": 541,
+        "learning_event_id": 14
       },
       "thumbnail": "http://picsum.photos/200"
     }]
     const wrapper = shallow(<SearchResults searchResults={searchResults}/>);
-    /*expect(wrapper.find('search_result_image').exists()).toBe(true);
+    expect(wrapper.find('.search_result_image').exists()).toBe(true);
     expect(wrapper.find('.search_result_title').exists()).toBe(true);
-    expect(wrapper.find('.search_result_title').text()).toEqual("Title of Learning Event")
     expect(wrapper.find('.search_result_description').exists()).toBe(true);
-    expect(wrapper.find('.search_result_description').render().text()).toEqual("Short description of the content")*/
+    //expect(wrapper.find('.search_result_title').text()).toBe("Title of Learning Event")
+    expect(wrapper.find('.search_result_description').text()).toBe("Short description of the content")
   });
 });

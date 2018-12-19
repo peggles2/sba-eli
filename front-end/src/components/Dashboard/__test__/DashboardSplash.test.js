@@ -5,13 +5,13 @@ import { shallow } from "enzyme";
 
 describe("DashboardSplash", () => {
   it("should render correctly", () => {
-    const wrapper = shallow(<DashboardSplash />);
+    const wrapper = shallow(<DashboardSplash.WrappedComponent />);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it("should render a <Grid>", () => {
-    const wrapper = shallow(<DashboardSplash />);
+    const wrapper = shallow(<DashboardSplash.WrappedComponent />);
 
     expect(wrapper.find(Grid).length).toEqual(1);
   });
