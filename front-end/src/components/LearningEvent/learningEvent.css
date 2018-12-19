@@ -50,3 +50,7 @@
   font-size: 40px;
   font-weight: bolder;
 }
+.page-navigation-buttons {
+    width: 100%;
+    text-align: right;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import LearningEventManager from "./LearningEventManager";
+import LearningEventFooter from "./LearningEventFooter";
 import "./learningEvent.css";
 import { Header, Container, Divider } from "semantic-ui-react";
 
@@ -54,6 +55,8 @@ export default class LearningEvent extends Component {
         <Header as="h1">{event.title}</Header>
         <Divider />
         <LearningEventManager event={event} />
+        <Divider />
+        <LearningEventFooter />
       </Container>
     );
   }
