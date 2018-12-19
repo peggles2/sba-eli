@@ -5,9 +5,9 @@ const LearningEventHeader = (props) => {
   const event = props.event;
 
   return(
-    <div>
-      <Header size='medium'>Avengers</Header>
-      <Header size='huge'>{event.title}</Header>
+    <div className="learning-event-header">
+      <p className="learning-event-p">Avengers</p>
+      <Header as='h1'>{event.title}</Header>
     </div>
   )
 }

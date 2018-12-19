@@ -53,7 +53,7 @@ export default class LearningEvent extends Component {
 
     return (
       <Container className="learning-event-container">
-        <LearningEventHeader event={event}/>
+        <LearningEventHeader event={event} />
         <LearningEventManager event={event} />
         <LearningEventFooter />
       </Container>

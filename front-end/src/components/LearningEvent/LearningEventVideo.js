@@ -2,13 +2,17 @@ import React, {Component} from "react";
 import ReactPlayer from "react-player";
 import { Button, Header, Icon } from "semantic-ui-react";
 import { findDOMNode } from "react-dom";
+import axios from "axios";
 import Duration from "./LearningEventVideo/Duration";
+import DownloadButton from "./DownloadButton";
+import ShareButton from "./ShareButton";
 import screenfull from "screenfull";
 import "./Slider.css"
 
 export default class LearningEventVideo extends Component {
   state = {
-    url: "http://movietrailers.apple.com/movies/marvel/avengers-endgame/avengers-endgame-trailer-1_a720p.m4v",
+    // url: "http://movietrailers.apple.com/movies/marvel/avengers-endgame/avengers-endgame-trailer-1_a720p.m4v",
+    url: this.props.event.eventContent.url,
     playing: false,
     volume: 0.8,
     muted: false,
@@ -20,6 +24,17 @@ export default class LearningEventVideo extends Component {
     loop: false,
     height: '100%',
     width: '100%'
+  }
+
+  fetchVideo() {
+    const url = this.props.event.eventContent.url;
+
+    axios.get(url)
+      .then(res => {
+        const vidUrl = res.data;
+        this.setState({ url: vidUrl });
+        console.log(this.state.url);
+      });
   }
 
   playPause = () => {
@@ -35,16 +50,16 @@ export default class LearningEventVideo extends Component {
   }
 
   onSeekMouseDown = (e) => {
-    this.setState({ seeking: true })
+    this.setState({ seeking: true})
   }
 
   onSeekChange = (e) => {
-    this.setState({ played: parseFloat(e.target.value) })
+    //this.setState({ played: parseFloat(e.target.value) })
   }
 
   onSeekMouseUp = (e) => {
     this.setState({ seeking: false })
-    this.player.seekTo(parseFloat(e.target.value))
+    // this.player.seekTo(parseFloat(e.target.value))
   }
 
   onProgress = (state) => {
@@ -79,7 +94,7 @@ export default class LearningEventVideo extends Component {
     };
 
     const seekStyle = {
-      width: '450px',
+      width: '650px',
       marginLeft: '20px'
     };
 
@@ -95,10 +110,13 @@ export default class LearningEventVideo extends Component {
 
     return(
       <div>
-        <em>Exercise ({vidLength} minutes)</em>
-        <Button icon floated='right' as='a' href={url} download>
-          <Icon name='download' size='large'/>
-        </Button>
+        <div className="learning-event-header-video">
+          <span>
+            <p className="learning-event-p">Exercise ({vidLength} minutes)</p>
+            <DownloadButton url={url} />
+            <ShareButton />
+          </span>
+        </div>
         <div className="player-wrapper">
           <ReactPlayer
             ref={this.ref}
@@ -118,7 +136,7 @@ export default class LearningEventVideo extends Component {
         <div className="player-controls" style={playerControlsStyle}>
           <Button.Group basic color='black' icon>
             <Button onClick={this.playPause} aria-label="play">
-              {playing ? <Icon name='pause' size='big' inverted color='grey'/> : <Icon name='play' size='big' inverted color='grey' />}
+              {playing ? <Icon name='pause' size='large' inverted color='grey'/> : <Icon name='play' size='large' inverted color='grey' />}
             </Button>
           <Button icon basic onClick={this.toggleMuted} aria-label="mute">
             {muted ? <Icon name='volume off' size='big' inverted color='grey'/> : <Icon name='volume up' size='big' inverted color='grey'/>}

@@ -3,13 +3,13 @@ import { Button, Icon } from "semantic-ui-react";
 
 const LearningEventFooter = () => {
   return (
-    <div>
+    <div className="learning-event-footer">
       <Button.Group floated='right'>
-        <Button icon labelPosition="left">
+        <Button icon labelPosition="left" aria-label="previous">
           <Icon name='angle left' />
           Previous
         </Button>
-        <Button primary icon labelPosition="right">
+        <Button primary icon labelPosition="right" aria-label="next">
           Next
           <Icon name='angle right' />
         </Button>
