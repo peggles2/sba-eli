@@ -30,6 +30,8 @@ export default class LearningEvent extends Component {
     const { course_id, module_id, id: event_id } = this.props.match.params;
     const url =
       process.env.REACT_APP_SERVICE_HOST + `/learning_events/${event_id}`;
+    const url2 =
+      process.env.REACT_APP_SERVICE_HOST + `/learning_events/`;
 
     const eventParams = {
       course_id,
@@ -45,6 +47,16 @@ export default class LearningEvent extends Component {
       .catch(error => {
         console.log(error);
       });
+
+    axios
+      .get(url2, { params: eventParams })
+      .then(res => {
+        const learningModule = res.data;
+        this.setState({ learningModule });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -56,7 +68,7 @@ export default class LearningEvent extends Component {
         <Divider />
         <LearningEventManager event={event} />
         <Divider />
-        <LearningEventFooter />
+        <LearningEventFooter courseId={this.props.match.params.course_id} module={this.state.learningModule} event={this.state.learningEvent}/>
       </Container>
     );
   }
