@@ -8,9 +8,17 @@ export default class LearningEventFooter extends Component {
       let paging = {next: null, prev:  null}
       
       if(event && event.position && modules){
-          const pos = event.position-1 //To account for zero based array indeces
-          paging.next = modules[pos+1] ? NavigationLearningEvent.getEventPath(this.props.courseId, event.module_id, modules[pos+1].id) : null
-          paging.prev = modules[pos-1] ? NavigationLearningEvent.getEventPath(this.props.courseId, event.module_id, modules[pos-1].id) : null
+          const pos = event.position-1 //To account for zero based array indexes
+          paging.next = modules[pos+1] ? 
+              NavigationLearningEvent.getEventPath(this.props.courseId, 
+                  event.module_id, 
+                  modules[pos+1].id) : 
+              null
+          paging.prev = modules[pos-1] ? 
+              NavigationLearningEvent.getEventPath(this.props.courseId, 
+                  event.module_id, 
+                  modules[pos-1].id) : 
+              null
       }
       return paging
   }
