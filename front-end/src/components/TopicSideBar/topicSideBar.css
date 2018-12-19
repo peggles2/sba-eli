@@ -1,5 +1,5 @@
 /* TopicSideBar */
-.topic-accordion {
+.topic-container {
   border: 1px solid rgba(34, 36, 38, 0.15);
   box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
   border-radius: 0.28571429rem;
@@ -63,4 +63,32 @@
   color: #0b2f6b;
   padding-right: 1.5em !important;
   padding-left: 1em !important;
+}
+
+/* TopicProgress */
+.topic-progress {
+  padding: 1em !important;
+  color: #0b2f6b;
+}
+
+.topic-progress-icon {
+  font-size: 40px !important;
+  color: #ffab3b;
+}
+
+.topic-progress-bar-row {
+  padding: 0 !important;
+}
+
+.topic-progress-bar {
+  margin-bottom: 0 !important;
+}
+
+.topic-progress-meta {
+  color: #61656b;
+  font-style: italic;
+}
+
+.topic-progress-register-row {
+  padding-top: 0 !important;
 }

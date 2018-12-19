@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Accordion } from "semantic-ui-react";
+import { Accordion, Container } from "semantic-ui-react";
 import TopicEventList from "./TopicEventList";
 import "./topicSideBar.css";
+import TopicProgress from "./TopicProgress";
 
 export default class TopicSideBar extends Component {
   constructor(props) {
@@ -25,32 +26,35 @@ export default class TopicSideBar extends Component {
 
     if (objectives.length) {
       return (
-        <Accordion className={"topic-accordion"}>
-          {objectives.map((objective, idx) => {
-            return (
-              <React.Fragment key={"topicSidebar" + idx}>
-                <Accordion.Title
-                  active={activeIndex === idx}
-                  index={idx}
-                  onClick={this.handleClick}
-                  className={"topic-accordion-title"}
-                >
-                  <div className={"topic-number-circle"}>{idx + 1}</div>
-                  {objective.name}
-                </Accordion.Title>
-                <Accordion.Content
-                  active={activeIndex === idx}
-                  className={"topic-accordion-content"}
-                >
-                  <TopicEventList
-                    course_id={this.props.course_id}
-                    module_id={objective.id}
-                  />
-                </Accordion.Content>
-              </React.Fragment>
-            );
-          })}
-        </Accordion>
+        <Container fluid className={"topic-container"}>
+          <Accordion>
+            {objectives.map((objective, idx) => {
+              return (
+                <React.Fragment key={"topicSidebar" + idx}>
+                  <Accordion.Title
+                    active={activeIndex === idx}
+                    index={idx}
+                    onClick={this.handleClick}
+                    className={"topic-accordion-title"}
+                  >
+                    <div className={"topic-number-circle"}>{idx + 1}</div>
+                    {objective.name}
+                  </Accordion.Title>
+                  <Accordion.Content
+                    active={activeIndex === idx}
+                    className={"topic-accordion-content"}
+                  >
+                    <TopicEventList
+                      course_id={this.props.course_id}
+                      module_id={objective.id}
+                    />
+                  </Accordion.Content>
+                </React.Fragment>
+              );
+            })}
+          </Accordion>
+          <TopicProgress />
+        </Container>
       );
     }
     return null;
