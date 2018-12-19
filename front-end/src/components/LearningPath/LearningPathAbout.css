@@ -1,0 +1,11 @@
+.learning-path-about-icon {
+  margin-right: 10px;
+}
+
+.learning-path-about-icon-unselected {
+  color: gray;
+}
+
+.learning-path-about-icon-selected {
+  color: green;
+}

@@ -1,0 +1,667 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id                                   :bigint(8)        not null, primary key
+#  name                                 :string(255)
+#  account_id                           :bigint(8)        not null
+#  group_weighting_scheme               :string(255)
+#  workflow_state                       :string(255)      not null
+#  uuid                                 :string(255)
+#  start_at                             :datetime
+#  conclude_at                          :datetime
+#  grading_standard_id                  :bigint(8)
+#  is_public                            :boolean
+#  allow_student_wiki_edits             :boolean
+#  created_at                           :datetime
+#  updated_at                           :datetime
+#  show_public_context_messages         :boolean
+#  syllabus_body                        :text
+#  allow_student_forum_attachments      :boolean          default(FALSE)
+#  default_wiki_editing_roles           :string(255)
+#  wiki_id                              :bigint(8)
+#  allow_student_organized_groups       :boolean          default(TRUE)
+#  course_code                          :string(255)
+#  default_view                         :string(255)
+#  abstract_course_id                   :bigint(8)
+#  root_account_id                      :bigint(8)        not null
+#  enrollment_term_id                   :bigint(8)        not null
+#  sis_source_id                        :string(255)
+#  sis_batch_id                         :bigint(8)
+#  open_enrollment                      :boolean
+#  storage_quota                        :bigint(8)
+#  tab_configuration                    :text
+#  allow_wiki_comments                  :boolean
+#  turnitin_comments                    :text
+#  self_enrollment                      :boolean
+#  license                              :string(255)
+#  indexed                              :boolean
+#  restrict_enrollments_to_course_dates :boolean
+#  template_course_id                   :bigint(8)
+#  locale                               :string(255)
+#  settings                             :text
+#  replacement_course_id                :bigint(8)
+#  stuck_sis_fields                     :text
+#  public_description                   :text
+#  self_enrollment_code                 :string(255)
+#  self_enrollment_limit                :integer
+#  integration_id                       :string(255)
+#  time_zone                            :string(255)
+#  lti_context_id                       :string(255)
+#  turnitin_id                          :bigint(8)
+#  show_announcements_on_home_page      :boolean
+#  home_page_announcement_limit         :integer
+#  latest_outcome_import_id             :bigint(8)
+#
+# Indexes
+#
+#  index_courses_on_abstract_course_id                 (abstract_course_id) WHERE (abstract_course_id IS NOT NULL)
+#  index_courses_on_account_id                         (account_id)
+#  index_courses_on_enrollment_term_id                 (enrollment_term_id)
+#  index_courses_on_integration_id                     (integration_id,root_account_id) UNIQUE WHERE (integration_id IS NOT NULL)
+#  index_courses_on_lti_context_id                     (lti_context_id) UNIQUE
+#  index_courses_on_root_account_id                    (root_account_id)
+#  index_courses_on_self_enrollment_code               (self_enrollment_code) UNIQUE WHERE (self_enrollment_code IS NOT NULL)
+#  index_courses_on_sis_batch_id                       (sis_batch_id) WHERE (sis_batch_id IS NOT NULL)
+#  index_courses_on_sis_source_id_and_root_account_id  (sis_source_id,root_account_id) UNIQUE WHERE (sis_source_id IS NOT NULL)
+#  index_courses_on_template_course_id                 (template_course_id)
+#  index_courses_on_uuid                               (uuid)
+#  index_courses_on_wiki_id                            (wiki_id) WHERE (wiki_id IS NOT NULL)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (abstract_course_id => abstract_courses.id)
+#  fk_rails_...  (account_id => accounts.id)
+#  fk_rails_...  (enrollment_term_id => enrollment_terms.id)
+#  fk_rails_...  (latest_outcome_import_id => outcome_imports.id)
+#  fk_rails_...  (root_account_id => accounts.id)
+#  fk_rails_...  (sis_batch_id => sis_batches.id)
+#  fk_rails_...  (template_course_id => courses.id)
+#  fk_rails_...  (wiki_id => wikis.id)
+#
+
+---
+course_3:
+  id: 3
+  name: Test Course 1
+  account_id: 3
+  group_weighting_scheme: 
+  workflow_state: deleted
+  uuid: LhCYaY9sqHW1n1T6tLL21NfLYHdadqTe9D88eaOk
+  start_at: 
+  conclude_at: 
+  grading_standard_id: 
+  is_public: true
+  allow_student_wiki_edits: false
+  created_at: '2018-11-06 03:37:17.625368'
+  updated_at: '2018-11-06 03:57:11.74821'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: 
+  wiki_id: 3
+  allow_student_organized_groups: true
+  course_code: Test 1
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: 
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: public_domain
+  indexed: 
+  restrict_enrollments_to_course_dates: 
+  template_course_id: 
+  locale: 
+  settings: 
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,workflow_state
+  public_description: 
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: 
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: 
+  home_page_announcement_limit: 
+  latest_outcome_import_id: 
+course_2:
+  id: 2
+  name: Innovation/Opportunity Identification
+  account_id: 1
+  group_weighting_scheme: 
+  workflow_state: deleted
+  uuid: 0jjBKUE4CInGwTHLHflNkrUKeNcRwp73lPxOVq9D
+  start_at: 
+  conclude_at: 
+  grading_standard_id: 
+  is_public: false
+  allow_student_wiki_edits: false
+  created_at: '2018-11-05 21:39:35.02082'
+  updated_at: '2018-11-06 19:41:39.476104'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: teachers
+  wiki_id: 2
+  allow_student_organized_groups: true
+  course_code: LP2
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: LP2
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: private
+  indexed: false
+  restrict_enrollments_to_course_dates: false
+  template_course_id: 
+  locale: 
+  settings: |
+    ---
+    :allow_student_discussion_topics: true
+    :allow_student_discussion_editing: true
+    :restrict_student_past_view: false
+    :restrict_student_future_view: false
+    :hide_final_grade: false
+    :hide_distribution_graphs: false
+    :lock_all_announcements: false
+    :course_format: ''
+    :is_public_to_auth_users: false
+    :public_syllabus: false
+    :public_syllabus_to_auth: false
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,restrict_enrollments_to_course_dates,workflow_state
+  public_description: ''
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: Mountain Time (US & Canada)
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: false
+  home_page_announcement_limit: 3
+  latest_outcome_import_id: 
+course_6:
+  id: 6
+  name: Opportunity Assessment
+  account_id: 3
+  group_weighting_scheme: 
+  workflow_state: available
+  uuid: QVgXMG5DCvErFDUldvpuxmrX0lndBVd376Tsh1zw
+  start_at: '2018-11-06 05:11:35.482651'
+  conclude_at: 
+  grading_standard_id: 
+  is_public: true
+  allow_student_wiki_edits: false
+  created_at: '2018-11-06 04:28:26.834033'
+  updated_at: '2018-11-06 05:11:37.88535'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: 
+  wiki_id: 6
+  allow_student_organized_groups: true
+  course_code: LP3
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: 
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: public_domain
+  indexed: 
+  restrict_enrollments_to_course_dates: 
+  template_course_id: 
+  locale: 
+  settings: 
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,start_at,workflow_state
+  public_description: 
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: 
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: 
+  home_page_announcement_limit: 
+  latest_outcome_import_id: 
+course_5:
+  id: 5
+  name: Opportunity and Innovation
+  account_id: 3
+  group_weighting_scheme: 
+  workflow_state: available
+  uuid: jwGEJAP4pLb8ki6no7E7JZkZWI4BrloblejrfZQT
+  start_at: '2018-11-06 05:11:26.906728'
+  conclude_at: 
+  grading_standard_id: 
+  is_public: true
+  allow_student_wiki_edits: false
+  created_at: '2018-11-06 04:27:36.285792'
+  updated_at: '2018-11-06 05:11:26.915199'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: teachers
+  wiki_id: 5
+  allow_student_organized_groups: true
+  course_code: LP2
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: 
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: public_domain
+  indexed: false
+  restrict_enrollments_to_course_dates: false
+  template_course_id: 
+  locale: 
+  settings: |
+    ---
+    :allow_student_discussion_topics: true
+    :allow_student_discussion_editing: true
+    :restrict_student_past_view: false
+    :restrict_student_future_view: false
+    :hide_final_grade: false
+    :hide_distribution_graphs: false
+    :lock_all_announcements: false
+    :course_format: ''
+    :public_syllabus: true
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,restrict_enrollments_to_course_dates,start_at,workflow_state
+  public_description: ''
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: Mountain Time (US & Canada)
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: false
+  home_page_announcement_limit: 3
+  latest_outcome_import_id: 
+course_7:
+  id: 7
+  name: Marketing
+  account_id: 3
+  group_weighting_scheme: 
+  workflow_state: available
+  uuid: 860PIqg50HCVSH9peqelbfgqdC7iO4p096hmEVOl
+  start_at: '2018-11-06 05:11:52.663038'
+  conclude_at: 
+  grading_standard_id: 
+  is_public: true
+  allow_student_wiki_edits: false
+  created_at: '2018-11-06 04:29:05.518593'
+  updated_at: '2018-11-06 05:11:52.671251'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: teachers
+  wiki_id: 7
+  allow_student_organized_groups: true
+  course_code: LP4
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: 
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: public_domain
+  indexed: false
+  restrict_enrollments_to_course_dates: false
+  template_course_id: 
+  locale: 
+  settings: |
+    ---
+    :allow_student_discussion_topics: true
+    :allow_student_discussion_editing: true
+    :restrict_student_past_view: false
+    :restrict_student_future_view: false
+    :hide_final_grade: false
+    :hide_distribution_graphs: false
+    :lock_all_announcements: false
+    :course_format: ''
+    :public_syllabus: true
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,restrict_enrollments_to_course_dates,start_at,workflow_state
+  public_description: ''
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: Mountain Time (US & Canada)
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: false
+  home_page_announcement_limit: 3
+  latest_outcome_import_id: 
+course_8:
+  id: 8
+  name: People
+  account_id: 3
+  group_weighting_scheme: 
+  workflow_state: available
+  uuid: j2nVRzPG4zYlyiBC20AACb53YbW1Nxt9CbejduaK
+  start_at: '2018-11-06 05:12:04.006819'
+  conclude_at: 
+  grading_standard_id: 
+  is_public: true
+  allow_student_wiki_edits: false
+  created_at: '2018-11-06 04:29:36.414971'
+  updated_at: '2018-11-06 05:12:04.015607'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: teachers
+  wiki_id: 8
+  allow_student_organized_groups: true
+  course_code: LP5
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: 
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: public_domain
+  indexed: false
+  restrict_enrollments_to_course_dates: false
+  template_course_id: 
+  locale: 
+  settings: |
+    ---
+    :allow_student_discussion_topics: true
+    :allow_student_discussion_editing: true
+    :restrict_student_past_view: false
+    :restrict_student_future_view: false
+    :hide_final_grade: false
+    :hide_distribution_graphs: false
+    :lock_all_announcements: false
+    :course_format: ''
+    :public_syllabus: true
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,restrict_enrollments_to_course_dates,start_at,workflow_state
+  public_description: ''
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: Mountain Time (US & Canada)
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: false
+  home_page_announcement_limit: 3
+  latest_outcome_import_id: 
+course_10:
+  id: 10
+  name: Access to Capital
+  account_id: 3
+  group_weighting_scheme: 
+  workflow_state: available
+  uuid: amsGCe60eBeu9NfS1PT67Lp4fz5Ly2KnrAmS5R4g
+  start_at: '2018-11-06 16:20:29.74555'
+  conclude_at: 
+  grading_standard_id: 
+  is_public: true
+  allow_student_wiki_edits: false
+  created_at: '2018-11-06 04:31:23.022094'
+  updated_at: '2018-11-07 05:30:41.85907'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: teachers
+  wiki_id: 10
+  allow_student_organized_groups: true
+  course_code: LP7
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: 
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: public_domain
+  indexed: false
+  restrict_enrollments_to_course_dates: false
+  template_course_id: 
+  locale: 
+  settings: |
+    ---
+    :allow_student_discussion_topics: true
+    :allow_student_discussion_editing: true
+    :restrict_student_past_view: false
+    :restrict_student_future_view: false
+    :hide_final_grade: false
+    :hide_distribution_graphs: false
+    :lock_all_announcements: false
+    :course_format: ''
+    :public_syllabus: true
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,restrict_enrollments_to_course_dates,start_at,workflow_state
+  public_description: ''
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: Mountain Time (US & Canada)
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: false
+  home_page_announcement_limit: 3
+  latest_outcome_import_id: 
+course_4:
+  id: 4
+  name: Entrepreneurial Leadership
+  account_id: 3
+  group_weighting_scheme: 
+  workflow_state: available
+  uuid: hVHHcgs4leMyUOWwmBd8TbAdyHHB2sMBWbliwCmv
+  start_at: '2018-11-06 04:10:16.468211'
+  conclude_at: 
+  grading_standard_id: 
+  is_public: true
+  allow_student_wiki_edits: false
+  created_at: '2018-11-06 03:57:40.487068'
+  updated_at: '2018-11-26 20:12:13.954377'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: 
+  wiki_id: 4
+  allow_student_organized_groups: true
+  course_code: LP1
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: 
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: public_domain
+  indexed: 
+  restrict_enrollments_to_course_dates: 
+  template_course_id: 
+  locale: 
+  settings: 
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,start_at,workflow_state
+  public_description: 
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: 
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: 
+  home_page_announcement_limit: 
+  latest_outcome_import_id: 
+course_9:
+  id: 9
+  name: Financial Literacy
+  account_id: 3
+  group_weighting_scheme: 
+  workflow_state: available
+  uuid: DllGGYeVd89hO1Uwl33Feunv7Nm0vzdxeeV2gXNX
+  start_at: '2018-11-06 05:11:15.640543'
+  conclude_at: 
+  grading_standard_id: 
+  is_public: true
+  allow_student_wiki_edits: false
+  created_at: '2018-11-06 04:30:42.101786'
+  updated_at: '2018-11-10 17:30:04.404717'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: teachers
+  wiki_id: 9
+  allow_student_organized_groups: true
+  course_code: LP6
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: 
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: public_domain
+  indexed: false
+  restrict_enrollments_to_course_dates: false
+  template_course_id: 
+  locale: 
+  settings: |
+    ---
+    :allow_student_discussion_topics: true
+    :allow_student_discussion_editing: true
+    :restrict_student_past_view: false
+    :restrict_student_future_view: false
+    :hide_final_grade: false
+    :hide_distribution_graphs: false
+    :lock_all_announcements: false
+    :course_format: ''
+    :public_syllabus: true
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,restrict_enrollments_to_course_dates,start_at,workflow_state
+  public_description: ''
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: Mountain Time (US & Canada)
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: false
+  home_page_announcement_limit: 3
+  latest_outcome_import_id: 
+course_1:
+  id: 1
+  name: Entrepreneurial Leadership
+  account_id: 1
+  group_weighting_scheme: 
+  workflow_state: deleted
+  uuid: welHm4LzB3F5PRxYjdwvYQ45spFCRuXgoArrO4mj
+  start_at: 
+  conclude_at: 
+  grading_standard_id: 
+  is_public: false
+  allow_student_wiki_edits: false
+  created_at: '2018-11-05 21:32:24.543335'
+  updated_at: '2018-12-04 20:19:41.358236'
+  show_public_context_messages: 
+  syllabus_body: 
+  allow_student_forum_attachments: false
+  default_wiki_editing_roles: teachers
+  wiki_id: 1
+  allow_student_organized_groups: true
+  course_code: LP1
+  default_view: modules
+  abstract_course_id: 
+  root_account_id: 1
+  enrollment_term_id: 1
+  sis_source_id: LP1
+  sis_batch_id: 
+  open_enrollment: 
+  storage_quota: 
+  tab_configuration: 
+  allow_wiki_comments: 
+  turnitin_comments: 
+  self_enrollment: 
+  license: private
+  indexed: false
+  restrict_enrollments_to_course_dates: false
+  template_course_id: 
+  locale: 
+  settings: |
+    ---
+    :allow_student_discussion_topics: true
+    :allow_student_discussion_editing: true
+    :restrict_student_past_view: false
+    :restrict_student_future_view: false
+    :hide_final_grade: false
+    :hide_distribution_graphs: false
+    :lock_all_announcements: false
+    :course_format: ''
+    :is_public_to_auth_users: false
+    :public_syllabus: false
+    :public_syllabus_to_auth: false
+  replacement_course_id: 
+  stuck_sis_fields: account_id,course_code,enrollment_term_id,name,restrict_enrollments_to_course_dates,workflow_state
+  public_description: ''
+  self_enrollment_code: 
+  self_enrollment_limit: 
+  integration_id: 
+  time_zone: Mountain Time (US & Canada)
+  lti_context_id: 
+  turnitin_id: 
+  show_announcements_on_home_page: false
+  home_page_announcement_limit: 3
+  latest_outcome_import_id: 

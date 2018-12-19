@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  front-end:
+    build: ./front-end
+    image: sba-eli-ui
+    ports:
+      - "8000:8000"
+  service-layer:
+    build: ./service-layer
+    image: sba-eli-api
+    ports:
+      - "3000:3000"
+    links:
+      - front-end

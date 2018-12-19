@@ -23,42 +23,76 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
+      "centered": true,
       "children": Array [
-        <LearningPathBreadCrumb
-          id={1}
-        />,
-        <Header
-          as="h1"
-        />,
-        <Divider />,
-        <Grid
-          centered={true}
+        <GridRow
+          className="path-breadcrumb-row"
         >
-          <GridRow>
-            <GridColumn
-              computer={3}
-              mobile={16}
-              tablet={3}
+          <GridColumn
+            computer={15}
+            mobile={15}
+            tablet={15}
+          >
+            <LearningPathBreadCrumb
+              id={1}
+            />
+          </GridColumn>
+        </GridRow>,
+        <GridRow
+          className="path-header-row"
+        >
+          <GridColumn
+            computer={15}
+            mobile={15}
+            tablet={15}
+          >
+            <Header
+              as="h2"
+              className="path-header"
             >
-              <TopicSideBar
-                course_id={1}
-                topicsList={Array []}
-              />
-            </GridColumn>
-            <GridColumn
-              computer={11}
-              mobile={16}
-              tablet={3}
-            >
-              <TopicContentView
-                course_id={1}
-                topicsList={Array []}
-              />
-            </GridColumn>
-          </GridRow>
-        </Grid>,
+              <Button
+                as="button"
+                className="path-header-share mobile hidden"
+                role="button"
+              >
+                Share   
+                <Icon
+                  as="i"
+                  name="share"
+                />
+              </Button>
+            </Header>
+          </GridColumn>
+        </GridRow>,
+        <Divider />,
+        <GridRow>
+          <GridColumn
+            className="mobile hidden"
+            computer={5}
+            largeScreen={3}
+            tablet={5}
+            widescreen={3}
+          >
+            <TopicSideBar
+              course_id={1}
+              topicsList={Array []}
+            />
+          </GridColumn>
+          <GridColumn
+            computer={11}
+            largeScreen={11}
+            mobile={15}
+            tablet={11}
+            widescreen={11}
+          >
+            <TopicContentView
+              course_id={1}
+              topicsList={Array []}
+            />
+          </GridColumn>
+        </GridRow>,
       ],
     },
     "ref": null,
@@ -66,13 +100,47 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "id": 1,
-          "pathName": undefined,
+          "children": <GridColumn
+            computer={15}
+            mobile={15}
+            tablet={15}
+          >
+            <LearningPathBreadCrumb
+              id={1}
+            />
+          </GridColumn>,
+          "className": "path-breadcrumb-row",
         },
         "ref": null,
-        "rendered": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <LearningPathBreadCrumb
+              id={1}
+            />,
+            "computer": 15,
+            "mobile": 15,
+            "tablet": 15,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "id": 1,
+              "pathName": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
         "type": [Function],
       },
       Object {
@@ -80,11 +148,121 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "as": "h1",
-          "children": undefined,
+          "children": <GridColumn
+            computer={15}
+            mobile={15}
+            tablet={15}
+          >
+            <Header
+              as="h2"
+              className="path-header"
+            >
+              <Button
+                as="button"
+                className="path-header-share mobile hidden"
+                role="button"
+              >
+                Share   
+                <Icon
+                  as="i"
+                  name="share"
+                />
+              </Button>
+            </Header>
+          </GridColumn>,
+          "className": "path-header-row",
         },
         "ref": null,
-        "rendered": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <Header
+              as="h2"
+              className="path-header"
+            >
+              <Button
+                as="button"
+                className="path-header-share mobile hidden"
+                role="button"
+              >
+                Share   
+                <Icon
+                  as="i"
+                  name="share"
+                />
+              </Button>
+            </Header>,
+            "computer": 15,
+            "mobile": 15,
+            "tablet": 15,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "as": "h2",
+              "children": Array [
+                undefined,
+                <Button
+                  as="button"
+                  className="path-header-share mobile hidden"
+                  role="button"
+                >
+                  Share   
+                  <Icon
+                    as="i"
+                    name="share"
+                  />
+                </Button>,
+              ],
+              "className": "path-header",
+            },
+            "ref": null,
+            "rendered": Array [
+              undefined,
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "as": "button",
+                  "children": Array [
+                    "Share   ",
+                    <Icon
+                      as="i"
+                      name="share"
+                    />,
+                  ],
+                  "className": "path-header-share mobile hidden",
+                  "role": "button",
+                },
+                "ref": null,
+                "rendered": Array [
+                  "Share   ",
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "as": "i",
+                      "name": "share",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                ],
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          "type": [Function],
+        },
         "type": [Function],
       },
       Object {
@@ -101,12 +279,158 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "centered": true,
-          "children": <GridRow>
+          "children": Array [
             <GridColumn
-              computer={3}
-              mobile={16}
-              tablet={3}
+              className="mobile hidden"
+              computer={5}
+              largeScreen={3}
+              tablet={5}
+              widescreen={3}
+            >
+              <TopicSideBar
+                course_id={1}
+                topicsList={Array []}
+              />
+            </GridColumn>,
+            <GridColumn
+              computer={11}
+              largeScreen={11}
+              mobile={15}
+              tablet={11}
+              widescreen={11}
+            >
+              <TopicContentView
+                course_id={1}
+                topicsList={Array []}
+              />
+            </GridColumn>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <TopicSideBar
+                course_id={1}
+                topicsList={Array []}
+              />,
+              "className": "mobile hidden",
+              "computer": 5,
+              "largeScreen": 3,
+              "tablet": 5,
+              "widescreen": 3,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "course_id": 1,
+                "event_id": undefined,
+                "module_id": undefined,
+                "topicsList": Array [],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <TopicContentView
+                course_id={1}
+                topicsList={Array []}
+              />,
+              "computer": 11,
+              "largeScreen": 11,
+              "mobile": 15,
+              "tablet": 11,
+              "widescreen": 11,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "course_id": 1,
+                "topicsList": Array [],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "centered": true,
+        "children": Array [
+          <GridRow
+            className="path-breadcrumb-row"
+          >
+            <GridColumn
+              computer={15}
+              mobile={15}
+              tablet={15}
+            >
+              <LearningPathBreadCrumb
+                id={1}
+              />
+            </GridColumn>
+          </GridRow>,
+          <GridRow
+            className="path-header-row"
+          >
+            <GridColumn
+              computer={15}
+              mobile={15}
+              tablet={15}
+            >
+              <Header
+                as="h2"
+                className="path-header"
+              >
+                <Button
+                  as="button"
+                  className="path-header-share mobile hidden"
+                  role="button"
+                >
+                  Share   
+                  <Icon
+                    as="i"
+                    name="share"
+                  />
+                </Button>
+              </Header>
+            </GridColumn>
+          </GridRow>,
+          <Divider />,
+          <GridRow>
+            <GridColumn
+              className="mobile hidden"
+              computer={5}
+              largeScreen={3}
+              tablet={5}
+              widescreen={3}
             >
               <TopicSideBar
                 course_id={1}
@@ -115,8 +439,10 @@ ShallowWrapper {
             </GridColumn>
             <GridColumn
               computer={11}
-              mobile={16}
-              tablet={3}
+              largeScreen={11}
+              mobile={15}
+              tablet={11}
+              widescreen={11}
             >
               <TopicContentView
                 course_id={1}
@@ -124,18 +450,199 @@ ShallowWrapper {
               />
             </GridColumn>
           </GridRow>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <GridColumn
+              computer={15}
+              mobile={15}
+              tablet={15}
+            >
+              <LearningPathBreadCrumb
+                id={1}
+              />
+            </GridColumn>,
+            "className": "path-breadcrumb-row",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <LearningPathBreadCrumb
+                id={1}
+              />,
+              "computer": 15,
+              "mobile": 15,
+              "tablet": 15,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "id": 1,
+                "pathName": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          "type": [Function],
         },
-        "ref": null,
-        "rendered": Object {
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <GridColumn
+              computer={15}
+              mobile={15}
+              tablet={15}
+            >
+              <Header
+                as="h2"
+                className="path-header"
+              >
+                <Button
+                  as="button"
+                  className="path-header-share mobile hidden"
+                  role="button"
+                >
+                  Share   
+                  <Icon
+                    as="i"
+                    name="share"
+                  />
+                </Button>
+              </Header>
+            </GridColumn>,
+            "className": "path-header-row",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <Header
+                as="h2"
+                className="path-header"
+              >
+                <Button
+                  as="button"
+                  className="path-header-share mobile hidden"
+                  role="button"
+                >
+                  Share   
+                  <Icon
+                    as="i"
+                    name="share"
+                  />
+                </Button>
+              </Header>,
+              "computer": 15,
+              "mobile": 15,
+              "tablet": 15,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "as": "h2",
+                "children": Array [
+                  undefined,
+                  <Button
+                    as="button"
+                    className="path-header-share mobile hidden"
+                    role="button"
+                  >
+                    Share   
+                    <Icon
+                      as="i"
+                      name="share"
+                    />
+                  </Button>,
+                ],
+                "className": "path-header",
+              },
+              "ref": null,
+              "rendered": Array [
+                undefined,
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "as": "button",
+                    "children": Array [
+                      "Share   ",
+                      <Icon
+                        as="i"
+                        name="share"
+                      />,
+                    ],
+                    "className": "path-header-share mobile hidden",
+                    "role": "button",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    "Share   ",
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "as": "i",
+                        "name": "share",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                  ],
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
           "instance": null,
           "key": undefined,
           "nodeType": "function",
           "props": Object {
             "children": Array [
               <GridColumn
-                computer={3}
-                mobile={16}
-                tablet={3}
+                className="mobile hidden"
+                computer={5}
+                largeScreen={3}
+                tablet={5}
+                widescreen={3}
               >
                 <TopicSideBar
                   course_id={1}
@@ -144,8 +651,10 @@ ShallowWrapper {
               </GridColumn>,
               <GridColumn
                 computer={11}
-                mobile={16}
-                tablet={3}
+                largeScreen={11}
+                mobile={15}
+                tablet={11}
+                widescreen={11}
               >
                 <TopicContentView
                   course_id={1}
@@ -165,9 +674,11 @@ ShallowWrapper {
                   course_id={1}
                   topicsList={Array []}
                 />,
-                "computer": 3,
-                "mobile": 16,
-                "tablet": 3,
+                "className": "mobile hidden",
+                "computer": 5,
+                "largeScreen": 3,
+                "tablet": 5,
+                "widescreen": 3,
               },
               "ref": null,
               "rendered": Object {
@@ -196,8 +707,10 @@ ShallowWrapper {
                   topicsList={Array []}
                 />,
                 "computer": 11,
-                "mobile": 16,
-                "tablet": 3,
+                "largeScreen": 11,
+                "mobile": 15,
+                "tablet": 11,
+                "widescreen": 11,
               },
               "ref": null,
               "rendered": Object {
@@ -217,213 +730,8 @@ ShallowWrapper {
           ],
           "type": [Function],
         },
-        "type": [Function],
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <LearningPathBreadCrumb
-            id={1}
-          />,
-          <Header
-            as="h1"
-          />,
-          <Divider />,
-          <Grid
-            centered={true}
-          >
-            <GridRow>
-              <GridColumn
-                computer={3}
-                mobile={16}
-                tablet={3}
-              >
-                <TopicSideBar
-                  course_id={1}
-                  topicsList={Array []}
-                />
-              </GridColumn>
-              <GridColumn
-                computer={11}
-                mobile={16}
-                tablet={3}
-              >
-                <TopicContentView
-                  course_id={1}
-                  topicsList={Array []}
-                />
-              </GridColumn>
-            </GridRow>
-          </Grid>,
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "id": 1,
-            "pathName": undefined,
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "as": "h1",
-            "children": undefined,
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "centered": true,
-            "children": <GridRow>
-              <GridColumn
-                computer={3}
-                mobile={16}
-                tablet={3}
-              >
-                <TopicSideBar
-                  course_id={1}
-                  topicsList={Array []}
-                />
-              </GridColumn>
-              <GridColumn
-                computer={11}
-                mobile={16}
-                tablet={3}
-              >
-                <TopicContentView
-                  course_id={1}
-                  topicsList={Array []}
-                />
-              </GridColumn>
-            </GridRow>,
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "children": Array [
-                <GridColumn
-                  computer={3}
-                  mobile={16}
-                  tablet={3}
-                >
-                  <TopicSideBar
-                    course_id={1}
-                    topicsList={Array []}
-                  />
-                </GridColumn>,
-                <GridColumn
-                  computer={11}
-                  mobile={16}
-                  tablet={3}
-                >
-                  <TopicContentView
-                    course_id={1}
-                    topicsList={Array []}
-                  />
-                </GridColumn>,
-              ],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "children": <TopicSideBar
-                    course_id={1}
-                    topicsList={Array []}
-                  />,
-                  "computer": 3,
-                  "mobile": 16,
-                  "tablet": 3,
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "course_id": 1,
-                    "event_id": undefined,
-                    "module_id": undefined,
-                    "topicsList": Array [],
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "children": <TopicContentView
-                    course_id={1}
-                    topicsList={Array []}
-                  />,
-                  "computer": 11,
-                  "mobile": 16,
-                  "tablet": 3,
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "course_id": 1,
-                    "topicsList": Array [],
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                "type": [Function],
-              },
-            ],
-            "type": [Function],
-          },
-          "type": [Function],
-        },
       ],
-      "type": "div",
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
