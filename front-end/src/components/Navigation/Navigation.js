@@ -8,7 +8,7 @@ import NavigationDisplay from "./NavigationDisplay";
 const Navigation = () => {
   return (
     <Router>
-      <Grid stackable className="sba">
+      <Grid stackable width={16} className="sba">
         <Navbar />
         <NavigationDisplay />
       </Grid>
