@@ -54,7 +54,7 @@ export default class TopicSideBar extends Component {
             })}
           </Accordion>
           {/* TODO When progress tracking added send topics Completed to progress */}
-          <TopicProgress topicsComplete={0} topicsTotal={topics.length + 1} />
+          <TopicProgress topicsComplete={0} topicsTotal={topics.length} />
         </Container>
       );
     }
