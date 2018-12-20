@@ -2,7 +2,6 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import Error from "../Error";
-import LearningEvent from "../LearningEvent/LearningEvent";
 import LearningEvents from "../LearningEvent/LearningEvents";
 import LearningObjective from "../LearningObjective/LearningObjective";
 import LearningObjectives from "../LearningObjective/LearningObjectives";

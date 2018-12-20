@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import ReactPlayer from "react-player";
-import { Button, Header, Icon } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import { findDOMNode } from "react-dom";
 import axios from "axios";
 import Duration from "./LearningEventVideo/Duration";
@@ -122,7 +122,7 @@ export default class LearningEventVideo extends Component {
           <input type='range' min={0} max={1} step='any'
             value={volume}
             onChange={this.setVolume}
-            class="volumeSlider"
+            className="volumeSlider"
           />
           <span className="seek-bar" style={{ marginTop: '15px'}}>
             <input
@@ -131,7 +131,7 @@ export default class LearningEventVideo extends Component {
               onMouseDown={this.onSeekMouseDown}
               onChange={this.onSeekChange}
               onMouseUp={this.onSeekMouseUp}
-              class="slider"
+              className="slider"
             />
             <span className="duration"><b><Duration seconds={duration * played} /></b> / <Duration seconds={duration} /></span>
           </span>
