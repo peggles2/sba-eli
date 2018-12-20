@@ -3,7 +3,10 @@ import "./learningEvent.css";
 import React, { Component } from "react";
 import { Header, Container } from "semantic-ui-react";
 import axios from "axios";
+import LearningEventHeader from "./LearningEventHeader"
 import LearningEventManager from "./LearningEventManager";
+import LearningEventFooter from "./LearningEventFooter";
+import "./learningEvent.css";
 import MetaTags from '../SEO/MetaTags'
 
 export default class LearningEvent extends Component {
@@ -52,12 +55,13 @@ export default class LearningEvent extends Component {
     const event = this.state.learningEvent;
 
     return (
-      <Container>
+      <Container className="learning-event-container">
         <MetaTags metaTitle={event.title}
                 metaDescription={event.description}
                 canonicalUrl=""/>
-        <Header as="h1">{event.title}</Header>
+        <LearningEventHeader event={event} />
         <LearningEventManager event={event} />
+        <LearningEventFooter />
       </Container>
     );
   }

@@ -1,4 +1,34 @@
 /* Prototyping for infographic until more robust css in place */
+.learning-event-container {
+  font-family: "Source Sans Pro", sans-serif;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  box-shadow: 0 1px 2px 0 rgba(34,36,38, 0.15);
+  padding: 15px 0px 65px 0px;
+}
+
+.learning-event-header {
+  padding-top: 30px;
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.learning-event-header-video {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.learning-event-p {
+  font-size: 1.3em;
+}
+
+.learning-event-footer { 
+  padding-top: 30px;
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
 .infographic {
   font-family: "Source Sans Pro", sans-serif;
 }
