@@ -9,7 +9,8 @@ export default class TopicProgress extends Component {
     const { isLoggedIn } = this.state;
     if (isLoggedIn) {
       //show progress bar or completed journey
-      const pathComplete = false; //Logic for path complete
+      const { topicsComplete, topicsTotal } = this.props;
+      const pathComplete = topicsComplete === topicsTotal ? true : false; //Logic for path complete
       if (pathComplete) {
         //display "you completed your journey!"
         return (
@@ -41,7 +42,7 @@ export default class TopicProgress extends Component {
             <Grid.Row className={"topic-progress-bar-row"}>
               <Grid.Column>
                 <Progress
-                  percent={20}
+                  percent={this.progressPercentage(topicsComplete, topicsTotal)}
                   color={"blue"}
                   className={"topic-progress-bar"}
                 />
@@ -49,7 +50,9 @@ export default class TopicProgress extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <div className={"topic-progress-meta"}>2 out of 5 done!</div>
+                <div className={"topic-progress-meta"}>
+                  {topicsComplete} out of {topicsTotal} done!
+                </div>
               </Grid.Column>
             </Grid.Row>
           </React.Fragment>
@@ -79,7 +82,10 @@ export default class TopicProgress extends Component {
         </React.Fragment>
       );
     }
-    return <Grid.Row />;
+  }
+
+  progressPercentage(complete, total) {
+    return (complete / total) * 100;
   }
 
   render() {
