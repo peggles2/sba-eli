@@ -3,7 +3,7 @@ import { Grid, Icon, Progress, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 export default class TopicProgress extends Component {
-  state = { isLoggedIn: true };
+  state = { isLoggedIn: false };
 
   renderForSessionState() {
     const { isLoggedIn } = this.state;
