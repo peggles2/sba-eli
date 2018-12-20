@@ -8,6 +8,7 @@ import DownloadButton from "./DownloadButton";
 import ShareButton from "./ShareButton";
 import screenfull from "screenfull";
 import "./Slider.css"
+import "./playerControls.css";
 
 export default class LearningEventVideo extends Component {
   state = {
@@ -84,30 +85,6 @@ export default class LearningEventVideo extends Component {
     const { url, playing, volume, muted,  pip, played, duration, playbackRate, loop, height, width } = this.state
     const vidLength = <Duration seconds={duration} />;
 
-    const playerControlsStyle = {
-      width: width,
-      marginTop: '-5px',
-      overflow: 'auto',
-      padding: '15px 20px 15px 20px',
-      backgroundColor: '#000000',
-      opacity: 0.9
-    };
-
-    const seekStyle = {
-      width: '650px',
-      marginLeft: '20px'
-    };
-
-    const volStyle = {
-      width: '50px'
-    };
-
-    const durationStyle = {
-      marginLeft: '25px',
-      marginRight: '25px',
-      color: '#FFFFFF',
-    }
-
     return(
       <div>
         <div className="learning-event-header-video">
@@ -133,7 +110,7 @@ export default class LearningEventVideo extends Component {
             onDuration={this.onDuration}
           />
         </div>
-        <div className="player-controls" style={playerControlsStyle}>
+        <div className="player-controls" style={{width: width}}>
           <Button.Group basic color='black' icon>
             <Button onClick={this.playPause} aria-label="play">
               {playing ? <Icon name='pause' size='large' inverted color='grey'/> : <Icon name='play' size='large' inverted color='grey' />}
@@ -145,7 +122,6 @@ export default class LearningEventVideo extends Component {
           <input type='range' min={0} max={1} step='any'
             value={volume}
             onChange={this.setVolume}
-            style={volStyle}
             class="volumeSlider"
           />
           <span className="seek-bar" style={{ marginTop: '15px'}}>
@@ -155,10 +131,9 @@ export default class LearningEventVideo extends Component {
               onMouseDown={this.onSeekMouseDown}
               onChange={this.onSeekChange}
               onMouseUp={this.onSeekMouseUp}
-              style={seekStyle}
               class="slider"
             />
-            <span style={durationStyle}><b><Duration seconds={duration * played} /></b> / <Duration seconds={duration} /></span>
+            <span className="duration"><b><Duration seconds={duration * played} /></b> / <Duration seconds={duration} /></span>
           </span>
           <Button.Group basic icon color='black' floated='right'>
             <Button aria-label='closed captioning'>

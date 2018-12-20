@@ -6,7 +6,6 @@ const LearningEventHeader = (props) => {
 
   return(
     <div className="learning-event-header">
-      <p className="learning-event-p">Avengers</p>
       <Header as='h1'>{event.title}</Header>
     </div>
   )
