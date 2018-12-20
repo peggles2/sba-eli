@@ -3,14 +3,14 @@ import { Grid, Icon, Progress, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 export default class TopicProgress extends Component {
-  state = { isLoggedIn: false };
+  state = { isLoggedIn: true };
 
   renderForSessionState() {
     const { isLoggedIn } = this.state;
     if (isLoggedIn) {
       //show progress bar or completed journey
       const { topicsComplete, topicsTotal } = this.props;
-      const pathComplete = topicsComplete === topicsTotal ? true : false; //Logic for path complete
+      const pathComplete = topicsComplete === topicsTotal; //Logic for path complete
       if (pathComplete) {
         //display "you completed your journey!"
         return (
