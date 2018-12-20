@@ -1,6 +1,7 @@
 import React from 'react';
 import LearningPathsList from './LearningPathsList';
 import LearningPathAbout from './LearningPathAbout';
+import MetaTags from '../SEO/MetaTags'
 import { withRouter } from 'react-router-dom';
 import { Container, Header, Divider } from 'semantic-ui-react';
 
@@ -32,6 +33,9 @@ class LearningPaths extends React.Component {
   render () {
     return(
       <div>
+        <MetaTags metaTitle="SBA Learning Paths"
+                metaDescription="Description for the Learning Path landing page"
+                canonicalUrl="https://sba.gov/learning_paths"/>
         <Container textAlign="center">
           <Header as='h1'>Learning Paths</Header>
           <LearningPathAbout open={this.state.displayModal} handleClose={this.handleModalClose} />
