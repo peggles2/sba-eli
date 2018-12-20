@@ -6,6 +6,7 @@ import TopicSideBar from "../TopicSideBar/TopicSidebar";
 import TopicContentView from "../TopicContentView/TopicContentView";
 import LearningEvent from "../LearningEvent/LearningEvent";
 import LearningPathBreadCrumb from "./LearningPathBreadcrumb";
+import MetaTags from "../SEO/MetaTags";
 
 import "./learningPath.css";
 
@@ -102,6 +103,9 @@ export default class LearningPath extends React.Component {
 
     return (
       <Grid centered>
+        <MetaTags metaTitle={this.state.learningPath.name}
+                  metaDescription={this.state.learningPath.description}
+                  canonicalUrl={`https://sba.gov/learning_paths/${this.props.match.params.id}`}/>
         <Grid.Row className={"path-breadcrumb-row"}>
           <Grid.Column mobile={15} tablet={15} computer={15}>
             <LearningPathBreadCrumb
