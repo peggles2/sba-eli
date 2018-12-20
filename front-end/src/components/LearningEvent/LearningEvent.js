@@ -1,7 +1,7 @@
 
 import "./learningEvent.css";
 import React, { Component } from "react";
-import { Header, Container } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import axios from "axios";
 import LearningEventHeader from "./LearningEventHeader"
 import LearningEventManager from "./LearningEventManager";
