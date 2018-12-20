@@ -24,7 +24,7 @@ export default class TopicProgress extends Component {
             </Grid.Column>
           </Grid.Row>
         );
-      } else {
+      } 
         //progress bar!
         return (
           <React.Fragment>
@@ -54,8 +54,7 @@ export default class TopicProgress extends Component {
             </Grid.Row>
           </React.Fragment>
         );
-      }
-    } else {
+    } 
       //Show register button
       return (
         <React.Fragment>
@@ -78,8 +77,6 @@ export default class TopicProgress extends Component {
           </Grid.Row>
         </React.Fragment>
       );
-    }
-    return <Grid.Row />;
   }
 
   render() {
