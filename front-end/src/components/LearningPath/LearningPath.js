@@ -8,7 +8,7 @@ import LearningEvent from "../LearningEvent/LearningEvent";
 import LearningPathBreadCrumb from "./LearningPathBreadcrumb";
 import MetaTags from "../SEO/MetaTags";
 
-import "./learningPath.css";
+import "./LearningPath.scss";
 
 export default class LearningPath extends React.Component {
   state = {
