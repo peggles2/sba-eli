@@ -80,7 +80,9 @@ export default class SearchPage extends Component {
           && this.state.searchMetadata.pagination
           && this.state.searchMetadata.pagination.total_count
           && this.state.searchMetadata.pagination.total_count > 0) {
-        return `${this.state.searchMetadata.pagination.total_count} Search Results for "${this.state.searchTerm}"`
+        return this.state.searchMetadata.pagination.total_count == 1 
+              ? `1 Search Result for "${this.state.searchTerm}"`
+              : `${this.state.searchMetadata.pagination.total_count} Search Results for "${this.state.searchTerm}"`
       }
       return `No Search Results were found for "${this.state.searchTerm}"`
     }
