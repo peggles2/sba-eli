@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Accordion, Container } from "semantic-ui-react";
 import TopicEventList from "./TopicEventList";
 import TopicProgress from "./TopicProgress";
-import "./TopicSideBar.scss";
+import "./TopicSidebar.scss";
 
 export default class TopicSideBar extends Component {
   constructor(props) {
