@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Dropdown } from "semantic-ui-react";
-import "./topicContentView.css";
 import TopicContentItem from "./TopicContentItem";
+import "./TopicContentView.scss";
 
 export default class TopicContentView extends Component {
   renderTopicSelect() {
