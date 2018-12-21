@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Accordion, Container } from "semantic-ui-react";
 import TopicEventList from "./TopicEventList";
-import "./topicSideBar.css";
 import TopicProgress from "./TopicProgress";
+import "./TopicSidebar.scss";
 
 export default class TopicSideBar extends Component {
   constructor(props) {
@@ -21,14 +21,14 @@ export default class TopicSideBar extends Component {
     this.setState({ activeIndex: newIndex });
   };
 
-  renderTopicsList(objectives = []) {
+  renderTopicsList(topics = []) {
     const { activeIndex } = this.state;
 
-    if (objectives.length) {
+    if (topics.length) {
       return (
         <Container fluid className={"topic-container"}>
           <Accordion>
-            {objectives.map((objective, idx) => {
+            {topics.map((topic, idx) => {
               return (
                 <React.Fragment key={"topicSidebar" + idx}>
                   <Accordion.Title
@@ -38,7 +38,7 @@ export default class TopicSideBar extends Component {
                     className={"topic-accordion-title"}
                   >
                     <div className={"topic-number-circle"}>{idx + 1}</div>
-                    {objective.name}
+                    {topic.name}
                   </Accordion.Title>
                   <Accordion.Content
                     active={activeIndex === idx}
@@ -46,14 +46,15 @@ export default class TopicSideBar extends Component {
                   >
                     <TopicEventList
                       course_id={this.props.course_id}
-                      module_id={objective.id}
+                      module_id={topic.id}
                     />
                   </Accordion.Content>
                 </React.Fragment>
               );
             })}
           </Accordion>
-          <TopicProgress />
+          {/* TODO When progress tracking added send topics Completed to progress */}
+          <TopicProgress topicsComplete={0} topicsTotal={topics.length} />
         </Container>
       );
     }

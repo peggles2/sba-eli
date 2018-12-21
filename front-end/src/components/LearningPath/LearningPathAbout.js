@@ -3,7 +3,7 @@ import { Button, Grid, Icon, Modal } from 'semantic-ui-react'
 import classnames from 'classnames'
 
 import LearningPathAboutPage from './LearningPathAboutPage'
-import './LearningPathAbout.css'
+import './LearningPathAbout.scss'
 
 class LearningPathAbout extends React.Component {
   state = {

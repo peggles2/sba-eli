@@ -99,6 +99,26 @@ jobs:
           key: front-end-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
+  jest:
+    docker:
+      - image: circleci/ruby:2.5.3-node-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Make front end the base directory
+          command: |
+            cp -r ./front-end/. ./
+            rm -rf ./service-layer ./front-end
+      - restore_cache:
+          keys:
+            - front-end-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - run: yarn test
+      - save_cache:
+          key: front-end-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
 
   build:
     docker:
@@ -182,11 +202,13 @@ workflows:
       - rubocop
       - rspec
       - eslint
+      - jest
       - build:
           requires:
             - rubocop
             - rspec
             - eslint
+            - jest
           filters:
             branches:
               only: master
@@ -195,6 +217,7 @@ workflows:
             - rubocop
             - rspec
             - eslint
+            - jest
             - build
           filters:
             branches:
