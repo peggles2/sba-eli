@@ -7,8 +7,8 @@ import Duration from "./LearningEventVideo/Duration";
 import DownloadButton from "./DownloadButton";
 import ShareButton from "./ShareButton";
 import screenfull from "screenfull";
-import "./Slider.css"
-import "./playerControls.css";
+import "./Slider.scss"
+import "./PlayerControls.scss";
 
 export default class LearningEventVideo extends Component {
   state = {
