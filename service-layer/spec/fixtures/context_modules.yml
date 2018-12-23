@@ -1,0 +1,1461 @@
+# == Schema Information
+#
+# Table name: context_modules
+#
+#  id                          :bigint(8)        not null, primary key
+#  context_id                  :bigint(8)        not null
+#  context_type                :string(255)      not null
+#  name                        :text
+#  position                    :integer
+#  prerequisites               :text
+#  completion_requirements     :text
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#  workflow_state              :string(255)      default("active"), not null
+#  deleted_at                  :datetime
+#  unlock_at                   :datetime
+#  migration_id                :string(255)
+#  require_sequential_progress :boolean
+#  cloned_item_id              :bigint(8)
+#  completion_events           :text
+#  requirement_count           :integer
+#
+# Indexes
+#
+#  index_context_modules_on_context_id_and_context_type  (context_id,context_type)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (cloned_item_id => cloned_items.id)
+#
+
+---
+context_module_2:
+  id: 2
+  context_id: 1
+  context_type: Course
+  name: Motivation/Definition of Success
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:33:51.767412'
+  updated_at: '2018-11-05 21:42:12.304091'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:12.234333'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_1:
+  id: 1
+  context_id: 1
+  context_type: Course
+  name: Economic Power of Women Entrepreneurs
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:33:33.884358'
+  updated_at: '2018-11-05 21:42:15.631101'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:15.567253'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_3:
+  id: 3
+  context_id: 1
+  context_type: Course
+  name: Confidence in Entrepreneurship Skills
+  position: 3
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:34:05.625556'
+  updated_at: '2018-11-05 21:42:18.786699'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:18.729953'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_4:
+  id: 4
+  context_id: 1
+  context_type: Course
+  name: Personal Aspirations/Goal Setting
+  position: 4
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:36:46.423266'
+  updated_at: '2018-11-05 21:42:22.342248'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:22.291183'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_5:
+  id: 5
+  context_id: 1
+  context_type: Course
+  name: Time Management
+  position: 5
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:36:56.69921'
+  updated_at: '2018-11-05 21:42:25.98512'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:25.941242'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_6:
+  id: 6
+  context_id: 1
+  context_type: Course
+  name: Decision Making
+  position: 6
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:37:12.787639'
+  updated_at: '2018-11-05 21:42:29.192096'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:29.154008'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_7:
+  id: 7
+  context_id: 1
+  context_type: Course
+  name: Risk Profile
+  position: 7
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:37:20.045041'
+  updated_at: '2018-11-05 21:42:32.661181'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:32.629506'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_8:
+  id: 8
+  context_id: 1
+  context_type: Course
+  name: Delegation
+  position: 8
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:37:27.852454'
+  updated_at: '2018-11-05 21:42:35.845319'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:35.819485'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_9:
+  id: 9
+  context_id: 1
+  context_type: Course
+  name: Approach to Leadership
+  position: 9
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:37:43.966228'
+  updated_at: '2018-11-05 21:42:39.127941'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:39.109343'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_10:
+  id: 10
+  context_id: 1
+  context_type: Course
+  name: Communication
+  position: 10
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:37:51.459477'
+  updated_at: '2018-11-05 21:42:42.116442'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:42.103796'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_11:
+  id: 11
+  context_id: 1
+  context_type: Course
+  name: Mentor Network
+  position: 11
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:37:57.363258'
+  updated_at: '2018-11-05 21:42:45.443422'
+  workflow_state: deleted
+  deleted_at: '2018-11-05 21:42:45.438621'
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_37:
+  id: 37
+  context_id: 5
+  context_type: Course
+  name: Identify Ideation Process
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:33:35.494477'
+  updated_at: '2018-11-06 04:33:35.494477'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_38:
+  id: 38
+  context_id: 5
+  context_type: Course
+  name: Apply the Practice of Situational Awareness
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:33:54.15917'
+  updated_at: '2018-11-06 04:33:54.15917'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_39:
+  id: 39
+  context_id: 5
+  context_type: Course
+  name: Experiment with Design Thinking Models.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:34:13.319897'
+  updated_at: '2018-11-06 04:34:13.319897'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_40:
+  id: 40
+  context_id: 5
+  context_type: Course
+  name: Create List of Potential Business Growth Opportunities Relative to Your Own
+    Business.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:34:55.580899'
+  updated_at: '2018-11-06 04:34:55.580899'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_41:
+  id: 41
+  context_id: 5
+  context_type: Course
+  name: Construct an Intellectual Property Strategy
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:36:00.996098'
+  updated_at: '2018-11-06 04:36:00.996098'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_42:
+  id: 42
+  context_id: 6
+  context_type: Course
+  name: Evaluate the Product/Service
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:37:02.692621'
+  updated_at: '2018-11-06 04:37:02.692621'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_43:
+  id: 43
+  context_id: 6
+  context_type: Course
+  name: Examine Product or Service Viability
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:37:19.498948'
+  updated_at: '2018-11-06 04:37:19.498948'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_12:
+  id: 12
+  context_id: 1
+  context_type: Course
+  name: LO1 - Understand the economic power of women entrepreneurs
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:43:10.792209'
+  updated_at: '2018-11-05 22:50:47.641475'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_13:
+  id: 13
+  context_id: 1
+  context_type: Course
+  name: L02 - Assess your motivation and identify your definition of success
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:43:27.054256'
+  updated_at: '2018-11-05 22:50:47.652151'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_14:
+  id: 14
+  context_id: 1
+  context_type: Course
+  name: LO3 - Assess your confidence in entrepreneurship skills
+  position: 3
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:43:44.451861'
+  updated_at: '2018-11-05 22:50:47.659794'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_15:
+  id: 15
+  context_id: 1
+  context_type: Course
+  name: LO4 - Create your business vision board
+  position: 4
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:44:00.790378'
+  updated_at: '2018-11-05 22:50:47.667528'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_16:
+  id: 16
+  context_id: 1
+  context_type: Course
+  name: LO5 - Apply time management best practices
+  position: 5
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:44:10.378505'
+  updated_at: '2018-11-05 22:50:47.675105'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_17:
+  id: 17
+  context_id: 1
+  context_type: Course
+  name: LO6 - Apply decision making best practices
+  position: 6
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:44:19.228482'
+  updated_at: '2018-11-05 22:50:47.683121'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_18:
+  id: 18
+  context_id: 1
+  context_type: Course
+  name: LO7 - Identify and assess your risk profile
+  position: 7
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:44:42.914168'
+  updated_at: '2018-11-05 22:50:47.690776'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_19:
+  id: 19
+  context_id: 1
+  context_type: Course
+  name: LO8 - Assess your openness to delegation
+  position: 8
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:45:12.324763'
+  updated_at: '2018-11-05 22:50:47.69841'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_20:
+  id: 20
+  context_id: 1
+  context_type: Course
+  name: LO9 - Apply best practices of communication
+  position: 9
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:45:25.893147'
+  updated_at: '2018-11-05 22:50:47.706198'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_21:
+  id: 21
+  context_id: 1
+  context_type: Course
+  name: LO10 - Identify your approach to leadership
+  position: 10
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:45:36.295155'
+  updated_at: '2018-11-05 22:50:47.713815'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_22:
+  id: 22
+  context_id: 1
+  context_type: Course
+  name: LO11 - Develop your mentor network
+  position: 11
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-05 21:45:43.830579'
+  updated_at: '2018-11-05 22:50:47.721536'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_44:
+  id: 44
+  context_id: 6
+  context_type: Course
+  name: Analyze and Rank Potential Opportunity Risks.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:37:39.920254'
+  updated_at: '2018-11-06 04:37:39.920254'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_45:
+  id: 45
+  context_id: 6
+  context_type: Course
+  name: Assess the Opportunity Compatibility with You and Your Business
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:38:17.816457'
+  updated_at: '2018-11-06 04:38:17.816457'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_46:
+  id: 46
+  context_id: 7
+  context_type: Course
+  name: Analyze the Customer Need
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:38:58.020186'
+  updated_at: '2018-11-06 04:38:58.020186'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_28:
+  id: 28
+  context_id: 4
+  context_type: Course
+  name: 'Assess your Confidence in Entrepreneurship Skills. '
+  position: 3
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:02:51.240049'
+  updated_at: '2018-11-06 16:23:44.518384'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_24:
+  id: 24
+  context_id: 3
+  context_type: Course
+  name: Test Module 2
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 03:44:41.873432'
+  updated_at: '2018-11-06 03:49:26.491617'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_25:
+  id: 25
+  context_id: 3
+  context_type: Course
+  name: Test Module 3
+  position: 3
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 03:44:52.034802'
+  updated_at: '2018-11-06 03:49:26.499653'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_23:
+  id: 23
+  context_id: 3
+  context_type: Course
+  name: Test Module 1
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 03:38:55.83567'
+  updated_at: '2018-11-06 03:51:44.787072'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_29:
+  id: 29
+  context_id: 4
+  context_type: Course
+  name: Design Your Business
+  position: 4
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:03:13.525312'
+  updated_at: '2018-11-06 16:23:45.198491'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_47:
+  id: 47
+  context_id: 7
+  context_type: Course
+  name: Analyze Market Information, Including Target Market and Market Segmentation
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:39:42.20774'
+  updated_at: '2018-11-06 04:39:42.20774'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_30:
+  id: 30
+  context_id: 4
+  context_type: Course
+  name: Apply Time Management Best Practices
+  position: 5
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:03:37.030112'
+  updated_at: '2018-11-06 16:23:46.331141'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_31:
+  id: 31
+  context_id: 4
+  context_type: Course
+  name: 'Apply Decision Making Best Practices. '
+  position: 6
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:04:40.508215'
+  updated_at: '2018-11-06 16:23:46.922366'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_32:
+  id: 32
+  context_id: 4
+  context_type: Course
+  name: Identify and Assess Your Risk Profile
+  position: 7
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:05:03.805425'
+  updated_at: '2018-11-06 16:23:48.026106'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_33:
+  id: 33
+  context_id: 4
+  context_type: Course
+  name: Assess Your Openness to Delegation.
+  position: 8
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:05:31.354266'
+  updated_at: '2018-11-06 16:23:48.713938'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_34:
+  id: 34
+  context_id: 4
+  context_type: Course
+  name: Identify and Assess Your Approach to Leadership.
+  position: 9
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:05:52.081874'
+  updated_at: '2018-11-06 16:23:49.414056'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_35:
+  id: 35
+  context_id: 4
+  context_type: Course
+  name: 'Apply Best Practices of Communication. '
+  position: 10
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:08:40.470484'
+  updated_at: '2018-11-06 16:23:50.850333'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_36:
+  id: 36
+  context_id: 4
+  context_type: Course
+  name: Develop Your Mentor Network
+  position: 11
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:08:58.891283'
+  updated_at: '2018-11-06 16:23:51.567751'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_27:
+  id: 27
+  context_id: 4
+  context_type: Course
+  name: 'Assess Your Motivation and Identify Your Definition of Success. '
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 03:59:28.020511'
+  updated_at: '2018-11-06 16:23:43.984919'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_48:
+  id: 48
+  context_id: 7
+  context_type: Course
+  name: Identify and Analyze the Competition and Mitigation Strategies
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:40:03.427185'
+  updated_at: '2018-11-06 04:40:03.427185'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_49:
+  id: 49
+  context_id: 7
+  context_type: Course
+  name: Design Customer Experience Process
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:40:55.354294'
+  updated_at: '2018-11-06 04:40:55.354294'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_50:
+  id: 50
+  context_id: 7
+  context_type: Course
+  name: Develop Pricing Strategy and Tactics.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:41:09.583229'
+  updated_at: '2018-11-06 04:41:09.583229'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_51:
+  id: 51
+  context_id: 7
+  context_type: Course
+  name: Develop Marketing Plan with Budget.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:41:32.387957'
+  updated_at: '2018-11-06 04:41:32.387957'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_52:
+  id: 52
+  context_id: 7
+  context_type: Course
+  name: Develop Plan to Test Marketing Tactics.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:41:49.865301'
+  updated_at: '2018-11-06 04:41:49.865301'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_53:
+  id: 53
+  context_id: 7
+  context_type: Course
+  name: Assess Marketing Efforts.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 04:42:04.466808'
+  updated_at: '2018-11-06 04:42:04.466808'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_54:
+  id: 54
+  context_id: 8
+  context_type: Course
+  name: Analyze the Skills Gap in Your Company
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:03:11.284581'
+  updated_at: '2018-11-06 05:03:23.578592'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_55:
+  id: 55
+  context_id: 8
+  context_type: Course
+  name: Write Strategic Job Descriptions.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:03:52.614084'
+  updated_at: '2018-11-06 05:03:52.614084'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_56:
+  id: 56
+  context_id: 8
+  context_type: Course
+  name: Distinguish Between Legal Employment of Regular Employees (4-2) and Contract
+    Employees (1099)
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:04:29.105139'
+  updated_at: '2018-11-06 05:04:29.105139'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_57:
+  id: 57
+  context_id: 8
+  context_type: Course
+  name: Design Recruitment Plan
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:04:46.090162'
+  updated_at: '2018-11-06 05:04:46.090162'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_58:
+  id: 58
+  context_id: 8
+  context_type: Course
+  name: Develop Interview Techniques that Enable You to Hire and Retain the Right
+    People.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:05:14.550511'
+  updated_at: '2018-11-06 05:05:14.550511'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_59:
+  id: 59
+  context_id: 8
+  context_type: Course
+  name: Prepare Salary Plan
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:05:34.604013'
+  updated_at: '2018-11-06 05:05:34.604013'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_60:
+  id: 60
+  context_id: 8
+  context_type: Course
+  name: Assess Benefit Options (Health Care, Retirement, and Family Leave)
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:06:01.228729'
+  updated_at: '2018-11-06 05:06:01.228729'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_61:
+  id: 61
+  context_id: 8
+  context_type: Course
+  name: Integrate Health and Safety Requirements into Your Business Practices
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:06:26.543745'
+  updated_at: '2018-11-06 05:06:26.543745'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_62:
+  id: 62
+  context_id: 8
+  context_type: Course
+  name: Evaluate the Elements in a Performance Development Plan to Reflect Your Organizations'
+    Values
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:07:25.903188'
+  updated_at: '2018-11-06 05:07:25.903188'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_63:
+  id: 63
+  context_id: 8
+  context_type: Course
+  name: Evaluate Organizational Culture
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:09:31.818738'
+  updated_at: '2018-11-06 05:09:31.818738'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_64:
+  id: 64
+  context_id: 9
+  context_type: Course
+  name: Analyze Personal and Business Finances and How They Relate to Each Other
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:10:37.526265'
+  updated_at: '2018-11-06 05:10:37.526265'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_65:
+  id: 65
+  context_id: 9
+  context_type: Course
+  name: Create and Evaluate Income Statement
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:10:56.487004'
+  updated_at: '2018-11-06 05:10:56.487004'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_66:
+  id: 66
+  context_id: 9
+  context_type: Course
+  name: Create and Evaluate Balance Sheet
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:11:13.361172'
+  updated_at: '2018-11-06 05:11:13.361172'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_67:
+  id: 67
+  context_id: 9
+  context_type: Course
+  name: Create and Evaluate Cash Flow Statement
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:12:31.397837'
+  updated_at: '2018-11-06 05:12:31.397837'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_68:
+  id: 68
+  context_id: 9
+  context_type: Course
+  name: Apply Financial Statements to Business Growth Decisions
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:13:03.377339'
+  updated_at: '2018-11-06 05:13:03.377339'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_69:
+  id: 69
+  context_id: 9
+  context_type: Course
+  name: Develop and Practice Financial Key Performance Indicators (KPI)
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:13:26.000979'
+  updated_at: '2018-11-06 05:13:26.000979'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_70:
+  id: 70
+  context_id: 9
+  context_type: Course
+  name: Develop Financial Projections (3–5 Year Plan)
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:13:48.597651'
+  updated_at: '2018-11-06 05:13:48.597651'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_71:
+  id: 71
+  context_id: 9
+  context_type: Course
+  name: Assess Your Insurance Needs
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:14:06.017586'
+  updated_at: '2018-11-06 05:14:06.017586'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_72:
+  id: 72
+  context_id: 9
+  context_type: Course
+  name: Assess Money-Saving Techniques (Including Bootstrapping)
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:14:31.024212'
+  updated_at: '2018-11-06 05:14:31.024212'
+  workflow_state: unpublished
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_77:
+  id: 77
+  context_id: 10
+  context_type: Course
+  name: Prepare and Deliver a Funding Pitch
+  position: 4
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:17:05.934417'
+  updated_at: '2018-11-06 16:20:22.019707'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_76:
+  id: 76
+  context_id: 10
+  context_type: Course
+  name: Develop Relationships with Your Banker and Relevant Capital Providers
+  position: 3
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:16:40.25522'
+  updated_at: '2018-11-06 16:20:22.612626'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_75:
+  id: 75
+  context_id: 10
+  context_type: Course
+  name: Analyze Funding Sources Appropriate for Your Business
+  position: 2
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:16:15.000238'
+  updated_at: '2018-11-06 16:20:23.891966'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_74:
+  id: 74
+  context_id: 10
+  context_type: Course
+  name: Analyze Potential Equity Funders and Deals
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:15:51.10252'
+  updated_at: '2018-11-06 16:20:24.601387'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_73:
+  id: 73
+  context_id: 10
+  context_type: Course
+  name: Analyze Potential Sources of Debt Funding.
+  position: 7
+  prerequisites: "--- []\n"
+  completion_requirements: |
+    ---
+    - :id: 3
+      :type: must_view
+  created_at: '2018-11-06 05:15:27.057857'
+  updated_at: '2018-11-07 05:29:36.311713'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_79:
+  id: 79
+  context_id: 10
+  context_type: Course
+  name: Understand the Role of Your Personal Finances in Access to Capital
+  position: 6
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:18:01.8984'
+  updated_at: '2018-11-06 16:20:20.792427'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_78:
+  id: 78
+  context_id: 10
+  context_type: Course
+  name: Construct Your Plan for Becoming an Angel Investor
+  position: 5
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 05:17:28.609792'
+  updated_at: '2018-11-06 16:20:21.459488'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 
+context_module_26:
+  id: 26
+  context_id: 4
+  context_type: Course
+  name: Understand the Economic Power of Women Entreprenuers.
+  position: 1
+  prerequisites: "--- []\n"
+  completion_requirements: "--- []\n"
+  created_at: '2018-11-06 03:58:44.960003'
+  updated_at: '2018-11-20 23:58:20.241542'
+  workflow_state: active
+  deleted_at: 
+  unlock_at: 
+  migration_id: 
+  require_sequential_progress: false
+  cloned_item_id: 
+  completion_events: 
+  requirement_count: 

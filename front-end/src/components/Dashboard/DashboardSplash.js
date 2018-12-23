@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom';
 import { Grid, Header, Button } from "semantic-ui-react";
 
-export default class DashboardSplash extends Component {
+class DashboardSplash extends Component {
   render() {
     return (
       <Grid centered>
@@ -28,9 +29,14 @@ export default class DashboardSplash extends Component {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Button size="huge">Begin Your Journey</Button>
+          <Button size="huge" onClick={() => this.props.history.push({
+            pathname: "/learning_paths",
+            state: {showModal: true}
+            })}>Begin Your Journey</Button>
         </Grid.Row>
       </Grid>
     );
   }
 }
+
+export default withRouter(DashboardSplash);

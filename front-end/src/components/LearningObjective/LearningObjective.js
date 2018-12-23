@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Header } from "semantic-ui-react";
 import LearningEventsList from "../LearningEvent/LearningEventsList";
+import MetaTags from '../SEO/MetaTags'
 
 export default class LearningObjective extends Component {
   constructor(props) {
@@ -42,8 +43,10 @@ export default class LearningObjective extends Component {
     const learningObjective = this.state.learningObjective;
     return (
       <div>
-        <Header as="h1">Learning Objective {learningObjective.id}</Header>
-        <Header as="h3">{learningObjective.name}</Header>
+        <MetaTags metaTitle={learningObjective.name}
+                  metaDescription={learningObjective.description}
+                  canonicalUrl={`https://sba.gov/learning_paths/${this.props.match.params.course_id}/learning_objectives/${this.props.match.params.id}`}/>
+        <Header as="h1">{learningObjective.name}</Header>
         <Header as="h4">Micro Learning Events:</Header>
         <LearningEventsList
           course_id={this.props.match.params.id}

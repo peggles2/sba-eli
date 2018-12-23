@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { List } from "semantic-ui-react";
 import LearningEventsItem from "./LearningEventsItem";
 
 export default class LearningEventsList extends Component {
@@ -44,6 +45,6 @@ export default class LearningEventsList extends Component {
   }
 
   render() {
-    return <ul>{this.renderEventsList(this.state.eventsList)}</ul>;
+    return <List>{this.renderEventsList(this.state.eventsList)}</List>;
   }
 }
