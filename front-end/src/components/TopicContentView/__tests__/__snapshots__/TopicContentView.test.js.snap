@@ -17,53 +17,21 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "function",
-    "props": Object {
-      "children": Array [
-        null,
-        <div />,
-      ],
-    },
+    "nodeType": "host",
+    "props": Object {},
     "ref": null,
-    "rendered": Array [
-      null,
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {},
-        "ref": null,
-        "rendered": null,
-        "type": "div",
-      },
-    ],
-    "type": Symbol(react.fragment),
+    "rendered": null,
+    "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "children": Array [
-          null,
-          <div />,
-        ],
-      },
+      "nodeType": "host",
+      "props": Object {},
       "ref": null,
-      "rendered": Array [
-        null,
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": "div",
-        },
-      ],
-      "type": Symbol(react.fragment),
+      "rendered": null,
+      "type": "div",
     },
   ],
   Symbol(enzyme.__options__): Object {

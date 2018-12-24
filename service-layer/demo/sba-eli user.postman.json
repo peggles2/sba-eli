@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "7753751b-7491-41c3-ab43-855d6e3b8290",
+		"name": "SBA-ELI-Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get a list of users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n\t\"user\": {\n \t\t\"name\":\"Brand New APIUser\",\n \t\t\"sortable_name\": \"New APIUser, Brand\",\n \t\t\"short_name\":\"B\",\n\t\t\"email\": \"email+1234@gmail.com\"\n \t},\n \t\"pseudonym\":{\n \t\t\"unique_id\": \"email+879879@gmail.com\"\n \t}\n }"
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"18"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/:id/16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						":id",
+						"16"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n \t\"user_data\": {\n\t\"user\": {\n \t\t\"name\":\"Kelly S\",\n \t\t\"sortable_name\": \"S, Kelly\",\n \t\t\"short_name\":\"Kelly\",\n\t\t\"email\": \"email+3446@gmail.com\"\n \t},\n \t\"pseudonym\":{\n \t\t\"unique_id\": \"email+789@gmail.com\"\n \t}\n \t},\n \t\"custom_data\": {\n \t\"ns\": \"sba-eli-services\",\n        \"data\": {\n            \"user\": {\n                \"linked_in\": \"http://www.google.com\",\n                \"zipcode\": \"06320\",\n                \"percent_ownership\": 97,\n                \"goal_percent_revenue\": 12,\n                \"goal_revenue_amount\": 1000,\n                \"goal_percent_increase_employees\": 15,\n                \"goal_increase_employee_amount\": 160,\n                \"race\": [\"race1\", \"race2\"],\n                \"ethnicity\": \"yes\"\n            },\n            \"company\": {\n                \"company_id\": \"12312\",\n                \"company_name\": \"New Company\",\n                \"industry\": [\"one\", \"two\", \"three\"],\n                \"naics\": [\"1234\", \"123123\", \"8976\"],\n                \"num_employees\": 40,\n                \"website\": \"http://www.website.com\"\n            }\n        }\n \t}\n }"
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/:id/25",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						":id",
+						"25"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

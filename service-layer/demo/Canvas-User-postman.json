@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "accec4ed-06a2-4ca3-a25c-ce4be92bd665",
+		"name": "Canvas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n\t\"user\": {\n \t\t\"name\":\"Brand New User\",\n \t\t\"sortable_name\": \"New User, Brand\",\n \t\t\"short_name\":\"B\",\n\t\t\"login_id\": \"email+1234@gmail.com\",\n\t\t\"email\": \"email+1234@gmail.com\"\n \t},\n \t\"pseudonym\":{\n \t\t\"unique_id\": \"email+1234@gmail.com\"\n \t}\n }"
+				},
+				"url": {
+					"raw": "http://ec2-34-205-29-33.compute-1.amazonaws.com/api/v1/accounts/1/users",
+					"protocol": "http",
+					"host": [
+						"ec2-34-205-29-33",
+						"compute-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list of users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://ec2-34-205-29-33.compute-1.amazonaws.com/api/v1/accounts/1/users",
+					"protocol": "http",
+					"host": [
+						"ec2-34-205-29-33",
+						"compute-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list of accounts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://ec2-34-205-29-33.compute-1.amazonaws.com/api/v1/accounts",
+					"protocol": "http",
+					"host": [
+						"ec2-34-205-29-33",
+						"compute-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add or update custom data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "content-type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n\t\"ns\": \"sba-eli-service\",\n\t\"data\": {\n \t\t\"race\":\"hispanic\",\n \t\t\"fruit\": \"pear\"\n\t}\n }"
+				},
+				"url": {
+					"raw": "http://ec2-34-205-29-33.compute-1.amazonaws.com/api/v1/users/10/custom_data",
+					"protocol": "http",
+					"host": [
+						"ec2-34-205-29-33",
+						"compute-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"10",
+						"custom_data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://ec2-34-205-29-33.compute-1.amazonaws.com/api/v1/accounts/1/users/12",
+					"protocol": "http",
+					"host": [
+						"ec2-34-205-29-33",
+						"compute-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"1",
+						"users",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete custom data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://ec2-34-205-29-33.compute-1.amazonaws.com/api/v1/users/10/custom_data?ns=sba-eli-service",
+					"protocol": "http",
+					"host": [
+						"ec2-34-205-29-33",
+						"compute-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"10",
+						"custom_data"
+					],
+					"query": [
+						{
+							"key": "ns",
+							"value": "sba-eli-service"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get custom data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "content-type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ns\": \"sba-eli-service\"\n }"
+				},
+				"url": {
+					"raw": "http://ec2-34-205-29-33.compute-1.amazonaws.com/api/v1/users/10/custom_data?ns=sba-eli-service",
+					"protocol": "http",
+					"host": [
+						"ec2-34-205-29-33",
+						"compute-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"10",
+						"custom_data"
+					],
+					"query": [
+						{
+							"key": "ns",
+							"value": "sba-eli-service"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "sd8bEomN7mgo6M0QwoMCzgQ7XSkNDIbtIfFBxSfnBEEphQ2LzRfEHGfqEGTPIQgl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n\t\"user\": {\n\t\t\"name\":\"Test D User\",\n \t\t\"sortable_name\": \"User, Test\",\n \t\t\"short_name\":\"Test\",\n\t\t\"email\": \"email@gmail.com\"\n \t}\n }"
+				},
+				"url": {
+					"raw": "http://ec2-34-205-29-33.compute-1.amazonaws.com/api/v1/users/15",
+					"protocol": "http",
+					"host": [
+						"ec2-34-205-29-33",
+						"compute-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"15"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,35 +1,23 @@
 import React from "react";
-import { Header, Grid } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 import LearningPath from "../LearningPath";
 import LearningEvent from "../../LearningEvent/LearningEvent";
-import MetaTags from "../../SEO/MetaTags";
-import TopicContentView from "../../TopicContentView/TopicContentView";
 import { shallow } from "enzyme";
+import TopicContentView from "../../TopicContentView/TopicContentView";
 
 describe("LearningPath", () => {
-  it("should render meta tags with Learning Path specific information", () => {
+  it("should render correctly", () => {
     const match = { params: { id: 1 } };
     const wrapper = shallow(<LearningPath match={match} />);
-    const name = "Learning Path Name"
-    const desc = "Learning Path Description"
-    const learningPath = {name: name, description: desc} 
-    wrapper.instance().setState({learningPath});
 
-    expect(wrapper.find(MetaTags).exists()).toBe(true);
-    const metaWrapper = wrapper.find(MetaTags).dive();
-
-    expect(metaWrapper.find('title').text()).toBe(name);
-    expect(metaWrapper.find("meta[name='author']").exists()).toBe(false);
-    expect(metaWrapper.find("meta[name='description']").exists()).toBe(true);
-    expect(metaWrapper.find("meta[name='description']").props().content).toBe(desc);
-    //TODO: add Canonical URL validation when we have final urls
+    expect(wrapper).toMatchSnapshot();
   });
 
   it("should render all parts for base landing page", () => {
     const match = { params: { id: 1 } };
     const wrapper = shallow(<LearningPath match={match} />);
 
-    expect(wrapper.find(Grid).exists()).toBe(true);
+    expect(wrapper.find("div").length).toEqual(1);
     expect(wrapper.find(Header).exists()).toBe(true);
     expect(wrapper.find(TopicContentView).exists()).toBe(true);
   });
@@ -39,7 +27,7 @@ describe("LearningPath", () => {
 
     const wrapper = shallow(<LearningPath match={match} />);
 
-    expect(wrapper.find(Grid).exists()).toBe(true);
+    expect(wrapper.find("div").length).toEqual(1);
     expect(wrapper.find(Header).exists()).toBe(true);
     expect(wrapper.find(LearningEvent).exists()).toBe(true);
   });

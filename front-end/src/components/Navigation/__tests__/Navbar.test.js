@@ -6,6 +6,11 @@ import NavigationLearningPath from '../NavigationLearningPath';
 import { shallow, mount } from 'enzyme';
 
 describe('Navbar', () => {
+  it('should render correctly', () => {
+    const wrapper = shallow(<Navbar/>);
+
+    expect(wrapper).toMatchSnapshot();
+  });
 
   it('should render a <Menu>', () => {
     const wrapper = shallow(<Navbar/>);

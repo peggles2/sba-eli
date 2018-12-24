@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Label, Form, Input } from "semantic-ui-react";
+import { Form, Input } from "semantic-ui-react";
 import SubjectFilters from "./SubjectFilters";
 import MediaTypeFilters from "./MediaTypeFilters";
 import TimeFilters from "./TimeFilters";
@@ -18,32 +18,30 @@ export default class SearchFacets extends Component {
         <Form.Group inline>
           <Form.Group>
             <Form.Field>
-              <Label>Media Type</Label>
-              <MediaTypeFilters filters={this.props.urlParams.mediaType} />
+              <label>Subject</label>
+              <SubjectFilters />
             </Form.Field>
           </Form.Group>
           <Form.Group>
             <Form.Field>
-              <Label>Subject</Label>
-              <SubjectFilters filters={this.props.urlParams.subject} />
+              <label>Media Type</label>
+              <MediaTypeFilters />
             </Form.Field>
           </Form.Group>
           <Form.Group>
             <Form.Field>
-              <Label>Time</Label>
-              <TimeFilters filters={this.props.urlParams.time} />
+              <label>Time</label>
+              <TimeFilters />
             </Form.Field>
           </Form.Group>
         </Form.Group>
         <Form.Group>
-          <Form.Button fluid id='cancel_search' onClick={this.cancelSearch}>
-            Reset
-          </Form.Button>
-          <Form.Button fluid type='submit' id='submit_search'>
+          <Form.Button fluid onClick={this.cancelSearch}>Cancel</Form.Button>
+          <Form.Button fluid type="submit">
             Apply
           </Form.Button>
         </Form.Group>
-        <Input type="hidden" name="searchTerm" value={this.props.urlParams.searchTerm} />
+        <Input type="hidden" name="searchTerm" value={this.props.searchTerm} />
       </Form>
     );
   }

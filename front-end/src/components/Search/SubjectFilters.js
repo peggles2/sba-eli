@@ -13,15 +13,12 @@ export default class SubjectFilters extends Component {
     ]
 
     return subjectFilters.map(filter => {
-      let selected = this.props.filters && this.props.filters.includes(filter.key)
-
       return (
         <Form.Checkbox name='subject'
                       value={filter.key}
                       key={filter.key}
                       id={'subject_filter_' +  filter.key}
-                      label={{children: filter.text}}
-                       defaultChecked={selected}/>
+                      label={{children: filter.text}}/>
       )
     })
   }

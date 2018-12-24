@@ -1,16 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { Header, Divider, Grid, Button, Icon } from "semantic-ui-react";
+import { Header, Divider, Grid } from "semantic-ui-react";
 
 import TopicSideBar from "../TopicSideBar/TopicSidebar";
 import TopicContentView from "../TopicContentView/TopicContentView";
 import LearningEvent from "../LearningEvent/LearningEvent";
 import LearningPathBreadCrumb from "./LearningPathBreadcrumb";
-import MetaTags from "../SEO/MetaTags";
 
-import "./LearningPath.scss";
-
-export default class LearningPath extends React.Component {
+class LearningPath extends React.Component {
   state = {
     learningPath: {},
     topicsList: []
@@ -102,50 +99,26 @@ export default class LearningPath extends React.Component {
     const breadCrumbProps = this.props.match.params;
 
     return (
-      <Grid centered>
-        <MetaTags metaTitle={this.state.learningPath.name}
-                  metaDescription={this.state.learningPath.description}
-                  canonicalUrl={`https://sba.gov/learning_paths/${this.props.match.params.id}`}/>
-        <Grid.Row className={"path-breadcrumb-row"}>
-          <Grid.Column mobile={15} tablet={15} computer={15}>
-            <LearningPathBreadCrumb
-              pathName={this.state.learningPath.name}
-              {...breadCrumbProps}
-            />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row className={"path-header-row"}>
-          <Grid.Column mobile={15} tablet={15} computer={15}>
-            <Header as="h2" className={"path-header"}>
-              {this.state.learningPath.name}
-              <Button className={"path-header-share mobile hidden"}>
-                Share &nbsp; <Icon name={"share"} />
-              </Button>
-            </Header>
-          </Grid.Column>
-        </Grid.Row>
+      <div>
+        <LearningPathBreadCrumb
+          pathName={this.state.learningPath.name}
+          {...breadCrumbProps}
+        />
+        <Header as="h1">{this.state.learningPath.name}</Header>
         <Divider />
-        <Grid.Row>
-          <Grid.Column
-            className={"mobile hidden"}
-            tablet={5}
-            computer={5}
-            largeScreen={3}
-            widescreen={3}
-          >
-            <TopicSideBar {...sideBarProps} />
-          </Grid.Column>
-          <Grid.Column
-            mobile={15}
-            tablet={11}
-            computer={11}
-            largeScreen={11}
-            widescreen={11}
-          >
-            {this.renderRightColumnContent()}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+        <Grid centered>
+          <Grid.Row>
+            <Grid.Column mobile={16} tablet={3} computer={3}>
+              <TopicSideBar {...sideBarProps} />
+            </Grid.Column>
+            <Grid.Column mobile={16} tablet={3} computer={11}>
+              {this.renderRightColumnContent()}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
     );
   }
 }
+
+export default LearningPath;
