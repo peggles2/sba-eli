@@ -8,12 +8,12 @@ const defaultValue = {
 
 export default function reducer(state=defaultValue, action) {
   switch(action.type) {
-    case 'GET_LEARNING_PATHS_PENDING':
+    case 'GET_LEARNING_PATHS':
       return {...state, learningPaths: [], learningPathsLoading: true, learningPathsError: null} 
     case 'GET_LEARNING_PATHS_FAILURE':
       return {...state, learningPaths: [], learningPathsLoading: false, learningPathsError: action.payload} 
-    case 'GET_LEARNING_PATHS_SUCCESS':
-      return {...state, learningPaths: action.payload, learningPathsLoading: false, learningPathsError: null} 
+    case 'GET_LEARNING_PATHS_FULFILLED':
+      return {...state, learningPaths: action.payload.data, learningPathsLoading: false, learningPathsError: null} 
     default:
       break;
   };
