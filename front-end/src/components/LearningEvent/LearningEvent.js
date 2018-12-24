@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { Container } from "semantic-ui-react";
 import axios from "axios";
 import LearningEventHeader from "./LearningEventHeader"
 import LearningEventManager from "./LearningEventManager";
 import LearningEventFooter from "./LearningEventFooter";
 import { Header, Container, Divider } from "semantic-ui-react";
-import LearningEventFooter from "./LearningEventFooter";
 import "./LearningEvent.scss";
 import MetaTags from '../SEO/MetaTags'
 

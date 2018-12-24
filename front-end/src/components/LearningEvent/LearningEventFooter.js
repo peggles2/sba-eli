@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Icon, Button } from "semantic-ui-react";
-import NavigationLearningEvent from "../Navigation/NavigationLearningEvent";
+import NavigationLearningPath from "../Navigation/NavigationLearningPath";
 
 export default class LearningEventFooter extends Component {
   parseNextPrev(modules, event){
@@ -10,12 +10,12 @@ export default class LearningEventFooter extends Component {
       if(event && event.position && modules){
           const pos = event.position-1 //To account for zero based array indexes
           paging.next = modules[pos+1] ? 
-              NavigationLearningEvent.getEventPath(this.props.courseId, 
+              NavigationLearningPath.getEventPath(this.props.courseId, 
                   event.module_id, 
                   modules[pos+1].id) : 
               null
           paging.prev = modules[pos-1] ? 
-              NavigationLearningEvent.getEventPath(this.props.courseId, 
+              NavigationLearningPath.getEventPath(this.props.courseId, 
                   event.module_id, 
                   modules[pos-1].id) : 
               null

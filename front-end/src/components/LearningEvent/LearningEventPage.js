@@ -6,7 +6,7 @@ export default class LearningEventPage extends Component {
     const __html = this.props.event.eventContent.body;
 
     return (
-        <div
+        <div className="learning-event-body"
           dangerouslySetInnerHTML={{
             __html: __html
           }}
