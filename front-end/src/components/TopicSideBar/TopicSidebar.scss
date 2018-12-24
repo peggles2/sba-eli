@@ -1,0 +1,94 @@
+/* TopicSideBar */
+.topic-container {
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  border-radius: 0.28571429rem;
+}
+
+.topic-number-circle {
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 1rem;
+  font-weight: bolder;
+
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+
+  background: #0b2f6b;
+  border: 2px solid #0b2f6b;
+  color: #ffffff;
+  text-align: center;
+
+  font-size: 16px;
+}
+
+.active > .topic-number-circle {
+  background: #ffab3b;
+  border: 2px solid #ffab3b;
+  color: #0b2f6b;
+}
+
+.topic-accordion-title {
+  color: #0b2f6b !important;
+  font-size: 16px !important;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
+  padding: 1rem !important;
+}
+
+.topic-accordion-content {
+  background-color: #f2f3f4 !important;
+}
+
+.topic-accordion-content .ui.divided.items > .item:last-child {
+  padding-bottom: 1em !important;
+}
+
+.topic-accordion-content .ui.divided.items > .item:first-child {
+  padding-top: 1em !important;
+}
+
+/* TopicEventList */
+.event-list-accordion-item:hover {
+  background-color: #d9dfe4 !important;
+}
+
+.event-list-item-link {
+  color: #0b2f6b !important;
+  font-weight: 500;
+}
+
+.event-list-item-icon {
+  color: #0b2f6b;
+  padding-right: 1.5em !important;
+  padding-left: 1em !important;
+}
+
+/* TopicProgress */
+.topic-progress {
+  padding: 1em !important;
+  color: #0b2f6b;
+}
+
+.topic-progress-icon {
+  font-size: 40px !important;
+  color: #ffab3b;
+}
+
+.topic-progress-bar-row {
+  padding: 0 !important;
+}
+
+.topic-progress-bar {
+  margin-bottom: 0 !important;
+}
+
+.topic-progress-meta {
+  color: #61656b;
+  font-style: italic;
+}
+
+.topic-progress-register-row {
+  padding-top: 0 !important;
+}

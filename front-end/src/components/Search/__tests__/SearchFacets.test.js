@@ -8,7 +8,7 @@ import MediaTypeFilters from "../MediaTypeFilters";
 describe('SearchFacets', () => {
 
   it('should render an <Form> with two <Form.Button>', () => {
-    const wrapper = shallow(<SearchFacets location={{search: ''}}/>);
+    const wrapper = shallow(<SearchFacets urlParams={{searchTerm: ''}} />);
 
     expect(wrapper.find(Form).exists()).toBe(true);
     expect(wrapper.find(Form.Button).exists()).toBe(true);
@@ -16,16 +16,16 @@ describe('SearchFacets', () => {
   });
 
   it('should render a hidden <Input> with the search term value', () => {
-    const wrapper = mount(<SearchFacets location={{search: "?searchTerm=hello"}}/>);
+    const wrapper = mount(<SearchFacets urlParams={{searchTerm: 'hello'}}/>);
 
     expect(wrapper.find(Input).exists()).toBe(true);
-    //expect(wrapper.find(Input).type()).toBe('hidden');
-    //expect(wrapper.find(Input).html()).toBe('searchTerm');
-    //expect(wrapper.find(Input).value()).toBe('hello');
+    expect(wrapper.find(Input).get(0).props.type).toBe('hidden');
+    expect(wrapper.find(Input).get(0).props.name).toBe('searchTerm');
+    expect(wrapper.find(Input).get(0).props.value).toBe('hello');
   });
 
   it('should render a <MediaTypeFilters> component', () => {
-    const wrapper = shallow(<SearchFacets location={{search: ''}}/>);
+    const wrapper = shallow(<SearchFacets urlParams={{searchTerm: ''}}/>);
 
     expect(wrapper.find(MediaTypeFilters).exists()).toBe(true);
   });

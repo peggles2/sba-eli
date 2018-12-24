@@ -1,13 +1,21 @@
 import React from "react";
 import Dashboard from "../Dashboard";
 import LearningPaths from "../../LearningPath/LearningPaths";
-import { shallow, mount } from "enzyme";
+import {shallow} from "enzyme";
+import MetaTags from "../../SEO/MetaTags";
 
 describe("Dashboard", () => {
-  it("should render correctly", () => {
-    const wrapper = shallow(<Dashboard />);
 
-    expect(wrapper).toMatchSnapshot();
+  it("should render meta tags with dashboard specific information", () => {
+    const wrapper = shallow(<Dashboard />);
+    expect(wrapper.find(MetaTags).exists()).toBe(true);
+
+    const metaWrapper = wrapper.find(MetaTags).dive();
+    expect(metaWrapper.find('title').text()).toBe("SBA Dashboard");
+    expect(metaWrapper.find("meta[name='author']").exists()).toBe(false);
+    expect(metaWrapper.find("meta[name='description']").exists()).toBe(true);
+    expect(metaWrapper.find("meta[name='description']").props().content).toBe("Description for the dashboard");
+    expect(metaWrapper.find("link[rel='canonical']").props().href).toBe("https://sba.gov/eli")
   });
 
   it("should render a <div>", () => {

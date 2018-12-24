@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {Button, Dropdown, Form, Input, Menu} from 'semantic-ui-react';
+import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
 
 const LoggedOutView = () => {
@@ -22,8 +22,7 @@ export default class Navbar extends Component {
   render() {
 
     return(
-      <div className="navbar">
-        <Menu>
+        <Menu className="navbar" fluid>
           <Menu.Item header href={`/`}>Dashboard</Menu.Item>
           <Dropdown text='Learning Paths' item>
             <Dropdown.Menu>
@@ -31,7 +30,7 @@ export default class Navbar extends Component {
             </Dropdown.Menu>
           </Dropdown>
           <Menu.Item>
-            <Form method='GET' action='/search'>
+            <Form id='navigation_site_search' method='GET' action='/search'>
               <Form.Group inline>
                 <Form.Input icon='search' placeholder='Search' name='searchTerm' />
                 <Form.Button type="submit">
@@ -46,7 +45,6 @@ export default class Navbar extends Component {
             </Menu.Item>
           </Menu.Menu>
         </Menu>
-      </div>
     )
   }
 };
