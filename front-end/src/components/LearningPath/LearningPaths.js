@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 import { toggleModal } from '../../actions/aboutModalActions'
 
-class LearningPaths extends React.Component {  
+export class LearningPaths extends React.Component {  
   handleModalClose = () => this.props.dispatch(toggleModal(false));
 
   render () {

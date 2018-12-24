@@ -6,7 +6,7 @@ import LearningPathsItem from './LearningPathsItem';
 
 import { getLearningPaths } from '../../actions/learningPathActions';
 
-class LearningPathsList extends React.Component {
+export class LearningPathsList extends React.Component {
   componentDidMount() {
     this.props.dispatch(getLearningPaths());
   }
