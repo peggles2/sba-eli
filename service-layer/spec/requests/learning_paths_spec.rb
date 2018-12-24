@@ -83,8 +83,6 @@
 require "rails_helper"
 
 describe "LearningPaths" do
-  fixtures :courses
-
   describe "GET /learning_paths" do
     it "gets a list of all courses" do
       VCR.use_cassette("learning_paths/get_learning_paths") do
@@ -144,54 +142,6 @@ describe "LearningPaths" do
         expect(response).to be_successful
         expect(json["delete"]).to eq(true)
       end
-    end
-  end
-
-  describe "GET /learning_paths/:learning_path_id/custom_content" do
-    it "gets an empty content object if there is not content found" do
-      learning_path_id = 1
-      get "/learning_paths/#{learning_path_id}/custom_content"
-      json = JSON.parse(response.body)
-
-      expect(response).to be_successful
-      expect(json["content"]).to be_nil
-    end
-
-    it "gets the custom content if it exists" do
-      content = create(:custom_content, contentable_id: 2)
-
-      get "/learning_paths/#{content.contentable_id}/custom_content"
-      json = JSON.parse(response.body)
-
-      expect(response).to be_successful
-      expect(json["content"]).to eq(content.content)
-    end
-  end
-
-  describe "POST /learning_paths/:learning_path_id/custom_content" do
-    it "creates custom content for a learning path" do
-      content = build(:custom_content, contentable_id: 3)
-      params = { custom_content: { content: content.content } }
-
-      post "/learning_paths/#{content.contentable_id}/custom_content", params: params
-      json = JSON.parse(response.body)
-
-      expect(response).to be_successful
-      expect(json["content"]).to eq(content.content)
-    end
-  end
-
-  describe "PUT /learning_paths/:learning_path_id/custom_content" do
-    it "updates custom content for a learning path" do
-      content = create(:custom_content, contentable_id: 4)
-      new_content = "This is the new content to be written"
-      params = { custom_content: { content: new_content } }
-
-      put "/learning_paths/#{content.contentable_id}/custom_content", params: params
-      json = JSON.parse(response.body)
-
-      expect(response).to be_successful
-      expect(json["content"]).to eq(new_content)
     end
   end
 end

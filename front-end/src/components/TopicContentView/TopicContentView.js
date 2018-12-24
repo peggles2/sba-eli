@@ -1,48 +1,44 @@
 import React, { Component } from "react";
-import { Dropdown } from "semantic-ui-react";
-import TopicContentItem from "./TopicContentItem";
-import "./TopicContentView.scss";
+import { Item } from "semantic-ui-react";
+import TopicContentEventList from "./TopicContentEventList";
 
 export default class TopicContentView extends Component {
-  renderTopicSelect() {
-    if (this.props.topicsList.length) {
-      const topics = this.props.topicsList;
-      const options = topics.map((topic, idx) => {
-        return {
-          key: topic.id,
-          value: "topic" + topic.id.toString(),
-          text: topic.name
-        };
-      });
-
-      return (
-        <div className={"mobile only topic-content-select"}>
-          <Dropdown
-            placeholder={"Select a Topic..."}
-            options={options}
-            selection
-            fluid
-            onChange={this.handleChange}
-          />
-        </div>
-      );
-    } else {
-      return null;
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
   renderTopicsList(topicsList) {
     if (topicsList.length) {
-      return topicsList.map((topic, idx) => {
-        let ref = "topic" + topic.id.toString();
-        this[ref] = React.createRef();
+      return topicsList.map(topic => {
         return (
           <div
             key={"topicContentView" + topic.id}
-            className={"topic-content-view"}
-            ref={this[ref]}
+            style={{
+              marginBottom: "20px",
+              border: "1px solid rgba(34,36,38,.15)"
+            }}
           >
-            <TopicContentItem topic={topic} course_id={this.props.course_id} />
+            <Item.Group>
+              <Item>
+                <Item.Image src="https://via.placeholder.com/350" />
+
+                <Item.Content>
+                  <Item.Header style={{ paddingTop: "20px" }}>
+                    {topic.name}
+                  </Item.Header>
+                  <Item.Meta># of Learning Events (Time)</Item.Meta>
+                  <Item.Description>
+                    This is a desciption for the Topic: {topic.name}
+                  </Item.Description>
+                </Item.Content>
+              </Item>
+            </Item.Group>
+
+            <TopicContentEventList
+              course_id={this.props.course_id}
+              module_id={topic.id}
+            />
           </div>
         );
       });
@@ -51,17 +47,7 @@ export default class TopicContentView extends Component {
     }
   }
 
-  scrollToTopic(ref) {
-    this[ref].current.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-  handleChange = (e, { name, value }) => this.scrollToTopic(value);
-
   render() {
-    return (
-      <React.Fragment>
-        {this.renderTopicSelect()}
-        {this.renderTopicsList(this.props.topicsList)}
-      </React.Fragment>
-    );
+    return this.renderTopicsList(this.props.topicsList);
   }
 }

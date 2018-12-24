@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_205542) do
+ActiveRecord::Schema.define(version: 2018_12_03_140619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -1592,15 +1592,6 @@ ActiveRecord::Schema.define(version: 2018_12_11_205542) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "context_id", "context_type"], name: "index_favorites_unique_user_object", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
-  end
-
-  create_table "fearless_custom_contents", force: :cascade do |t|
-    t.string "contentable_type", null: false
-    t.integer "contentable_id", null: false
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["contentable_type", "contentable_id"], name: "idx_custom_contents_contentable_type_contentable_id", unique: true
   end
 
   create_table "fearless_taggings", id: :serial, force: :cascade do |t|

@@ -18,7 +18,7 @@ RSpec.configure do |config|
   config.include Features, type: :feature
   config.infer_base_class_for_anonymous_controllers = false
   config.infer_spec_type_from_file_location!
-  config.fixture_path = "spec/fixtures"
+  config.use_transactional_fixtures = true
 end
 
 VCR.configure do |config|

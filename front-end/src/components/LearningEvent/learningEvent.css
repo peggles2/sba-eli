@@ -1,0 +1,52 @@
+/* Prototyping for infographic until more robust css in place */
+.infographic {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.sba-yellow {
+  color: #ffab3b;
+}
+
+.sba-white {
+  color: #ffffff;
+}
+
+.sba-blue {
+  color: #0b2f6b;
+}
+
+.infographic-header-footer {
+  background-color: #0b2f6b;
+}
+
+.header-text {
+  font-size: 40px;
+}
+
+.row.infographic-header-border {
+  padding-top: 0px !important;
+  background-color: #a8e7ee;
+}
+.row.infographic-header-border > img {
+  margin-top: -1px;
+}
+
+.skyblue-white-gradient {
+  background-image: linear-gradient(#a8e7ee, #ffffff);
+}
+.no-padding {
+  padding: 0;
+}
+.largest-text {
+  font-size: 100px;
+  font-weight: bold;
+}
+
+.small-text {
+  font-size: 25px;
+}
+
+.medium-text {
+  font-size: 40px;
+  font-weight: bolder;
+}

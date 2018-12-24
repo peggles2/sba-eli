@@ -1,19 +1,13 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import App from './App';
-import {shallow} from 'enzyme';
-import MetaTags from './components/SEO/MetaTags';
-import Navigation from './components/Navigation/Navigation';
+import { shallow, mount } from 'enzyme';
 
 describe('App', () => {
-
-  it('should render a <MetaTag> tag', () => {
+  it('should render App correctly', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.find(MetaTags).exists()).toBe(true);
-  });
 
-  it('should render a <Navigation> tag', () => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.find(Navigation).exists()).toBe(true);
+    expect(wrapper).toMatchSnapshot();
   });
 });
 

@@ -27,7 +27,7 @@ ShallowWrapper {
           Home
         </BreadcrumbSection>,
         <BreadcrumbDivider
-          icon="triangle right"
+          icon="right angle"
         />,
         <BreadcrumbSection
           href="/learning_paths/1"
@@ -55,7 +55,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "icon": "triangle right",
+          "icon": "right angle",
         },
         "ref": null,
         "rendered": null,
@@ -89,7 +89,7 @@ ShallowWrapper {
             Home
           </BreadcrumbSection>,
           <BreadcrumbDivider
-            icon="triangle right"
+            icon="right angle"
           />,
           <BreadcrumbSection
             href="/learning_paths/1"
@@ -117,7 +117,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "icon": "triangle right",
+            "icon": "right angle",
           },
           "ref": null,
           "rendered": null,

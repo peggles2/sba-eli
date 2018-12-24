@@ -1,0 +1,447 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LearningPath should render correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <LearningPath
+    match={
+      Object {
+        "params": Object {
+          "id": 1,
+        },
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <LearningPathBreadCrumb
+          id={1}
+        />,
+        <Header
+          as="h1"
+        />,
+        <Divider />,
+        <Grid
+          centered={true}
+        >
+          <GridRow>
+            <GridColumn
+              computer={3}
+              mobile={16}
+              tablet={3}
+            >
+              <TopicSideBar
+                course_id={1}
+                topicsList={Array []}
+              />
+            </GridColumn>
+            <GridColumn
+              computer={11}
+              mobile={16}
+              tablet={3}
+            >
+              <TopicContentView
+                course_id={1}
+                topicsList={Array []}
+              />
+            </GridColumn>
+          </GridRow>
+        </Grid>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "id": 1,
+          "pathName": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "as": "h1",
+          "children": undefined,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "centered": true,
+          "children": <GridRow>
+            <GridColumn
+              computer={3}
+              mobile={16}
+              tablet={3}
+            >
+              <TopicSideBar
+                course_id={1}
+                topicsList={Array []}
+              />
+            </GridColumn>
+            <GridColumn
+              computer={11}
+              mobile={16}
+              tablet={3}
+            >
+              <TopicContentView
+                course_id={1}
+                topicsList={Array []}
+              />
+            </GridColumn>
+          </GridRow>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <GridColumn
+                computer={3}
+                mobile={16}
+                tablet={3}
+              >
+                <TopicSideBar
+                  course_id={1}
+                  topicsList={Array []}
+                />
+              </GridColumn>,
+              <GridColumn
+                computer={11}
+                mobile={16}
+                tablet={3}
+              >
+                <TopicContentView
+                  course_id={1}
+                  topicsList={Array []}
+                />
+              </GridColumn>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <TopicSideBar
+                  course_id={1}
+                  topicsList={Array []}
+                />,
+                "computer": 3,
+                "mobile": 16,
+                "tablet": 3,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "course_id": 1,
+                  "event_id": undefined,
+                  "module_id": undefined,
+                  "topicsList": Array [],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": <TopicContentView
+                  course_id={1}
+                  topicsList={Array []}
+                />,
+                "computer": 11,
+                "mobile": 16,
+                "tablet": 3,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "course_id": 1,
+                  "topicsList": Array [],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <LearningPathBreadCrumb
+            id={1}
+          />,
+          <Header
+            as="h1"
+          />,
+          <Divider />,
+          <Grid
+            centered={true}
+          >
+            <GridRow>
+              <GridColumn
+                computer={3}
+                mobile={16}
+                tablet={3}
+              >
+                <TopicSideBar
+                  course_id={1}
+                  topicsList={Array []}
+                />
+              </GridColumn>
+              <GridColumn
+                computer={11}
+                mobile={16}
+                tablet={3}
+              >
+                <TopicContentView
+                  course_id={1}
+                  topicsList={Array []}
+                />
+              </GridColumn>
+            </GridRow>
+          </Grid>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "id": 1,
+            "pathName": undefined,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "as": "h1",
+            "children": undefined,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "centered": true,
+            "children": <GridRow>
+              <GridColumn
+                computer={3}
+                mobile={16}
+                tablet={3}
+              >
+                <TopicSideBar
+                  course_id={1}
+                  topicsList={Array []}
+                />
+              </GridColumn>
+              <GridColumn
+                computer={11}
+                mobile={16}
+                tablet={3}
+              >
+                <TopicContentView
+                  course_id={1}
+                  topicsList={Array []}
+                />
+              </GridColumn>
+            </GridRow>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                <GridColumn
+                  computer={3}
+                  mobile={16}
+                  tablet={3}
+                >
+                  <TopicSideBar
+                    course_id={1}
+                    topicsList={Array []}
+                  />
+                </GridColumn>,
+                <GridColumn
+                  computer={11}
+                  mobile={16}
+                  tablet={3}
+                >
+                  <TopicContentView
+                    course_id={1}
+                    topicsList={Array []}
+                  />
+                </GridColumn>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": <TopicSideBar
+                    course_id={1}
+                    topicsList={Array []}
+                  />,
+                  "computer": 3,
+                  "mobile": 16,
+                  "tablet": 3,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "course_id": 1,
+                    "event_id": undefined,
+                    "module_id": undefined,
+                    "topicsList": Array [],
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": <TopicContentView
+                    course_id={1}
+                    topicsList={Array []}
+                  />,
+                  "computer": 11,
+                  "mobile": 16,
+                  "tablet": 3,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "course_id": 1,
+                    "topicsList": Array [],
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

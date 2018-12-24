@@ -1,60 +1,20 @@
 import React from 'react';
-import {Header, Pagination} from "semantic-ui-react";
+import {Header} from "semantic-ui-react";
 import {shallow, mount} from 'enzyme';
-import MetaTags from '../../SEO/MetaTags';
 import SearchPage from "../SearchPage";
 import SearchFacets from "../SearchFacets";
 import SearchResults from "../SearchResults";
 
 describe('SearchPage', () => {
-  it("should render meta tags with Search specific information", () => {
-    const wrapper = shallow(<SearchPage location={{search: ''}}/>);
 
-    expect(wrapper.find(MetaTags).exists()).toBe(true);
-    const metaWrapper = wrapper.find(MetaTags).dive();
-
-    expect(metaWrapper.find('title').text()).toBe("SBA Search");
-    expect(metaWrapper.find("meta[name='author']").exists()).toBe(false);
-    expect(metaWrapper.find("meta[name='description']").exists()).toBe(true);
-    expect(metaWrapper.find("meta[name='description']").props().content).toBe("Description for the SBA Search");
-    //TODO: add Canonical URL validation when we have final urls
-  });
-
-  it('should render a <Header> that displays the search term', () => {
-    let searchTerm = "leadership"
+  it('should render an <Header> that dislpays the search term', () => {
+    let searchTerm = "hello world"
     let urlString = {search: "?mediaType=podcast&mediaType=assessment&mediaType=tools&searchTerm=" + searchTerm}
+
     const wrapper = shallow(<SearchPage location={urlString}/>);
-    const searchMetadata = {
-      "pagination": {
-        "current_page": 1,
-        "next_page": "/uri/to/page",
-        "previous_page": "/uri/to/page",
-        "total_pages": 1,
-        "total_count": 6
-      }
-    }
-    wrapper.instance().setState({searchMetadata});
 
     expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toBe("6 Search Results for \"" + searchTerm + "\"");
-  });
-
-  it('should render a <Header> that displays text for a single search result', () => {
-    let searchTerm = "leadership"
-    const wrapper = shallow(<SearchPage location={{search: "?searchTerm=" + searchTerm}} />);
-    const searchMetadata = {
-      "pagination": {
-        "current_page": 1,
-        "next_page": "/uri/to/page",
-        "previous_page": "/uri/to/page",
-        "total_pages": 1,
-        "total_count": 1
-      }
-    }
-    wrapper.instance().setState({searchMetadata});
-
-    expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toBe("1 Search Result for \"" + searchTerm + "\"");
+    expect(wrapper.find(Header).render().text()).toEqual("Search Results for '" + searchTerm + "'");
   });
 
   it('should display blank, without an error, if no search term is available', () => {
@@ -63,14 +23,14 @@ describe('SearchPage', () => {
     const wrapper = shallow(<SearchPage location={urlString}/>);
 
     expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toEqual("All Results");
+    expect(wrapper.find(Header).render().text()).toEqual("Search Results for ''");
   });
 
   it('should display blank, without an error, if no search string is available', () => {
     const wrapper = shallow(<SearchPage location={{search: ''}}/>);
 
     expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toEqual("All Results");
+    expect(wrapper.find(Header).render().text()).toEqual("Search Results for ''");
   });
 
   it('should not execute script tags in the search input box', () => {
@@ -80,7 +40,7 @@ describe('SearchPage', () => {
     const wrapper = shallow(<SearchPage location={urlString}/>);
 
     expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toEqual("No Search Results were found for \"" + searchTerm + "\"");
+    expect(wrapper.find(Header).render().text()).toEqual("Search Results for '" + searchTerm + "'");
   });
 
   it('should not execute XSS code with single quotes in the search input box', () => {
@@ -91,7 +51,7 @@ describe('SearchPage', () => {
     const wrapper = shallow(<SearchPage location={urlString}/>);
 
     expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toEqual("No Search Results were found for \"" + displayTerm + "\"");
+    expect(wrapper.find(Header).render().text()).toEqual("Search Results for '" + displayTerm + "'");
   });
 
   it('should not execute XSS code with double quotes in the search input box', () => {
@@ -102,47 +62,19 @@ describe('SearchPage', () => {
     const wrapper = shallow(<SearchPage location={urlString}/>);
 
     expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toEqual("No Search Results were found for \"" + displayTerm + "\"");
+    expect(wrapper.find(Header).render().text()).toEqual("Search Results for '" + displayTerm + "'");
   });
 
   it('should render a <SearchFacets> component', () => {
-    const wrapper = shallow(<SearchPage location={{search: ''}}/>);
+    const wrapper = mount(<SearchPage location={{search: ''}}/>);
 
     expect(wrapper.find(SearchFacets).exists()).toBe(true);
   });
 
   it('should render a <SearchResults> component', () => {
-    const wrapper = shallow(<SearchPage location={{search: ''}}/>);
+    const wrapper = mount(<SearchPage location={{search: ''}}/>);
 
     expect(wrapper.find(SearchResults).exists()).toBe(true);
-  });
-
-  it('should render a <Pagination> component if there is more than 1 page of results', () => {
-    const wrapper = shallow(<SearchPage location={{search: ''}} />);
-    const searchMetadata = {pagination: {total_pages: 4}} 
-    wrapper.instance().setState({searchMetadata});
-    expect(wrapper.find(Pagination).exists()).toBe(true);
-  });
-
-  it('should not render a <Pagination> component if there is 1 page of results', () => {
-    const wrapper = shallow(<SearchPage location={{search: ''}} />);
-    const searchMetadata = {pagination: {total_pages: 1}}
-    wrapper.instance().setState({searchMetadata});
-    expect(wrapper.find(Pagination).exists()).toBe(false);
-  });
-
-  it('should not render a <Pagination> component if there is empty pagination data', () => {
-    const wrapper = shallow(<SearchPage location={{search: ''}} />);
-    const searchMetadata = {pagination: {}}
-    wrapper.instance().setState({searchMetadata});
-    expect(wrapper.find(Pagination).exists()).toBe(false);
-  });
-
-  it('should not render a <Pagination> component if there is no pagination data', () => {
-    const wrapper = shallow(<SearchPage location={{search: ''}} />);
-    const searchMetadata = {}
-    wrapper.instance().setState({searchMetadata});
-    expect(wrapper.find(Pagination).exists()).toBe(false);
   });
 
 });

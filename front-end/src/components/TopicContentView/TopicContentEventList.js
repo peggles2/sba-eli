@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Grid } from "semantic-ui-react";
+import { Item } from "semantic-ui-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -38,50 +38,29 @@ export default class TopicContentEventList extends Component {
   renderEventList(eventList) {
     const { course_id, module_id } = this.props;
     const url = `/learning_paths/${course_id}/learning_objectives/${module_id}/learning_events/`;
-
     if (eventList.length) {
       return eventList.map(event => {
         return (
-          <Grid
-            className={"topic-content-event-grid"}
-            key={"topicContentItem" + event.id}
-          >
-            <Grid.Column
-              mobile={4}
-              tablet={3}
-              computer={2}
-              largeScreen={1}
-              widescreen={1}
-            >
-              <Icon
-                name={"image"}
-                className={"topic-content-event-grid-icon"}
-              />
-            </Grid.Column>
-            <Grid.Column
-              mobile={12}
-              tablet={13}
-              computer={14}
-              largeScreen={13}
-              widescreen={15}
-            >
-              <Link
-                className={"topic-content-event-grid-header"}
-                to={url + event.id}
-              >
-                {event.title}
-              </Link>
-              <div className={"topic-content-event-grid-meta"}>Event Type</div>
-            </Grid.Column>
-          </Grid>
+          <Item>
+            <Item.Image size="tiny" src="https://via.placeholder.com/50" />
+
+            <Item.Content>
+              <Item.Header>
+                <Link to={url + event.id}>{event.title}</Link>
+              </Item.Header>
+              <Item.Meta>Event Type</Item.Meta>
+            </Item.Content>
+          </Item>
         );
       });
     } else {
-      return null;
+      return <div />;
     }
   }
 
   render() {
-    return this.renderEventList(this.state.eventsList);
+    return (
+      <Item.Group>{this.renderEventList(this.state.eventsList)}</Item.Group>
+    );
   }
 }
