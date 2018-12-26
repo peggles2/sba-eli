@@ -1,25 +1,11 @@
-/* Prototyping for infographic until more robust css in place */
 .learning-event-container {
   font-family: "Source Sans Pro", sans-serif;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  box-shadow: 0 1px 2px 0 rgba(34,36,38, 0.15);
-  padding: 15px 0px 65px 0px;
-}
-
-.learning-event-header {
-  padding-top: 30px;
-  padding-left: 45px;
-  padding-right: 45px;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  padding: 15px 0px 25px 0px;
 }
 
 .learning-event-body {
-  padding-left: 45px;
-  padding-right: 45px;
-}
-
-.learning-event-header-video {
-  padding-top: 10px;
-  padding-bottom: 20px;
   padding-left: 45px;
   padding-right: 45px;
 }
@@ -28,12 +14,43 @@
   font-size: 1.3em;
 }
 
-.learning-event-footer { 
-  padding-top: 30px;
+.learning-event-footer {
+  padding-top: 10px;
   padding-left: 45px;
   padding-right: 45px;
 }
 
+// LearningEventHeader
+.learning-event-header {
+  padding: 20px 45px 0 45px !important;
+  color: #61656b;
+  .row {
+    padding: 0 !important;
+  }
+  .topic-title {
+    font-size: 17px;
+  }
+  .event-title {
+    padding: 4px 0;
+    color: #61656b !important;
+  }
+  .event-meta {
+    font-style: italic;
+    padding: 0.75em 0;
+  }
+  .share-button {
+    float: right;
+    display: inline-block;
+  }
+}
+
+.learning-event-header-video {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 45px;
+  padding-right: 45px;
+}
+/* Prototyping for infographic until more robust css in place */
 .infographic {
   font-family: "Source Sans Pro", sans-serif;
 }
@@ -86,6 +103,6 @@
   font-weight: bolder;
 }
 .page-navigation-buttons {
-    width: 100%;
-    text-align: right;
+  width: 100%;
+  text-align: right;
 }

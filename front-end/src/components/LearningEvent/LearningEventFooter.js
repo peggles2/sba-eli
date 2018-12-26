@@ -31,23 +31,25 @@ export default class LearningEventFooter extends Component {
     const np = this.parseNextPrev(this.props.module, this.props.event);
 
     return (
-      <div className="page-navigation-buttons">
-        {np.prev && (
-          <Link to={np.prev}>
-            <Button icon labelPosition="left">
-              <Icon name="left arrow" />
-              Previous
-            </Button>
-          </Link>
-        )}
-        {np.next && (
-          <Link to={np.next}>
-            <Button icon labelPosition="right" primary>
-              Next
-              <Icon name="right arrow" />
-            </Button>
-          </Link>
-        )}
+      <div className="learning-event-footer">
+        <div className="page-navigation-buttons">
+          {np.prev && (
+            <Link to={np.prev}>
+              <Button icon labelPosition="left">
+                <Icon name="left chevron" />
+                Previous
+              </Button>
+            </Link>
+          )}
+          {np.next && (
+            <Link to={np.next}>
+              <Button icon labelPosition="right" primary>
+                Next
+                <Icon name="right chevron" />
+              </Button>
+            </Link>
+          )}
+        </div>
       </div>
     );
   }
