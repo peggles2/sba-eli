@@ -20,14 +20,41 @@ describe('SearchPage', () => {
     //TODO: add Canonical URL validation when we have final urls
   });
 
-  it('should render a <Header> that dislpays the search term', () => {
+  it('should render a <Header> that displays the search term', () => {
     let searchTerm = "leadership"
     let urlString = {search: "?mediaType=podcast&mediaType=assessment&mediaType=tools&searchTerm=" + searchTerm}
-
     const wrapper = shallow(<SearchPage location={urlString}/>);
+    const searchMetadata = {
+      "pagination": {
+        "current_page": 1,
+        "next_page": "/uri/to/page",
+        "previous_page": "/uri/to/page",
+        "total_pages": 1,
+        "total_count": 6
+      }
+    }
+    wrapper.instance().setState({searchMetadata});
 
     expect(wrapper.find(Header).exists()).toBe(true);
-    expect(wrapper.find(Header).render().text()).toContain("Search Results were found for \"" + searchTerm + "\"");
+    expect(wrapper.find(Header).render().text()).toBe("6 Search Results for \"" + searchTerm + "\"");
+  });
+
+  it('should render a <Header> that displays text for a single search result', () => {
+    let searchTerm = "leadership"
+    const wrapper = shallow(<SearchPage location={{search: "?searchTerm=" + searchTerm}} />);
+    const searchMetadata = {
+      "pagination": {
+        "current_page": 1,
+        "next_page": "/uri/to/page",
+        "previous_page": "/uri/to/page",
+        "total_pages": 1,
+        "total_count": 1
+      }
+    }
+    wrapper.instance().setState({searchMetadata});
+
+    expect(wrapper.find(Header).exists()).toBe(true);
+    expect(wrapper.find(Header).render().text()).toBe("1 Search Result for \"" + searchTerm + "\"");
   });
 
   it('should display blank, without an error, if no search term is available', () => {
