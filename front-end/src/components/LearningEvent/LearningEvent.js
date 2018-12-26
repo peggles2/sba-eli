@@ -3,7 +3,7 @@ import axios from "axios";
 import LearningEventHeader from "./LearningEventHeader";
 import LearningEventManager from "./LearningEventManager";
 import LearningEventFooter from "./LearningEventFooter";
-import { Header, Container, Divider } from "semantic-ui-react";
+import { Container, Divider } from "semantic-ui-react";
 import "./LearningEvent.scss";
 import MetaTags from "../SEO/MetaTags";
 
