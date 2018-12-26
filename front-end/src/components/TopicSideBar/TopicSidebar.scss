@@ -1,3 +1,5 @@
+@import "../../assets/style/colors";
+
 /* TopicSideBar */
 .topic-container {
   border: 1px solid rgba(34, 36, 38, 0.15);
@@ -15,22 +17,22 @@
   height: 36px;
   padding: 6px;
 
-  background: #0b2f6b;
-  border: 2px solid #0b2f6b;
-  color: #ffffff;
+  background: $sba-navy;
+  border: 2px solid $sba-navy; 
+  color: $sba-white;
   text-align: center;
 
   font-size: 16px;
 }
 
 .active > .topic-number-circle {
-  background: #ffab3b;
-  border: 2px solid #ffab3b;
-  color: #0b2f6b;
+  background: $sba-gold; 
+  border: 2px solid $sba-gold; 
+  color: $sba-navy; 
 }
 
 .topic-accordion-title {
-  color: #0b2f6b !important;
+  color: $sba-navy !important;
   font-size: 16px !important;
   font-weight: bold;
   border-bottom: 1px solid rgba(34, 36, 38, 0.15);
@@ -51,16 +53,16 @@
 
 /* TopicEventList */
 .event-list-accordion-item:hover {
-  background-color: #d9dfe4 !important;
+  background-color: $sba-grey-one !important;
 }
 
 .event-list-item-link {
-  color: #0b2f6b !important;
+  color: $sba-navy !important;
   font-weight: 500;
 }
 
 .event-list-item-icon {
-  color: #0b2f6b;
+  color: $sba-navy;
   padding-right: 1.5em !important;
   padding-left: 1em !important;
 }
@@ -68,12 +70,12 @@
 /* TopicProgress */
 .topic-progress {
   padding: 1em !important;
-  color: #0b2f6b;
+  color: $sba-navy;
 }
 
 .topic-progress-icon {
   font-size: 40px !important;
-  color: #ffab3b;
+  color: $sba-gold;
 }
 
 .topic-progress-bar-row {
@@ -85,7 +87,7 @@
 }
 
 .topic-progress-meta {
-  color: #61656b;
+  color: $sba-grey-three; 
   font-style: italic;
 }
 
