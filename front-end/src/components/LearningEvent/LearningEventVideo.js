@@ -86,14 +86,7 @@ export default class LearningEventVideo extends Component {
     const vidLength = <Duration seconds={duration} />;
 
     return(
-      <div>
-        <div className="learning-event-header-video">
-          <span>
-            <p className="learning-event-p">Exercise ({vidLength} minutes)</p>
-            <DownloadButton url={url} />
-            <ShareButton />
-          </span>
-        </div>
+      <div>        
         <div className="player-wrapper">
           <ReactPlayer
             ref={this.ref}
