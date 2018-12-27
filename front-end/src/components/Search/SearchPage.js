@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import "../../App.css";
-import "../../assets/style/search.css"
 import {Button, Grid, Header, Icon, Pagination, Segment, Sidebar} from "semantic-ui-react";
 import axios from "axios";
 import queryString from 'query-string';
@@ -8,6 +6,7 @@ import SearchFacets from "./SearchFacets";
 import SearchResults from "./SearchResults";
 import MetaTags from '../SEO/MetaTags'
 
+import "./search.scss";
 export default class SearchPage extends Component {
 
   constructor(props) {
