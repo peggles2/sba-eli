@@ -1,3 +1,5 @@
+@import "../../assets/styles/base";
+
 .sba {
     background-color: #FAFBFD;
     height: 100%;
@@ -18,7 +20,7 @@
 }
 
 .search_page .search_result_item {
-    background-color: white;
+    background-color: $sba-white;
     border: 1px solid #ced6e1;
     box-shadow: 5px 6px 8px #b2b9c4;
     border-radius: 7px;
