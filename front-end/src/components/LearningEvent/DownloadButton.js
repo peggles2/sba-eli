@@ -11,7 +11,7 @@ const DownloadButton = props => {
       download
       className="header-button"
     >
-      <Icon name="download" size="large" />
+      <Icon name="download" />
     </Button>
   );
 };
