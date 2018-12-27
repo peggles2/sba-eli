@@ -18,12 +18,12 @@ class LearningEventHeader extends Component {
   }
 
   render() {
-    const event = this.props.event;
+    const { event, topicTitle } = this.props;
     return (
       <Grid className="learning-event-header">
         <Grid.Row>
           <Grid.Column>
-            <div className="topic-title">Topic Title</div>
+            <div className="topic-title">{topicTitle}</div>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>

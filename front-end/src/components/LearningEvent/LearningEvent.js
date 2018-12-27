@@ -70,7 +70,7 @@ export default class LearningEvent extends Component {
 
   render() {
     const event = this.state.learningEvent;
-
+    const topicTitle = this.props.topicTitle;
     return (
       <Container className="learning-event-container">
         <MetaTags
@@ -78,7 +78,7 @@ export default class LearningEvent extends Component {
           metaDescription={event.description}
           canonicalUrl=""
         />
-        <LearningEventHeader event={event} />
+        <LearningEventHeader event={event} topicTitle={topicTitle} />
         <LearningEventManager event={event} />
         <Divider />
         <LearningEventFooter
