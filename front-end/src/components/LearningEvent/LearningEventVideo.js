@@ -4,8 +4,6 @@ import { Button, Icon } from "semantic-ui-react";
 import { findDOMNode } from "react-dom";
 import axios from "axios";
 import Duration from "./LearningEventVideo/Duration";
-import DownloadButton from "./DownloadButton";
-import ShareButton from "./ShareButton";
 import screenfull from "screenfull";
 import "./Slider.scss"
 import "./PlayerControls.scss";
@@ -82,8 +80,7 @@ export default class LearningEventVideo extends Component {
   }
 
   render() {
-    const { url, playing, volume, muted,  pip, played, duration, playbackRate, loop, height, width } = this.state
-    const vidLength = <Duration seconds={duration} />;
+    const { url, playing, volume, muted,  pip, played, duration, playbackRate, loop, height, width } = this.state    
 
     return(
       <div>        
