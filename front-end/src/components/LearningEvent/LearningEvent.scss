@@ -18,18 +18,20 @@
 
 // LearningEventHeader
 .learning-event-header {
-  padding: 20px 45px 0 45px !important;
   color: $sba-dark-grey;
+  &.grid {
+    padding: 20px 45px 0 45px;
+  }
 
-  .row {
-    padding: 0 !important;
+  .row.header-row {
+    padding: 0;
   }
   .topic-title {
     font-size: 17px;
   }
-  .event-title {
+  .header.event-title {
     padding: 4px 0;
-    color: $sba-dark-grey !important;
+    color: $sba-dark-grey;
   }
   .event-meta {
     font-size: 16px;
