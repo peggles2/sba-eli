@@ -54,7 +54,8 @@
 }
 
 /* TopicEventList */
-.event-list-accordion-item:hover {
+.event-list-accordion-item:hover,
+.event-list-accordion-item.active-event {
   background-color: $sba-grey-one !important;
 }
 

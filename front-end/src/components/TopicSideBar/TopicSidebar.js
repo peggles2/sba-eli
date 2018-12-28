@@ -23,6 +23,7 @@ export default class TopicSideBar extends Component {
 
   renderTopicsList(topics = []) {
     const { activeIndex } = this.state;
+    const { event_id } = this.props;
 
     if (topics.length) {
       return (
@@ -47,6 +48,7 @@ export default class TopicSideBar extends Component {
                     <TopicEventList
                       course_id={this.props.course_id}
                       module_id={topic.id}
+                      event_id={event_id}
                     />
                   </Accordion.Content>
                 </React.Fragment>
