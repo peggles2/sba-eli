@@ -1,6 +1,7 @@
 @import "../../assets/styles/base";
 /* TopicContentView */
 .topic-content-view {
+  background: $sba-white;
   margin-bottom: 20px;
   border: 1px solid rgba(34, 36, 38, 0.15);
   border-radius: 0.28571429rem;
@@ -72,6 +73,6 @@
 }
 
 .topic-content-event-grid-meta {
-  color:$sba-grey-three; 
+  color: $sba-grey-three;
   font-style: italic;
 }
