@@ -3,7 +3,7 @@
 .topic-content-view {
   background: $sba-white;
   margin-bottom: 20px;
-  border: 1px solid rgba(34, 36, 38, 0.15);
+  border: 1px solid $border-color;
   border-radius: 0.28571429rem;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .topic-content-item {
-  border-bottom: 1px solid rgba(34, 36, 38, 0.15) !important;
+  border-bottom: 1px solid $border-color !important;
   margin-top: 0 !important;
 }
 
@@ -52,7 +52,7 @@
   margin-top: 0 !important;
   margin: 0 !important;
   padding: 1em 2em !important;
-  border-bottom: 1px solid rgba(34, 36, 38, 0.15) !important;
+  border-bottom: 1px solid $border-color !important;
   &:hover {
     background-color: #f2f3f4 !important;
   }
