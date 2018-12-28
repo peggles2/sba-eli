@@ -1,22 +1,16 @@
 @import "../../assets/styles/base";
 
-.learning-event-container {
+.container.learning-event-container {
   border: 1px solid rgba(34, 36, 38, 0.15);
   box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
   padding: 15px 0px 25px 0px;
+  margin-top: 0;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
 
+// LearningEventPage
 .learning-event-body {
-  padding-left: 45px;
-  padding-right: 45px;
-}
-
-.learning-event-p {
-  font-size: 1.3em;
-}
-
-.learning-event-footer {
-  padding-top: 10px;
   padding-left: 45px;
   padding-right: 45px;
 }
@@ -24,7 +18,8 @@
 // LearningEventHeader
 .learning-event-header {
   padding: 20px 45px 0 45px !important;
-  color: #34363a;
+  color: $sba-dark-grey;
+
   .row {
     padding: 0 !important;
   }
@@ -33,10 +28,10 @@
   }
   .event-title {
     padding: 4px 0;
-    color: #34363a !important;
+    color: $sba-dark-grey !important;
   }
   .event-meta {
-    font-size: 17px;
+    font-size: 16px;
     font-style: italic;
   }
   .header-button {
@@ -44,11 +39,11 @@
   }
 }
 
-.learning-event-header-video {
+// LearningEventFooter
+.learning-event-footer {
   padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 45px;
-  padding-right: 45px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 /* Prototyping for infographic until more robust css in place */

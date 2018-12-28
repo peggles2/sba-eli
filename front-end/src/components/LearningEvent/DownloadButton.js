@@ -9,7 +9,7 @@ const DownloadButton = props => {
       href={props.url}
       aria-label="download"
       download
-      className="header-button"
+      className="header-button mobile hidden"
     >
       <Icon name="download" />
     </Button>

@@ -20,7 +20,7 @@
   padding: 6px;
 
   background: $sba-navy;
-  border: 2px solid $sba-navy; 
+  border: 2px solid $sba-navy;
   color: $sba-white;
   text-align: center;
 
@@ -28,9 +28,9 @@
 }
 
 .active > .topic-number-circle {
-  background: $sba-gold; 
-  border: 2px solid $sba-gold; 
-  color: $sba-navy; 
+  background: $sba-gold;
+  border: 2px solid $sba-gold;
+  color: $sba-navy;
 }
 
 .topic-accordion-title {
@@ -60,7 +60,7 @@
 
 .event-list-item-link {
   color: $sba-navy !important;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .event-list-item-icon {
@@ -89,7 +89,7 @@
 }
 
 .topic-progress-meta {
-  color: $sba-grey-three; 
+  color: $sba-grey-three;
   font-style: italic;
 }
 
