@@ -42,20 +42,32 @@ export default class TopicEventList extends Component {
     if (events.length) {
       return events.map((event, index) => {
         return (
-          <Item key={"eventListItem" + index}>
+          <Item
+            key={"eventListItem" + index}
+            className={"event-list-accordion-item"}
+          >
             <Item.Header>
-              <Icon name="circle" />
-              <Link to={url + event.id}>{event.title}</Link>
+              <Icon
+                className={"event-list-item-icon"}
+                name="image"
+                size="big"
+              />
+              <Link className={"event-list-item-link"} to={url + event.id}>
+                {event.title}
+              </Link>
             </Item.Header>
           </Item>
         );
       });
     }
     return (
-      <Item>
+      //Placeholder for no event, TODO expand on this
+      <Item className={"event-list-accordion-item"}>
         <Item.Header>
-          <Icon name="circle" />
-          Test
+          <Icon className={"event-list-item-icon"} name="image" size="big" />
+          <Link className={"event-list-item-link"} to={"#"}>
+            Learning Event
+          </Link>
         </Item.Header>
       </Item>
     );

@@ -1,0 +1,96 @@
+@import "../../assets/styles/base";
+
+/* TopicSideBar */
+.topic-container {
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  border-radius: 0.28571429rem;
+}
+
+.topic-number-circle {
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 1rem;
+  font-weight: bolder;
+
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+
+  background: $sba-navy;
+  border: 2px solid $sba-navy; 
+  color: $sba-white;
+  text-align: center;
+
+  font-size: 16px;
+}
+
+.active > .topic-number-circle {
+  background: $sba-gold; 
+  border: 2px solid $sba-gold; 
+  color: $sba-navy; 
+}
+
+.topic-accordion-title {
+  color: $sba-navy !important;
+  font-size: 16px !important;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
+  padding: 1rem !important;
+}
+
+.topic-accordion-content {
+  background-color: #f2f3f4 !important;
+}
+
+.topic-accordion-content .ui.divided.items > .item:last-child {
+  padding-bottom: 1em !important;
+}
+
+.topic-accordion-content .ui.divided.items > .item:first-child {
+  padding-top: 1em !important;
+}
+
+/* TopicEventList */
+.event-list-accordion-item:hover {
+  background-color: $sba-grey-one !important;
+}
+
+.event-list-item-link {
+  color: $sba-navy !important;
+  font-weight: 500;
+}
+
+.event-list-item-icon {
+  color: $sba-navy;
+  padding-right: 1.5em !important;
+  padding-left: 1em !important;
+}
+
+/* TopicProgress */
+.topic-progress {
+  padding: 1em !important;
+  color: $sba-navy;
+}
+
+.topic-progress-icon {
+  font-size: 40px !important;
+  color: $sba-gold;
+}
+
+.topic-progress-bar-row {
+  padding: 0 !important;
+}
+
+.topic-progress-bar {
+  margin-bottom: 0 !important;
+}
+
+.topic-progress-meta {
+  color: $sba-grey-three; 
+  font-style: italic;
+}
+
+.topic-progress-register-row {
+  padding-top: 0 !important;
+}
