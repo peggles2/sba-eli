@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
+import SignUpModal from '../SignUpForm/SignUpModal';
 
-const LoggedOutView = () => {
-  return(
-    <div>
-      <Link to={`#login`}>
-        <Button primary>Login</Button>
-      </Link>
-      <Link to={`/signup`}>
-        <Button secondary >Register</Button>
-      </Link>
-    </div>
-  )
+class LoggedOutView extends Component {
+  render() {
+    return( 
+      <div>
+        <Button id="login" onClick={this.toggleLogin}>Login</Button>
+        <SignUpModal/>
+      </div>
+    )
+  }
 }
 
 export default class Navbar extends Component {
