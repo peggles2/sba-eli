@@ -1,6 +1,7 @@
 @import "../../assets/styles/base";
 
 .container.learning-event-container {
+  background: $sba-white;
   border: 1px solid rgba(34, 36, 38, 0.15);
   box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
   padding: 15px 0px 25px 0px;
@@ -33,9 +34,6 @@
   .event-meta {
     font-size: 16px;
     font-style: italic;
-  }
-  .header-button {
-    float: right;
   }
 }
 
@@ -82,7 +80,7 @@
   font-size: 40px;
   font-weight: bolder;
 }
-.page-navigation-buttons {
+.page-navigation-buttons-wrapper {
   width: 100%;
   text-align: right;
 }

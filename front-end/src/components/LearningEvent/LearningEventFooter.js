@@ -32,7 +32,7 @@ export default class LearningEventFooter extends Component {
 
     return (
       <div className="learning-event-footer">
-        <div className="page-navigation-buttons">
+        <div className="page-navigation-buttons-wrapper">
           {np.prev && (
             <Link to={np.prev}>
               <Button icon labelPosition="left">
