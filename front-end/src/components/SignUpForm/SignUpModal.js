@@ -4,7 +4,11 @@ import {Modal, Button} from 'semantic-ui-react';
 import SignUpForm from './SignUpForm';
 
 class SignUpModal extends React.Component {
-  state = { open: false }
+  constructor(props) {
+    super(props);
+
+    this.state = { open: props.open };
+  }
 
   close = () => {
     this.setState({ open: false });

@@ -9,7 +9,7 @@ class LoggedOutView extends Component {
     return( 
       <div>
         <Button id="login" onClick={this.toggleLogin}>Login</Button>
-        <SignUpModal/>
+        <SignUpModal open={false}/>
       </div>
     )
   }

@@ -1,14 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import {Button, Input, Container, Form} from 'semantic-ui-react';
+import {Button, Input, Container, Form, Radio} from 'semantic-ui-react';
 
 class SignUpForm extends React.Component {
   state = {
     firstName: '',
     lastName: '',
+    middleName: '',
+    zipCode: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    inBusiness: null
   };
 
   handleFirstNameChange = (e) => {
@@ -19,6 +22,10 @@ class SignUpForm extends React.Component {
     this.setState({lastName: e.target.value});
   }
 
+  handleMiddleNameChange = (e) => {
+    this.setState({middleName: e.target.value});
+  }
+
   handleEmailChange = (e) => {
     this.setState({email: e.target.value});
   }
@@ -27,8 +34,12 @@ class SignUpForm extends React.Component {
     this.setState({password: e.target.value});
   }
 
-  handleConfirmPasswordChange = (e) => {
-    this.setState({confirmPassword: e.target.value});
+  handleZipCodeChange = (e) => {
+    this.setState({zipCode: e.target.value});
+  }
+
+  handleInBusiness = (e) => {
+    this.setState({inBusiness: e.target.value});
   }
 
   handleSubmit = (e) => {
@@ -38,9 +49,11 @@ class SignUpForm extends React.Component {
     axios.post(url, {
       first_name: this.state.firstName.trim(),
       last_name: this.state.lastName.trim(),
+      middle_name: this.state.middleName.trim(),
+      zip_code: this.state.zipCode.trim(),
       email: this.state.email.trim(),
       password: this.state.password.trim(),
-      password_confirmation: this.state.confirmPassword.trim(),
+      inBusiness: this.state.inBusiness
     }).then(() => {
       console.log('Success!');
     }).catch((e) => {
@@ -52,36 +65,54 @@ class SignUpForm extends React.Component {
     return (
       <Container>
         <Form onSubmit={this.handleSubmit.bind(this)}>
-          <Form.Field>
-            <Input type="text"
-                   value={this.state.firstName}
-                   placeholder="First Name"
+          <h2>Register</h2>
+          <hr/>
+          <Form.Field required>
+            <label>First Name</label>
+            <input placeholder="First Name"
                    onChange={this.handleFirstNameChange.bind(this)}/> <br />
           </Form.Field>
-          <Form.Field>
-            <Input type="text"
-                   value={this.state.lastName}
-                   placeholder="Last Name"
+          <Form.Field required>
+            <label>Last Name</label>
+            <input placeholder="Last Name"
                    onChange={this.handleLastNameChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field>
-            <Input type="text"
-                   value={this.state.email}
-                   placeholder="Email"
+            <label>Middle Name</label>
+            <input placeholder="Middle Name"
+                   onChange={this.handleMiddleNameChange.bind(this)}/> <br />
+          </Form.Field>
+          <Form.Field>
+            <label>Zip Code</label>
+            <input placeholder="Zip Code"
+                   onChange={this.handleZipCodeChange.bind(this)}/> <br />
+          </Form.Field>
+          <Form.Field required>
+            <label>Email Address</label>
+            <input placeholder="Email"
                    onChange={this.handleEmailChange.bind(this)}/> <br />
           </Form.Field>
-          <Form.Field>
-            <Input type="password"
-                   value={this.state.password}
+          <Form.Field required>
+            <label>Password</label>
+            <input type="password"
                    placeholder="Password"
-                   onChange={this.handlePasswordChange.bind(this)}/><br />
+                   onChange={this.handlePasswordChange.bind(this)}/> <br />
           </Form.Field>
-          <Form.Field>
-            <Input type="password"
-                   value={this.state.confirmPassword}
-                   placeholder="Confirm Password"
-                   onChange={this.handleConfirmPasswordChange.bind(this)}/><br />
-          </Form.Field>
+          <Form.Group>
+            <label>Are you in business?</label>
+            <Form.Field 
+              control={Radio}
+              label='Yes'
+              value='1'
+              onChange={this.handleInBusiness.bind(this)}
+            />
+            <Form.Field
+              control={Radio}
+              label='No'
+              value='2'
+              onChange={this.handleInBusiness.bind(this)}
+            />
+          </Form.Group>
           <Button type="submit">Submit</Button>
         </Form>
       </Container>
