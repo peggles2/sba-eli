@@ -23,7 +23,7 @@ module Canvas
     
     def self.find(learning_path_id, quiz_id)
       questions = JSON.parse get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions", base_options).body
-
+      quiz = JSON.parse get("/courses/#{learning_path_id}/quizzes/#{quiz_id}", base_options).body
       results = []
 
       questions.each do |question|
@@ -54,7 +54,8 @@ module Canvas
         }
       end
 
-      results
+      quiz[:results] = results
+      quiz
     end
   end
 end
