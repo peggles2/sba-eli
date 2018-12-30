@@ -79,7 +79,7 @@ export default class LearningEvent extends Component {
           canonicalUrl=""
         />
         <LearningEventHeader event={event} topicTitle={topicTitle} />
-        <LearningEventManager event={event} />
+        <LearningEventManager event={event} courseId={this.props.match.params.course_id} />
         <Divider />
         <LearningEventFooter
           courseId={this.props.match.params.course_id}

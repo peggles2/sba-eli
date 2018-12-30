@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LearningEventInfoCard from "./LearningEventInfoCard";
 import LearningEventPage from "./LearningEventPage";
 import LearningEventVideo from "./LearningEventVideo";
+import LearningEventQuiz from "./LearningEventQuiz/LearningEventQuiz";
 
 export default class LearningEventManager extends Component {
   eventFileManager(event) {
@@ -31,6 +32,8 @@ export default class LearningEventManager extends Component {
         return <LearningEventPage event={event} />;
       case 'File':
         return this.eventFileManager(event);
+      case 'Quiz':
+        return <LearningEventQuiz event={event} courseId={this.props.courseId} />
       case 'ExternalUrl':
         return this.eventURLManager(event);
       default:
