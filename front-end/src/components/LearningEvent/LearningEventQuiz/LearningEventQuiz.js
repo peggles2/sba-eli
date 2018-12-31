@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Divider } from "semantic-ui-react";
 import MultipleChoiceQuestion from "./MultipleChoiceQuestion";
+import MultipleAnswerQuestion from "./MultipleAnswerQuestion";
+import ShortAnswerQuestion from "./ShortAnswerQuestion";
 
 //Placeholder for testing purposes to handle unaccounted learning event types
 export default class LearningEventQuiz extends Component {
@@ -37,7 +39,6 @@ export default class LearningEventQuiz extends Component {
   }
 
   setLearningEvent() {
-    console.log(this.props.event)
     const course_id = this.props.courseId;
     const quiz_id = this.props.event.content_id;
     const url = process.env.REACT_APP_SERVICE_HOST + LearningEventQuiz.getEventPath(course_id, quiz_id);
@@ -57,11 +58,11 @@ export default class LearningEventQuiz extends Component {
       return this.state.learningEvent.results.map((question, i) => {
         switch(question.question_type) {
           case 'multiple_choice_question':
-            return <MultipleChoiceQuestion key={i} order={i+1} question={question} />;
+            return <MultipleChoiceQuestion key={i} order={i+1} question={question} />
           case 'short_answer_question':
-            return <div key={i}><em>Question type not supported</em></div>
+            return <ShortAnswerQuestion key={i} order={i+1} question={question} />
           case 'fill_in_multiple_blanks_question':
-            return <div key={i}><em>Question type not supported</em></div>
+          return <MultipleAnswerQuestion key={i} order={i+1} question={question} />
           default:
             return <div key={i}><em>Question type not supported</em></div>
         }
