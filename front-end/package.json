@@ -6,6 +6,7 @@
     "amazon-cognito-identity-js": "^3.0.3",
     "axios": "^0.18.0",
     "dotenv": "^6.1.0",
+    "mime-types": "^2.1.21",
     "node-sass": "^4.11.0",
     "query-string": "^6.2.0",
     "react": "^16.6.0",
@@ -15,11 +16,11 @@
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.0",
-    "screenfull": "^3.3.3",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.3.0",
+    "screenfull": "^3.3.3",
     "semantic-ui-react": "^0.83.0"
   },
   "scripts": {

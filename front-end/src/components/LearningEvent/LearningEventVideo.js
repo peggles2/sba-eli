@@ -10,8 +10,7 @@ import "./PlayerControls.scss";
 
 export default class LearningEventVideo extends Component {
   state = {
-    // url: "http://movietrailers.apple.com/movies/marvel/avengers-endgame/avengers-endgame-trailer-1_a720p.m4v",
-    url: this.props.event.eventContent.url,
+    url: this.props.url,
     playing: false,
     volume: 0.8,
     muted: false,
@@ -53,12 +52,12 @@ export default class LearningEventVideo extends Component {
   }
 
   onSeekChange = (e) => {
-    //this.setState({ played: parseFloat(e.target.value) })
+    this.setState({ played: parseFloat(e.target.value) })
   }
 
   onSeekMouseUp = (e) => {
     this.setState({ seeking: false })
-    // this.player.seekTo(parseFloat(e.target.value))
+    this.player.seekTo(parseFloat(e.target.value))
   }
 
   onProgress = (state) => {
