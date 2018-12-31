@@ -1,76 +1,68 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { Divider } from "semantic-ui-react";
-import MultipleChoiceQuestion from "./MultipleChoiceQuestion";
-import MultipleAnswerQuestion from "./MultipleAnswerQuestion";
-import ShortAnswerQuestion from "./ShortAnswerQuestion";
+import { Button, Divider, Icon } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
+import { getLearningPathQuizzes, getQuiz } from "../../../actions/learningPathActions";
+import { MultipleChoiceQuestion, MultipleAnswerQuestion, ShortAnswerQuestion } from "./LearningEventQuestions";
 
 //Placeholder for testing purposes to handle unaccounted learning event types
-export default class LearningEventQuiz extends Component {
+export class LearningEventQuiz extends Component {
   
   constructor(props){
     super(props);
 
     this.state = {
-      learningEvent: {
-        description: "",
-        results: []
+      answers: {
       }
     };
-  }
-  
-  static getEventPath(course_id, content_id) {
-    return (
-      `/learning_paths/${course_id}` +
-      `/quizzes/${content_id}`
-    );
+
+    this.beginQuiz = this.beginQuiz.bind(this)
+    this.recordAnswer = this.recordAnswer.bind(this)
   }
 
   componentDidMount() {
-    this.setLearningEvent();
+    this.props.dispatch(getLearningPathQuizzes(this.props.courseId))
   }
 
   componentWillReceiveProps(newProps) {
-    //Added this to account for react routing not updating with different props
-    if (this.props !== newProps) {
-      this.props = newProps;
-      this.setLearningEvent();
-    }
+
   }
 
-  setLearningEvent() {
-    const course_id = this.props.courseId;
-    const quiz_id = this.props.event.content_id;
-    const url = process.env.REACT_APP_SERVICE_HOST + LearningEventQuiz.getEventPath(course_id, quiz_id);
+  recordAnswer(id, answer){
+    let answers = this.state.answers
+    answers[id] = answer
+    this.setState({answers}, () => console.log(answers))
+  }
 
-    axios
-      .get(url)
-      .then(res => {
-        const learningEvent = res.data;
-        this.setState({ learningEvent });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  beginQuiz(){
+    this.props.dispatch(getQuiz(this.props.courseId, this.props.event.content_id));
   }
 
   renderQuestions() {
-      return this.state.learningEvent.results.map((question, i) => {
-        switch(question.question_type) {
-          case 'multiple_choice_question':
-            return <MultipleChoiceQuestion key={i} order={i+1} question={question} />
-          case 'short_answer_question':
-            return <ShortAnswerQuestion key={i} order={i+1} question={question} />
-          case 'fill_in_multiple_blanks_question':
-          return <MultipleAnswerQuestion key={i} order={i+1} question={question} />
-          default:
-            return <div key={i}><em>Question type not supported</em></div>
-        }
-      });
+      if(this.props.quiz && this.props.quiz.questions){
+        return this.props.quiz.questions.map((question, i) => {
+          switch(question.question_type) {
+            case 'multiple_choice_question':
+              return <MultipleChoiceQuestion key={i} order={i+1} question={question} onSelected={this.recordAnswer} />
+            case 'short_answer_question':
+              return <ShortAnswerQuestion key={i} order={i+1} question={question} />
+            case 'fill_in_multiple_blanks_question':
+              return <MultipleAnswerQuestion key={i} order={i+1} question={question} />
+            default:
+              return <div key={i}><em>Question type not supported</em></div>
+          }
+        });
+      }
+      else {
+        return <Button icon labelPosition="right" primary onClick={this.beginQuiz} >
+                  Begin Assesment
+                  <Icon name="pencil alternate" />
+              </Button>
+      }
   }
 
   render() {
-    const description = this.state.learningEvent.description || "";
+    const description = this.props.event && this.props.event.eventContent ? this.props.event.eventContent.description : "";
     return (
       <div className="learning-event-quiz">
         <span dangerouslySetInnerHTML={{
@@ -82,3 +74,10 @@ export default class LearningEventQuiz extends Component {
     );
   }
 }
+
+export default connect((store) => {
+  return {
+    quizzes: store.learningPath.quizzes,
+    quiz: store.learningPath.quiz
+  }
+})(withRouter(LearningEventQuiz));

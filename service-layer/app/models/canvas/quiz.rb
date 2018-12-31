@@ -23,7 +23,7 @@ module Canvas
     
     def self.find(learning_path_id, quiz_id, submission)
       quiz = JSON.parse get("/courses/#{learning_path_id}/quizzes/#{quiz_id}", base_options).body
-      questions = JSON.parse get("/quiz_submissions/2/questions", base_options).body
+      questions = JSON.parse get("/quiz_submissions/#{quiz_id}/questions", base_options).body
       
       questions = questions["quiz_submission_questions"]
 
@@ -63,10 +63,14 @@ module Canvas
       result
     end
 
-    def self.start_submission(learning_path_id, quiz_id)
-      submissions = JSON.parse post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options).body
+    def self.start_submission(learning_path_id, quiz_id)      
+      submissions = JSON.parse get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options).body
 
-      submissions["quiz_submissions"][0]
+      print submissions
+      if(!submissions or submissions["quiz_submissions"].empty?)
+        submissions = JSON.parse post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options).body
+      end
+      submissions["quiz_submissions"].first
     end
 
     def self.submit(submission)
