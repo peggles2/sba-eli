@@ -23,7 +23,7 @@ export default class Navbar extends Component {
   render() {
     return(
         <Menu className="navbar" fluid>
-          <Menu.Item header href={`/`}><img class='logo' src={`/Ascent_Logo_Stacked.png`}/></Menu.Item>
+          <Menu.Item header href={`/`}><img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/></Menu.Item>
           <Dropdown text='Learning Paths' item>
             <Dropdown.Menu>
               <NavigationLearningPath />
