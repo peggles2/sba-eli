@@ -10,24 +10,24 @@ export default class MultipleChoiceQuestion extends Component {
     render() {
         const question = this.props.question;
         return (
-        <div className="multiple-choice">
-        <strong>Question {this.props.order}</strong>
-            <span dangerouslySetInnerHTML={{
+        <div className="question multiple-choice">
+            <p><strong>Question {this.props.order}</strong></p>
+            <p dangerouslySetInnerHTML={{
             __html: question.question_text
             }} />
             <Form>
-            { question.answers.map(a =>
-            <Form.Field>
-                <Radio
-                    label={a.text}
-                    name='radioGroup'
-                    value={a.id}
-                    checked={this.state.value === a.id}
-                    onChange={this.handleChange}
-                />
-            </Form.Field>
-            )}
-        </Form>
+                { question.answers.map(a =>
+                <Form.Field>
+                    <Radio
+                        label={a.text}
+                        name='radioGroup'
+                        value={a.id}
+                        checked={this.state.value === a.id}
+                        onChange={this.handleChange}
+                    />
+                </Form.Field>
+                )}
+            </Form>
             <Divider />
         </div>
         );
