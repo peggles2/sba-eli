@@ -1,6 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { Header, Divider, Grid, Button, Icon } from "semantic-ui-react";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TwitterShareButton,
+  TwitterIcon,
+} from 'react-share';
 
 import TopicSideBar from "../TopicSideBar/TopicSidebar";
 import TopicContentView from "../TopicContentView/TopicContentView";
@@ -83,7 +91,7 @@ export default class LearningPath extends React.Component {
       //send the topic Title for wrapper header purposes, break this into state?
       const topicTitle = this.state.topicsList.find(
         topic => topic.id.toString() === topicId.toString()
-      );      
+      );
       return <LearningEvent match={eventMatch} topicTitle={topicTitle ? topicTitle.name : null} />;
     } else {
       return (
@@ -131,6 +139,32 @@ export default class LearningPath extends React.Component {
               <Button className={"path-header-share mobile hidden"}>
                 Share &nbsp; <Icon name={"share"} />
               </Button>
+              <FacebookShareButton
+                url={window.location.href}
+                quote={this.state.learningPath.name}
+                className="path-header-share path-header-share-button" >
+                <FacebookIcon
+                  size={32}
+                  round />
+              </FacebookShareButton>
+              <TwitterShareButton
+                url={window.location.href}
+                title={this.state.learningPath.name}
+                className="path-header-share path-header-share-button" >
+                <TwitterIcon
+                  size={32}
+                  round />
+              </TwitterShareButton>
+              <LinkedinShareButton
+                url={window.location.href}
+                title={this.state.learningPath.name}
+                windowWidth={750}
+                windowHeight={600}
+                className="path-header-share path-header-share-button">
+                <LinkedinIcon
+                  size={32}
+                  round />
+              </LinkedinShareButton>
             </Header>
           </Grid.Column>
         </Grid.Row>
