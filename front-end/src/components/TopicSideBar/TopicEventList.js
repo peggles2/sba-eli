@@ -36,16 +36,17 @@ export default class TopicEventList extends Component {
   }
 
   renderEventsList(events = []) {
-    const { course_id, module_id } = this.props;
+    const { course_id, module_id, event_id } = this.props;
     const url = `/learning_paths/${course_id}/learning_objectives/${module_id}/learning_events/`;
 
     if (events.length) {
       return events.map((event, index) => {
+        const itemClassName =
+          event_id && event_id.toString() === event.id.toString()
+            ? "event-list-accordion-item active-event"
+            : "event-list-accordion-item";
         return (
-          <Item
-            key={"eventListItem" + index}
-            className={"event-list-accordion-item"}
-          >
+          <Item key={"eventListItem" + index} className={itemClassName}>
             <Item.Header>
               <Icon
                 className={"event-list-item-icon"}

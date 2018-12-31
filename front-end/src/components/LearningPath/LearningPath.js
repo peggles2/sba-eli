@@ -71,14 +71,20 @@ export default class LearningPath extends React.Component {
     if (isLearningEvent) {
       //This is to mimic react routing for the learning event. Learning event component
       //should be refactored to pass props
-      const match = {
+      const { eventId, topicId, id } = this.props.match.params;
+      const eventMatch = {
         params: {
-          id: this.props.match.params.eventId,
-          module_id: this.props.match.params.topicId,
-          course_id: this.props.match.params.id
+          id: eventId,
+          module_id: topicId,
+          course_id: id
         }
       };
-      return <LearningEvent match={match} />;
+
+      //send the topic Title for wrapper header purposes, break this into state?
+      const topicTitle = this.state.topicsList.find(
+        topic => topic.id.toString() === topicId.toString()
+      );      
+      return <LearningEvent match={eventMatch} topicTitle={topicTitle ? topicTitle.name : null} />;
     } else {
       return (
         <TopicContentView
@@ -103,9 +109,13 @@ export default class LearningPath extends React.Component {
 
     return (
       <Grid centered>
-        <MetaTags metaTitle={this.state.learningPath.name}
-                  metaDescription={this.state.learningPath.description}
-                  canonicalUrl={`https://sba.gov/learning_paths/${this.props.match.params.id}`}/>
+        <MetaTags
+          metaTitle={this.state.learningPath.name}
+          metaDescription={this.state.learningPath.description}
+          canonicalUrl={`https://sba.gov/learning_paths/${
+            this.props.match.params.id
+          }`}
+        />
         <Grid.Row className={"path-breadcrumb-row"}>
           <Grid.Column mobile={15} tablet={15} computer={15}>
             <LearningPathBreadCrumb

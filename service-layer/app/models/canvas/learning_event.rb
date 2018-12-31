@@ -12,7 +12,6 @@ module Canvas
     def self.find(course_id, module_id, id)
       url = "/courses/#{course_id}/modules/#{module_id}/items/#{id}"
       learning_event = get(url, base_options)
-
       if learning_event["url"]
         learning_event["eventContent"] = get(learning_event["url"], base_options)
       end

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
+import "./Navbar.scss"
 
 const LoggedOutView = () => {
   return(
@@ -20,10 +21,9 @@ export default class Navbar extends Component {
   state = {}
 
   render() {
-
     return(
         <Menu className="navbar" fluid>
-          <Menu.Item header href={`/`}>Dashboard</Menu.Item>
+          <Menu.Item header href={`/`}><img class='logo' src={`/Ascent_Logo_Stacked.png`}/></Menu.Item>
           <Dropdown text='Learning Paths' item>
             <Dropdown.Menu>
               <NavigationLearningPath />

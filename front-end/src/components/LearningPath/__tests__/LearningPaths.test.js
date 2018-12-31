@@ -1,11 +1,11 @@
 import React from 'react';
-import LearningPaths from '../LearningPaths';
+import { LearningPaths } from '../LearningPaths';
 import MetaTags from '../../SEO/MetaTags';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 describe('LearningPaths', () => {
   it("should render meta tags with Learning Paths specific information", () => {
-    const wrapper = shallow(<LearningPaths.WrappedComponent location={{pathname: ''}}/>);
+    const wrapper = shallow(<LearningPaths />);
 
     expect(wrapper.find(MetaTags).exists()).toBe(true);
     const metaWrapper = wrapper.find(MetaTags).dive();
@@ -18,7 +18,7 @@ describe('LearningPaths', () => {
   });
 
   it('should render a <div>', () => {
-    const wrapper = shallow(<LearningPaths.WrappedComponent location={{pathname: ''}}/>);
+    const wrapper = shallow(<LearningPaths />);
 
     expect(wrapper.find('div').length).toEqual(1);
   });
