@@ -19,7 +19,12 @@ export default class LearningEventManager extends Component {
 
   eventURLManager(event) {
     const url = event.external_url;
-    const mimeType = mime.lookup(url).split("/")[0];
+    let mimeType;
+    if ( mime.lookup(url) ) {
+      mimeType = mime.lookup(url).split("/")[0];
+    } else {
+      mimeType = "NONE"
+    }
 
     switch(mimeType) {
       case 'video':
