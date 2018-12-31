@@ -98,18 +98,22 @@ class SignUpForm extends React.Component {
                    placeholder="Password"
                    onChange={this.handlePasswordChange.bind(this)}/> <br />
           </Form.Field>
-          <Form.Group>
+          <Form.Group grouped>
             <label>Are you in business?</label>
-            <Form.Field 
-              control={Radio}
+            <Form.Field
+              control='input'
+              type='radio'
               label='Yes'
               value='1'
+              name='inBusiness'
               onChange={this.handleInBusiness.bind(this)}
             />
             <Form.Field
-              control={Radio}
+              control='input'
               label='No'
+              type='radio'
               value='2'
+              name='inBusiness'
               onChange={this.handleInBusiness.bind(this)}
             />
           </Form.Group>
