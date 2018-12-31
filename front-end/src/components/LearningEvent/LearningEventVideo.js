@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import ReactPlayer from "react-player";
 import { Button, Icon } from "semantic-ui-react";
 import { findDOMNode } from "react-dom";
-import axios from "axios";
 import Duration from "./LearningEventVideo/Duration";
 import screenfull from "screenfull";
 import "./Slider.scss"
@@ -22,17 +21,6 @@ export default class LearningEventVideo extends Component {
     loop: false,
     height: '100%',
     width: '100%'
-  }
-
-  fetchVideo() {
-    const url = this.props.event.eventContent.url;
-
-    axios.get(url)
-      .then(res => {
-        const vidUrl = res.data;
-        this.setState({ url: vidUrl });
-        console.log(this.state.url);
-      });
   }
 
   playPause = () => {
@@ -79,10 +67,10 @@ export default class LearningEventVideo extends Component {
   }
 
   render() {
-    const { url, playing, volume, muted,  pip, played, duration, playbackRate, loop, height, width } = this.state    
+    const { url, playing, volume, muted,  pip, played, duration, playbackRate, loop, height, width } = this.state
 
     return(
-      <div>        
+      <div>
         <div className="player-wrapper">
           <ReactPlayer
             ref={this.ref}

@@ -22,7 +22,7 @@ export default class LearningEventManager extends Component {
     const mimeType = mime.lookup(url).split("/")[0];
 
     switch(mimeType) {
-      case 'video': 
+      case 'video':
         return <LearningEventVideo url={url} event={event}/>;
       default:
         return this.infoCard(event);
