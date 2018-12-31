@@ -24,11 +24,15 @@ module Canvas
     def self.find(learning_path_id, quiz_id)
       questions = JSON.parse get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions", base_options).body
       quiz = JSON.parse get("/courses/#{learning_path_id}/quizzes/#{quiz_id}", base_options).body
-      results = []
+
+      result = {
+        id:             quiz["id"],
+        title:          quiz["title"],
+        description:    quiz["description"],
+        questions:      []
+      }
 
       questions.each do |question|
-        pp question
-
         answers = []
 
         question["answers"].each do |answer|
@@ -36,7 +40,6 @@ module Canvas
             id: answer["id"],
             text: answer["text"]
           }
-
           a[:blank_id] = answer["blank_id"] if answer["blank_id"]
           a[:left] = answer["left"] if answer["left"]
           a[:right] = answer["right"] if answer["right"]
@@ -45,7 +48,7 @@ module Canvas
           answers << a
         end
 
-        results << {
+        result[:questions] << {
           id:               question["id"],
           quiz_id:          question["quiz_id"],
           question_type:    question["question_type"],
@@ -54,8 +57,24 @@ module Canvas
         }
       end
 
-      quiz[:results] = results
-      quiz
+      result
+    end
+
+    def self.start_submission(learning_path_id, quiz_id)
+      post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options)
+    end
+
+    def self.submit(submission)
+      options = base_options.merge!(body: submission)
+      post("/quiz_submissions/#{submission["submission_id"]}/questions", options)
+    end
+
+    def self.end_submission(learning_path_id, quiz_id, submission)
+      options = base_options.merge!(body: {
+        attempt: submission["attempt"],
+        validation_token: submission["validation_token"]
+      })
+      post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions/#{submission["submission_id"]}/completed", options)
     end
   end
 end
