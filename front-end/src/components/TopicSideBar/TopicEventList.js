@@ -35,6 +35,16 @@ export default class TopicEventList extends Component {
       });
   }
 
+  getIcon(eventType){
+    console.log("Event ", eventType)
+    switch(eventType){
+      case "Quiz":
+        return "pencil alternate";
+      default:
+        return "image";
+    }
+  }
+
   renderEventsList(events = []) {
     const { course_id, module_id, event_id } = this.props;
     const url = `/learning_paths/${course_id}/learning_objectives/${module_id}/learning_events/`;
@@ -50,7 +60,7 @@ export default class TopicEventList extends Component {
             <Item.Header>
               <Icon
                 className={"event-list-item-icon"}
-                name="image"
+                name={this.getIcon(event.type)}
                 size="big"
               />
               <Link className={"event-list-item-link"} to={url + event.id}>
