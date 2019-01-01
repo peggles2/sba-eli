@@ -2,14 +2,16 @@ class UserCreationService
   include ActiveModel::Model
 
   attr_accessor :first_name,
+                :middle_name,
                 :last_name,
                 :email,
                 :short_name,
                 :password,
-                :password_confirmation,
+                :zip_code,
+                :in_business,
                 :user
 
-  validates :first_name, :last_name, :password_confirmation, presence: true
+  validates :first_name, :last_name, presence: true
   validates :email, presence: true, email: true
   validates :password, password_complexity: true
   validates_confirmation_of :password

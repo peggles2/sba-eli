@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
 import SignUpModal from '../SignUpForm/SignUpModal';
+import LoginModal from "../LoginForm/LoginModal";
 
 class LoggedOutView extends Component {
   render() {
     return( 
       <div>
-        <Button id="login" onClick={this.toggleLogin}>Login</Button>
+        <LoginModal open={false}/>
         <SignUpModal open={false}/>
       </div>
     )

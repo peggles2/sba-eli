@@ -53,7 +53,7 @@ class SignUpForm extends React.Component {
       zip_code: this.state.zipCode.trim(),
       email: this.state.email.trim(),
       password: this.state.password.trim(),
-      inBusiness: this.state.inBusiness
+      in_business: this.state.inBusiness
     }).then(() => {
       console.log('Success!');
     }).catch((e) => {
