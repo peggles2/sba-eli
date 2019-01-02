@@ -13,7 +13,7 @@ const defaultValue = {
   quizSubmissions: [],
   quizSubmissionsLoading: null,
   quizSubmissionsError: null,
-  submitQuiz: {},
+  submitQuiz: null,
   submitQuizLoading: null,
   submitQuizError: null
 };
@@ -45,9 +45,9 @@ export default function reducer(state=defaultValue, action) {
     case 'GET_LEARNING_PATH_QUIZ_SUBMISSIONS_FULFILLED':
       return {...state, quizSubmissions: action.payload.data, quizSubmissionsLoading: false, quizSubmissionsError: null} 
     case 'SUBMIT_QUIZ':
-      return {...state, submitQuiz: {}, submitQuizLoading: true, submitQuizError: null} 
+      return {...state, submitQuiz: null, submitQuizLoading: true, submitQuizError: null} 
     case 'SUBMIT_QUIZ_FAILURE':
-      return {...state, submitQuiz: {}, submitQuizLoading: false, submitQuizError: action.payload} 
+      return {...state, submitQuiz: null, submitQuizLoading: false, submitQuizError: action.payload} 
     case 'SUBMIT_QUIZ_FULFILLED':
       return {...state, submitQuiz: action.payload.data, submitQuizLoading: false, submitQuizError: null} 
     default:

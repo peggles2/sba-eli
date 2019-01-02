@@ -30,8 +30,9 @@ export function getQuizSubmissions(course_id, content_id) {
   };  
 }
 export function submitQuiz(course_id, content_id, quiz) {
+  quiz.quiz_id = content_id
   return {
     type: 'SUBMIT_QUIZ',
-    payload: axios.put(baseUrl + `/learning_paths/${course_id}/quizzes/${content_id}`, quiz)
+    payload: axios.post(baseUrl + `/learning_paths/${course_id}/quizzes`, quiz)
   };  
 }

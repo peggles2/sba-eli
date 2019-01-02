@@ -29,7 +29,6 @@ export class LearningEventQuiz extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(newProps)
     if(newProps.submissions.length && ! this.props.submissions.length)
       this.beginQuiz()
   }
@@ -65,7 +64,6 @@ export class LearningEventQuiz extends Component {
   }
 
   renderQuestions() {
-      if(this.props.quiz && this.props.quiz.questions){
         return this.props.quiz.questions.map((question, i) => {
           switch(question.question_type) {
             case 'multiple_choice_question':
@@ -77,15 +75,19 @@ export class LearningEventQuiz extends Component {
             default:
               return <div key={i}><em>Question type not supported</em></div>
           }
-        });
-      }
-      else {
-        return this.props.submissionsLoading === false && !this.props.submissions.length &&
-              <Button icon labelPosition="right" primary onClick={this.beginQuiz} >
-                  Begin Assesment
-                  <Icon name="pencil alternate" />
-              </Button>
-      }
+        })
+  }
+
+  renderStart() {
+    return this.props.submissionsLoading === false && !this.props.submissions.length &&
+      <Button icon labelPosition="right" primary onClick={this.beginQuiz} >
+          Begin Assesment
+          <Icon name="pencil alternate" />
+      </Button>
+  }
+
+  renderResults(){
+    return JSON.stringify(this.props.results)
   }
 
   render() {
@@ -96,7 +98,13 @@ export class LearningEventQuiz extends Component {
           __html: description
         }} />
         <Divider />
-        {this.renderQuestions()}
+        {
+          this.props.quiz && this.props.quiz.questions ?
+            this.renderQuestions() : 
+          this.props.results ?
+            this.renderResults() :
+            this.renderStart()
+          }
         {
           this.props.quiz.questions && 
           <div style={{textAlign: "right"}}>

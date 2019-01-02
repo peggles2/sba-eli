@@ -91,11 +91,12 @@ module Canvas
       JSON.parse post("/quiz_submissions/#{submission["submission_id"]}/questions", options).body
     end
 
-    def self.end_submission(learning_path_id, quiz_id, submission)
+    def self.end_submission(learning_path_id, submission)
       options = base_options.merge!(body: {
         attempt: submission["attempt"],
         validation_token: submission["validation_token"]
       })
+      quiz_id = submission[:quiz_id]
 
       JSON.parse post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions/#{submission["submission_id"]}/complete", options).body
     end

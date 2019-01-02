@@ -21,6 +21,7 @@ class QuizzesController < ApplicationController
   ##
   # a submission looks like this:
   # {
+  #   quiz_id: 1
   #   submission_id: 1,
   #   attempt: 1,
   #   validation_token: 'token',
@@ -32,10 +33,12 @@ class QuizzesController < ApplicationController
   #     answer: 5678  - for multiple choice, this should be the answer ID
   #   }]
   # }
-  def update
+  def create
+    pp "Go"
     quiz_answer_resp = Canvas::Quiz.submit params
-    end_submission_resp = Canvas::Quiz.end_submission params[:learning_path_id], params[:id], params
-
+    pp quiz_answer_resp
+    end_submission_resp = Canvas::Quiz.end_submission params[:learning_path_id], params
+    pp end_submission_resp
     render json: end_submission_resp, status: :ok
   end
 end
