@@ -70,4 +70,19 @@ describe("LearningEventManager", () => {
     expect(inst.eventURLManager(event))
       .toEqual(<LearningEventInfoCard event={event}/>);
   });
+
+  it("should render an event info card if External URL is null", () => {
+    const event = {
+      type: "ExternalUrl",
+      external_url: null 
+    }
+
+    const wrapper = shallow(<LearningEventManager event={event} />)
+
+    const inst = wrapper.instance()
+    expect(inst.renderEventContentByType())
+      .toEqual(<LearningEventInfoCard event={event}/>);
+    expect(inst.eventURLManager(event))
+      .toEqual(<LearningEventInfoCard event={event}/>);
+  });
 });
