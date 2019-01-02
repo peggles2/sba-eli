@@ -5,10 +5,10 @@ import MetaTags from "./components/SEO/MetaTags";
 class App extends Component {
   render() {
     return (
-    <div className="application">
-      <MetaTags />
-      <Navigation />
-    </div>
+      <div className="application">
+        <MetaTags />
+        <Navigation />
+      </div>
     );
   }
 }

@@ -1,50 +1,52 @@
-/* Prototyping for infographic until more robust css in place */
-.learning-event-container {
-  font-family: "Source Sans Pro", sans-serif;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  box-shadow: 0 1px 2px 0 rgba(34,36,38, 0.15);
-  padding: 15px 0px 65px 0px;
+@import "../../assets/styles/base";
+
+.container.learning-event-container {
+  background: $sba-white;
+  border: $main-border;
+  box-shadow: $main-box-shadow;
+  padding: 15px 0px 25px 0px;
+  margin-top: 0;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
 
+// LearningEventPage
+.learning-event-body {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+// LearningEventHeader
 .learning-event-header {
-  padding-top: 30px;
-  padding-left: 45px;
-  padding-right: 45px;
+  color: $sba-dark-grey;
+  &.grid {
+    padding: 20px 45px 0 45px;
+  }
+
+  .row.header-row {
+    padding: 0;
+  }
+  .topic-title {
+    font-size: 17px;
+  }
+  .header.event-title {
+    padding: 4px 0;
+    color: $sba-dark-grey;
+  }
+  .event-meta {
+    font-size: 16px;
+    font-style: italic;
+  }
 }
 
-.learning-event-header-video {
+// LearningEventFooter
+.learning-event-footer {
   padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 45px;
-  padding-right: 45px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
-.learning-event-p {
-  font-size: 1.3em;
-}
-
-.learning-event-footer { 
-  padding-top: 30px;
-  padding-left: 45px;
-  padding-right: 45px;
-}
-
-.infographic {
-  font-family: "Source Sans Pro", sans-serif;
-}
-
-.sba-yellow {
-  color: #ffab3b;
-}
-
-.sba-white {
-  color: #ffffff;
-}
-
-.sba-blue {
-  color: #0b2f6b;
-}
-
+/* Prototyping for infographic until more robust css in place */
 .infographic-header-footer {
   background-color: #0b2f6b;
 }
@@ -79,4 +81,8 @@
 .medium-text {
   font-size: 40px;
   font-weight: bolder;
+}
+.page-navigation-buttons-wrapper {
+  width: 100%;
+  text-align: right;
 }

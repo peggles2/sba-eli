@@ -1,0 +1,38 @@
+@import "../../assets/styles/base";
+
+.sba {
+  background-color: #FAFBFD;
+  height: 100%;
+}
+
+.grid.search_page {
+  width: 100% !important;
+  padding: 0px;
+
+  .search_results {
+    min-height: 400px;
+  }
+}
+
+.search_page_header {
+  background-color: white;
+  box-shadow: 0 1px 2px 0 #b2b9c4;
+}
+
+
+.search_page {
+  .search_result_item {
+    background-color: $sba-white;
+    border: 1px solid #ced6e1;
+    box-shadow: 5px 6px 8px #b2b9c4;
+    border-radius: 7px;
+    margin: 10px;
+  }
+
+  .search_result_image {
+    padding: 10px;
+  }
+  .search_result_content {
+    padding: 40px 0 0 0;
+  }
+}
