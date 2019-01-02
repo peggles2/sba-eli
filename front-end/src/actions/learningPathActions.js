@@ -22,3 +22,16 @@ export function getQuiz(course_id, content_id) {
     payload: axios.get(baseUrl + `/learning_paths/${course_id}/quizzes/${content_id}`)
   };  
 }
+
+export function getQuizSubmissions(course_id, content_id) {
+  return {
+    type: 'GET_LEARNING_PATH_QUIZ_SUBMISSIONS',
+    payload: axios.get(baseUrl + `/learning_paths/${course_id}/quizzes/${content_id}/submissions`)
+  };  
+}
+export function submitQuiz(course_id, content_id, quiz) {
+  return {
+    type: 'SUBMIT_QUIZ',
+    payload: axios.put(baseUrl + `/learning_paths/${course_id}/quizzes/${content_id}`, quiz)
+  };  
+}

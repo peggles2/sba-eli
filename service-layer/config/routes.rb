@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resource :cofirmation_code, only: :create
   resources :learning_events, concerns: :contentable
   resources :learning_paths, concerns: :contentable do
-    resources :quizzes
+    resources :quizzes do 
+      get 'submissions', :on => :member
+    end
   end
   resources :learning_objectives, concerns: :contentable
   resource :search, only: :show

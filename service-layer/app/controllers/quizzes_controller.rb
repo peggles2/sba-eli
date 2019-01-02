@@ -12,6 +12,12 @@ class QuizzesController < ApplicationController
     render json: @quiz, status: :ok
   end
 
+  def submissions
+    @submissions = Canvas::Quiz.get_submissions params[:learning_path_id], params[:id]
+
+    render json: @submissions, status: :ok
+  end
+
   ##
   # a submission looks like this:
   # {

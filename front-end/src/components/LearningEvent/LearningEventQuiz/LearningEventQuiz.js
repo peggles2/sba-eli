@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Divider, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
-import { getLearningPathQuizzes, getQuiz } from "../../../actions/learningPathActions";
+import { getLearningPathQuizzes, getQuizSubmissions, getQuiz, submitQuiz } from "../../../actions/learningPathActions";
 import { MultipleChoiceQuestion, MultipleAnswerQuestion, ShortAnswerQuestion } from "./LearningEventQuestions";
 
 //Placeholder for testing purposes to handle unaccounted learning event types
@@ -18,24 +18,50 @@ export class LearningEventQuiz extends Component {
 
     this.beginQuiz = this.beginQuiz.bind(this)
     this.recordAnswer = this.recordAnswer.bind(this)
+    this.viewResults = this.viewResults.bind(this)
   }
 
   componentDidMount() {
     this.props.dispatch(getLearningPathQuizzes(this.props.courseId))
+    if(this.props.event) {
+      this.props.dispatch(getQuizSubmissions(this.props.courseId, this.props.event.content_id))
+    }
   }
 
   componentWillReceiveProps(newProps) {
-
+    console.log(newProps)
+    if(newProps.submissions.length && ! this.props.submissions.length)
+      this.beginQuiz()
   }
 
   recordAnswer(id, answer){
     let answers = this.state.answers
     answers[id] = answer
-    this.setState({answers}, () => console.log(answers))
+    this.setState({answers})
   }
 
   beginQuiz(){
     this.props.dispatch(getQuiz(this.props.courseId, this.props.event.content_id));
+  }
+
+  viewResults(){
+    let answers = Object.keys(this.state.answers).map(k => {
+      return {
+        id: k,
+        answer: this.state.answers[k]
+      }
+    })
+
+    let submission = {
+      "submission_id": this.props.quiz.submission_id,
+      "attempt": this.props.quiz.attempt,
+      "validation_token": this.props.quiz.validation_token,
+      "quiz_questions": answers
+    }
+
+    this.props.dispatch(submitQuiz(this.props.courseId, 
+      this.props.event.content_id,
+      submission))
   }
 
   renderQuestions() {
@@ -54,7 +80,8 @@ export class LearningEventQuiz extends Component {
         });
       }
       else {
-        return <Button icon labelPosition="right" primary onClick={this.beginQuiz} >
+        return this.props.submissionsLoading === false && !this.props.submissions.length &&
+              <Button icon labelPosition="right" primary onClick={this.beginQuiz} >
                   Begin Assesment
                   <Icon name="pencil alternate" />
               </Button>
@@ -70,6 +97,14 @@ export class LearningEventQuiz extends Component {
         }} />
         <Divider />
         {this.renderQuestions()}
+        {
+          this.props.quiz.questions && 
+          <div style={{textAlign: "right"}}>
+            <Button className="cyan" onClick={this.viewResults} >
+              View Results
+            </Button>
+          </div>
+        }
       </div>
     );
   }
@@ -78,6 +113,9 @@ export class LearningEventQuiz extends Component {
 export default connect((store) => {
   return {
     quizzes: store.learningPath.quizzes,
-    quiz: store.learningPath.quiz
+    quiz: store.learningPath.quiz,
+    submissions: store.learningPath.quizSubmissions,
+    submissionsLoading: store.learningPath.quizSubmissionsLoading,
+    results: store.learningPath.submitQuiz
   }
 })(withRouter(LearningEventQuiz));

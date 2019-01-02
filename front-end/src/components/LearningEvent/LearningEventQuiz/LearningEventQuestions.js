@@ -59,7 +59,7 @@ export class MultipleChoiceQuestion extends Component {
     handleChange = (e, { value }) => { 
         this.setState({ value })
         if(this.props.onSelected){
-            this.props.onSelected(this.props.question.id, this.state.value)
+            this.props.onSelected(this.props.question.id, value)
         }
     }
 
