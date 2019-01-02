@@ -1,0 +1,50 @@
+@import "../../assets/styles/base";
+
+#mle-comments {
+  margin: 30px 0px;
+
+  .row.mle-comments-header-row {
+    border-bottom: 1px solid $sba-grey-one;
+  }
+
+  .comment-count {
+    font-weight: normal;
+  }
+
+  #discussion-input {
+    font-style: italic;
+  }
+
+  .post_buttons {
+    float: right;
+    padding-top: 12px;
+  }
+
+  img {
+    border-radius: 25px;
+  }
+
+  .row.user {
+    padding-bottom: 0px;
+
+    .username {
+      font-weight: bold;
+      padding-left: 0px;
+    }
+
+    .post-date {
+      padding-left: 8px;
+      font-weight: normal;
+      font-style: italic;
+    }
+  }
+
+  .row.user-title {
+    padding: 4px 0px;
+  }
+
+  .reply-link {
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+}
