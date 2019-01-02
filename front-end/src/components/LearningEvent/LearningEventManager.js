@@ -3,6 +3,7 @@ import mime from "mime-types";
 import LearningEventInfoCard from "./LearningEventInfoCard";
 import LearningEventPage from "./LearningEventPage";
 import LearningEventVideo from "./LearningEventVideo";
+import LearningEventPodcast from "./LearningEventPodcast";
 
 export default class LearningEventManager extends Component {
   getMimeType(url) {
@@ -20,6 +21,8 @@ export default class LearningEventManager extends Component {
     switch (fileType) {
       case 'video':
         return <LearningEventVideo url={url} event={event} />;
+      case 'audio':
+        return <LearningEventPodcast url={url} event={event}/>;
       default:
         return this.infoCard(event)
     }
@@ -32,6 +35,8 @@ export default class LearningEventManager extends Component {
     switch(mimeType) {
       case 'video':
         return <LearningEventVideo url={url} event={event}/>;
+      case 'audio':
+        return <LearningEventPodcast url={url} event={event}/>;
       default:
         return this.infoCard(event);
     }
