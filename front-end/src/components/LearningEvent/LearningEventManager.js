@@ -5,6 +5,14 @@ import LearningEventPage from "./LearningEventPage";
 import LearningEventVideo from "./LearningEventVideo";
 
 export default class LearningEventManager extends Component {
+  getMimeType(url) {
+    if ( mime.lookup(url) ) {
+      return mime.lookup(url).split("/")[0];
+    } else {
+      return "NONE";
+    }
+  }
+
   eventFileManager(event) {
     const fileType = event.eventContent.mime_class;
     const url = event.eventContent.url;
@@ -19,12 +27,7 @@ export default class LearningEventManager extends Component {
 
   eventURLManager(event) {
     const url = event.external_url;
-    let mimeType;
-    if ( mime.lookup(url) ) {
-      mimeType = mime.lookup(url).split("/")[0];
-    } else {
-      mimeType = "NONE"
-    }
+    const mimeType = this.getMimeType(url);
 
     switch(mimeType) {
       case 'video':
