@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
 import SignUpModal from '../SignUpForm/SignUpModal';
 import LoginModal from "../LoginForm/LoginModal";
+import { connect } from "react-redux";
 
-class LoggedOutView extends Component {
-  render() {
-    return( 
-      <div>
-        <LoginModal open={false}/>
-        <SignUpModal open={false}/>
-      </div>
-    )
-  }
-}
-
-export default class Navbar extends Component {
+export class Navbar extends Component {
   state = {}
 
   render() {
@@ -41,10 +31,20 @@ export default class Navbar extends Component {
           </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item>
-              <LoggedOutView />
+              <div>
+                <LoginModal open={this.props.displayLogin}/>
+                <SignUpModal open={this.props.displayRegister}/>
+              </div>
             </Menu.Item>
           </Menu.Menu>
         </Menu>
     )
   }
 };
+
+export default connect((store) => {
+  return {
+    displayLogin: store.navbar.showLogin,
+    displayRegister: store.navbar.showRegister
+  }
+})(withRouter(Navbar));

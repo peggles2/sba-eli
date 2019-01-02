@@ -9,6 +9,7 @@ import LearningPath from "../LearningPath/LearningPath";
 import LearningPaths from "../LearningPath/LearningPaths";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SignUpModal from '../SignUpForm/SignUpModal';
+import LoginModal from '../LoginForm/LoginModal';
 import SearchPage from "../Search/SearchPage";
 
 const NavigationDisplay = () => {
@@ -47,6 +48,7 @@ const NavigationDisplay = () => {
             path="/search"
             component={SearchPage} />
         <Route path="/register" component={() => (<SignUpModal open="true" />)}/>
+        <Route path="/login" component={() => (<LoginModal open="true" />)}/>
 
         <Route component={Error} />
       </Switch>

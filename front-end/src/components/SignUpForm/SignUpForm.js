@@ -1,6 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import {Button, Input, Container, Form, Radio} from 'semantic-ui-react';
+import { toggleLogin, toggleRegister } from '../../actions/navbarActions';
+import { registerUser } from '../../actions/registrationActions';
+import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 class SignUpForm extends React.Component {
   state = {
@@ -44,9 +47,7 @@ class SignUpForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const url = process.env.REACT_APP_SERVICE_HOST + "/sign_up"
-
-    axios.post(url, {
+    this.props.dispatch(registerUser({
       first_name: this.state.firstName.trim(),
       last_name: this.state.lastName.trim(),
       middle_name: this.state.middleName.trim(),
@@ -54,11 +55,12 @@ class SignUpForm extends React.Component {
       email: this.state.email.trim(),
       password: this.state.password.trim(),
       in_business: this.state.inBusiness
-    }).then(() => {
-      console.log('Success!');
-    }).catch((e) => {
-      console.log('Failure!', e);
-    });
+    }));
+  }
+
+  showLogin = () => {
+    this.props.dispatch(toggleRegister(false));
+    this.props.dispatch(toggleLogin(true));
   }
 
   render() {
@@ -70,32 +72,38 @@ class SignUpForm extends React.Component {
           <Form.Field required>
             <label>First Name</label>
             <input placeholder="First Name"
+                   value={this.props.firstName}
                    onChange={this.handleFirstNameChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field required>
             <label>Last Name</label>
             <input placeholder="Last Name"
+                   value={this.props.lastName}
                    onChange={this.handleLastNameChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field>
             <label>Middle Name</label>
             <input placeholder="Middle Name"
+                   value={this.props.middleName}
                    onChange={this.handleMiddleNameChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field>
             <label>Zip Code</label>
             <input placeholder="Zip Code"
+                   value={this.props.zipCode}
                    onChange={this.handleZipCodeChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field required>
             <label>Email Address</label>
             <input placeholder="Email"
+                   value={this.props.email}
                    onChange={this.handleEmailChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field required>
             <label>Password</label>
             <input type="password"
                    placeholder="Password"
+                   value={this.props.password}
                    onChange={this.handlePasswordChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Group grouped>
@@ -124,4 +132,14 @@ class SignUpForm extends React.Component {
   }
 }
 
-export default SignUpForm;
+export default connect((store) => {
+  return {
+    firstName: store.registration.firstName,
+    lastName: store.registration.lastName,
+    middleName: store.registration.middleName,
+    zipCode: store.registration.zipCode,
+    email: store.registration.email,
+    password: store.registration.password,
+    inBusiness: store.registration.inBusiness
+  }
+})(withRouter(SignUpForm));

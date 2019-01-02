@@ -27,9 +27,6 @@ class SignUpModal extends React.Component {
       <Modal.Content>
         <SignUpForm/>
       </Modal.Content>
-      <Modal.Actions>
-        <Button>Got it</Button>
-      </Modal.Actions>
     </Modal>
   }
 }
