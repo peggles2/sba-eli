@@ -124,6 +124,7 @@ class SignUpForm extends React.Component {
               onChange={this.handleInBusiness.bind(this)}
             />
           </Form.Group>
+          Already have an account? <a onClick={() => this.props.dispatch(toggleLogin(true))}>Log in</a>
           <Button type="submit">Submit</Button>
         </Form>
       </Container>

@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
-import SignUpModal from '../SignUpForm/SignUpModal';
-import LoginModal from "../LoginForm/LoginModal";
+import RegistrationModal from '../RegistrationModal/RegistrationModal';
+import { toggleRegister } from '../../actions/navbarActions';
+
 import { connect } from "react-redux";
 
 export class Navbar extends Component {
   state = {}
 
   render() {
-
     return(
         <Menu className="navbar" fluid>
           <Menu.Item header href={`/`}>Dashboard</Menu.Item>
@@ -32,8 +32,9 @@ export class Navbar extends Component {
           <Menu.Menu position='right'>
             <Menu.Item>
               <div>
-                <LoginModal open={this.props.displayLogin}/>
-                <SignUpModal open={this.props.displayRegister}/>
+                <Button onClick={() => this.props.dispatch(toggleRegister(true))}>Register</Button>
+                <Button>Login</Button>
+                <RegistrationModal type={this.props.modalType} open={this.props.open}/>
               </div>
             </Menu.Item>
           </Menu.Menu>
@@ -44,7 +45,7 @@ export class Navbar extends Component {
 
 export default connect((store) => {
   return {
-    displayLogin: store.navbar.showLogin,
-    displayRegister: store.navbar.showRegister
+    modalType: store.navbar.modalType,
+    open: store.navbar.open
   }
 })(withRouter(Navbar));
