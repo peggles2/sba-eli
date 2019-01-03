@@ -27,7 +27,6 @@ class RegistrationModal extends React.Component {
   getModalContent(type) {
     switch(type) {
       case types.signup:
-        console.log('rendering signup form');
         return <SignUpForm/>;
         break;
       case types.login:

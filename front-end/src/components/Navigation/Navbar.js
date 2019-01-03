@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
 import RegistrationModal from '../RegistrationModal/RegistrationModal';
-import { toggleRegister } from '../../actions/navbarActions';
+import { toggleRegister, toggleLogin } from '../../actions/navbarActions';
 
 import { connect } from "react-redux";
 
@@ -33,7 +33,7 @@ export class Navbar extends Component {
             <Menu.Item>
               <div>
                 <Button onClick={() => this.props.dispatch(toggleRegister(true))}>Register</Button>
-                <Button>Login</Button>
+                <Button onClick={() => this.props.dispatch(toggleLogin(true))}>Login</Button>
                 <RegistrationModal type={this.props.modalType} open={this.props.open}/>
               </div>
             </Menu.Item>
