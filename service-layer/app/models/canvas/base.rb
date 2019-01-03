@@ -20,6 +20,10 @@ module Canvas
           },
         }
       end
+
+      def masquerade_current_user(uri)
+        Current.user ? "#{uri}?as_user_id=#{Current.user&.id}" : uri
+      end
     end
   end
 end
