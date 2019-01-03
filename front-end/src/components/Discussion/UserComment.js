@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import { Link } from "react-router-dom";
 import {Grid, Image} from "semantic-ui-react";
 import Discussion from "./Discussion";
 
@@ -8,7 +7,7 @@ export default class UserComment extends Component {
   replyLink(parentContentType, parentId, replies) {
     if (parentContentType !== "comment" && replies && replies.replies) {
       return <Grid.Row>
-        <Link className="reply-link" to={`#/reply?postId=${parentId}`}>Reply</Link>
+        <a className="reply-link" href={`#/reply?postId=${parentId}`}>Reply</a>
         <Discussion replies={replies}/>
       </Grid.Row>
     }
