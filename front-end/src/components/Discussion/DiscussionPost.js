@@ -41,7 +41,7 @@ export default class DiscussionPost extends Component {
         </Grid.Column>
       </Grid.Row>
     }
-    return ''
+    return null
   }
 
   render() {

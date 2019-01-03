@@ -11,7 +11,7 @@ export default class LearningEventDiscussion extends Component {
     if (count > 0) {
       return <span className="comment-count">({count})</span>
     }
-    return ""
+    return null
   }
 
   render() {
