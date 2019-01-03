@@ -64,7 +64,7 @@ export default class LearningEventPodcast extends Component {
 
     return (
       <div>
-        <div className="podcast-wrapper" style={{display: "none"}}>
+        <div className="podcast-wrapper">
           <ReactPlayer
             ref={this.ref}
             url={url}
@@ -83,11 +83,12 @@ export default class LearningEventPodcast extends Component {
         <div className="podcast-controls">
           <Grid centered>
             <Grid.Column width={1}>
-              <Button 
-                circular 
+              <Button
+                circular
+                basic
                 icon={playing ? 'pause' : 'play'}
-                size="massive" 
-                onClick={this.playPause} 
+                size="massive"
+                onClick={this.playPause}
                 aria-label={playing ? 'pause' : 'play' }
               />
             </Grid.Column>
@@ -96,7 +97,9 @@ export default class LearningEventPodcast extends Component {
                 <Header as='h2'> {this.props.event.title}</Header>
               </Grid.Row>
               <Grid.Row>
-                <b><Duration seconds={duration * played} /></b>
+                <span className="podcast-duration">
+                  <b><Duration seconds={duration * played} /></b>
+                </span>
                 <input
                   type='range' min={0} max={1} step='any'
                   value={played}
@@ -104,10 +107,12 @@ export default class LearningEventPodcast extends Component {
                   onChange={this.onSeekChange}
                   onMouseUp={this.onSeekMouseUp}
                   className="slider"
+                  aria-label="seek"
                 />
-                <span style={{paddingLeft: "10px", paddingRight: "10px"}}><Duration seconds={duration} /></span>
+                <span className="podcast-duration"><Duration seconds={duration} /></span>
                 <Button
-                  circular 
+                  circular
+                  basic
                   icon={muted ? 'volume off' : 'volume up'}
                   onClick={this.toggleMuted}
                   aria-label={muted ? "mute" : "unmute"}
@@ -116,6 +121,7 @@ export default class LearningEventPodcast extends Component {
                   value={volume}
                   onChange={this.setVolume}
                   className="volumeSlider"
+                  aria-label="volume slider"
                 />
               </Grid.Row>
             </Grid.Column>
