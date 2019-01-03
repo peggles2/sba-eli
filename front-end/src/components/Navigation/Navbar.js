@@ -4,6 +4,7 @@ import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
 import RegistrationModal from '../RegistrationModal/RegistrationModal';
 import { toggleRegister, toggleLogin } from '../../actions/navbarActions';
+import "./Navbar.scss"
 
 import { connect } from "react-redux";
 
@@ -13,7 +14,7 @@ export class Navbar extends Component {
   render() {
     return(
         <Menu className="navbar" fluid>
-          <Menu.Item header href={`/`}>Dashboard</Menu.Item>
+          <Menu.Item header href={`/`}><img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/></Menu.Item>
           <Dropdown text='Learning Paths' item>
             <Dropdown.Menu>
               <NavigationLearningPath />

@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import ReactPlayer from "react-player";
 import { Button, Icon } from "semantic-ui-react";
 import { findDOMNode } from "react-dom";
-import axios from "axios";
 import Duration from "./LearningEventVideo/Duration";
 import screenfull from "screenfull";
 import "./Slider.scss"
@@ -10,8 +9,7 @@ import "./PlayerControls.scss";
 
 export default class LearningEventVideo extends Component {
   state = {
-    // url: "http://movietrailers.apple.com/movies/marvel/avengers-endgame/avengers-endgame-trailer-1_a720p.m4v",
-    url: this.props.event.eventContent.url,
+    url: this.props.url,
     playing: false,
     volume: 0.8,
     muted: false,
@@ -23,17 +21,6 @@ export default class LearningEventVideo extends Component {
     loop: false,
     height: '100%',
     width: '100%'
-  }
-
-  fetchVideo() {
-    const url = this.props.event.eventContent.url;
-
-    axios.get(url)
-      .then(res => {
-        const vidUrl = res.data;
-        this.setState({ url: vidUrl });
-        console.log(this.state.url);
-      });
   }
 
   playPause = () => {
@@ -53,12 +40,12 @@ export default class LearningEventVideo extends Component {
   }
 
   onSeekChange = (e) => {
-    //this.setState({ played: parseFloat(e.target.value) })
+    this.setState({ played: parseFloat(e.target.value) })
   }
 
   onSeekMouseUp = (e) => {
     this.setState({ seeking: false })
-    // this.player.seekTo(parseFloat(e.target.value))
+    this.player.seekTo(parseFloat(e.target.value))
   }
 
   onProgress = (state) => {
@@ -80,10 +67,10 @@ export default class LearningEventVideo extends Component {
   }
 
   render() {
-    const { url, playing, volume, muted,  pip, played, duration, playbackRate, loop, height, width } = this.state    
+    const { url, playing, volume, muted,  pip, played, duration, playbackRate, loop, height, width } = this.state
 
     return(
-      <div>        
+      <div>
         <div className="player-wrapper">
           <ReactPlayer
             ref={this.ref}

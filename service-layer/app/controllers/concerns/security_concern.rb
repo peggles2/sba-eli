@@ -15,23 +15,23 @@ module SecurityConcern
   end
 
   def session_cookie
-    cookies.encrypted[SESSION_KEY]
+    session[SESSION_KEY]
   end
 
   def sign_in(user)
     Current.user = user
-    cookies.encrypted[SESSION_KEY] = user.id
+    session[SESSION_KEY] = user.id
   end
 
   def sign_out
-    cookies.delete SESSION_KEY
+    session[SESSION_KEY] = nil
   end
 
   def valid_session?
-    (head 403 && return) unless Current.user
+    return_forbidden unless Current.user
   end
 
   def return_forbidden
-    head 403 && return
+    render json: { error: "Not Authorized" }, status: :unauthorized
   end
 end

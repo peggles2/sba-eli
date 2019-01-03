@@ -6,6 +6,7 @@
     "amazon-cognito-identity-js": "^3.0.3",
     "axios": "^0.18.0",
     "dotenv": "^6.1.0",
+    "mime-types": "^2.1.21",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",

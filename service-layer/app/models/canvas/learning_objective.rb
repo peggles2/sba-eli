@@ -6,11 +6,13 @@ module Canvas
     base_uri ENV["CANVAS_HOST"] + "/api/v1"
 
     def self.all(course_id)
-      JSON.parse get("/courses/#{course_id}/modules", base_options).body
+      uri = masquerade_current_user("/courses/#{course_id}/modules")
+      JSON.parse get(uri, base_options).body
     end
 
     def self.find(course_id, id)
-      JSON.parse get("/courses/#{course_id}/modules/#{id}", base_options).body
+      uri = masquerade_current_user("/courses/#{course_id}/modules/#{id}")
+      JSON.parse get(uri, base_options).body
     end
 
     def self.create(course_id, le_params)
