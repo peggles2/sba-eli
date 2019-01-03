@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import {Grid} from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import {Grid, Image} from "semantic-ui-react";
 import Discussion from "./Discussion";
 
 export default class UserComment extends Component {
@@ -26,7 +26,7 @@ export default class UserComment extends Component {
 
     return <Grid.Row className='user-comment' width={16}>
       <Grid.Column width={1}>
-        <img className='user-image' src={this.userImage(reply.user_img)} alt={reply.user_name}/>
+        <Image className='user-image' src={this.userImage(reply.user_img)} alt={reply.user_name}/>
       </Grid.Column>
       <Grid.Column width={14} className='discussion-post'>
         <Grid>
