@@ -85,7 +85,7 @@ export default class LearningEventDiscussion extends Component {
     }
 
     return (
-        <Grid className="mle-comments" id="mle-comments">
+        <Grid id="mle-comments">
           <Grid.Row stretched centered columns={15} className="mle-comments-header-row">
             <Grid.Column width={15}>
               <Header as='h3'
