@@ -1,4 +1,13 @@
 const defaultValue = {
+  userData: {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    zipCode: '',
+    email: '',
+    inBusiness: '',
+    password: ''
+  }
 };
 
 export default function reducer(state=defaultValue, action) {

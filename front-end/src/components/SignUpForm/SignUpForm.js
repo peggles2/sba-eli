@@ -7,14 +7,13 @@ import { withRouter } from 'react-router-dom';
 
 class SignUpForm extends React.Component {
   state = {
-    firstName: '',
-    lastName: '',
-    middleName: '',
-    zipCode: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    inBusiness: null
+    firstName: this.props.firstName,
+    lastName: this.props.lastName,
+    middleName: this.props.middleName,
+    zipCode: this.props.zipCode,
+    email: this.props.email,
+    password: this.props.password,
+    inBusiness: this.props.inBusiness
   };
 
   handleFirstNameChange = (e) => {
@@ -72,38 +71,38 @@ class SignUpForm extends React.Component {
           <Form.Field required>
             <label>First Name</label>
             <input placeholder="First Name"
-                   value={this.props.firstName}
+                   value={this.state.firstName}
                    onChange={this.handleFirstNameChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field required>
             <label>Last Name</label>
             <input placeholder="Last Name"
-                   value={this.props.lastName}
+                   value={this.state.lastName}
                    onChange={this.handleLastNameChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field>
             <label>Middle Name</label>
             <input placeholder="Middle Name"
-                   value={this.props.middleName}
+                   value={this.state.middleName}
                    onChange={this.handleMiddleNameChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field>
             <label>Zip Code</label>
             <input placeholder="Zip Code"
-                   value={this.props.zipCode}
+                   value={this.state.zipCode}
                    onChange={this.handleZipCodeChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field required>
             <label>Email Address</label>
             <input placeholder="Email"
-                   value={this.props.email}
+                   value={this.state.email}
                    onChange={this.handleEmailChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field required>
             <label>Password</label>
             <input type="password"
                    placeholder="Password"
-                   value={this.props.password}
+                   value={this.state.password}
                    onChange={this.handlePasswordChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Group grouped>
@@ -134,12 +133,12 @@ class SignUpForm extends React.Component {
 
 export default connect((store) => {
   return {
-    firstName: store.registration.firstName,
-    lastName: store.registration.lastName,
-    middleName: store.registration.middleName,
-    zipCode: store.registration.zipCode,
-    email: store.registration.email,
-    password: store.registration.password,
-    inBusiness: store.registration.inBusiness
+    firstName: store.registration.userData.firstName,
+    lastName: store.registration.userData.lastName,
+    middleName: store.registration.userData.middleName,
+    zipCode: store.registration.userData.zipCode,
+    email: store.registration.userData.email,
+    password: store.registration.userData.password,
+    inBusiness: store.registration.userData.inBusiness
   }
 })(withRouter(SignUpForm));
