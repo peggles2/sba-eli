@@ -27,5 +27,11 @@ module Canvas
     def self.destroy(course_id, module_id, id)
       JSON.parse delete("/courses/#{course_id}/modules/#{module_id}/items/#{id}", base_options).body
     end
+
+    def self.done(course_id, module_id, id)
+      uri = "/courses/#{course_id}/modules/#{module_id}/"\
+            "items/#{id}/done?as_user_id=#{Current.user&.id}"
+      JSON.parse put(uri, base_options).body
+    end
   end
 end
