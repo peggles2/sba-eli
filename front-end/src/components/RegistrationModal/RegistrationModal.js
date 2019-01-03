@@ -13,7 +13,6 @@ class RegistrationModal extends React.Component {
   }
 
   render() {
-    console.log('registration modal render', this);
     return <Modal open={this.props.open} 
                   closeOnDimmerClick={false} 
                   closeIcon 
