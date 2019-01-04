@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://ec2-54-160-60-48.compute-1.amazonaws.com/api/v1/accounts/1/users/
+    body:
+      encoding: UTF-8
+      string: user[name]=John%20Jane&user[sortable_name]=Jane%2C%20John&user[short_name]=&user[email]=jack123%40jill.com&pseudonym[unique_id]=jack123%40jill.com
+    headers:
+      Authorization:
+      - Bearer jrTjDJw8gGwZVssnywOi4znd4h7nJwbyG2iGiaMsOuQtmiJRGz936k8wO1TckJ9K
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 03 Jan 2019 20:59:28 GMT
+      Server:
+      - Apache/2.4.18 (Ubuntu)
+      X-Request-Cost:
+      - '0.10609233800000342'
+      X-Session-Id:
+      - 602b9483dc961323fc8eaff0f60c37a4
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Context-Id:
+      - e17ccab7-7310-4139-9dab-0386fe02fefb
+      X-Rate-Limit-Remaining:
+      - '600.0'
+      X-Canvas-Meta:
+      - at=10000000000004;dk=10000000000001;o=users;n=create;t=Account;i=1;b=977768;m=977768;u=0.09;y=0.00;d=0.02;
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Canvas-User-Id:
+      - '10000000000001'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Runtime:
+      - '0.113326'
+      X-Content-Type-Options:
+      - nosniff
+      X-Powered-By:
+      - Phusion Passenger 5.0.27
+      Set-Cookie:
+      - _csrf_token=zV66BuJUW9yl9hdUs61QgKX%2Fnob4DNzwncJjA6Dx4g6OFIlEySMOmZGCTnvB72bh7a7Xw4o%2FkLmlqQxUzqa4Xg%3D%3D;
+        path=/
+      - _normandy_session=BRVFee0AAU3kCzXkxdiZgA.Pn572VYf-Xug5kIqYJcxXhTERYqXjXNWICErtv5Y4NtsnkbGA9fkH9ec136wLUs-YDBRqWM-Gc_VaBB-OAkkNTl8bfAC2gb58GsyBSMeL1jFEbmIk-gSajqIhkFSNUvk.6peUYFvP4hlP3PVuObgwqY2zzRY.XC53sA;
+        path=/; HttpOnly
+      - log_session_id=602b9483dc961323fc8eaff0f60c37a4; path=/
+      Etag:
+      - W/"95fffe3d5a67e278f52f923ac466bdda"
+      Status:
+      - 200 OK
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '{"id":30,"name":"John Jane","created_at":"2019-01-03T13:59:28-07:00","sortable_name":"Jane,
+        John","short_name":"John Jane","sis_user_id":null,"integration_id":null,"sis_import_id":null,"login_id":"jack123@jill.com","locale":null}'
+    http_version: 
+  recorded_at: Thu, 03 Jan 2019 20:59:30 GMT
+recorded_with: VCR 4.0.0
