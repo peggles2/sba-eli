@@ -1,21 +1,24 @@
-import React from "react";
-import "../../App.css";
+import React, {Component} from "react";
 import LearningPaths from "../LearningPath/LearningPaths";
 import { Divider } from "semantic-ui-react";
 import DashboardSplash from "./DashboardSplash";
+import DashboardCTA from "./DashboardCTA";
 import MetaTags from "../SEO/MetaTags";
 
-const Dashboard = () => {
-  return (
-    <div>
-      <MetaTags metaTitle="SBA Dashboard"
-                metaDescription="Description for the dashboard"
-                canonicalUrl="https://sba.gov/eli"/>
-      <DashboardSplash />
-      <Divider hidden />
-      <LearningPaths />
-    </div>
-  );
-};
+import "./Dashboard.scss";
 
-export default Dashboard;
+export default class Dashboard extends Component {
+  render() {
+    return (
+      <div className="dashboard">
+        <MetaTags metaTitle="SBA Dashboard"
+                  metaDescription="Description for the dashboard"
+                  canonicalUrl="https://sba.gov/eli"/>
+        <DashboardSplash />
+        <DashboardCTA />
+        <Divider hidden />
+        <LearningPaths />
+      </div>
+    );
+  }
+};
