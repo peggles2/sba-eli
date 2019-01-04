@@ -23,6 +23,12 @@ export default function reducer(state={
         open: true,
         modalType: RegistrationModal.types.success
       }
+    case 'LOGIN_FULFILLED':
+      return {
+        ...state,
+        open: false,
+        modalType: RegistrationModal.types.login
+      }
     default:
       break;
   };

@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import {Button, Input, Container, Form} from 'semantic-ui-react';
+import { loginUser } from '../../actions/registrationActions';
+import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 class LoginForm extends React.Component {
   state = {
@@ -18,16 +21,11 @@ class LoginForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const url = process.env.REACT_APP_SERVICE_HOST + "/session"
 
-    axios.post(url, {
-      email: this.state.email.trim(),
-      password: this.state.password.trim()
-    }).then(() => {
-      console.log('Success!');
-    }).catch((e) => {
-      console.log('Failure!', e);
-    });
+    this.props.dispatch(loginUser({
+      email: this.state.email,
+      password: this.state.password
+    }));
   }
 
   render() {
@@ -53,4 +51,9 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+export default connect((store) => {
+  return {
+    email: store.registration.userData.email,
+    password: store.registration.userData.password
+  }
+})(withRouter(LoginForm));

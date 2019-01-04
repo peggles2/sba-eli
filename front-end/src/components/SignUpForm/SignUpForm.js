@@ -46,6 +46,7 @@ class SignUpForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    
     this.props.dispatch(registerUser({
       first_name: this.state.firstName.trim(),
       last_name: this.state.lastName.trim(),
