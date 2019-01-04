@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./LearningEventPageContent.scss";
 
 export default class LearningEventPage extends Component {
   render() {
