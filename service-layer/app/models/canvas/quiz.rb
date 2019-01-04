@@ -72,7 +72,7 @@ module Canvas
       submission = {}
 
       print submissions
-      if(!submissions.nil? and (submissions["quiz_submissions"].empty? or submissions["quiz_submissions"].length > 1 or submission_id["quiz_submissions"].first["finished_at"].nil?))
+      if(!submissions.nil? and (submissions["quiz_submissions"].empty? or submissions["quiz_submissions"].length > 1 or !submissions["quiz_submissions"].first["finished_at"].nil?))
         submissions = JSON.parse post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options).body
       end
 
