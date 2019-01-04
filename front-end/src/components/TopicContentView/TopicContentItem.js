@@ -27,7 +27,7 @@ export default class TopicContentItem extends Component {
         <Item.Group className={"topic-content-item-group"}>
           <Item className="topic-content-item">
             <Item.Image
-              src="https://via.placeholder.com/400"
+              src="/Image_Placeholder.png"
               className={"computer large screen widescreen only"}
             />
 
