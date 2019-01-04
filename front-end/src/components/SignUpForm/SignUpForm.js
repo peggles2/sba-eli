@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Input, Container, Form, Radio} from 'semantic-ui-react';
+import {Button, Container, Form} from 'semantic-ui-react';
 import { toggleLogin, toggleRegister } from '../../actions/navbarActions';
 import { registerUser } from '../../actions/registrationActions';
 import { connect } from "react-redux";
@@ -124,7 +124,7 @@ class SignUpForm extends React.Component {
               onChange={this.handleInBusiness.bind(this)}
             />
           </Form.Group>
-          Already have an account? <a onClick={() => this.props.dispatch(toggleLogin(true))}>Log in</a>
+          Already have an account? <a href="/" onClick={() => this.props.dispatch(toggleLogin(true))}>Log in</a>
           <Button type="submit">Submit</Button>
         </Form>
       </Container>

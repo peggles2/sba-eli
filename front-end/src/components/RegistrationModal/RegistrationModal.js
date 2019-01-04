@@ -1,7 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
-import {Modal, Button} from 'semantic-ui-react';
+import {Modal} from 'semantic-ui-react';
 import LoginForm from '../LoginForm/LoginForm';
 import SignUpForm from '../SignUpForm/SignUpForm';
 
@@ -27,11 +26,11 @@ class RegistrationModal extends React.Component {
     switch(type) {
       case types.signup:
         return <SignUpForm/>;
-        break;
       case types.login:
         return <LoginForm/>;
-        break;
       case types.success:
+        break;
+      default:
         break;
     }
   }

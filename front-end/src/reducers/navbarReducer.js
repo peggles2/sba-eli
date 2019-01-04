@@ -1,4 +1,3 @@
-import React from 'react';
 import RegistrationModal from '../components/RegistrationModal/RegistrationModal';
 
 export default function reducer(state={

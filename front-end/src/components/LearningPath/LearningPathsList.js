@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { Card } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import LearningPathsItem from './LearningPathsItem';
