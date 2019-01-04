@@ -25,7 +25,12 @@ export default class UserComment extends Component {
 
     return <Grid.Row className='user-comment' width={16}>
       <Grid.Column width={1}>
-        <Image className='user-image' src={this.userImage(reply.user_img)} alt={reply.user_name}/>
+        <Image className='user-image' 
+               size='tiny' 
+               circular  
+               verticalAlign='middle' 
+               src={this.userImage(reply.user_img)} 
+               alt={reply.user_name}/>
       </Grid.Column>
       <Grid.Column width={14} className='discussion-post'>
         <Grid>
