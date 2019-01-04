@@ -21,7 +21,7 @@ class SignUpsController < ApplicationController
       :email,
       :password,
       :zip_code,
-      :in_business
+      :in_business,
     )
   end
 end

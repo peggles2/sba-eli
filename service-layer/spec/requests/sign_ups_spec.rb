@@ -42,7 +42,7 @@ describe "SignUps" do
           first_name: first_name,
           last_name: nil, # required field
           email: email,
-          password: password
+          password: password,
         }
         post uri, params: params
         expect(response).to have_http_status(:unprocessable_entity)
