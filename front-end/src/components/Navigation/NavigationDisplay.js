@@ -19,10 +19,6 @@ const NavigationDisplay = () => {
             component={Dashboard} />
         <Route
             exact
-            path="/signup"
-            component={SignUpForm} />
-        <Route
-            exact
             path="/learning_paths"
             component={LearningPaths} />
         <Route
@@ -49,6 +45,7 @@ const NavigationDisplay = () => {
             exact
             path="/search"
             component={SearchPage} />
+
         <Route component={Error} />
       </Switch>
   );

@@ -6,6 +6,7 @@ import LearningEventFooter from "./LearningEventFooter";
 import { Container, Divider } from "semantic-ui-react";
 import "./LearningEvent.scss";
 import MetaTags from "../SEO/MetaTags";
+import LearningEventDiscussion from "../Discussion/LearningEventDiscussion";
 
 export default class LearningEvent extends Component {
   constructor(props) {
@@ -72,6 +73,7 @@ export default class LearningEvent extends Component {
     const event = this.state.learningEvent;
     const topicTitle = this.props.topicTitle;
     return (
+      <div>
       <Container className="learning-event-container">
         <MetaTags
           metaTitle={event.title}
@@ -87,6 +89,8 @@ export default class LearningEvent extends Component {
           event={this.state.learningEvent}
         />
       </Container>
+      <LearningEventDiscussion event={event} />
+      </div>
     );
   }
 }

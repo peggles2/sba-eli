@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
+import RegistrationModal from '../RegistrationModal/RegistrationModal';
+import { toggleRegister, toggleLogin } from '../../actions/navbarActions';
 import "./Navbar.scss"
 
-const LoggedOutView = () => {
-  return(
-    <div>
-      <Link to={`#login`}>
-        <Button primary>Login</Button>
-      </Link>
-      <Link to={`/signup`}>
-        <Button secondary >Register</Button>
-      </Link>
-    </div>
-  )
-}
+import { connect } from "react-redux";
 
-export default class Navbar extends Component {
+export class Navbar extends Component {
   state = {}
 
   render() {
     return(
         <Menu className="navbar" fluid>
-          <Menu.Item header href={`/`}><img class='logo' src={`/Ascent_Logo_Stacked.png`}/></Menu.Item>
+          <Menu.Item header href={`/`}><img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/></Menu.Item>
           <Dropdown text='Learning Paths' item>
             <Dropdown.Menu>
               <NavigationLearningPath />
@@ -41,10 +32,21 @@ export default class Navbar extends Component {
           </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item>
-              <LoggedOutView />
+              <div>
+                <Button onClick={() => this.props.dispatch(toggleRegister(true))}>Register</Button>
+                <Button onClick={() => this.props.dispatch(toggleLogin(true))}>Login</Button>
+                <RegistrationModal type={this.props.modalType} open={this.props.open}/>
+              </div>
             </Menu.Item>
           </Menu.Menu>
         </Menu>
     )
   }
 };
+
+export default connect((store) => {
+  return {
+    modalType: store.navbar.modalType,
+    open: store.navbar.open
+  }
+})(withRouter(Navbar));

@@ -34,11 +34,6 @@ describe "UserCreationService" do
     expect(subject).to_not be_valid
   end
 
-  it "is invalid without a password_confirmation" do
-    subject.password_confirmation = nil
-    expect(subject).to_not be_valid
-  end
-
   it "is invalid if password doesn't match password_confirmation" do
     subject.password_confirmation = "123ChangeME"
     expect(subject).to_not be_valid

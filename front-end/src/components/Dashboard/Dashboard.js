@@ -5,7 +5,7 @@ import { Divider } from "semantic-ui-react";
 import DashboardSplash from "./DashboardSplash";
 import MetaTags from "../SEO/MetaTags";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   return (
     <div>
       <MetaTags metaTitle="SBA Dashboard"

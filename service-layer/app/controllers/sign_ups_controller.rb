@@ -1,6 +1,7 @@
 class SignUpsController < ApplicationController
   def create
     params.delete(:sign_up)
+    params.delete(:format)
     new_account = UserCreationService.new(model_params)
 
     if new_account.create
@@ -15,10 +16,12 @@ class SignUpsController < ApplicationController
   def model_params
     params.permit(
       :first_name,
+      :middle_name,
       :last_name,
       :email,
       :password,
-      :password_confirmation,
+      :zip_code,
+      :in_business,
     )
   end
 end
