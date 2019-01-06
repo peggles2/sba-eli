@@ -12,6 +12,7 @@ export class LearningEventQuiz extends Component {
     super(props);
 
     this.state = {
+      contentId: null,
       answers: {
       }
     };
@@ -21,16 +22,18 @@ export class LearningEventQuiz extends Component {
     this.viewResults = this.viewResults.bind(this)
   }
 
-  componentDidMount() {
-    this.props.dispatch(getLearningPathQuizzes(this.props.courseId))
-    if(this.props.event) {
+  componentWillReceiveProps(newProps) {
+    let newContentId = newProps && newProps.event ? newProps.event.content_id : null
+    
+    if(this.state.contentId !== newContentId){
+      this.setState({contentId: newContentId})
+      this.props.dispatch(getQuiz(this.props.courseId, newContentId))
       this.props.dispatch(getQuizSubmissions(this.props.courseId, this.props.event.content_id))
     }
-  }
 
-  componentWillReceiveProps(newProps) {
-    if(newProps.submissions.length && ! this.props.submissions.length)
-      this.beginQuiz()
+    if(newProps.submissions.length && ! this.props.submissions.length){
+      //this.beginQuiz()
+    }
   }
 
   recordAnswer(id, answer){
@@ -40,7 +43,7 @@ export class LearningEventQuiz extends Component {
   }
 
   beginQuiz(){
-    this.props.dispatch(getQuiz(this.props.courseId, this.props.event.content_id));
+    // this.props.dispatch(getQuiz(this.props.courseId, this.props.event.content_id));
   }
 
   viewResults(){
@@ -59,7 +62,7 @@ export class LearningEventQuiz extends Component {
     }
 
     this.props.dispatch(submitQuiz(this.props.courseId, 
-      this.props.event.content_id,
+      this.state.contentId,
       submission))
   }
 

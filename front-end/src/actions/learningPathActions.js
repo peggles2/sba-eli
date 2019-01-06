@@ -24,6 +24,7 @@ export function getQuiz(course_id, content_id) {
 }
 
 export function getQuizSubmissions(course_id, content_id) {
+  console.log(course_id, content_id)
   return {
     type: 'GET_LEARNING_PATH_QUIZ_SUBMISSIONS',
     payload: axios.get(baseUrl + `/learning_paths/${course_id}/quizzes/${content_id}/submissions`)

@@ -12,11 +12,11 @@ export class MultipleAnswerQuestion extends Component {
         let regex = new RegExp(q.answers.map(a=> '\\[' + a.blank_id + '\\]').join('|'))
         
         let splits = 
-            q.question_text.split(regex).map(t => <p className="inline-form" dangerouslySetInnerHTML={{
+            q.question_text.split(regex).map((t, i) => <p key={i} className="inline-form" dangerouslySetInnerHTML={{
                 __html: t
             }} />)
 
-        return splits.reduce((p,c) => [p, <div className="inline-form" style={{margin: "0 .5em"}}>
+        return splits.reduce((p,c) => [p, <div key={Math.random()} className="inline-form" style={{margin: "0 .5em"}}>
                 <Input icon='pencil alternate' iconPosition='left' size="mini" onChange={this.handleChange}/>
             </div>, c])
     }
@@ -72,8 +72,8 @@ export class MultipleChoiceQuestion extends Component {
             __html: question.question_text
             }} />
             <Form>
-                { question.answers.map(a =>
-                <Form.Field>
+                { question.answers.map((a, id) =>
+                <Form.Field key={id} >
                     <Radio
                         label={a.text}
                         name='radioGroup'
