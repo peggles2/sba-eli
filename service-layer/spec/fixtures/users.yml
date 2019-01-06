@@ -1,0 +1,460 @@
+---
+user_10:
+  id: 10
+  name: John Foster
+  sortable_name: Foster, John
+  workflow_state: registered
+  time_zone: Mountain Time (US & Canada)
+  uuid: zFUAQkUgtdIAbhojGVYbhPgz6AcbNxoy9A0mFrhP
+  created_at: '2018-11-08 12:22:34.352895'
+  updated_at: '2018-11-08 15:56:03.071446'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: jfoster
+  deleted_at: 
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: 
+  preferences: |
+    ---
+    :accepted_terms: 2018-11-08 15:56:03.071260319 Z
+  avatar_state: 
+  locale: 
+  browser_locale: en
+  unread_conversations_count: 0
+  stuck_sis_fields: name,short_name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: 
+  lti_context_id: 
+  turnitin_id: 
+user_3:
+  id: 3
+  name: Test Student
+  sortable_name: Student, Test
+  workflow_state: registered
+  time_zone: 
+  uuid: DyBqX6WVp7UW08RU0AzeyTRFmGH6R3yluRq7kfkf
+  created_at: '2018-11-06 05:11:37.818928'
+  updated_at: '2018-11-06 05:11:37.943716'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: 
+  deleted_at: 
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: 
+  preferences: |
+    ---
+    :fake_student: true
+  avatar_state: 
+  locale: 
+  browser_locale: 
+  unread_conversations_count: 0
+  stuck_sis_fields: name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: 
+  lti_context_id: 
+  turnitin_id: 
+user_4:
+  id: 4
+  name: Test Student
+  sortable_name: Student, Test
+  workflow_state: registered
+  time_zone: 
+  uuid: HIX0V3y4qawuUhmaDQKjpYwuVvUS2usIGmfvGvUW
+  created_at: '2018-11-06 15:07:57.399593'
+  updated_at: '2018-11-10 17:26:29.188417'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: 
+  deleted_at: 
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: 
+  preferences: |
+    ---
+    :fake_student: true
+  avatar_state: 
+  locale: 
+  browser_locale: 
+  unread_conversations_count: 0
+  stuck_sis_fields: name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: 
+  lti_context_id: 
+  turnitin_id: 
+user_2:
+  id: 2
+  name: Test Student
+  sortable_name: Student, Test
+  workflow_state: registered
+  time_zone: 
+  uuid: oFQuz6y15FpjSGlpbfKfkXEyPDGXuCygInfLIUfg
+  created_at: '2018-11-06 04:10:00.700109'
+  updated_at: '2018-11-06 16:24:10.028724'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: 
+  deleted_at: 
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: 
+  preferences: |
+    ---
+    :fake_student: true
+  avatar_state: 
+  locale: 
+  browser_locale: 
+  unread_conversations_count: 0
+  stuck_sis_fields: name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: 
+  lti_context_id: 
+  turnitin_id: 
+user_9:
+  id: 9
+  name: TJ Famodu
+  sortable_name: Famodu, TJ
+  workflow_state: pre_registered
+  time_zone: 
+  uuid: 4Jgk7MtjblgqoZ3II2PJamIWMvAq1zvFYKaHG3gj
+  created_at: '2018-11-08 12:05:04.884369'
+  updated_at: '2018-11-08 12:14:07.390828'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: tfamodu
+  deleted_at: 
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: 
+  preferences: 
+  avatar_state: 
+  locale: 
+  browser_locale: 
+  unread_conversations_count: 1
+  stuck_sis_fields: name,short_name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: 
+  lti_context_id: 
+  turnitin_id: 
+user_1:
+  id: 1
+  name: admin@fearless.tech
+  sortable_name: admin@fearless.tech
+  workflow_state: registered
+  time_zone: Mountain Time (US & Canada)
+  uuid: xp4movXsSGJRjG5DcBYpI7PR556DmCmlhhhW7EJB
+  created_at: '2018-10-31 11:17:33.498168'
+  updated_at: '2018-12-11 13:41:43.138495'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: 
+  deleted_at: 
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: cc_prefs
+  preferences: |
+    ---
+    :accepted_terms: 2018-10-31 11:18:56.329193222 Z
+    :custom_colors:
+      user_1: "#5a92de"
+      course_3: "#4D3D4D"
+      course_4: "#177B63"
+      course_5: "#8D9900"
+      course_6: "#FF2717"
+      course_7: "#91349B"
+      course_8: "#E71F63"
+      course_9: "#0B9BE3"
+      course_10: "#324A4D"
+    :dashboard_view: cards
+  avatar_state: 
+  locale: 
+  browser_locale: en
+  unread_conversations_count: 0
+  stuck_sis_fields: name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: '2018-11-10 17:50:34.423606'
+  lti_context_id: 
+  turnitin_id: 
+user_7:
+  id: 7
+  name: Test Student
+  sortable_name: Student, Test
+  workflow_state: deleted
+  time_zone: 
+  uuid: JrWz15w8czUTvOm6B3Vl0arMC4JHgk7wEEeRhu01
+  created_at: '2018-11-06 17:06:46.48569'
+  updated_at: '2018-12-11 12:36:15.217417'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: 
+  deleted_at: '2018-11-07 05:26:27.311316'
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: 
+  preferences: |
+    ---
+    :fake_student: true
+  avatar_state: 
+  locale: 
+  browser_locale: 
+  unread_conversations_count: 0
+  stuck_sis_fields: name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: 
+  lti_context_id: 
+  turnitin_id: 
+user_6:
+  id: 6
+  name: Test Student
+  sortable_name: Student, Test
+  workflow_state: deleted
+  time_zone: 
+  uuid: mh3Etfd8ts5mkYJpzcYrGXncIa40U9LPW08jFhWy
+  created_at: '2018-11-06 16:32:28.494427'
+  updated_at: '2018-12-11 12:36:15.217417'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: 
+  deleted_at: '2018-11-06 17:06:46.442336'
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: 
+  preferences: |
+    ---
+    :fake_student: true
+  avatar_state: 
+  locale: 
+  browser_locale: 
+  unread_conversations_count: 0
+  stuck_sis_fields: name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: 
+  lti_context_id: 
+  turnitin_id: 
+user_5:
+  id: 5
+  name: Test Student
+  sortable_name: Student, Test
+  workflow_state: deleted
+  time_zone: 
+  uuid: YXi4jjkiYfupweY4926fr1iaMiWRjj7oSKiwuAoY
+  created_at: '2018-11-06 16:20:38.369012'
+  updated_at: '2018-12-11 12:36:15.217417'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: 
+  deleted_at: '2018-11-06 16:32:28.401754'
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: 
+  preferences: |
+    ---
+    :fake_student: true
+  avatar_state: 
+  locale: 
+  browser_locale: 
+  unread_conversations_count: 0
+  stuck_sis_fields: name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: 
+  lti_context_id: 
+  turnitin_id: 
+user_8:
+  id: 8
+  name: Test Student
+  sortable_name: Student, Test
+  workflow_state: registered
+  time_zone: 
+  uuid: E526dcWxOUIuet9pSjqwAg39osriVVQ2HyXRuf0h
+  created_at: '2018-11-07 05:26:27.34169'
+  updated_at: '2018-12-11 12:36:15.217417'
+  avatar_image_url: 
+  avatar_image_source: 
+  avatar_image_updated_at: 
+  phone: 
+  school_name: 
+  school_position: 
+  short_name: 
+  deleted_at: 
+  show_user_services: true
+  gender: 
+  page_views_count: 0
+  reminder_time_for_due_dates: 172800
+  reminder_time_for_grading: 0
+  storage_quota: 
+  visible_inbox_types: 
+  last_user_note: 
+  subscribe_to_emails: 
+  features_used: 
+  preferences: |
+    ---
+    :fake_student: true
+  avatar_state: 
+  locale: 
+  browser_locale: 
+  unread_conversations_count: 0
+  stuck_sis_fields: name,sortable_name
+  public: 
+  birthdate: 
+  otp_secret_key_enc: 
+  otp_secret_key_salt: 
+  otp_communication_channel_id: 
+  initial_enrollment_type: 
+  crocodoc_id: 
+  last_logged_out: 
+  lti_context_id: 
+  turnitin_id: 

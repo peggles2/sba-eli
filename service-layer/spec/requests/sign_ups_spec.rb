@@ -40,10 +40,9 @@ describe "SignUps" do
       VCR.use_cassette("sign_ups/invalid_sign_up") do
         params = {
           first_name: first_name,
-          last_name: last_name,
+          last_name: nil, # required field
           email: email,
           password: password,
-          password_confirmation: "ThisAintThePassword",
         }
         post uri, params: params
         expect(response).to have_http_status(:unprocessable_entity)

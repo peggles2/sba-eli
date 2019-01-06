@@ -47,6 +47,20 @@
   padding-right: 25px;
 }
 
+// LearningEventPodcast
+.podcast-wrapper {
+  display: none;
+}
+
+.podcast-controls {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.podcast-duration {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 /* Prototyping for infographic until more robust css in place */
 .infographic-header-footer {
   background-color: #0b2f6b;

@@ -1,3 +1,5 @@
+@import "../../assets/styles/base";
+
 .slider {
   -webkit-appearance: none;
   appearance: none;
@@ -16,17 +18,21 @@
   appearance: none;
   width: 20px;
   height: 20px;
+  border: $main-border; 
   border-radius: 50%;
-  border-width: 1px;
-  background: #FFFFFF;
+  background: $sba-white;
 }
 
 .slider::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border-width: 1px;
-  background: #FFFFFF;
+  border: $main-border; 
+  background: $sba-white;
+}
+
+.slider::-moz-range-progress {
+  background-color: $sba-gold;
 }
 
 .volumeSlider {
@@ -47,7 +53,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border-width: 1px;
+  border: $main-border; 
   background: #000000;
 }
 
@@ -55,6 +61,6 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border-width: 1px;
+  border: $main-border; 
   background: #000000;
 }
