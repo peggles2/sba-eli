@@ -36,6 +36,7 @@ export default class TopicEventList extends Component {
   }
 
   getIcon(eventType){
+    console.log("Event ", eventType)
     switch(eventType){
       case "Quiz":
         return "pencil alternate";

@@ -4,6 +4,7 @@ import LearningEventInfoCard from "./LearningEventInfoCard";
 import LearningEventPage from "./LearningEventPage";
 import LearningEventVideo from "./LearningEventVideo";
 import LearningEventPodcast from "./LearningEventPodcast";
+import LearningEventQuiz from "./LearningEventQuiz/LearningEventQuiz";
 
 export default class LearningEventManager extends Component {
   getMimeType(url) {
