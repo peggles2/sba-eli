@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Accordion, Container } from "semantic-ui-react";
+import { Accordion, Container, Icon } from "semantic-ui-react";
 import TopicEventList from "./TopicEventList";
 import TopicProgress from "./TopicProgress";
 import "./TopicSidebar.scss";
@@ -24,7 +24,7 @@ export default class TopicSideBar extends Component {
   renderTopicsList(topics = []) {
     const { activeIndex } = this.state;
     const { event_id } = this.props;
-
+        
     if (topics.length) {
       return (
         <Container fluid className={"topic-container"}>
@@ -38,7 +38,7 @@ export default class TopicSideBar extends Component {
                     onClick={this.handleClick}
                     className={"topic-accordion-title"}
                   >
-                    <div className={"topic-number-circle"}>{idx + 1}</div>
+                    <div className={"topic-number-circle"}>{topic.completed_at ? <Icon name='checkmark' /> : idx + 1 }</div>
                     {topic.name}
                   </Accordion.Title>
                   <Accordion.Content
