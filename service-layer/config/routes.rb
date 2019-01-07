@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       ":learning_objective_id/learning_events/:id/done",
       to: "learning_event_done#update"
 
-  resource :cofirmation_code, only: :create
+  resource :confirmation_code, only: :create
   resources :learning_events, concerns: :contentable
   resources :learning_paths, concerns: :contentable
   resources :learning_objectives, concerns: :contentable
