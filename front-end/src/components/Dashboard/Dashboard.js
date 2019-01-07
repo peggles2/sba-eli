@@ -9,15 +9,32 @@ import MetaTags from "../SEO/MetaTags";
 import "./Dashboard.scss";
 
 export default class Dashboard extends Component {
+  state = { isLoggedIn: true}
+
+  dashboardHeader = (isLoggedIn) => {
+    if(isLoggedIn) {
+      return <DashboardHeader />;
+    }
+  }
+
+  splash = (isLoggedIn) => {
+    if(isLoggedIn) {
+      return <DashboardCTA />;
+    } else {
+      return <DashboardSplash />;
+    }
+  }
+
   render() {
+    const isLoggedIn = this.state.isLoggedIn;
+
     return (
       <div className="dashboard">
         <MetaTags metaTitle="SBA Dashboard"
                   metaDescription="Description for the dashboard"
                   canonicalUrl="https://sba.gov/eli"/>
-        <DashboardHeader />
-        <DashboardSplash />
-        <DashboardCTA />
+        { this.dashboardHeader(isLoggedIn) }
+        { this.splash(isLoggedIn) }
         <Divider hidden />
         <LearningPaths />
       </div>

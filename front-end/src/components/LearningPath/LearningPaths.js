@@ -17,10 +17,12 @@ export class LearningPaths extends React.Component {
         <MetaTags metaTitle="SBA Learning Paths"
                 metaDescription="Description for the Learning Path landing page"
                 canonicalUrl="https://sba.gov/learning_paths"/>
-        <Grid centered>
+        <Grid>
           <Grid.Row>
-            <Header as='h2'>Explore All Paths</Header>
-            <LearningPathAbout open={this.props.displayModal} handleClose={this.handleModalClose} />
+            <Container>
+              <Header as='h2'>Explore All Paths</Header>
+              <LearningPathAbout open={this.props.displayModal} handleClose={this.handleModalClose} />
+            </Container>
           </Grid.Row>
           <Container>
             <Divider />
