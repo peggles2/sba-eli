@@ -6,7 +6,12 @@ module Canvas
     base_uri ENV["CANVAS_HOST"] + "/api/v1"
     
     def self.all(learning_path_id)
-      quizzes = JSON.parse get("/courses/#{learning_path_id}/quizzes", base_options).body
+      res = get("/courses/#{learning_path_id}/quizzes", base_options)
+      quizzes = res.body
+
+      raise Exception, quizzes unless res.code == 200
+
+      quizzes = JSON.parse quizzes
 
       results = []
 
@@ -22,8 +27,19 @@ module Canvas
     end
     
     def self.find(learning_path_id, quiz_id, submission)
-      quiz = JSON.parse get("/courses/#{learning_path_id}/quizzes/#{quiz_id}", base_options).body
-      questions = JSON.parse get("/quiz_submissions/#{submission["submission_id"]}/questions", base_options).body
+      res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}", base_options)
+      quiz = res.body
+
+      raise Exception, quiz unless res.code == 200
+
+      quiz = JSON.parse quiz
+
+      res = get("/quiz_submissions/#{submission["submission_id"]}/questions", base_options)
+      questions = res.body
+
+      raise Exception, questions unless res.code == 200
+
+      questions = JSON.parse questions
 
       questions = questions["quiz_submission_questions"]
 
@@ -40,7 +56,6 @@ module Canvas
       questions.each do |question|
         answers = []
 
-        pp question
         question["answers"].each do |answer|
           a = {
             id: answer["id"],
@@ -63,17 +78,33 @@ module Canvas
     end
 
     def self.get_submissions(learning_path_id, quiz_id)
-      submissions = JSON.parse get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options).body
+      res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options)
+      submissions = res.body
+
+      raise Exception, submissions unless res.code == 200
+
+      submissions = JSON.parse submissions
+
       submissions["quiz_submissions"]
     end
 
     def self.start_submission(learning_path_id, quiz_id)      
-      submissions = JSON.parse get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options).body
+      res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options)
+      submissions = res.body
+
+      raise Exception, submissions unless res.code == 200
+
+      submissions = JSON.parse submissions
+      
       submission = {}
 
-      print submissions
       if(!submissions.nil? and (submissions["quiz_submissions"].empty? or submissions["quiz_submissions"].length > 1 or !submissions["quiz_submissions"].first["finished_at"].nil?))
-        submissions = JSON.parse post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options).body
+        res = post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options)
+        submissions = res.body
+
+        raise Exception, submissions unless res.code == 200
+
+        submissions = JSON.parse submissions
       end
 
       submissions["quiz_submissions"].first
@@ -90,7 +121,12 @@ module Canvas
         options[:body][:quiz_questions] << {id: quiz_question["id"], answer: quiz_question["answer"]}
       end
 
-      JSON.parse post("/quiz_submissions/#{submission["submission_id"]}/questions", options).body
+      res = post("/quiz_submissions/#{submission["submission_id"]}/questions", options)
+      body = res.body
+
+      raise Exception, body unless res.code == 200
+
+      JSON.parse body
     end
 
     def self.end_submission(learning_path_id, submission)
@@ -100,7 +136,12 @@ module Canvas
       })
       quiz_id = submission[:quiz_id]
 
-      JSON.parse post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions/#{submission["submission_id"]}/complete", options).body
+      res = post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions/#{submission["submission_id"]}/complete", options)
+      body = res.body
+
+      raise Exception, body unless res.code == 200
+
+      JSON.parse body
     end
   end
 end

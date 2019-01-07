@@ -1,21 +1,33 @@
 class QuizzesController < ApplicationController
   def index
-    @quizzes = Canvas::Quiz.all params[:learning_path_id]
-    render json: @quizzes, status: :ok
+    begin
+      @quizzes = Canvas::Quiz.all params[:learning_path_id]
+      render json: @quizzes, status: :ok
+    rescue Exception => e
+      render json: e.message, status: :bad_request
+    end
   end
   
   def show
-    submission = Canvas::Quiz.start_submission params[:learning_path_id], params[:id]
+    begin
+      submission = Canvas::Quiz.start_submission params[:learning_path_id], params[:id]
 
-    @quiz = Canvas::Quiz.find params[:learning_path_id], params[:id], submission
+      @quiz = Canvas::Quiz.find params[:learning_path_id], params[:id], submission
 
-    render json: @quiz, status: :ok
+      render json: @quiz, status: :ok
+    rescue Exception => e
+      render json: e.message, status: :bad_request
+    end
   end
 
   def submissions
-    @submissions = Canvas::Quiz.get_submissions params[:learning_path_id], params[:id]
+    begin
+      @submissions = Canvas::Quiz.get_submissions params[:learning_path_id], params[:id]
 
-    render json: @submissions, status: :ok
+      render json: @submissions, status: :ok
+    rescue Exception => e
+      render json: e.message, status: :bad_request
+    end
   end
 
   ##
@@ -34,11 +46,14 @@ class QuizzesController < ApplicationController
   #   }]
   # }
   def create
-    pp "Go"
-    quiz_answer_resp = Canvas::Quiz.submit params
-    pp quiz_answer_resp
-    end_submission_resp = Canvas::Quiz.end_submission params[:learning_path_id], params
-    pp end_submission_resp
-    render json: end_submission_resp, status: :ok
+    begin
+      quiz_answer_resp = Canvas::Quiz.submit params
+      pp quiz_answer_resp
+      end_submission_resp = Canvas::Quiz.end_submission params[:learning_path_id], params
+      pp end_submission_resp
+      render json: end_submission_resp, status: :ok
+    rescue Exception => e
+      render json: e.message, status: :bad_request
+    end
   end
 end
