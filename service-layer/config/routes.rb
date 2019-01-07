@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   resource :cofirmation_code, only: :create
   resources :learning_events, concerns: :contentable
-  resources :learning_paths, concerns: :contentable
+  resources :learning_paths, concerns: :contentable do
+    resource :enroll, only: :create
+  end
   resources :learning_objectives, concerns: :contentable
   resource :search, only: :show
   resource :session, only: %I[create destroy]
