@@ -17,29 +17,19 @@ class UserCreationService
   validates_confirmation_of :password
 
   def create
-    if !valid?
-      Rails.logger.debug("errors on user: #{errors.inspect}")
-      return false
-    end
-    Rails.logger.debug("creating user in cognito")
+    return self if !valid?
 
     begin
       CognitoService.sign_up(email, password)
     rescue Aws::CognitoIdentityProvider::Errors::UsernameExistsException
-      Rails.logger.debug("tried to create an existing cognito user")
       errors.add(:email, "already exists.")
-      return false
+      return self
     end
 
-    # TODO: We're going to want to save the user_sub from the
-    # cognito response as a custom attribute in canvas
-
-    Rails.logger.debug("trying to create user in canvas")
-    # Create user in Canvas
     response = Canvas::User.create_user(build_canvas_json)
     self.user = User.from_canvas_json(response)
 
-    true
+    self
   end
 
   private
