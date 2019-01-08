@@ -19,20 +19,20 @@ export class LearningPaths extends React.Component {
                 canonicalUrl="https://sba.gov/learning_paths"/>
         <Grid>
           <Grid.Row>
-            <Container>
-              <Header as='h2'>Explore All Paths</Header>
-              <LearningPathAbout open={this.props.displayModal} handleClose={this.handleModalClose} />
-            </Container>
-          </Grid.Row>
-          <Container>
-            <Divider />
-          </Container>
-          <Grid.Row>
+            <Grid.Column>
+              <Container>
+                <Header as='h2'>Explore All Paths</Header>
+                <LearningPathAbout open={this.props.displayModal} handleClose={this.handleModalClose} />
+                <Divider />
+              </Container>
+            </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Container>
-              <LearningPathsList />
-            </Container>
+            <Grid.Column>
+              <Container>
+                <LearningPathsList />
+              </Container>
+            </Grid.Column>
           </Grid.Row>
         </Grid>
       </div>
