@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   before_action :valid_session?, only: :destroy
 
   def create
-    CognitoService.authenticate(params[:email], params[:password])
+    @cognito_response = CognitoService.authenticate(params[:email], params[:password])
     canvas_user_response = Canvas::User.fetch_by_email(params[:email])
     sign_in User.from_canvas_json(canvas_user_response)
     render json: Current.user.to_json
