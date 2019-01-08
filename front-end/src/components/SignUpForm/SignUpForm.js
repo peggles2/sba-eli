@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Container, Form} from 'semantic-ui-react';
+import {Button, Container, Form, Grid} from 'semantic-ui-react';
 import { toggleLogin, toggleRegister } from '../../actions/navbarActions';
 import { registerUser } from '../../actions/registrationActions';
 import { connect } from "react-redux";
@@ -46,7 +46,7 @@ class SignUpForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    
+
     this.props.dispatch(registerUser({
       first_name: this.state.firstName.trim(),
       last_name: this.state.lastName.trim(),
@@ -125,8 +125,12 @@ class SignUpForm extends React.Component {
               onChange={this.handleInBusiness.bind(this)}
             />
           </Form.Group>
-          Already have an account? <a href="/" onClick={() => this.props.dispatch(toggleLogin(true))}>Log in</a>
-          <Button type="submit">Submit</Button>
+          <Grid>
+            <Grid.Row columns={16}>
+              <Grid.Column width={10}>Already have an account? <a href="/" onClick={() => this.props.dispatch(toggleLogin(true))}>Log in</a></Grid.Column>
+              <Grid.Column><Button type="submit">Submit</Button></Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Form>
       </Container>
     );

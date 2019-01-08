@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import {Button, Input, Container, Form} from 'semantic-ui-react';
 import { loginUser } from '../../actions/registrationActions';
 import { connect } from "react-redux";

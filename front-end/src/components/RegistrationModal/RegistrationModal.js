@@ -24,7 +24,8 @@ class RegistrationModal extends React.Component {
     return <Modal open={this.props.open} 
                   closeOnDimmerClick={false} 
                   closeIcon 
-                  onClose={this.close}>
+                  onClose={this.close}
+                  size={'mini'}>
       <Modal.Content>
         {this.getModalContent(this.props.type)}
       </Modal.Content>
