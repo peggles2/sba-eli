@@ -17,12 +17,6 @@ describe('LearningPathsList', () => {
     expect(wrapper).toMatchSnapshot();
   });
   
-  it('should render a <div>', () => {
-    const wrapper = shallow(<LearningPathsList learningPaths={lps} dispatch={() => {}}/>);
-
-    expect(wrapper.find('div').length).toEqual(1);
-  });
-
   describe('rendering the list', () => {
     
     var wrapper = mount(<LearningPathsList learningPaths={lps} dispatch={() => {}} />)
@@ -31,7 +25,7 @@ describe('LearningPathsList', () => {
       expect(wrapper.find(Card.Group).length).toEqual(1);
     });
     
-    it('should render a 4 <Card>s', () => {
+    it('should render 4 <Card>s', () => {
       expect(wrapper.find(Card).length).toEqual(4);
     });
   })

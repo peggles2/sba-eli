@@ -22,11 +22,9 @@ export class LearningPathsList extends React.Component {
       }
 
     return(
-      <div>
-        <Card.Group>
-          {result}
-        </Card.Group>
-      </div>
+      <Card.Group itemsPerRow={3}>
+        {result}
+      </Card.Group>
     )
   }
 }
