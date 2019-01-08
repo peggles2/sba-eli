@@ -38,55 +38,35 @@ describe("Dashboard", () => {
 describe("Dashboard when user is logged in", () => {
 
   it("should render a DashboardHeader", () => {
-    const wrapper = shallow(<Dashboard />);
-    wrapper.setState({ isLoggedIn: true });
+    const wrapper = shallow(<Dashboard isLoggedIn={true}/>);
 
-    const inst = wrapper.instance()
-    const isLoggedIn = inst.state.isLoggedIn;
-
-    expect(inst.dashboardHeader(isLoggedIn)).toEqual(<DashboardHeader />)
+    expect(wrapper.find(DashboardHeader).exists()).toBe(true);
   });
 
   it("should render a Dashboard Call To Action", () => {
-    const wrapper = shallow(<Dashboard />);
-    wrapper.setState({ isLoggedIn: true });
+    const wrapper = shallow(<Dashboard isLoggedIn={true}/>);
 
-    const inst = wrapper.instance()
-    const isLoggedIn = inst.state.isLoggedIn;
-
-    expect(inst.splash(isLoggedIn)).toEqual(<DashboardCTA />)
+    expect(wrapper.find(DashboardCTA).exists()).toBe(true);
   });
 
-  it("should not render a DashboardSlash", () => {
-    const wrapper = shallow(<Dashboard />);
-    wrapper.setState({ isLoggedIn: true});
+  it("should not render a DashboardSplash", () => {
+    const wrapper = shallow(<Dashboard isLoggedIn={true}/>);
 
-    const inst = wrapper.instance()
-    const isLoggedIn = inst.state.isLoggedIn;
-
-    expect(inst.splash(isLoggedIn)).not.toEqual(<DashboardSplash />)
+    expect(wrapper.find(DashboardSplash).exists()).toBe(false);
   });
 });
 
 describe("Dashboard when user is not logged in", () => {
 
-  it("should render a DashboardSlash", () => {
-    const wrapper = shallow(<Dashboard />);
-    wrapper.setState({ isLoggedIn: false});
+  it("should render a DashboardSplash", () => {
+    const wrapper = shallow(<Dashboard isLoggedIn={false}/>);
 
-    const inst = wrapper.instance()
-    const isLoggedIn = inst.state.isLoggedIn;
-
-    expect(inst.splash(isLoggedIn)).toEqual(<DashboardSplash />)
+    expect(wrapper.find(DashboardSplash).exists()).toBe(true);
   });
 
   it("should not render a Dashboard Call To Action", () => {
-    const wrapper = shallow(<Dashboard />);
-    wrapper.setState({ isLoggedIn: false});
+    const wrapper = shallow(<Dashboard isLoggedIn={false}/>);
 
-    const inst = wrapper.instance()
-    const isLoggedIn = inst.state.isLoggedIn;
-
-    expect(inst.splash(isLoggedIn)).not.toEqual(<DashboardCTA />);
+    expect(wrapper.find(DashboardCTA).exists()).toBe(false);
   });
 });

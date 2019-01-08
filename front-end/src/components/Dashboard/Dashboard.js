@@ -9,8 +9,6 @@ import MetaTags from "../SEO/MetaTags";
 import "./Dashboard.scss";
 
 export default class Dashboard extends Component {
-  // will need to connect isLoggedIn to redux
-  state = { isLoggedIn: true}
 
   dashboardHeader = (isLoggedIn) => {
     if(isLoggedIn) {
@@ -21,13 +19,12 @@ export default class Dashboard extends Component {
   splash = (isLoggedIn) => {
     if(isLoggedIn) {
       return <DashboardCTA />;
-    } else {
-      return <DashboardSplash />;
-    }
+    } 
+    return <DashboardSplash />;
   }
 
   render() {
-    const isLoggedIn = this.state.isLoggedIn;
+    const isLoggedIn = this.props.isLoggedIn;
 
     return (
       <div className="dashboard">
@@ -42,3 +39,4 @@ export default class Dashboard extends Component {
     );
   }
 };
+
