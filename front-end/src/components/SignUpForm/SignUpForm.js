@@ -127,7 +127,7 @@ class SignUpForm extends React.Component {
           </Form.Group>
           <Grid>
             <Grid.Row columns={16}>
-              <Grid.Column width={10}>Already have an account? <a href="/" onClick={() => this.props.dispatch(toggleLogin(true))}>Log in</a></Grid.Column>
+              <Grid.Column width={10}>Already have an account? <a href="/" onClick={(e) => {e.preventDefault(); this.props.dispatch(toggleLogin(true))}}>Log in</a></Grid.Column>
               <Grid.Column><Button type="submit">Submit</Button></Grid.Column>
             </Grid.Row>
           </Grid>
