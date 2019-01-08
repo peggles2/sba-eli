@@ -14,7 +14,7 @@ export function enrollUserInPath(id) {
 }
 
 export function enrollAndGetLearningPath(id) {
-  return function(dispatch) {
+  return dispatch => {
     return enrollUserInPath(id).then(result => {
       dispatch(getLearningPath(id, result));
     });
@@ -22,10 +22,17 @@ export function enrollAndGetLearningPath(id) {
 }
 
 export function getPathWithTopics(id) {
-  return function(dispatch) {
-    dispatch(enrollAndGetLearningPath(id)).then(result =>
-      dispatch(getTopicsForPath(id, result))
-    );
+  return (dispatch, getState) => {
+    //get loggedin from state when implemented
+    const isLoggedIn = false;
+    if (isLoggedIn) {
+      dispatch(enrollAndGetLearningPath(id)).then(result =>
+        dispatch(getTopicsForPath(id, result))
+      );
+    } else {
+      dispatch(getLearningPath(id));
+      dispatch(getTopicsForPath(id));
+    }
   };
 }
 
