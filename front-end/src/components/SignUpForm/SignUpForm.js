@@ -7,13 +7,13 @@ import { withRouter } from 'react-router-dom';
 
 class SignUpForm extends React.Component {
   state = {
-    firstName: this.props.firstName,
-    lastName: this.props.lastName,
-    middleName: this.props.middleName,
-    zipCode: this.props.zipCode,
-    email: this.props.email,
-    password: this.props.password,
-    inBusiness: this.props.inBusiness
+    firstName: this.props.firstName || '',
+    lastName: this.props.lastName || '',
+    middleName: this.props.middleName || '',
+    zipCode: this.props.zipCode || '',
+    email: this.props.email || '',
+    password: this.props.password || '',
+    inBusiness: this.props.inBusiness || ''
   };
 
   handleFirstNameChange = (e) => {
