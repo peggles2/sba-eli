@@ -9,6 +9,7 @@ import MetaTags from "../SEO/MetaTags";
 import "./Dashboard.scss";
 
 export default class Dashboard extends Component {
+  // will need to connect isLoggedIn to redux
   state = { isLoggedIn: true}
 
   dashboardHeader = (isLoggedIn) => {

@@ -39,7 +39,9 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": <CardGroup>
+      "children": <CardGroup
+        itemsPerRow={3}
+      >
         <LearningPathsItem
           id={1}
           name="Course 1"
@@ -82,6 +84,7 @@ ShallowWrapper {
             name="Course 4"
           />,
         ],
+        "itemsPerRow": 3,
       },
       "ref": null,
       "rendered": Array [
@@ -148,7 +151,9 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": <CardGroup>
+        "children": <CardGroup
+          itemsPerRow={3}
+        >
           <LearningPathsItem
             id={1}
             name="Course 1"
@@ -191,6 +196,7 @@ ShallowWrapper {
               name="Course 4"
             />,
           ],
+          "itemsPerRow": 3,
         },
         "ref": null,
         "rendered": Array [
