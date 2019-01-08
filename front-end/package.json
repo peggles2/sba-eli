@@ -8,6 +8,7 @@
     "dotenv": "^6.1.0",
     "mime-types": "^2.1.21",
     "node-sass": "^4.11.0",
+    "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

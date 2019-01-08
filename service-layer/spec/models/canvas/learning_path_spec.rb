@@ -14,4 +14,18 @@ describe "Canvas::LearningPath" do
     it "finds a course" do
     end
   end
+
+  describe "#enroll" do
+    let (:user_id) { 3 }
+    let (:learning_path_id) { 6 }
+    it "should enroll a user in to a course" do
+      Current.user = User.new(id: user_id)
+      VCR.turned_off do
+        stub_enroll_in_learning_path(user_id: user_id, learning_path_id: learning_path_id)
+        response = Canvas::LearningPath.enroll(learning_path_id, Current.user)
+        expect(response["user_id"]).to eq(user_id)
+        expect(response["course_id"]).to eq(learning_path_id)
+      end
+    end
+  end
 end

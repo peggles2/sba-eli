@@ -33,5 +33,16 @@ module Canvas
       options = base_options.merge!(body: { "event": "delete" })
       JSON.parse delete("/courses/#{id}", options).body
     end
+
+    def self.enroll(id, user)
+      params = {
+        "enrollment[user_id]": user.id,
+        "enrollment[type]": "StudentEnrollment",
+        "enrollment[enrollment_state]": "active",
+        "enrollment[notify]": false,
+      }
+      options = base_options.merge!(body: params)
+      JSON.parse post("/courses/#{id}/enrollments", options).body
+    end
   end
 end
