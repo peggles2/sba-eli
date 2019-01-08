@@ -13,7 +13,7 @@ import { getPathWithTopics } from "../../actions/learningPathActions";
 
 import "./LearningPath.scss";
 
-class LearningPath extends React.Component {
+export class LearningPath extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.dispatch(getPathWithTopics(id));
