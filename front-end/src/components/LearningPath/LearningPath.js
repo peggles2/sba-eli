@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { Header, Divider, Grid, Button, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -10,18 +9,14 @@ import LearningEvent from "../LearningEvent/LearningEvent";
 import LearningPathBreadCrumb from "./LearningPathBreadcrumb";
 import MetaTags from "../SEO/MetaTags";
 
-import {
-  getTopicsForPath,
-  getLearningPath
-} from "../../actions/learningPathActions";
+import { getPathWithTopics } from "../../actions/learningPathActions";
 
 import "./LearningPath.scss";
 
 class LearningPath extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
-    this.props.dispatch(getLearningPath(id));
-    this.props.dispatch(getTopicsForPath(id));
+    this.props.dispatch(getPathWithTopics(id));
   }
 
   renderRightColumnContent() {

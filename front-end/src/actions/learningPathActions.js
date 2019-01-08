@@ -9,6 +9,26 @@ export function getLearningPaths() {
   };
 }
 
+export function enrollUserInPath(id) {
+  return axios.post(baseUrl + `/learning_paths/${id}/enroll`);
+}
+
+export function enrollAndGetLearningPath(id) {
+  return function(dispatch) {
+    return enrollUserInPath(id).then(result => {
+      dispatch(getLearningPath(id, result));
+    });
+  };
+}
+
+export function getPathWithTopics(id) {
+  return function(dispatch) {
+    dispatch(enrollAndGetLearningPath(id)).then(result =>
+      dispatch(getTopicsForPath(id, result))
+    );
+  };
+}
+
 export function getLearningPath(id) {
   return {
     type: "GET_LEARNING_PATH",
