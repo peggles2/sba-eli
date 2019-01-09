@@ -1,8 +1,9 @@
 import React from 'react';
-import {Button, Input, Container, Form} from 'semantic-ui-react';
+import {Button, Input, Container, Form, Message} from 'semantic-ui-react';
 import { loginUser } from '../../actions/registrationActions';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
+import "./LoginForm.scss";
 
 class LoginForm extends React.Component {
   state = {
@@ -27,9 +28,15 @@ class LoginForm extends React.Component {
     }));
   }
 
+  componentDidUpdate(prevProps) {
+    console.log('props updated', this.props);
+  }
+
   render() {
     return (
       <Container>
+        <Message negative className={this.props.userError ? '' : 'noError'}
+                       content={'Login failed. Please try again.'}></Message>
         <Form onSubmit={this.handleSubmit.bind(this)}>
           <Form.Field>
             <Input type="text"
@@ -52,7 +59,8 @@ class LoginForm extends React.Component {
 
 export default connect((store) => {
   return {
-    email: store.registration.userData.email,
-    password: store.registration.userData.password
+    email: store.login.userData.email,
+    password: store.login.userData.password,
+    userError: store.login.userError
   }
 })(withRouter(LoginForm));

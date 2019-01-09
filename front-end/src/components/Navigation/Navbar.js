@@ -12,6 +12,7 @@ export class Navbar extends Component {
   state = {}
 
   render() {
+    console.log('props', this.props);
     return(
         <Menu className="navbar" fluid>
           <Menu.Item header href={`/`}><img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/></Menu.Item>
@@ -33,8 +34,8 @@ export class Navbar extends Component {
           <Menu.Menu position='right'>
             <Menu.Item>
               <div>
-                <Button onClick={() => this.props.dispatch(toggleRegister(true))}>Register</Button>
-                <Button onClick={() => this.props.dispatch(toggleLogin(true))}>Login</Button>
+                <Button className={this.props.isUserLoggedIn ? 'invisible' : 'visible'} onClick={() => this.props.dispatch(toggleRegister(true))}>Register</Button>
+                <Button className={this.props.isUserLoggedIn ? 'invisible' : 'visible'} onClick={() => this.props.dispatch(toggleLogin(true))}>Login</Button>
                 <RegistrationModal type={this.props.modalType} open={this.props.open}/>
               </div>
             </Menu.Item>
@@ -47,6 +48,7 @@ export class Navbar extends Component {
 export default connect((store) => {
   return {
     modalType: store.navbar.modalType,
-    open: store.navbar.open
+    open: store.navbar.open,
+    isUserLoggedIn: store.login.isUserLoggedIn
   }
 })(withRouter(Navbar));

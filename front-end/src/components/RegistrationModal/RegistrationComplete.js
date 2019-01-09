@@ -18,13 +18,13 @@ export default class SearchPage extends Component {
                 <span className='registration-message'>Congrats!</span>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row stretched centered columns={8}>
-              <Grid.Column width={6}>
+            <Grid.Row stretched centered columns={16}>
+              <Grid.Column width={12}>
                 <span className='registration-message'>You've successfully registered!</span>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row stretched centered columns={8}>
-              <Grid.Column width={6}>
+            <Grid.Row stretched centered columns={16}>
+              <Grid.Column width={16}>
                 <span>Take a look at your inbox for a confirmation email.</span>
               </Grid.Column>
             </Grid.Row>
