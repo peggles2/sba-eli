@@ -16,7 +16,7 @@ class LearningEventPage extends Component {
   }
 
   completeEvent() {
-    const isLoggedIn = true;
+    const isLoggedIn = false;
     if (isLoggedIn && !this.props.event.completion_requirement.completed) {
       const {
         id: path_id,
