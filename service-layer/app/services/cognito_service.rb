@@ -41,4 +41,8 @@ module CognitoService
       confirmation_code: code,
     )
   end
+
+  def self.get_user(access_token)
+    client.get_user(access_token: access_token)
+  end
 end
