@@ -24,12 +24,18 @@ export default class TopicSideBar extends Component {
   renderTopicsList(topics = []) {
     const { activeIndex } = this.state;
     const { event_id } = this.props;
-        
+
     if (topics.length) {
+      let topicsComplete = 0;
       return (
         <Container fluid className={"topic-container"}>
           <Accordion>
             {topics.map((topic, idx) => {
+              let topicCircle = idx + 1;
+              if (topic.completed_at) {
+                topicCircle = <Icon name="checkmark" />;
+                topicsComplete++;
+              }
               return (
                 <React.Fragment key={"topicSidebar" + idx}>
                   <Accordion.Title
@@ -38,7 +44,7 @@ export default class TopicSideBar extends Component {
                     onClick={this.handleClick}
                     className={"topic-accordion-title"}
                   >
-                    <div className={"topic-number-circle"}>{topic.completed_at ? <Icon name='checkmark' /> : idx + 1 }</div>
+                    <div className={"topic-number-circle"}>{topicCircle}</div>
                     {topic.name}
                   </Accordion.Title>
                   <Accordion.Content
@@ -55,8 +61,11 @@ export default class TopicSideBar extends Component {
               );
             })}
           </Accordion>
-          {/* TODO When progress tracking added send topics Completed to progress */}
-          <TopicProgress topicsComplete={0} topicsTotal={topics.length} />
+
+          <TopicProgress
+            topicsComplete={topicsComplete}
+            topicsTotal={topics.length}
+          />
         </Container>
       );
     }
