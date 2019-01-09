@@ -5,7 +5,9 @@ const defaultValue = {
 
   learningEvents: [],
   learningEventsLoading: false,
-  learningEventsError: null
+  learningEventsError: null,
+
+  completeEventError: null
 };
 
 export default function reducer(state = defaultValue, action) {
@@ -51,6 +53,22 @@ export default function reducer(state = defaultValue, action) {
         learningEvents: action.payload.data,
         learningEventsLoading: false,
         learningEventsError: null
+      };
+
+    case "COMPLETE_LEARNING_EVENT":
+      return {
+        ...state,
+        completeEventError: null
+      };
+    case "COMPLETE_LEARNING_EVENT_FAILURE":
+      return {
+        ...state,
+        completeEventError: action.payload
+      };
+    case "COMPLETE_LEARNING_EVENT_FULFILLED":
+      return {
+        ...state,
+        completeEventError: null
       };
     default:
       break;
