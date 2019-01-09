@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -46,27 +45,26 @@ export class LearningEvent extends Component {
   }
 
   render() {
-    const event = this.props.learningEvent;
-    const topicTitle = this.props.topicTitle;
+    const { learningEvent, topicTitle } = this.props;
 
     return (
       <div>
         <Container className="learning-event-container">
           <MetaTags
-            metaTitle={event.title}
-            metaDescription={event.description}
+            metaTitle={learningEvent.title}
+            metaDescription={learningEvent.description}
             canonicalUrl=""
           />
-          <LearningEventHeader event={event} topicTitle={topicTitle} />
-          <LearningEventManager event={event} />
+          <LearningEventHeader event={learningEvent} topicTitle={topicTitle} />
+          <LearningEventManager event={learningEvent} />
           <Divider />
           <LearningEventFooter
-            courseId={this.props.match.params.course_id}
+            courseId={this.props.match.params.id}
             module={this.props.learningEvents}
             event={this.props.learningEvent}
           />
         </Container>
-        <LearningEventDiscussion event={event} />
+        <LearningEventDiscussion event={learningEvent} />
       </div>
     );
   }
