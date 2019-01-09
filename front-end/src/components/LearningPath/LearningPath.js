@@ -22,35 +22,17 @@ export class LearningPath extends React.Component {
   renderRightColumnContent() {
     const isLearningEvent =
       this.props.match.params.topicId && this.props.match.params.eventId;
+    const { topicId, id } = this.props.match.params;
 
     if (isLearningEvent) {
-      //This is to mimic react routing for the learning event. Learning event component
-      //should be refactored to pass props
-      const { eventId, topicId, id } = this.props.match.params;
-      const eventMatch = {
-        params: {
-          id: eventId,
-          module_id: topicId,
-          course_id: id
-        }
-      };
-
       //send the topic Title for wrapper header purposes, break this into state?
       const topicTitle = this.props.topicsList.find(
         topic => topic.id.toString() === topicId.toString()
       );
-      return (
-        <LearningEvent
-          match={eventMatch}
-          topicTitle={topicTitle ? topicTitle.name : null}
-        />
-      );
+      return <LearningEvent topicTitle={topicTitle ? topicTitle.name : null} />;
     } else {
       return (
-        <TopicContentView
-          course_id={this.props.match.params.id}
-          topicsList={this.props.topicsList}
-        />
+        <TopicContentView course_id={id} topicsList={this.props.topicsList} />
       );
     }
   }
