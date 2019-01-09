@@ -11,8 +11,8 @@ class UserCreationService
                 :in_business,
                 :user
 
-  validates :first_name, :last_name, presence: true
-  validates :email, presence: true, email: true
+  validates :first_name, :last_name, :email, presence: { message: "This is a required field" }
+  validates :email, email: { message: "This is not a valid email format" }
   validates :password, password_complexity: true
   validates_confirmation_of :password
 
