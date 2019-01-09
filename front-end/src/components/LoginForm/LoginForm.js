@@ -28,10 +28,6 @@ class LoginForm extends React.Component {
     }));
   }
 
-  componentDidUpdate(prevProps) {
-    console.log('props updated', this.props);
-  }
-
   render() {
     return (
       <Container>

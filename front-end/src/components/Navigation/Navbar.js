@@ -9,22 +9,34 @@ import "./Navbar.scss"
 import { connect } from "react-redux";
 
 export class Navbar extends Component {
-  state = {}
+  state = {
+    searchTerm: ''
+  }
+
+  handleSubmit = () => {
+    this.props.history.push('/search?searchTerm=' + this.state.searchTerm);
+  }
+
+  searchTermChanged = (e) => {
+    this.setState({searchTerm: e.target.value})
+  }
 
   render() {
-    console.log('props', this.props);
     return(
         <Menu className="navbar" fluid>
-          <Menu.Item header href={`/`}><img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/></Menu.Item>
+          <Menu.Item header onClick={() => this.props.history.push('/')}>
+            <img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/>
+          </Menu.Item>
           <Dropdown text='Learning Paths' item>
             <Dropdown.Menu>
               <NavigationLearningPath />
             </Dropdown.Menu>
           </Dropdown>
           <Menu.Item>
-            <Form id='navigation_site_search' method='GET' action='/search'>
+            <Form id='navigation_site_search' onSubmit={this.handleSubmit.bind(this)}>
               <Form.Group inline>
-                <Form.Input icon='search' placeholder='Search' name='searchTerm' />
+                <Form.Input icon='search' placeholder='Search' name='searchTerm' 
+                            value={this.state.searchTerm} onChange={this.searchTermChanged.bind(this)}/>
                 <Form.Button type="submit">
                   Submit
                 </Form.Button>

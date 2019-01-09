@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Container, Form, Grid, Input, Message} from 'semantic-ui-react';
+import {Button, Container, Form, Grid, Message} from 'semantic-ui-react';
 import { toggleLogin, toggleRegister } from '../../actions/navbarActions';
 import { registerUser } from '../../actions/registrationActions';
 import { connect } from "react-redux";
@@ -23,7 +23,6 @@ class SignUpForm extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('updated props', this.props);
     if ((prevProps.first_name !== this.props.first_name) ||
         (prevProps.last_name !== this.props.last_name) ||
         (prevProps.middle_name !== this.props.middle_name) ||
@@ -32,7 +31,7 @@ class SignUpForm extends React.Component {
         (prevProps.password !== this.props.password) ||
         (prevProps.in_business !== this.props.in_business) ||
         (prevProps.errors !== this.props.errors)) {
-      this.state = this.getState(prevProps);
+      this.setState(this.getState(prevProps));
     }
   }
 
