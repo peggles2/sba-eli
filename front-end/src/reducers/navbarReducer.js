@@ -1,4 +1,3 @@
-import React from 'react';
 import RegistrationModal from '../components/RegistrationModal/RegistrationModal';
 
 export default function reducer(state={
@@ -19,6 +18,12 @@ export default function reducer(state={
         modalType: RegistrationModal.types.signup
       }
     case 'REGISTER_FULFILLED':
+      return {
+        ...state,
+        open: true,
+        modalType: RegistrationModal.types.success
+      }
+    case 'LOGIN_FULFILLED':
       return {
         ...state,
         open: false,
