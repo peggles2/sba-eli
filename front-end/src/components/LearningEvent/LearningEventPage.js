@@ -4,7 +4,7 @@ import { completeLearningEvent } from "../../actions/learningEventActions";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-class LearningEventPage extends Component {
+export class LearningEventPage extends Component {
   componentDidMount() {
     this.completeEvent();
   }
