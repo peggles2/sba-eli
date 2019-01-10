@@ -1,6 +1,9 @@
 import React from 'react';
-import axios from 'axios';
-import {Button, Input, Container, Form} from 'semantic-ui-react';
+import {Button, Input, Container, Form, Message} from 'semantic-ui-react';
+import { loginUser } from '../../actions/registrationActions';
+import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
+import "./LoginForm.scss";
 
 class LoginForm extends React.Component {
   state = {
@@ -18,39 +21,49 @@ class LoginForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const url = process.env.REACT_APP_SERVICE_HOST + "/session"
 
-    axios.post(url, {
-      email: this.state.email.trim(),
-      password: this.state.password.trim()
-    }).then(() => {
-      console.log('Success!');
-    }).catch((e) => {
-      console.log('Failure!', e);
-    });
+    this.props.dispatch(loginUser({
+      email: this.state.email,
+      password: this.state.password
+    }));
+  }
+
+  getErrorMessageIfNeeded() {
+    if (this.props.userError) {
+      return <Message negative content={'Login failed. Please try again.'}></Message>
+    }
   }
 
   render() {
     return (
       <Container>
+        {this.getErrorMessageIfNeeded()}
         <Form onSubmit={this.handleSubmit.bind(this)}>
           <Form.Field>
+            <label>Email:</label>
             <Input type="text"
                    value={this.state.email}
                    placeholder="Email"
                    onChange={this.handleEmailChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field>
+            <label>Password:</label>
             <Input type="password"
                    value={this.state.password}
                    placeholder="Password"
                    onChange={this.handlePasswordChange.bind(this)}/><br />
           </Form.Field>
-          <Button type="submit">Submit</Button>
+          <Button className="submit" type="submit">Submit</Button>
         </Form>
       </Container>
     );
   }
 }
 
-export default LoginForm;
+export default connect((store) => {
+  return {
+    email: store.login.userData.email,
+    password: store.login.userData.password,
+    userError: store.login.userError
+  }
+})(withRouter(LoginForm));
