@@ -26,7 +26,7 @@ class RegistrationModal extends React.Component {
     return <Modal id="registrationModal"
                   open={this.props.open}
                   closeOnDimmerClick={false} 
-                  size={'mini'}>
+                  size={'tiny'}>
       <Modal.Content>
         <Grid>
           <Grid.Row stretched columns={16}>
@@ -34,7 +34,7 @@ class RegistrationModal extends React.Component {
               <h2>{this.getTitle(this.props.type)}</h2>
             </Grid.Column>
             <Grid.Column width={3}>
-              <Button icon><Icon link name='close' size='large' onClick={this.close}/></Button>
+              <Button className='close-icon' icon><Icon link name='close' size='large' onClick={this.close}/></Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>

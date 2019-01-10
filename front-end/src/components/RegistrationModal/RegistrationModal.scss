@@ -1,15 +1,24 @@
 @import "../../assets/styles/base";
 
-.registration-message {
+.registration-message span {
   font-weight: bold;
-  color: blue;
+  color: $light-blue;
 }
 
-span {
-  text-align: center;
-}
-
-#registrationModal .button {
+#registrationModal .close-icon {
   background: white;
   padding-top: 5px;
+}
+
+#registrationModal .button.submit {
+  background: $light-blue;
+  color: white;
+}
+
+#registrationModal h2 {
+  color: $dark-blue;
+}
+
+#registrationComplete .registration-message.row {
+  padding: 0;
 }

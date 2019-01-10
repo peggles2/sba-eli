@@ -28,25 +28,32 @@ class LoginForm extends React.Component {
     }));
   }
 
+  getErrorMessageIfNeeded() {
+    if (this.props.userError) {
+      return <Message negative content={'Login failed. Please try again.'}></Message>
+    }
+  }
+
   render() {
     return (
       <Container>
-        <Message negative className={this.props.userError ? '' : 'noError'}
-                       content={'Login failed. Please try again.'}></Message>
+        {this.getErrorMessageIfNeeded()}
         <Form onSubmit={this.handleSubmit.bind(this)}>
           <Form.Field>
+            <label>Email:</label>
             <Input type="text"
                    value={this.state.email}
                    placeholder="Email"
                    onChange={this.handleEmailChange.bind(this)}/> <br />
           </Form.Field>
           <Form.Field>
+            <label>Password:</label>
             <Input type="password"
                    value={this.state.password}
                    placeholder="Password"
                    onChange={this.handlePasswordChange.bind(this)}/><br />
           </Form.Field>
-          <Button type="submit">Submit</Button>
+          <Button className="submit" type="submit">Submit</Button>
         </Form>
       </Container>
     );
