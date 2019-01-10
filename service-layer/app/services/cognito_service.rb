@@ -45,4 +45,28 @@ module CognitoService
   def self.get_user(access_token)
     client.get_user(access_token: access_token)
   end
+
+  def self.forgot_password(email)
+    client.forgot_password(
+      client_id: ENV["AWS_COGNITO_CLIENT_ID"],
+      username: email,
+    )
+  end
+
+  def self.confirm_forgot_password(email, confirmation_code, password)
+    client.confirm_forgot_password(
+      client_id: ENV["AWS_COGNITO_CLIENT_ID"],
+      username: email,
+      confirmation_code: confirmation_code,
+      password: password,
+    )
+  end
+
+  def self.change_password(previous_password, proposed_password, access_token)
+    client.change_password(
+      previous_password: previous_password,
+      proposed_password: proposed_password,
+      access_token: access_token,
+    )
+  end
 end
