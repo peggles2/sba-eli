@@ -16,7 +16,7 @@ module Mocks
       response_body = options.fetch(:response_body,
                                   json_string("learning_events/learning_event_done.json"))
 
-      stub_authorized_request(:put, url).to_return(status: status, body: response_body)
+      stub_authorized_request(:post, url).to_return(status: status, body: response_body)
     end
   end
 end
