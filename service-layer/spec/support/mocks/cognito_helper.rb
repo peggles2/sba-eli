@@ -68,5 +68,31 @@ module Mocks
         Aws::CognitoIdentityProvider::Errors::NotAuthorizedException.new("username", "username")
       end
     end
+
+    def get_user_response(options = {})
+      email = options.fetch(:email, "jane.doe@example.com")
+      sub = options.fetch(:sub, SecureRandom.uuid)
+      email_verified = options.fetch(:email_verified, true)
+
+      Proc.new do
+        user_attributes = Array.new
+        user_attributes.push Aws::CognitoIdentityProvider::Types::AttributeType.new(
+          name: "sub",
+          value: sub,
+        )
+        user_attributes.push Aws::CognitoIdentityProvider::Types::AttributeType.new(
+          name: "email_verified",
+          value: email_verified,
+        )
+        user_attributes.push Aws::CognitoIdentityProvider::Types::AttributeType.new(
+          name: "email",
+          value: email,
+        )
+        Aws::CognitoIdentityProvider::Types::GetUserResponse.new(
+          username: email,
+          user_attributes: user_attributes,
+        )
+      end
+    end
   end
 end
