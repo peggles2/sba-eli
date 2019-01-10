@@ -16,5 +16,8 @@ Rails.application.routes.draw do
   resource :search, only: :show
   resource :session, only: %I[create destroy]
   resource :sign_up, only: :create
-  resources :users
+  resources :users do
+    resources :enrollments, only: :index
+  end
+  
 end

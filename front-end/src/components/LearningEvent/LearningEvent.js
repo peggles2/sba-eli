@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
 import LearningEventHeader from "./LearningEventHeader";
 import LearningEventManager from "./LearningEventManager";
 import LearningEventFooter from "./LearningEventFooter";
@@ -8,15 +10,12 @@ import "./LearningEvent.scss";
 import MetaTags from "../SEO/MetaTags";
 import LearningEventDiscussion from "../Discussion/LearningEventDiscussion";
 
-export default class LearningEvent extends Component {
-  constructor(props) {
-    super(props);
+import {
+  getLearningEvent,
+  getLearningEvents
+} from "../../actions/learningEventActions";
 
-    this.state = {
-      learningEvent: {}
-    };
-  }
-
+export class LearningEvent extends Component {
   static getEventPath(course_id, module_id, event_id) {
     return (
       `/learning_paths/${course_id}` +
@@ -29,68 +28,53 @@ export default class LearningEvent extends Component {
     this.setLearningEvent();
   }
 
-  componentWillReceiveProps(newProps) {
-    //Added this to account for react routing not updating with different props
-    if (this.props !== newProps) {
-      this.props = newProps;
+  componentDidUpdate(prevProps) {
+    if (this.props.match !== prevProps.match) {
       this.setLearningEvent();
     }
   }
 
   setLearningEvent() {
-    const { course_id, module_id, id: event_id } = this.props.match.params;
-    const url =
-      process.env.REACT_APP_SERVICE_HOST + `/learning_events/${event_id}`;
-    const url2 = process.env.REACT_APP_SERVICE_HOST + `/learning_events/`;
-
-    const eventParams = {
-      course_id,
-      module_id
-    };
-
-    axios
-      .get(url, { params: eventParams })
-      .then(res => {
-        const learningEvent = res.data;
-        this.setState({ learningEvent });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    axios
-      .get(url2, { params: eventParams })
-      .then(res => {
-        const learningModule = res.data;
-        this.setState({ learningModule });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    const {
+      id: course_id,
+      topicId: module_id,
+      eventId: event_id
+    } = this.props.match.params;
+    this.props.dispatch(getLearningEvent(course_id, module_id, event_id));
+    this.props.dispatch(getLearningEvents(course_id, module_id));
   }
 
   render() {
-    const event = this.state.learningEvent;
-    const topicTitle = this.props.topicTitle;
+    const { learningEvent, topicTitle } = this.props;
+
     return (
       <div>
-      <Container className="learning-event-container">
-        <MetaTags
-          metaTitle={event.title}
-          metaDescription={event.description}
-          canonicalUrl=""
-        />
-        <LearningEventHeader event={event} topicTitle={topicTitle} />
-        <LearningEventManager event={event} />
-        <Divider />
-        <LearningEventFooter
-          courseId={this.props.match.params.course_id}
-          module={this.state.learningModule}
-          event={this.state.learningEvent}
-        />
-      </Container>
-      <LearningEventDiscussion event={event} />
+        <Container className="learning-event-container">
+          <MetaTags
+            metaTitle={learningEvent.title}
+            metaDescription={learningEvent.description}
+            canonicalUrl=""
+          />
+          <LearningEventHeader event={learningEvent} topicTitle={topicTitle} />
+          <LearningEventManager event={learningEvent} />
+          <Divider />
+          <LearningEventFooter
+            courseId={this.props.match.params.id}
+            module={this.props.learningEvents}
+            event={this.props.learningEvent}
+          />
+        </Container>
+        <LearningEventDiscussion event={learningEvent} />
       </div>
     );
   }
 }
+
+export default withRouter(
+  connect(store => {
+    return {
+      learningEvent: store.learningEvent.learningEvent,
+      learningEvents: store.learningEvent.learningEvents
+    };
+  })(LearningEvent)
+);

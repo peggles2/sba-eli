@@ -11,11 +11,12 @@ export default class NavigationLearningPath extends Component {
     this.state = {
       learningPaths: []
     };
-  };
+  }
 
-  handleItemClick = (e, {name}) => this.setState({
-    activeItem: name
-  });
+  handleItemClick = (e, { name }) =>
+    this.setState({
+      activeItem: name
+    });
 
   componentDidMount() {
     this.fetchData();
@@ -35,15 +36,40 @@ export default class NavigationLearningPath extends Component {
       });
   }
 
-  render() {
-    return this.state.learningPaths.map(lp => (
-      <Dropdown.Item key={lp.id} style={{width: '300px'}}>
-        <Dropdown pointing='left' fluid text={lp.name}>
-          <Dropdown.Menu style={{width: '450px' }}>
-            <Header as='h1'><Link to={`/learning_paths/${lp.id}`} onClick={this.handleItemClick}>{lp.name}</Link></Header>
+  renderPathForLoggedIn(lp) {
+    //TODO Hook this into login session work when complete
+    const isLoggedIn = false;
+    if (isLoggedIn) {
+      return (
+        <Dropdown pointing="left" fluid text={lp.name}>
+          <Dropdown.Menu style={{ width: "450px" }}>
+            <Header as="h1">
+              <Link
+                to={`/learning_paths/${lp.id}`}
+                onClick={this.handleItemClick}
+              >
+                {lp.name}
+              </Link>
+            </Header>
             <NavigationLearningObjective learningPathId={lp.id} />
           </Dropdown.Menu>
         </Dropdown>
+      );
+    } else {
+      return (
+        <Dropdown.Item>
+          <Link to={`/learning_paths/${lp.id}`} onClick={this.handleItemClick}>
+            {lp.name}
+          </Link>
+        </Dropdown.Item>
+      );
+    }
+  }
+
+  render() {
+    return this.state.learningPaths.map(lp => (
+      <Dropdown.Item key={lp.id} style={{ width: "300px" }}>
+        {this.renderPathForLoggedIn(lp)}
       </Dropdown.Item>
     ));
   }

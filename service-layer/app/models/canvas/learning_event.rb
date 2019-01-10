@@ -31,8 +31,8 @@ module Canvas
 
     def self.done(course_id, module_id, id)
       uri = masquerade_current_user("/courses/#{course_id}/modules/#{module_id}/"\
-            "items/#{id}/done")
-      JSON.parse put(uri, base_options).body
+            "items/#{id}/mark_read")
+      JSON.parse post(uri, base_options).body
     end
   end
 end
