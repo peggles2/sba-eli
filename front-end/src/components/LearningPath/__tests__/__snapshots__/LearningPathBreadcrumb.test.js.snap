@@ -3,7 +3,7 @@
 exports[`LearningPathBreadcrumb should render correctly 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <LearningPathBreadCrumb
+  Symbol(enzyme.__unrendered__): <Connect(withRouter(LearningPathBreadCrumb))
     id={1}
     pathName="LP 1"
   />,
@@ -20,61 +20,28 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "children": Array [
-        <BreadcrumbSection
-          href="/"
-        >
-          Home
-        </BreadcrumbSection>,
-        <BreadcrumbDivider
-          icon="triangle right"
-        />,
-        <BreadcrumbSection
-          href="/learning_paths/1"
-        >
-          LP 1
-        </BreadcrumbSection>,
-      ],
+      "children": [Function],
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": "Home",
-          "href": "/",
+    "rendered": [Function],
+    "type": Object {
+      "$$typeof": Symbol(react.context),
+      "_calculateChangedBits": null,
+      "_context": Object {
+        "$$typeof": Symbol(react.context),
+        "Consumer": [Circular],
+        "Provider": Object {
+          "$$typeof": Symbol(react.provider),
+          "_context": [Circular],
         },
-        "ref": null,
-        "rendered": "Home",
-        "type": [Function],
+        "_calculateChangedBits": null,
+        "_currentRenderer": null,
+        "_currentRenderer2": null,
+        "_currentValue": null,
+        "_currentValue2": null,
+        "_threadCount": 0,
       },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "icon": "triangle right",
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": "LP 1",
-          "href": "/learning_paths/1",
-        },
-        "ref": null,
-        "rendered": "LP 1",
-        "type": [Function],
-      },
-    ],
-    "type": [Function],
+    },
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
@@ -82,61 +49,28 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "children": Array [
-          <BreadcrumbSection
-            href="/"
-          >
-            Home
-          </BreadcrumbSection>,
-          <BreadcrumbDivider
-            icon="triangle right"
-          />,
-          <BreadcrumbSection
-            href="/learning_paths/1"
-          >
-            LP 1
-          </BreadcrumbSection>,
-        ],
+        "children": [Function],
       },
       "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": "Home",
-            "href": "/",
+      "rendered": [Function],
+      "type": Object {
+        "$$typeof": Symbol(react.context),
+        "_calculateChangedBits": null,
+        "_context": Object {
+          "$$typeof": Symbol(react.context),
+          "Consumer": [Circular],
+          "Provider": Object {
+            "$$typeof": Symbol(react.provider),
+            "_context": [Circular],
           },
-          "ref": null,
-          "rendered": "Home",
-          "type": [Function],
+          "_calculateChangedBits": null,
+          "_currentRenderer": null,
+          "_currentRenderer2": null,
+          "_currentValue": null,
+          "_currentValue2": null,
+          "_threadCount": 0,
         },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "icon": "triangle right",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": "LP 1",
-            "href": "/learning_paths/1",
-          },
-          "ref": null,
-          "rendered": "LP 1",
-          "type": [Function],
-        },
-      ],
-      "type": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {
