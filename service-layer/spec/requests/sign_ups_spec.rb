@@ -26,7 +26,7 @@ describe "SignUps" do
             first_name: first_name,
             last_name: last_name,
             email: email,
-            password: password
+            password: password,
           }
           stub_create_user
           post uri, params: params
@@ -64,7 +64,7 @@ describe "SignUps" do
             first_name: "Nick",
             last_name: "Watson",
             email: "nick.watson@claritybizsol.com",
-            password: password
+            password: password,
           }
           post uri, params: params
           expect(response).to have_http_status(:unprocessable_entity)
