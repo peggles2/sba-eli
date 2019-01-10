@@ -4,21 +4,21 @@ import LearningPathProgress from "./LearningPathProgress";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-class LearningPathsItem extends Component {
-  state = { isLoggedIn: true }
+export class LearningPathsItem extends Component {
 
-  learningPathProgress = () => {
-    if(this.state.isLoggedIn) {
+  learningPathProgress = (total) => {
+    if(this.props.isUserLoggedIn) {
+      const complete = 0;
+
       return (
         <Card.Content>
-          <LearningPathProgress complete={4} total={5}/>
+          <LearningPathProgress complete={complete} total={total}/>
         </Card.Content>
       );
     }
   };
 
   render() {
-    const complete = 3;
     const total = 5;
     const learningPathDescription = "Maybe it means something more - something we can't yet understand."
 
@@ -35,12 +35,14 @@ class LearningPathsItem extends Component {
           <Card.Meta>{this.props.course_code}</Card.Meta>
           <Card.Description>{learningPathDescription}</Card.Description>
         </Card.Content>
-        {this.learningPathProgress()}
+        {this.learningPathProgress(total)}
       </Card>
     )
   }
 };
 
-export default connect((store) => {
-  return {}
-})(withRouter(LearningPathsItem));
+const mapStateToProps = (store) => {
+  return { isUserLoggedIn: store.login.isUserLoggedIn }
+}
+
+export default withRouter(connect(mapStateToProps)(LearningPathsItem));
