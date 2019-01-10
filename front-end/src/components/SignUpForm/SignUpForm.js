@@ -50,7 +50,6 @@ class SignUpForm extends React.Component {
   }
 
   showLogin = () => {
-    this.props.dispatch(toggleRegister(false));
     this.props.dispatch(toggleLogin(true));
   }
 
@@ -90,8 +89,6 @@ class SignUpForm extends React.Component {
     return (
       <Container>
         <Form onSubmit={this.handleSubmit.bind(this)}>
-          <h2>Register</h2>
-          <hr/>
           {this.getField('first_name', 'First Name', true)}
           {this.getField('last_name', 'Last Name', true)}
           {this.getField('middle_name', 'Middle Name')}

@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Modal} from 'semantic-ui-react';
+import {Modal, Grid, Button, Icon} from 'semantic-ui-react';
 import LoginForm from '../LoginForm/LoginForm';
 import SignUpForm from '../SignUpForm/SignUpForm';
 import RegistrationComplete from './RegistrationComplete';
 import {toggleLogin, toggleRegister} from '../../actions/navbarActions';
 import {connect} from "react-redux";
 import { withRouter } from 'react-router-dom';
+
+import "./RegistrationModal.scss"
 
 class RegistrationModal extends React.Component {
   constructor(props) {
@@ -21,12 +23,23 @@ class RegistrationModal extends React.Component {
   }
 
   render() {
-    return <Modal open={this.props.open} 
+    return <Modal id="registrationModal"
+                  open={this.props.open}
                   closeOnDimmerClick={false} 
-                  closeIcon 
-                  onClose={this.close}
                   size={'mini'}>
       <Modal.Content>
+        <Grid>
+          <Grid.Row stretched columns={16}>
+            <Grid.Column width={13}>
+              <h2>{this.getTitle(this.props.type)}</h2>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <Button icon><Icon link name='close' size='large' onClick={this.close}/></Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <hr/>
+
         {this.getModalContent(this.props.type)}
       </Modal.Content>
     </Modal>
@@ -41,6 +54,20 @@ class RegistrationModal extends React.Component {
       case types.success:
         return <RegistrationComplete/>
       default:
+        break;
+    }
+  }
+
+  getTitle(type) {
+    switch(type) {
+      case types.signup:
+        return 'Register';
+      case types.login:
+        return 'Welcome';
+      case types.success:
+        return 'Register'
+      default:
+        return '';
         break;
     }
   }

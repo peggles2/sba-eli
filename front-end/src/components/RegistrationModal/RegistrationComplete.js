@@ -5,9 +5,6 @@ import "./RegistrationModal.scss";
 export default class SearchPage extends Component {
   render() {
     return <Grid centered>
-            <Grid.Row>
-              <Grid.Column><h2>Register</h2><hr/></Grid.Column>
-            </Grid.Row>
             <Grid.Row columns={3}>
               <Grid.Column>
                 <img className='logo' src={`/modal-graphic-2x.png`} alt="Ascent"/>
