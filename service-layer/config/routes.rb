@@ -19,5 +19,4 @@ Rails.application.routes.draw do
   resources :users do
     resources :enrollments, only: :index
   end
-  
 end
