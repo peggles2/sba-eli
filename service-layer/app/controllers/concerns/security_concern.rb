@@ -38,7 +38,8 @@ module SecurityConcern
 
     begin
       cognito_response = CognitoService.get_user(token)
-      Current.user = Canvas::User.fetch_by_email(cognito_response[:username])
+      user_response = Canvas::User.fetch_by_email(cognito_response[:username])
+      Current.user = User.from_canvas_json(user_response)
       Current.access_token = token
       true
     rescue Aws::CognitoIdentityProvider::Errors::NotAuthorizedException
