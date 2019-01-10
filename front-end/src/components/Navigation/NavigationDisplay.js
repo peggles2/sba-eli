@@ -7,7 +7,6 @@ import LearningObjective from "../LearningObjective/LearningObjective";
 import LearningObjectives from "../LearningObjective/LearningObjectives";
 import LearningPath from "../LearningPath/LearningPath";
 import LearningPaths from "../LearningPath/LearningPaths";
-import SignUpForm from "../SignUpForm/SignUpForm";
 import SearchPage from "../Search/SearchPage";
 
 const NavigationDisplay = () => {

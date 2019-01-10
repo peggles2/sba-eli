@@ -51,7 +51,7 @@ describe "UserCreationService" do
     it "fails to create a user if the email is already registered" do
       subject.email = "john.doe@doe.com"
       VCR.use_cassette("failed_user_creation") do
-        expect(subject.create).to be_falsey
+        expect(subject.create.errors.any?).to be_truthy
       end
     end
   end

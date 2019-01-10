@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Card, Image } from "semantic-ui-react";
 import LearningPathProgress from "./LearningPathProgress";
+import { withRouter } from 'react-router-dom';
+import { connect } from "react-redux";
 
 class LearningPathsItem extends Component {
   state = { isLoggedIn: true }
@@ -27,7 +29,9 @@ class LearningPathsItem extends Component {
           alt="learning path image placeholder"
         />
         <Card.Content>
-          <Card.Header aria-label={`Link to Learning Path ` + this.props.name}><a href={`/learning_paths/${this.props.id}`}>{this.props.name}</a></Card.Header>
+          <Card.Header aria-label={`Link to Learning Path ` + this.props.name}>
+            <a href="#" onClick={() => { this.props.history.push('/learning_paths/' + this.props.id)}}>{this.props.name}</a>
+          </Card.Header>
           <Card.Meta>{this.props.course_code}</Card.Meta>
           <Card.Description>{learningPathDescription}</Card.Description>
         </Card.Content>
@@ -37,4 +41,6 @@ class LearningPathsItem extends Component {
   }
 };
 
-export default LearningPathsItem;
+export default connect((store) => {
+  return {}
+})(withRouter(LearningPathsItem));
