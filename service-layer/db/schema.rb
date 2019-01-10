@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_205542) do
+ActiveRecord::Schema.define(version: 2019_01_10_161517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1600,6 +1600,15 @@ ActiveRecord::Schema.define(version: 2018_12_11_205542) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["contentable_type", "contentable_id"], name: "idx_custom_contents_contentable_type_contentable_id", unique: true
+  end
+
+  create_table "fearless_discussion_maps", force: :cascade do |t|
+    t.integer "discussion_id", null: false
+    t.string "content_type", null: false
+    t.integer "content_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discussion_id"], name: "index_fearless_discussion_maps_on_discussion_id", unique: true
   end
 
   create_table "fearless_taggings", id: :serial, force: :cascade do |t|
