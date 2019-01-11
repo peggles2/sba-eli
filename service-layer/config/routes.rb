@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resource :enroll, only: :create
   end
   resources :learning_objectives, concerns: :contentable
+  resource :request_password, only: :create
+  resource :reset_password, only: :create
   resource :search, only: :show
   resource :session, only: %I[create destroy]
   resource :sign_up, only: :create

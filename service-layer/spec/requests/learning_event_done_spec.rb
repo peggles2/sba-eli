@@ -10,7 +10,8 @@ describe "LearningEventDone" do
     let (:learning_path_id) { 10 }
     let (:learning_objective_id) { 73 }
     let (:learning_event_id) { 3 }
-    let (:user_id) { 1 }
+    let (:user_id) { 3 }
+    let (:email) { "test.student@example.com" }
 
     it "returns a 401 if there is not an authenticated user" do
       VCR.turned_off do
@@ -25,10 +26,12 @@ describe "LearningEventDone" do
     it "returns OK if a user is authenticated" do
       sign_in_as_user
       VCR.turned_off do
-        stub_get_user_request(id: 14)
-        stub_learning_event_done(user_id: 14)
+        stub_get_user_request(id: user_id)
+        stub_learning_event_done(user_id: user_id)
         post "/learning_paths/#{learning_path_id}/learning_objectives/"\
-        "#{learning_objective_id}/learning_events/#{learning_event_id}/done"
+            "#{learning_objective_id}/learning_events/#{learning_event_id}/done",
+            params: {},
+            headers: authenticated_header(email: email, id: user_id)
         json = JSON.parse(response.body)
         expect(response).to be_successful
         expect(json["message"]).to eq("OK")
