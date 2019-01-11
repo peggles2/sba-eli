@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { Dropdown, Header } from "semantic-ui-react";
 import NavigationLearningObjective from "./NavigationLearningObjective";
 import axios from "axios";
+import { connect } from "react-redux";
 
-export default class NavigationLearningPath extends Component {
+export class NavigationLearningPath extends Component {
   constructor(props) {
     super(props);
 
@@ -37,9 +38,8 @@ export default class NavigationLearningPath extends Component {
   }
 
   renderPathForLoggedIn(lp) {
-    //TODO Hook this into login session work when complete
-    const isLoggedIn = false;
-    if (isLoggedIn) {
+    const { isUserLoggedIn } = this.props;
+    if (isUserLoggedIn) {
       return (
         <Dropdown pointing="left" fluid text={lp.name}>
           <Dropdown.Menu style={{ width: "450px" }}>
@@ -74,3 +74,9 @@ export default class NavigationLearningPath extends Component {
     ));
   }
 }
+
+const mapStateToProps = store => {
+  return { isUserLoggedIn: store.login.isUserLoggedIn };
+};
+
+export default connect(mapStateToProps)(NavigationLearningPath);
