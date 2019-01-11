@@ -102,11 +102,11 @@ export class LearningPath extends React.Component {
   }
 }
 
-export default withRouter(
-  connect(store => {
-    return {
-      learningPath: store.learningPath.learningPath,
-      topicsList: store.learningPath.topicsList
-    };
-  })(LearningPath)
-);
+const mapStateToProps = store => {
+  return {
+    learningPath: store.learningPath.learningPath,
+    topicsList: store.learningPath.topicsList
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(LearningPath));

@@ -70,11 +70,11 @@ export class LearningEvent extends Component {
   }
 }
 
-export default withRouter(
-  connect(store => {
-    return {
-      learningEvent: store.learningEvent.learningEvent,
-      learningEvents: store.learningEvent.learningEvents
-    };
-  })(LearningEvent)
-);
+const mapStateToProps = store => {
+  return {
+    learningEvent: store.learningEvent.learningEvent,
+    learningEvents: store.learningEvent.learningEvents
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(LearningEvent));
