@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   resource :session, only: %I[create destroy]
   resource :sign_up, only: :create
   resources :users
+  resource :discussion, only: :show
 end
