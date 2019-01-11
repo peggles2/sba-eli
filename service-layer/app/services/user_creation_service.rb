@@ -2,36 +2,34 @@ class UserCreationService
   include ActiveModel::Model
 
   attr_accessor :first_name,
+                :middle_name,
                 :last_name,
                 :email,
                 :short_name,
                 :password,
-                :password_confirmation,
+                :zip_code,
+                :in_business,
                 :user
 
-  validates :first_name, :last_name, :password_confirmation, presence: true
-  validates :email, presence: true, email: true
+  validates :first_name, :last_name, :email, presence: { message: "This is a required field" }
+  validates :email, email: { message: "This is not a valid email format" }
   validates :password, password_complexity: true
   validates_confirmation_of :password
 
   def create
-    return false unless valid?
+    return self if !valid?
 
     begin
       CognitoService.sign_up(email, password)
     rescue Aws::CognitoIdentityProvider::Errors::UsernameExistsException
       errors.add(:email, "already exists.")
-      return false
+      return self
     end
 
-    # TODO: We're going to want to save the user_sub from the
-    # cognito response as a custom attribute in canvas
-
-    # Create user in Canvas
     response = Canvas::User.create_user(build_canvas_json)
     self.user = User.from_canvas_json(response)
 
-    true
+    self
   end
 
   private

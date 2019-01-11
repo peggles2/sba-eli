@@ -13,7 +13,7 @@ const Navigation = () => {
         <NavigationDisplay />
       </Grid>
     </Router>
-  );
+  )
 };
 
 export default Navigation;

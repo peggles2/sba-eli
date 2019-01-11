@@ -20,17 +20,17 @@ describe "SignUps" do
         }
       end
 
-      it "creates a validate account" do
+      it "creates a valid account" do
         VCR.turned_off do
           params = {
             first_name: first_name,
             last_name: last_name,
             email: email,
             password: password,
-            password_confirmation: password,
           }
           stub_create_user
           post uri, params: params
+
           expect(response).to be_successful
         end
       end
@@ -40,10 +40,9 @@ describe "SignUps" do
       VCR.use_cassette("sign_ups/invalid_sign_up") do
         params = {
           first_name: first_name,
-          last_name: last_name,
+          last_name: nil, # required field
           email: email,
           password: password,
-          password_confirmation: "ThisAintThePassword",
         }
         post uri, params: params
         expect(response).to have_http_status(:unprocessable_entity)
@@ -60,13 +59,12 @@ describe "SignUps" do
       end
 
       it "returns unprocessable_entity if account already exists" do
-        VCR.use_cassette("sign_ups/duplicate_sign_up") do
+        VCR.turned_off do
           params = {
             first_name: "Nick",
             last_name: "Watson",
             email: "nick.watson@claritybizsol.com",
             password: password,
-            password_confirmation: password,
           }
           post uri, params: params
           expect(response).to have_http_status(:unprocessable_entity)

@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { Card } from 'semantic-ui-react';
 import { connect } from "react-redux";
 import LearningPathsItem from './LearningPathsItem';
@@ -22,11 +21,9 @@ export class LearningPathsList extends React.Component {
       }
 
     return(
-      <div>
-        <Card.Group>
-          {result}
-        </Card.Group>
-      </div>
+      <Card.Group itemsPerRow={3}>
+        {result}
+      </Card.Group>
     )
   }
 }
