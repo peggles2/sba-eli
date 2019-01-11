@@ -12,7 +12,7 @@ import { completeLearningEvent } from "../../actions/learningEventActions";
 
 export class LearningEventVideo extends Component {
   state = {
-    url: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4", //this.props.url,
+    url: this.props.url,
     playing: false,
     volume: 0.8,
     muted: false,
