@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Dropdown } from "semantic-ui-react";
-import NavigationLearningPath from "../NavigationLearningPath";
+import { NavigationLearningPath } from "../NavigationLearningPath";
 import { shallow, mount } from "enzyme";
 
 describe("NavigationLearningPath", () => {
