@@ -10,23 +10,16 @@ export function getLearningPaths() {
 }
 
 export function enrollUserInPath(id) {
-  return axios.post(baseUrl + `/learning_paths/${id}/enroll`);
-}
-
-export function enrollAndGetLearningPath(id) {
-  return dispatch => {
-    return enrollUserInPath(id).then(result => {
-      dispatch(getLearningPath(id, result));
-    });
+  return {
+    type: "ENROLL_USER_IN_PATH",
+    payload: axios.post(baseUrl + `/learning_paths/${id}/enroll`)
   };
 }
 
 export function getPathWithTopics(id) {
   return (dispatch, getState) => {
     if (getState().login.isUserLoggedIn) {
-      dispatch(enrollAndGetLearningPath(id)).then(() =>
-        dispatch(getTopicsForPath(id))
-      );
+      dispatch(enrollUserInPath(id));
     } else {
       dispatch(getLearningPath(id));
       dispatch(getTopicsForPath(id));
