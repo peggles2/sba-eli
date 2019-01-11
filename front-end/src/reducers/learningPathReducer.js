@@ -9,7 +9,9 @@ const defaultValue = {
 
   topicsList: [],
   pathTopicsLoading: true,
-  pathTopicsError: null
+  pathTopicsError: null,
+
+  enrollUserError: null
 };
 
 export default function reducer(state = defaultValue, action) {
@@ -38,14 +40,14 @@ export default function reducer(state = defaultValue, action) {
     case "GET_LEARNING_PATH":
       return {
         ...state,
-        learningPath: [],
+        learningPath: {},
         learningPathLoading: true,
         learningPathError: null
       };
     case "GET_LEARNING_PATH_FAILURE":
       return {
         ...state,
-        learningPath: [],
+        learningPath: {},
         learningPathLoading: false,
         learningPathError: action.payload
       };
@@ -76,6 +78,33 @@ export default function reducer(state = defaultValue, action) {
         topicsList: action.payload.data,
         pathTopicsLoading: false,
         pathTopicsError: null
+      };
+    case "ENROLL_USER_IN_PATH":
+      return {
+        ...state,
+        learningPath: {},
+        topicsList: [],
+        learningPathsLoading: true,
+        pathTopicsLoading: true,
+        enrollUserError: null
+      };
+    case "ENROLL_USER_IN_PATH_FAILURE":
+      return {
+        ...state,
+        learningPath: {},
+        topicsList: [],
+        learningPathsLoading: false,
+        pathTopicsLoading: false,
+        enrollUserError: action.payload
+      };
+    case "ENROLL_USER_IN_PATH_FULFILLED":
+      return {
+        ...state,
+        learningPath: action.payload.data.learningPath,
+        topicsList: action.payload.data.topicsList,
+        pathTopicsLoading: false,
+        learningPathsLoading: false,
+        enrollUserError: null
       };
     default:
       break;
