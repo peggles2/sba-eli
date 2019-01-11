@@ -23,11 +23,9 @@ export function enrollAndGetLearningPath(id) {
 
 export function getPathWithTopics(id) {
   return (dispatch, getState) => {
-    //get loggedin from state when implemented
-    const isLoggedIn = false;
-    if (isLoggedIn) {
-      dispatch(enrollAndGetLearningPath(id)).then(result =>
-        dispatch(getTopicsForPath(id, result))
+    if (getState().login.isUserLoggedIn) {
+      dispatch(enrollAndGetLearningPath(id)).then(() =>
+        dispatch(getTopicsForPath(id))
       );
     } else {
       dispatch(getLearningPath(id));
