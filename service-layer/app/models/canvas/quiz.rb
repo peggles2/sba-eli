@@ -34,7 +34,7 @@ module Canvas
 
       quiz = JSON.parse quiz
 
-      res = get("/quiz_submissions/#{submission["submission_id"]}/questions", base_options)
+      res = get("/quiz_submissions/#{submission["id"]}/questions", base_options)
       questions = res.body
 
       raise Exception, questions unless res.code == 200
@@ -47,7 +47,7 @@ module Canvas
         id:                 quiz["id"],
         title:              quiz["title"],
         description:        quiz["description"],
-        submission_id:      submission["submission_id"],
+        submission_id:      submission["id"],
         attempt:            submission["attempt"],
         validation_token:   submission["validation_token"],
         questions:          []

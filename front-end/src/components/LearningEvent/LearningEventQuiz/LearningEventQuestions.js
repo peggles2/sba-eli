@@ -73,7 +73,7 @@ export class MultipleChoiceQuestion extends Component {
             }} />
             <Form>
                 { question.answers.map(a =>
-                <Form.Field>
+                <Form.Field key={a.id}>
                     <Radio
                         label={a.text}
                         name='radioGroup'

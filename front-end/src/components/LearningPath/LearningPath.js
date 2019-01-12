@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { withRouter } from 'react-router-dom';
 import { Header, Divider, Grid, Button, Icon } from "semantic-ui-react";
 
 import TopicSideBar from "../TopicSideBar/TopicSidebar";
@@ -10,7 +11,7 @@ import MetaTags from "../SEO/MetaTags";
 
 import "./LearningPath.scss";
 
-export default class LearningPath extends React.Component {
+class LearningPath extends React.Component {
   state = {
     learningPath: {},
     topicsList: []
@@ -20,8 +21,10 @@ export default class LearningPath extends React.Component {
     this.initialFunctions();
   }
 
-  componentWillReceiveProps() {
-    this.initialFunctions();
+  componentDidUpdate(prevProps) {
+    if(this.props.match.params.topicId !== prevProps.match.params.topicId && this.props.match.params.eventId !== prevProps.match.params.eventId) {
+      this.initialFunctions();
+    }
   }
 
   initialFunctions() {
@@ -159,3 +162,5 @@ export default class LearningPath extends React.Component {
     );
   }
 }
+
+export default withRouter(LearningPath);
