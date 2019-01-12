@@ -60,7 +60,7 @@ class SignUpForm extends React.Component {
   }
 
   getFieldError(field) {
-    if (!this.props.errors[field])
+    if (!this.props || !this.props.errors || !this.props.errors[field])
       return '';
     return this.props.errors[field][0]
   }
