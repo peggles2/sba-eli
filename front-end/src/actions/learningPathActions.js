@@ -2,6 +2,10 @@ import axios from "axios";
 
 const baseUrl = process.env.REACT_APP_SERVICE_HOST;
 
+function axiosHeaders(token) {
+  return { AUTHORIZATION: token };
+}
+
 export function getLearningPaths() {
   return {
     type: "GET_LEARNING_PATHS",
@@ -9,17 +13,20 @@ export function getLearningPaths() {
   };
 }
 
-export function enrollUserInPath(id) {
+export function enrollUserInPath(id, token) {
   return {
     type: "ENROLL_USER_IN_PATH",
-    payload: axios.post(baseUrl + `/learning_paths/${id}/enroll`)
+    payload: axios.post(baseUrl + `/learning_paths/${id}/enroll`, {
+      headers: axiosHeaders(token)
+    })
   };
 }
 
 export function getPathWithTopics(id) {
   return (dispatch, getState) => {
     if (getState().login.isUserLoggedIn) {
-      dispatch(enrollUserInPath(id));
+      const { access_token } = getState().login.userData;
+      dispatch(enrollUserInPath(id, access_token));
     } else {
       dispatch(getLearningPath(id));
       dispatch(getTopicsForPath(id));
