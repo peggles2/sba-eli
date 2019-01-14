@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Dropdown, Header } from "semantic-ui-react";
+import { Dropdown, Header, Image } from "semantic-ui-react";
 import NavigationLearningObjective from "./NavigationLearningObjective";
 import axios from "axios";
+
+import './Navbar.scss'
 
 export default class NavigationLearningPath extends Component {
   constructor(props) {
@@ -40,7 +42,15 @@ export default class NavigationLearningPath extends Component {
       <Dropdown.Item key={lp.id} style={{width: '300px'}}>
         <Dropdown pointing='left' fluid text={lp.name}>
           <Dropdown.Menu style={{width: '450px' }}>
-            <Header as='h1'><Link to={`/learning_paths/${lp.id}`} onClick={this.handleItemClick}>{lp.name}</Link></Header>
+            <Header as='h1'>
+              <Image
+                src={`/Image_Placeholder.png`}
+                circular
+                size="medium"
+                alt="img placeholder"
+              />
+              <Link to={`/learning_paths/${lp.id}`} onClick={this.handleItemClick}>{lp.name}</Link>
+            </Header>
             <NavigationLearningObjective learningPathId={lp.id} />
           </Dropdown.Menu>
         </Dropdown>

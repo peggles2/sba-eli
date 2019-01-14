@@ -1,7 +1,62 @@
 @import "../../assets/styles/base";
 
-.navbar.ui.menu img.logo {
-  width: 4.5em;
+.navbar.ui.menu {
+  background-color: $dark-blue;
+
+  a {
+    padding-bottom: 0;
+  }
+
+  .dropdown {
+    padding-bottom: 0;
+  }
+
+  .dropdown.visible {
+    background-color: $grey1;
+
+    .text {
+      color: black;
+    }
+
+    img {
+      margin-right: 20px;
+    }
+
+    topic-description {
+      white-space: normal;
+      margin-top: 15px;
+    }
+  }
+
+  .search-bar {
+    padding: 0;
+    padding-top: 13px;
+
+    .fields {
+      margin-bottom: 0;
+    }
+  }
+
+  .text {
+    color: white;
+    font-size: 1.2em;
+  }
+
+  img.logo {
+    width: 3.5em;
+  }
+
+  .registrationButtons {
+    padding-bottom: 0;
+  }
+
+  .userButtons {
+    color: white;
+
+    a {
+      color: white;
+    }
+  }
 }
 
 .ui.button.invisible {

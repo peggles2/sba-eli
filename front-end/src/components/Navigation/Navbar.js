@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
+import {Button, Dropdown, Form, Menu, Input} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
 import RegistrationModal from '../RegistrationModal/RegistrationModal';
 import { toggleRegister, toggleLogin } from '../../actions/navbarActions';
 import "./Navbar.scss"
 
 import { connect } from "react-redux";
+import { logoutUser } from '../../actions/registrationActions';
 
 export class Navbar extends Component {
   state = {
-    searchTerm: ''
+    searchTerm: '',
+    userButtonHover: false
   }
 
   handleSubmit = () => {
@@ -19,6 +21,37 @@ export class Navbar extends Component {
 
   searchTermChanged = (e) => {
     this.setState({searchTerm: e.target.value})
+  }
+
+  loginButtons() {
+    return <Menu.Item className='registrationButtons'>
+      <div>
+        <Button className={this.props.isUserLoggedIn ? 'invisible' : 'visible'} onClick={() => this.props.dispatch(toggleRegister(true))}>Register</Button>
+        <Button className={this.props.isUserLoggedIn ? 'invisible' : 'visible'} onClick={() => this.props.dispatch(toggleLogin(true))}>Login</Button>
+        <RegistrationModal type={this.props.modalType} open={this.props.open}/>
+      </div>
+    </Menu.Item>
+  }
+
+  logoutLink() {
+    return <a onClick={() => this.props.dispatch(logoutUser(this.props.accessToken))}>Log out</a>
+  }
+
+  greeting() {
+    return <Menu.Item className='userButtons'>
+              <div>
+                Hi, {this.props.userData.user.name}
+              </div>
+           </Menu.Item>
+  }
+
+  userButtons() {
+    return <Menu.Item className='userButtons'>
+              <div onMouseEnter={() => { this.setState({userButtonHover: true})}}
+                 onMouseLeave={() => { this.setState({userButtonHover: false})}}>
+                 {this.state.userButtonHover ? this.logoutLink() : this.greeting()}
+              </div>
+           </Menu.Item>
   }
 
   render() {
@@ -32,7 +65,7 @@ export class Navbar extends Component {
               <NavigationLearningPath />
             </Dropdown.Menu>
           </Dropdown>
-          <Menu.Item>
+          <Menu.Item className="search-bar">
             <Form id='navigation_site_search' onSubmit={this.handleSubmit.bind(this)}>
               <Form.Group inline>
                 <Form.Input icon='search' placeholder='Search' name='searchTerm' 
@@ -44,13 +77,7 @@ export class Navbar extends Component {
             </Form>
           </Menu.Item>
           <Menu.Menu position='right'>
-            <Menu.Item>
-              <div>
-                <Button className={this.props.isUserLoggedIn ? 'invisible' : 'visible'} onClick={() => this.props.dispatch(toggleRegister(true))}>Register</Button>
-                <Button className={this.props.isUserLoggedIn ? 'invisible' : 'visible'} onClick={() => this.props.dispatch(toggleLogin(true))}>Login</Button>
-                <RegistrationModal type={this.props.modalType} open={this.props.open}/>
-              </div>
-            </Menu.Item>
+            {this.props.isUserLoggedIn ? this.userButtons() : this.loginButtons()}
           </Menu.Menu>
         </Menu>
     )
@@ -61,6 +88,8 @@ export default connect((store) => {
   return {
     modalType: store.navbar.modalType,
     open: store.navbar.open,
-    isUserLoggedIn: store.login.isUserLoggedIn
+    isUserLoggedIn: store.login.isUserLoggedIn,
+    userData: store.login.userData,
+    accessToken: store.login.userData.access_token
   }
 })(withRouter(Navbar));

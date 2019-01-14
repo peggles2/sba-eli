@@ -57,7 +57,8 @@ export default class NavigationLearningObjective extends Component {
 
     return (
       <div>
-        <em>{this.topicNumber()}</em>
+        <em>{this.topicNumber()}, 1 hour 24 minutes</em><br/>
+        <p className='topic-description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu viverra dolor. In pharetra non nunc vitae cursus. Donec fermentum vestibulum orci ut aliquam. Phasellus eu arcu scelerisque, pretium massa eget, semper justo.</p>
         <Divider />
         { topics }
       </div>
