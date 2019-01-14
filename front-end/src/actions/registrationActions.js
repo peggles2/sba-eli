@@ -19,7 +19,6 @@ export function loginUser(userData) {
 }
 
 export function logoutUser(token) {
-  console.log('logging out using token', token);
   const url = process.env.REACT_APP_SERVICE_HOST + "/session"
 
   return {

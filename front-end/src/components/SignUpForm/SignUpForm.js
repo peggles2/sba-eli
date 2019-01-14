@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import "./SignUpForm.scss";
 
-class SignUpForm extends React.Component {
+export class SignUpForm extends React.Component {
   state = this.getState(this.props);
 
   getState(props) {
@@ -73,11 +73,16 @@ class SignUpForm extends React.Component {
     }
   }
 
+  getError(field) {
+    if (this.hasError(field)) {
+      return <Message negative content={this.getFieldError(field)}/>
+    }
+  }
+
   getField(field, fieldName, required) {
     return <Form.Field required={required}>
               <label>{fieldName}</label>
-              <Message negative className={this.hasError(field) ? '' : 'noError'}
-                       content={this.getFieldError(field)}></Message>
+              {this.getError(field)}
               <Form.Input placeholder={fieldName}
                    value={this.state[field]}
                    onChange={this.getChangeHandler(field).bind(this)}
@@ -96,8 +101,7 @@ class SignUpForm extends React.Component {
           {this.getField('email', 'Email', true)}
           <Form.Field required>
               <label>Password</label>
-              <Message negative className={this.hasError('password') ? '' : 'noError'}
-                       content={this.getFieldError('password')}></Message>
+              {this.getError('password')}
               <Form.Input placeholder="Password" type="password"
                    value={this.state.password}
                    onChange={this.getChangeHandler('password').bind(this)}
