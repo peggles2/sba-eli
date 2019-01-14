@@ -1,5 +1,8 @@
+require 'discourse_api'
 class DiscussionsController < ApplicationController
+    #include DiscourseAPI
     def show
+      client = DiscourseAPI::Client.new("https://forum-dev.eli.fearless.tech")
       @results = DiscussionMap.where(query_parameters)
     end
   
