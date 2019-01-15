@@ -1,6 +1,7 @@
 import React from "react";
-import axios from "axios";
 import { Header, Divider, Grid, Button, Icon } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import TopicSideBar from "../TopicSideBar/TopicSidebar";
 import TopicContentView from "../TopicContentView/TopicContentView";
@@ -8,89 +9,30 @@ import LearningEvent from "../LearningEvent/LearningEvent";
 import LearningPathBreadCrumb from "./LearningPathBreadcrumb";
 import MetaTags from "../SEO/MetaTags";
 
+import { getPathWithTopics } from "../../actions/learningPathActions";
+
 import "./LearningPath.scss";
 
-export default class LearningPath extends React.Component {
-  state = {
-    learningPath: {},
-    topicsList: []
-  };
-
+export class LearningPath extends React.Component {
   componentDidMount() {
-    this.initialFunctions();
-  }
-
-  componentWillReceiveProps() {
-    this.initialFunctions();
-  }
-
-  initialFunctions() {
     const id = this.props.match.params.id;
-    this.fetchLearningPath(id);
-    this.fetchTopics(id);
-    this.showLearningEvent();
-  }
-
-  showLearningEvent() {
-    this.setState({
-      isLearningEvent:
-        this.props.match.params.topicId && this.props.match.params.eventId
-    });
-  }
-
-  fetchLearningPath(id) {
-    const url = process.env.REACT_APP_SERVICE_HOST + "/learning_paths/" + id;
-
-    axios.get(url).then(res => {
-      const learningPath = res.data;
-      this.setState({ learningPath });
-    });
-  }
-
-  fetchTopics(pathId) {
-    const url = process.env.REACT_APP_SERVICE_HOST + `/learning_objectives/`;
-
-    const topicParams = {
-      course_id: pathId
-    };
-
-    axios
-      .get(url, { params: topicParams })
-      .then(res => {
-        const topicsList = res.data;
-        this.setState({ topicsList });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.props.dispatch(getPathWithTopics(id));
   }
 
   renderRightColumnContent() {
-    const isLearningEvent = this.state.isLearningEvent;
+    const isLearningEvent =
+      this.props.match.params.topicId && this.props.match.params.eventId;
+    const { topicId, id } = this.props.match.params;
 
     if (isLearningEvent) {
-      //This is to mimic react routing for the learning event. Learning event component
-      //should be refactored to pass props
-      const { eventId, topicId, id } = this.props.match.params;
-      const eventMatch = {
-        params: {
-          id: eventId,
-          module_id: topicId,
-          course_id: id
-        }
-      };
-
       //send the topic Title for wrapper header purposes, break this into state?
-      const topicTitle = this.state.topicsList.find(
+      const topicTitle = this.props.topicsList.find(
         topic => topic.id.toString() === topicId.toString()
-      );      
-      return <LearningEvent match={eventMatch} topicTitle={topicTitle ? topicTitle.name : null} />;
+      );
+      return <LearningEvent topicTitle={topicTitle ? topicTitle.name : null} />;
     } else {
       return (
-        <TopicContentView
-          course_id={this.props.match.params.id}
-          topicsList={this.state.topicsList}
-        />
+        <TopicContentView course_id={id} topicsList={this.props.topicsList} />
       );
     }
   }
@@ -100,7 +42,7 @@ export default class LearningPath extends React.Component {
 
     const sideBarProps = {
       course_id: courseId,
-      topicsList: this.state.topicsList,
+      topicsList: this.props.topicsList,
       module_id: this.props.match.params.topicId,
       event_id: this.props.match.params.eventId
     };
@@ -110,8 +52,8 @@ export default class LearningPath extends React.Component {
     return (
       <Grid centered>
         <MetaTags
-          metaTitle={this.state.learningPath.name}
-          metaDescription={this.state.learningPath.description}
+          metaTitle={this.props.learningPath.name}
+          metaDescription={this.props.learningPath.description}
           canonicalUrl={`https://sba.gov/learning_paths/${
             this.props.match.params.id
           }`}
@@ -119,7 +61,7 @@ export default class LearningPath extends React.Component {
         <Grid.Row className={"path-breadcrumb-row"}>
           <Grid.Column mobile={15} tablet={15} computer={15}>
             <LearningPathBreadCrumb
-              pathName={this.state.learningPath.name}
+              pathName={this.props.learningPath.name}
               {...breadCrumbProps}
             />
           </Grid.Column>
@@ -127,7 +69,7 @@ export default class LearningPath extends React.Component {
         <Grid.Row className={"path-header-row"}>
           <Grid.Column mobile={15} tablet={15} computer={15}>
             <Header as="h2" className={"path-header"}>
-              {this.state.learningPath.name}
+              {this.props.learningPath.name}
               <Button className={"path-header-share mobile hidden"}>
                 Share &nbsp; <Icon name={"share"} />
               </Button>
@@ -159,3 +101,12 @@ export default class LearningPath extends React.Component {
     );
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    learningPath: store.learningPath.learningPath,
+    topicsList: store.learningPath.topicsList
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(LearningPath));
