@@ -1603,7 +1603,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_161517) do
   end
 
   create_table "fearless_discussion_maps", force: :cascade do |t|
-    t.integer "discussion_id", null: false
+    t.string "discussion_id", null: false
     t.string "content_type", null: false
     t.integer "content_id", null: false
     t.datetime "created_at", null: false
