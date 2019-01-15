@@ -1,5 +1,10 @@
 class DiscussionRepliesController < ApplicationController
-  before_action :valid_session?
+  before_action :valid_session?, except: :index
+
+  def index
+    response = DiscourseClient.create.topic_posts(params[:discussion_id])
+    render json: response
+  end
 
   def show
     response = DiscourseClient.create.get_post(params[:id])
