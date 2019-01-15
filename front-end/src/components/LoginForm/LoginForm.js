@@ -1,6 +1,7 @@
 import React from 'react';
-import {Button, Input, Container, Form, Message} from 'semantic-ui-react';
+import {Button, Input, Container, Form, Message, Grid} from 'semantic-ui-react';
 import { loginUser } from '../../actions/registrationActions';
+import { toggleRegister } from '../../actions/navbarActions'
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import "./LoginForm.scss";
@@ -53,7 +54,34 @@ export class LoginForm extends React.Component {
                    placeholder="Password"
                    onChange={this.handlePasswordChange.bind(this)}/><br />
           </Form.Field>
-          <Button className="submit" type="submit">Submit</Button>
+          <Grid centered>
+            <Grid.Row>
+              <Grid.Column width={4}>
+                <Button className="submit" type="submit">Sign In</Button>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={4}>
+                <hr/>
+              </Grid.Column>
+              <Grid.Column className='orText' width={2}>
+                OR
+              </Grid.Column>
+              <Grid.Column width={4}>
+                <hr/>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={6}>
+                <b>Don't have an account?</b>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={4}>
+                <Button className="switchToRegister" onClick={() => {this.props.dispatch(toggleRegister(true))}}>Register</Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Form>
       </Container>
     );
