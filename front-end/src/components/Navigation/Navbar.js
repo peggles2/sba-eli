@@ -34,12 +34,14 @@ export class Navbar extends Component {
   }
 
   logoutLink() {
-    return <a onClick={() => this.props.dispatch(logoutUser(this.props.accessToken))}>Log out</a>
+    return <div class='logoutLink'>
+            <a onClick={() => this.props.dispatch(logoutUser(this.props.accessToken))}>Log out</a>
+           </div>
   }
 
   greeting() {
     return <Menu.Item className='userButtons'>
-              <div>
+              <div className='greeting'>
                 Hi, {this.props.userData.user.name}
               </div>
            </Menu.Item>
