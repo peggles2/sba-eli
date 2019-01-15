@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resource :confirmation_code, only: :create
   resources :discussions, only: %I[show create] do
-    resources :discussion_replies, only: %I[show create]
+    resources :discussion_replies, only: %I[index show create]
   end
   resources :learning_events, concerns: :contentable
   resources :learning_paths, concerns: :contentable do
