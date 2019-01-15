@@ -8,9 +8,12 @@ Rails.application.routes.draw do
       to: "learning_event_done#update"
 
   resource :confirmation_code, only: :create
-  resources :discussions, only: %I[show create] do
+  resources :discussions, only: %I[create] do
     resources :discussion_replies, only: %I[index show create]
   end
+
+  get "discussions/:content_type/:content_id", to: "discussions#show"
+
   resources :learning_events, concerns: :contentable
   resources :learning_paths, concerns: :contentable do
     resource :enroll, only: :create
