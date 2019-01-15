@@ -24,7 +24,7 @@ describe("LoginForm", () => {
   it("can submit the form", () => {
     const dispatch = jasmine.createSpy();
     const wrapper = shallow(<ConnectedLoginForm.WrappedComponent dispatch={dispatch}/>);
-    expect(wrapper.find('Button').length).toEqual(1);
+    expect(wrapper.find('Button').length).toEqual(2);
     wrapper.find('Form').simulate('submit', {preventDefault: function(){}});
     expect(dispatch).toHaveBeenCalled();
   })

@@ -69,7 +69,8 @@ export class NavigationLearningPath extends Component {
   }
 
   render() {
-    return this.state.learningPaths.map(lp => (
+    const learningPaths = this.state.learningPaths || [];
+    return learningPaths.map(lp => (
       <Dropdown.Item key={lp.id} style={{ width: "300px" }}>
         {this.renderPathForLoggedIn(lp)}
       </Dropdown.Item>

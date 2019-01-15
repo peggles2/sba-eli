@@ -39,7 +39,8 @@ export default class NavigationLearningObjective extends Component {
   }
 
   topicNumber() {
-    const topicNumber = this.state.learningObjectives.length;
+    const objectives = this.state.learningObjectives || [];
+    const topicNumber = objectives.length;
 
     if (topicNumber === 1) {
       return topicNumber + " Topic";
@@ -50,8 +51,8 @@ export default class NavigationLearningObjective extends Component {
 
   render() {
     const learningObjectivePath = `/learning_paths/${this.props.learningPathId}/learning_objectives/`
-
-    const topics = this.state.learningObjectives.map((lo, index) => (
+    const objectives = this.state.learningObjectives || [];
+    const topics = objectives.map((lo, index) => (
       <List.Item key={'learning_objective_' + index}><Link to={learningObjectivePath + lo.id} onClick={this.handleItemClick}>{lo.name}</Link></List.Item>
     ));
 
