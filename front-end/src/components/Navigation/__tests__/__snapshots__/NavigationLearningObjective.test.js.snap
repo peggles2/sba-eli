@@ -20,7 +20,14 @@ ShallowWrapper {
       "children": Array [
         <em>
           0 Topics
+          , 1 hour 24 minutes
         </em>,
+        <br />,
+        <p
+          className="topic-description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu viverra dolor. In pharetra non nunc vitae cursus. Donec fermentum vestibulum orci ut aliquam. Phasellus eu arcu scelerisque, pretium massa eget, semper justo.
+        </p>,
         <Divider />,
         Array [],
       ],
@@ -32,11 +39,38 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "0 Topics",
+          "children": Array [
+            "0 Topics",
+            ", 1 hour 24 minutes",
+          ],
         },
         "ref": null,
-        "rendered": "0 Topics",
+        "rendered": Array [
+          "0 Topics",
+          ", 1 hour 24 minutes",
+        ],
         "type": "em",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": "br",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu viverra dolor. In pharetra non nunc vitae cursus. Donec fermentum vestibulum orci ut aliquam. Phasellus eu arcu scelerisque, pretium massa eget, semper justo.",
+          "className": "topic-description",
+        },
+        "ref": null,
+        "rendered": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu viverra dolor. In pharetra non nunc vitae cursus. Donec fermentum vestibulum orci ut aliquam. Phasellus eu arcu scelerisque, pretium massa eget, semper justo.",
+        "type": "p",
       },
       Object {
         "instance": null,
@@ -59,7 +93,14 @@ ShallowWrapper {
         "children": Array [
           <em>
             0 Topics
+            , 1 hour 24 minutes
           </em>,
+          <br />,
+          <p
+            className="topic-description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu viverra dolor. In pharetra non nunc vitae cursus. Donec fermentum vestibulum orci ut aliquam. Phasellus eu arcu scelerisque, pretium massa eget, semper justo.
+          </p>,
           <Divider />,
           Array [],
         ],
@@ -71,11 +112,38 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "0 Topics",
+            "children": Array [
+              "0 Topics",
+              ", 1 hour 24 minutes",
+            ],
           },
           "ref": null,
-          "rendered": "0 Topics",
+          "rendered": Array [
+            "0 Topics",
+            ", 1 hour 24 minutes",
+          ],
           "type": "em",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": "br",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu viverra dolor. In pharetra non nunc vitae cursus. Donec fermentum vestibulum orci ut aliquam. Phasellus eu arcu scelerisque, pretium massa eget, semper justo.",
+            "className": "topic-description",
+          },
+          "ref": null,
+          "rendered": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu viverra dolor. In pharetra non nunc vitae cursus. Donec fermentum vestibulum orci ut aliquam. Phasellus eu arcu scelerisque, pretium massa eget, semper justo.",
+          "type": "p",
         },
         Object {
           "instance": null,
