@@ -5,7 +5,7 @@ namespace :db do
 
     begin
       ActiveRecord::Base.establish_connection
-      %w[content_tags context_modules courses fearless_tags
+      %w[content_tags context_modules courses pseudonyms fearless_tags
          fearless_taggings users].each do |table_name|
         next if TABLES_TO_SKIP.include?(table_name)
 

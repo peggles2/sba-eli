@@ -1,5 +1,5 @@
 import React from "react";
-import LearningEventPage from "../LearningEventPage";
+import { LearningEventPage } from "../LearningEventPage";
 import { shallow } from "enzyme";
 
 describe("LearningEventPage", () => {
@@ -7,6 +7,6 @@ describe("LearningEventPage", () => {
     const event = { eventContent: { body: "<div></div>" } };
     const wrapper = shallow(<LearningEventPage event={event} />);
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find("div").exists()).toBe(true);
   });
 });

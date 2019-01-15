@@ -4,7 +4,7 @@ import { completeLearningEvent } from "../../actions/learningEventActions";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-class LearningEventPage extends Component {
+export class LearningEventPage extends Component {
   componentDidMount() {
     this.completeEvent();
   }
@@ -16,8 +16,8 @@ class LearningEventPage extends Component {
   }
 
   completeEvent() {
-    const isLoggedIn = false;
-    if (isLoggedIn && !this.props.event.completion_requirement.completed) {
+    const { isUserLoggedIn, event } = this.props;
+    if (isUserLoggedIn && !event.completion_requirement.completed) {
       const {
         id: path_id,
         topicId: objective_id,
@@ -44,4 +44,8 @@ class LearningEventPage extends Component {
   }
 }
 
-export default withRouter(connect()(LearningEventPage));
+const mapStateToProps = store => {
+  return { isUserLoggedIn: store.login.isUserLoggedIn };
+};
+
+export default withRouter(connect(mapStateToProps)(LearningEventPage));

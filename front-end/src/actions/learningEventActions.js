@@ -35,6 +35,6 @@ export function completeLearningEvent(path_id, objective_id, event_id) {
 
   return {
     type: "COMPLETE_LEARNING_EVENT",
-    payload: axios.put(url)
+    payload: axios.post(url)
   };
 }
