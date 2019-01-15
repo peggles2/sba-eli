@@ -10,7 +10,7 @@ class DiscussionsController < ApplicationController
       response = client.create_topic(
         skip_validations: true,
         title: "Discussion #{params[:content_type]} #{params[:content_id]}",
-        raw: "Please discuss this here!",
+        raw: "",
       )
 
       discussion_map = DiscussionMap.create!(
