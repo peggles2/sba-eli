@@ -3,7 +3,7 @@
 # Table name: fearless_discussion_maps
 #
 #  id            :bigint(8)        not null, primary key
-#  discussion_id :integer          not null
+#  discussion_id :string           not null
 #  content_type  :string           not null
 #  content_id    :integer          not null
 #  created_at    :datetime         not null
