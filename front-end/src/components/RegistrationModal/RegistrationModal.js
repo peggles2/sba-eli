@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 
 import "./RegistrationModal.scss"
 
-class RegistrationModal extends React.Component {
+export class RegistrationModal extends React.Component {
   constructor(props) {
     super(props);
 
@@ -48,6 +48,7 @@ class RegistrationModal extends React.Component {
   getModalContent(type) {
     switch(type) {
       case types.signup:
+        console.log('signup');
         return <SignUpForm/>;
       case types.login:
         return <LoginForm/>;

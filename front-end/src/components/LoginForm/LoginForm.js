@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import "./LoginForm.scss";
 
-class LoginForm extends React.Component {
+export class LoginForm extends React.Component {
   state = {
     email: '',
     password: ''
