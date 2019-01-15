@@ -1,9 +1,10 @@
 module DiscourseClient
   ##
   # This method creates a instance of the Discourse API Client.
-  def self.create
+  def self.create(options = {})
+    discourse_user = options.fetch(:user, ENV["DISCOURSE_USER"])
     client = DiscourseApi::Client.new(ENV["DISCOURSE_HOST"])
-    client.api_username = ENV["DISCOURSE_USER"]
+    client.api_username = discourse_user
     client.api_key = ENV["DISCOURSE_API_KEY"]
     client
   end
