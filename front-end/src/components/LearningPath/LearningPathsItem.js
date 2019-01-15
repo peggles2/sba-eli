@@ -15,8 +15,8 @@ export class LearningPathsItem extends Component {
   }
 
   learningPathProgress = (total) => {
-    // const isUserLoggedIn = this.props.isUserLoggedIn
-    const isUserLoggedIn = true;
+    const isUserLoggedIn = this.props.isUserLoggedIn;
+
     if(isUserLoggedIn) {
       const complete = 0;
 
@@ -63,7 +63,7 @@ export class LearningPathsItem extends Component {
         />
         <Card.Content>
           <Card.Header aria-label={`Link to Learning Path ` + this.props.name}>
-            <a href="#" onClick={() => { this.props.history.push('/learning_paths/' + this.props.id)}}>{this.props.name}</a>
+            <a onClick={() => { this.props.history.push('/learning_paths/' + this.props.id)}}>{this.props.name}</a>
           </Card.Header>
           <Card.Meta>{this.props.course_code}</Card.Meta>
           <Card.Description>{learningPathDescription}</Card.Description>
