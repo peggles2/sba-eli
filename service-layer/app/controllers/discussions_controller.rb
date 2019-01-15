@@ -1,22 +1,30 @@
-require 'discourse_api'
 class DiscussionsController < ApplicationController
-    #include DiscourseAPI
-    def show
-      client = DiscourseApi::Client.new("https://forum-dev.eli.fearless.tech")
-      @results = DiscussionMap.where(query_parameters)
-    end
+  def show
+    discussion_map = DiscussionMap.find_by(
+      content_type: params[:content_type],
+      content_id: params[:content_id],
+    )
 
-    def create
-      render json: null
-    end
+    unless discussion_map
+      client = DiscourseClient.create
+      response = client.create_topic(
+        skip_validations: true,
+        title: "Discussion #{params[:content_type]} #{params[:content_id]}",
+        raw: "",
+      )
 
-    # The query param method ensures that only the following parameters are passed
-    # to the method
-    def query_parameters
-      params.permit(
-        :content_id,
-        :content_type,
-        :page
+      discussion_map = DiscussionMap.create!(
+        content_type: params[:content_type],
+        content_id: params[:content_id],
+        discussion_id: response["topic_slug"],
       )
     end
+
+    replies = DiscourseClient.create.topic(discussion_map.discussion_id)
+    render json: replies
   end
+
+  def create
+    render json: null
+  end
+end
