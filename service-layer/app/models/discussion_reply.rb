@@ -32,6 +32,8 @@ class DiscussionReply
     self.user_name = response["display_username"]
     self.user_title = response["user_title"]
     self.timestamp = response["created_at"]
+    self.post_number = response["post_number"]
+    self.reply_to_post_number = response["reply_to_post_number"]
 
     true
   rescue DiscourseApi::UnauthenticatedError
