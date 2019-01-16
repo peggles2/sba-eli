@@ -1,16 +1,8 @@
 import React, {Component} from "react";
 import {Form, Input, Grid, TextArea} from "semantic-ui-react";
+import {connect} from "react-redux";
 
-export default class DiscussionPost extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      //TODO: update this logic when we have signon working
-      signedIn: true,
-      parentId: this.props.parent.id
-    };
-  };
+export class DiscussionPost extends Component {
 
   clearPost(event) {
     event.preventDefault();
@@ -23,7 +15,7 @@ export default class DiscussionPost extends Component {
   }
 
   ifRegistered() {
-    if (this.state.signedIn) { 
+    if (this.props.isUserLoggedIn) { 
       return <Grid.Row centered>
         <Grid.Column width={15}>
           <Form method="POST" action="/discuss">
@@ -36,7 +28,7 @@ export default class DiscussionPost extends Component {
                 Add Comment
               </Form.Button>
             </Form.Group>
-            <Input type="hidden" name="content_id" value={this.state.parentId}/>
+            <Input type="hidden" name="content_id" value={this.props.parent_id}/>
           </Form>
         </Grid.Column>
       </Grid.Row>
@@ -45,6 +37,14 @@ export default class DiscussionPost extends Component {
   }
 
   render() {
-    return (this.ifRegistered())
+    return (this.ifRegistered(this.props.parent_id))
   }
 }  
+
+const mapStateToProps = store => {
+  return {
+    isUserLoggedIn: store.login.isUserLoggedIn
+  }
+}
+
+export default connect(mapStateToProps)(DiscussionPost)
