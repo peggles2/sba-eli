@@ -15,6 +15,7 @@ module DiscourseClient
     discourse_client = create
     discourse_client.create_user(
       name: full_name,
+      display_username: full_name,
       email: email,
       password: SecureRandom.uuid,
       username: username_from_id(canvas_id),
