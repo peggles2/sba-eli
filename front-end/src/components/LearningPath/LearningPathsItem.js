@@ -8,21 +8,30 @@ import { connect } from "react-redux";
 import { getLearningEvents } from "../../actions/learningEventActions";
 
 export class LearningPathsItem extends Component {
-  state = { topicsList: [] }
+  state = {
+    topicsList: [],
+    completedMLE: 0,
+  }
 
   componentDidMount() {
+    const isUserLoggedIn = this.props.isUserLoggedIn;
+
     this.getTopicsList();
+
+    if(isUserLoggedIn) {
+      this.getCompletedMicroLearningEvents();
+    }
   }
 
   learningPathProgress = (total) => {
     const isUserLoggedIn = this.props.isUserLoggedIn;
 
     if(isUserLoggedIn) {
-      const complete = 0;
+      const completed = this.state.completedMLE;
 
       return (
         <Card.Content>
-          <LearningPathProgress complete={complete} total={total}/>
+          <LearningPathProgress complete={completed} total={total}/>
         </Card.Content>
       );
     }
@@ -36,6 +45,17 @@ export class LearningPathsItem extends Component {
         const topicsList = res.data
         this.setState({ topicsList })
       })
+  }
+
+  getCompletedMicroLearningEvents = () => {
+    const baseUrl = process.env.REACT_APP_SERVICE_HOST;
+    const id = this.props.id;
+
+    axios.get(baseUrl + `/learning_paths/${id}/progress`)
+      .then(res => {
+        const completed = res.data.course_progress.requirement.completed_count;
+        this.setState({completedMLE: completed})
+      });
   }
 
   totalMicroLearningEvents = () => {
