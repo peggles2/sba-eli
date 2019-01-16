@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { withRouter } from 'react-router-dom';
 import { Header, Divider, Grid, Button, Icon } from "semantic-ui-react";
 
 import TopicSideBar from "../TopicSideBar/TopicSidebar";
@@ -11,7 +10,7 @@ import MetaTags from "../SEO/MetaTags";
 
 import "./LearningPath.scss";
 
-class LearningPath extends React.Component {
+export default class LearningPath extends React.Component {
   state = {
     learningPath: {},
     topicsList: []
@@ -162,5 +161,3 @@ class LearningPath extends React.Component {
     );
   }
 }
-
-export default withRouter(LearningPath);

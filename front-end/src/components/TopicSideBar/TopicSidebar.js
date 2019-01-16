@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { Accordion, Container } from "semantic-ui-react";
 import TopicEventList from "./TopicEventList";
 import TopicProgress from "./TopicProgress";
-import { withRouter } from 'react-router-dom';
 import "./TopicSidebar.scss";
 
-class TopicSideBar extends Component {
+export default class TopicSideBar extends Component {
   constructor(props) {
     super(props);
 
@@ -68,5 +67,3 @@ class TopicSideBar extends Component {
     return this.renderTopicsList(this.props.topicsList);
   }
 }
-
-export default withRouter(TopicSideBar)
