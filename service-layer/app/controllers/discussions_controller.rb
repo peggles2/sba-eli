@@ -4,14 +4,16 @@ class DiscussionsController < ApplicationController
       content_type: params[:content_type],
       content_id: params[:content_id],
     )
-    
+
     @discussion_replies = if discussion_map.present?
                             response = DiscourseClient.create.topic_posts(
                               discussion_map.discussion_id,
                             )
                             Rails.logger.info response
+                            @post_count = response["post_stream"]["posts"].size
                             DiscussionReply.from_discourse_list(response)
                           else
+                            @post_count = 0
                             []
                           end
   end
