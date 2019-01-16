@@ -62,7 +62,7 @@ export class Navbar extends Component {
           <Menu.Item header onClick={() => this.props.history.push('/')}>
             <img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/>
           </Menu.Item>
-          <Dropdown text='Learning Paths' item>
+          <Dropdown text='Learning Paths' item id="navbar-learning-paths">
             <Dropdown.Menu>
               <NavigationLearningPath />
             </Dropdown.Menu>
@@ -70,7 +70,7 @@ export class Navbar extends Component {
           <Menu.Item className="search-bar">
             <Form id='navigation_site_search' onSubmit={this.handleSubmit.bind(this)}>
               <Form.Group inline>
-                <Form.Input icon='search' placeholder='Search' name='searchTerm' 
+                <Form.Input icon='search' placeholder='Search' name='searchTerm' className='search-input'
                             value={this.state.searchTerm} onChange={this.searchTermChanged.bind(this)}/>
                 <Form.Button type="submit">
                   Submit
