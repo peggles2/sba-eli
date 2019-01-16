@@ -1,6 +1,7 @@
 @import "../../assets/styles/base";
 
 .navbar.ui.menu {
+  height: 65px;
   background-color: $dark-blue;
 
   a {
@@ -9,10 +10,12 @@
 
   .dropdown {
     padding-bottom: 0;
+    margin-right: 20px;
   }
 
   .dropdown.visible {
     background-color: $grey1;
+
 
     .text {
       color: black;
@@ -22,11 +25,16 @@
       margin-right: 20px;
     }
 
-    topic-description {
-      white-space: normal;
-      margin-top: 15px;
+    .topic-summary {
+      margin-left: 15px;
+
+      .path-description {
+        white-space: normal;
+        margin-top: 15px;
+      }
     }
   }
+
 
   .search-bar {
     padding: 0;
@@ -34,6 +42,15 @@
 
     .fields {
       margin-bottom: 0;
+
+      .search-input {
+        padding-right: 0;
+      }
+    }
+
+    .button {
+      background-color: $light-blue;
+      color: white;
     }
   }
 
@@ -43,11 +60,16 @@
   }
 
   img.logo {
-    width: 3.5em;
+    width: 2.5em;
   }
 
   .registrationButtons {
     padding-bottom: 0;
+
+    .button {
+      background-color: $dark-blue;
+      color: white;
+    }
   }
 
   .userButtons {

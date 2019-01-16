@@ -86,7 +86,7 @@ export class SignUpForm extends React.Component {
               <Form.Input placeholder={fieldName}
                    value={this.state[field]}
                    onChange={this.getChangeHandler(field).bind(this)}
-                   error={this.hasError(field)}/>
+                   error={false}/>
             </Form.Field>
   }
 
@@ -108,28 +108,38 @@ export class SignUpForm extends React.Component {
                    error={this.hasError('password')}/> <br />
           </Form.Field>
           <Form.Group grouped required>
-            <label>Are you in business?</label>
-            <Form.Field
-              control='input'
-              type='radio'
-              label='Yes'
-              value='1'
-              name='in_business'
-              onChange={this.getChangeHandler('in_business').bind(this)}
-            />
-            <Form.Field
-              control='input'
-              label='No'
-              type='radio'
-              value='2'
-              name='in_business'
-              onChange={this.getChangeHandler('in_business').bind(this)}
-            />
+            <Grid>
+              <Grid.Row>
+                <Grid.Column width={5} className='horizontalQuestion'>
+                  <label>Are you in business?</label>
+                </Grid.Column>
+                <Grid.Column width={2}>
+                  <Form.Field
+                    control='input'
+                    type='radio'
+                    label='Yes'
+                    value='1'
+                    name='in_business'
+                    onChange={this.getChangeHandler('in_business').bind(this)}
+                  />
+                </Grid.Column>
+                <Grid.Column width={2}>
+                  <Form.Field
+                    control='input'
+                    label='No'
+                    type='radio'
+                    value='2'
+                    name='in_business'
+                    onChange={this.getChangeHandler('in_business').bind(this)}
+                  />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Form.Group>
           <hr/>
-          <Grid>
+          <Grid className='registrationActions'>
             <Grid.Row columns={16}>
-              <Grid.Column width={10}>Already have an account? <a href="/" onClick={(e) => {e.preventDefault(); this.props.dispatch(toggleLogin(true))}}>Log in</a></Grid.Column>
+              <Grid.Column width={12} className='switchToLogin'>Already have an account? <a href="/" onClick={(e) => {e.preventDefault(); this.props.dispatch(toggleLogin(true))}}>Log in</a></Grid.Column>
               <Grid.Column><Button className="submit" type="submit">Submit</Button></Grid.Column>
             </Grid.Row>
           </Grid>
