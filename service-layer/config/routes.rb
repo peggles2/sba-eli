@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     resources :discussion_replies, only: %I[index show create]
   end
 
-  get "discussions/:content_type/:content_id", to: "discussions#show"
+  get "discussions/:content_type/:content_id", to: "discussions#index"
+  post "discussions/:content_type/:content_id", to: "discussions#create"
 
   resources :learning_events, concerns: :contentable
   resources :learning_paths, concerns: :contentable do
