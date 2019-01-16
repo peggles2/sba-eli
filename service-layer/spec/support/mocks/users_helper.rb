@@ -31,13 +31,28 @@ module Mocks
     end
 
     def stub_fetch_by_email(options = {})
-      email = options.fetch(:email, "nick.watson@claritybizsol.com")
+      id = options.fetch(:id, 10)
+      email = options.fetch(:email, "jane.doe@example.com")
+      first_name = options.fetch(:first_name, "Jane")
+      last_name = options.fetch(:last_name, "Doe")
       # rubocop:disable Metrics/LineLength
       url = "#{ENV['CANVAS_HOST']}/api/v1/accounts/#{ENV['CANVAS_ACCOUNT_ID']}/users/?search_term=#{email}"
       # rubocop:enable Metrics/LineLength
-      response_body = options.fetch(:response_body,
-                                  json_string("users/fetch_user.json"))
+      response = [
+        {
+          "id": id,
+          "name": "#{first_name} #{last_name}",
+          "created_at": "2018-11-16T05:35:20-07:00",
+          "sortable_name": "#{last_name}, #{first_name}",
+          "short_name": first_name,
+          "sis_user_id": nil,
+          "integration_id": nil,
+          "sis_import_id": nil,
+          "login_id": email,
+        },
+      ]
 
+      response_body = options.fetch(:response_body, response.to_json)
       stub_request(:get, url).to_return(status: status, body: response_body)
     end
 

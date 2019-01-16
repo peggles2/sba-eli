@@ -6,33 +6,35 @@ import DashboardSplash from "./DashboardSplash";
 import DashboardCTA from "./DashboardCTA";
 import MetaTags from "../SEO/MetaTags";
 
+import { connect } from "react-redux";
+
 import "./Dashboard.scss";
 
-export default class Dashboard extends Component {
+export class Dashboard extends Component {
 
-  dashboardHeader = (isLoggedIn) => {
-    if(isLoggedIn) {
+  dashboardHeader = (isUserLoggedIn) => {
+    if(isUserLoggedIn) {
       return <DashboardHeader />;
     }
   }
 
-  splash = (isLoggedIn) => {
-    if(isLoggedIn) {
+  splash = (isUserLoggedIn) => {
+    if(isUserLoggedIn) {
       return <DashboardCTA />;
     } 
     return <DashboardSplash />;
   }
 
   render() {
-    const isLoggedIn = this.props.isLoggedIn;
+    const isUserLoggedIn = this.props.isUserLoggedIn;
 
     return (
       <div className="dashboard">
         <MetaTags metaTitle="SBA Dashboard"
                   metaDescription="Description for the dashboard"
                   canonicalUrl="https://sba.gov/eli"/>
-        { this.dashboardHeader(isLoggedIn) }
-        { this.splash(isLoggedIn) }
+        { this.dashboardHeader(isUserLoggedIn) }
+        { this.splash(isUserLoggedIn) }
         <Divider hidden />
         <LearningPaths />
       </div>
@@ -40,3 +42,8 @@ export default class Dashboard extends Component {
   }
 };
 
+const mapStateToProps = (store) => {
+  return { isUserLoggedIn: store.login.isUserLoggedIn }
+};
+
+export default connect(mapStateToProps)(Dashboard);
