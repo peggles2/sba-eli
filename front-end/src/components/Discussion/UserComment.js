@@ -1,14 +1,18 @@
 import React, {Component} from "react";
 import {Grid, Image} from "semantic-ui-react";
+import {connect} from "react-redux";
 import Discussion from "./Discussion";
 
-export default class UserComment extends Component {
+export class UserComment extends Component {
 
-  replyLink(parentContentType, parentId, replies) {
-    if (parentContentType !== "comment" && replies && replies.replies) {
+  replyLink(parentContentType, parent_id, reply) {
+    const replyLink = this.props.isUserLoggedIn 
+                      ? <a className="reply-link" href={`#/discussion/content_type/${parent_id}`}>Reply</a>
+                      : null
+    if (parentContentType !== "comment" && reply && reply.replies) {
       return <Grid.Row>
-        <a className="reply-link" href={`#/reply?postId=${parentId}`}>Reply</a>
-        <Discussion replies={replies}/>
+        {replyLink}
+        <Discussion replies={reply}/>
       </Grid.Row>
     }
   }
@@ -54,3 +58,10 @@ export default class UserComment extends Component {
     </Grid.Row>
   }
 }
+const mapStateToProps = store => {
+  return {
+    isUserLoggedIn: store.login.isUserLoggedIn
+  }
+}
+
+export default connect(mapStateToProps)(UserComment)
