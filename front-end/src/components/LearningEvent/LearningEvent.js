@@ -89,7 +89,7 @@ export default class LearningEvent extends Component {
           event={this.state.learningEvent}
         />
       </Container>
-      <LearningEventDiscussion event={event} />
+      <LearningEventDiscussion parent_content_type={event.type} parent_id={event.id} />
       </div>
     );
   }

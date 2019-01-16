@@ -3,45 +3,44 @@ import Discussion from "./Discussion";
 import DiscussionPost from "./DiscussionPost";
 import {Header, Grid} from "semantic-ui-react";
 import {connect} from "react-redux";
+import {getDiscussion} from "../../actions/discussionActions";
 
 import "./LearningEventDiscussion.scss";
 
 export class LearningEventDiscussion extends Component {
 
-  commentCount(count) {
-    if (count > 0) {
-      return <span className="comment-count">({count})</span>
+  commentCount() {
+    if (this.props.replies && this.props.reply_count > 0) {
+      return <span className="comment-count">({this.props.reply_count})</span>
     }
     return null
   }
 
-  render() {
-    var event = this.props.event;
-    var learningEventDiscussion = {
-      id: (event.eventContent ? event.eventContent.html_url : 0),
-      content_type: "learning event",
-      reply_count: 4,
-      replies: this.props.replies
-    }
+  componentDidMount() {
+    //TODO this needs to be a dynamic call
+    this.props.dispatch(getDiscussion("infographic", 8))
+  }
 
-    return (
+  render() {
+    return ( 
         <Grid id="mle-comments">
           <Grid.Row stretched centered columns={15} className="mle-comments-header-row">
             <Grid.Column width={15}>
               <Header as='h3'
-                      className="mle-comments-header">Comments {this.commentCount(learningEventDiscussion.reply_count)}</Header>
+                      className="mle-comments-header">Comments {this.commentCount()}</Header>
             </Grid.Column>
           </Grid.Row>
-          <DiscussionPost parent={event}/>
-          <Discussion replies={learningEventDiscussion}/>
+          <DiscussionPost />
+          <Discussion replies={this.props.replies} parent_content_type={this.props.parent_content_type} parent_id={this.props.parent_id} />
         </Grid>
     )
   }
 }  
+
 const mapStateToProps = store => {
   return {
-    replies: store.discussion.replies
-    
+    replies: store.discussion.replies,
+    reply_count: store.discussion.reply_count
   }
 }
 

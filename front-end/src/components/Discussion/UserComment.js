@@ -5,14 +5,14 @@ import Discussion from "./Discussion";
 
 export class UserComment extends Component {
 
-  replyLink(parentContentType, parent_id, reply) {
+  replyLink(parent_content_type, parent_id, reply) {
     const replyLink = this.props.isUserLoggedIn 
                       ? <a className="reply-link" href={`#/discussion/content_type/${parent_id}`}>Reply</a>
                       : null
-    if (parentContentType !== "comment" && reply && reply.replies) {
+    if (parent_content_type !== "comment" && reply && reply.replies) {
       return <Grid.Row>
         {replyLink}
-        <Discussion replies={reply}/>
+        <Discussion replies={reply} parent_content_type={reply.content_type} parent_id={reply.id}/>
       </Grid.Row>
     }
   }

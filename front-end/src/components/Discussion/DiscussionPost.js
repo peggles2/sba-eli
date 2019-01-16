@@ -3,13 +3,6 @@ import {Form, Input, Grid, TextArea} from "semantic-ui-react";
 import {connect} from "react-redux";
 
 export class DiscussionPost extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      parentId: this.props.parent.id
-    };
-  };
 
   clearPost(event) {
     event.preventDefault();
@@ -35,7 +28,7 @@ export class DiscussionPost extends Component {
                 Add Comment
               </Form.Button>
             </Form.Group>
-            <Input type="hidden" name="content_id" value={this.state.parentId}/>
+            <Input type="hidden" name="content_id" value={this.props.parent_id}/>
           </Form>
         </Grid.Column>
       </Grid.Row>
@@ -44,7 +37,7 @@ export class DiscussionPost extends Component {
   }
 
   render() {
-    return (this.ifRegistered())
+    return (this.ifRegistered(this.props.parent_id))
   }
 }  
 
