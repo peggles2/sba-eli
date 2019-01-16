@@ -4,7 +4,7 @@ class DiscussionsController < ApplicationController
       content_type: params[:content_type],
       content_id: params[:content_id],
     )
-    Rails.logger.info discussion_map.discussion_id
+    
     @discussion_replies = if discussion_map.present?
                             response = DiscourseClient.create.topic_posts(
                               discussion_map.discussion_id,
