@@ -5,7 +5,7 @@ import {Grid} from "semantic-ui-react";
 export default class Discussion extends Component {
 
   renderComment(parentObject) {
-    if (parentObject) {
+    if (parentObject && parentObject.replies) {
       return parentObject.replies.map((reply, index) => {
         return (
             <UserComment key={index}
