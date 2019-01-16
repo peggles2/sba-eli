@@ -36,16 +36,23 @@ RSpec.describe PasswordComplexityValidator do
     it { is_expected.to_not be_valid }
   end
 
-#  context "when the password doesn't have a special character" do
-#    let(:password) { "Passw0rd!" }
+  context "when the password doesn't have a special character" do
+    let(:password) { "Passw0rd1234" }
 
-#    it { is_expected.to_not be_valid }
-#  end
+    it { is_expected.to_not be_valid }
+  end
 
-#  context "when the password isn't long enough" do
-#    let(:password) { "P@sw0rd" }
+  specials = %w( ! @ # + = ^ $ * . [ ] { } \( \) ? - " % & \/ \\ \, > < ' : ; | _ ~ `)
+  specials.each do |c|
+    let(:password) { "Passw0rd1234#{c}" }
+    it "a password with a #{c} has a special character" do
+      expect(subject).to be_valid
+    end
+  end
 
-#    it { is_expected.to_not be_valid }
-#  end
+  context "when the password isn't long enough" do
+    let(:password) { "P@sw0rd" }
 
+    it { is_expected.to_not be_valid }
+  end
 end
