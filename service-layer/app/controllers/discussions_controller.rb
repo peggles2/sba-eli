@@ -1,30 +1,54 @@
 class DiscussionsController < ApplicationController
-  def show
+  def index
+    discussion_map = DiscussionMap.find_by(
+      content_type: params[:content_type],
+      content_id: params[:content_id],
+    )
+    Rails.logger.info discussion_map.discussion_id
+    @discussion_replies = if discussion_map.present?
+                            response = DiscourseClient.create.topic_posts(
+                              discussion_map.discussion_id,
+                            )
+                            Rails.logger.info response
+                            DiscussionReply.from_discourse_list(response)
+                          else
+                            []
+                          end
+  end
+
+  def create
     discussion_map = DiscussionMap.find_by(
       content_type: params[:content_type],
       content_id: params[:content_id],
     )
 
-    unless discussion_map
-      client = DiscourseClient.create
-      response = client.create_topic(
-        skip_validations: true,
-        title: "Discussion #{params[:content_type]} #{params[:content_id]}",
-        raw: "",
-      )
+    @discussion_reply = if discussion_map
+                          DiscussionReply.new(
+                            model_params.merge!(
+                              user: Current.user,
+                              discussion_id: discussion_map.content_id,
+                            ),
+                          )
+                        else
+                          Discussion.new(
+                            model_params.merge!(
+                              content_type: params[:content_type],
+                              content_id: params[:content_id],
+                              user: Current.user,
+                            ),
+                          )
+                        end
 
-      discussion_map = DiscussionMap.create!(
-        content_type: params[:content_type],
-        content_id: params[:content_id],
-        discussion_id: response["topic_slug"],
-      )
+    if @discussion_reply.create
+      render status: :created
+    else
+      render errors_for(@discussion_reply)
     end
-
-    replies = DiscourseClient.create.topic(discussion_map.discussion_id)
-    render json: replies
   end
 
-  def create
-    render json: null
+  private
+
+  def model_params
+    params.require(:discussion_reply).permit(:discussion_id, :raw)
   end
 end
