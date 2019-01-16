@@ -28,7 +28,7 @@ class DiscussionsController < ApplicationController
                           DiscussionReply.new(
                             model_params.merge!(
                               user: Current.user,
-                              discussion_id: discussion_map.content_id,
+                              discussion_id: discussion_map.discussion_id,
                             ),
                           )
                         else
@@ -51,6 +51,10 @@ class DiscussionsController < ApplicationController
   private
 
   def model_params
-    params.require(:discussion_reply).permit(:discussion_id, :raw)
+    params.require(:discussion_reply).permit(
+      :discussion_id,
+      :raw,
+      :reply_to_post_number,
+    )
   end
 end
