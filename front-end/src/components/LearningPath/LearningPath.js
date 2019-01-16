@@ -82,7 +82,7 @@ export default class LearningPath extends React.Component {
 
       //send the topic Title for wrapper header purposes, break this into state?
       const topicTitle = this.state.topicsList.find(
-        topic => topic.id.toString() === topicId.toString()
+        topic => topic && topic.id ? topic.id.toString() === topicId.toString() : false
       );      
       return <LearningEvent match={eventMatch} topicTitle={topicTitle ? topicTitle.name : null} />;
     } else {
