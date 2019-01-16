@@ -13,6 +13,8 @@ class Discussion
                 :user_title,
                 :timestamp,
                 :replies,
+                :post_number,
+                :reply_to_post_number,
                 :user
 
   validates :raw, presence: true, length: { minimum: 20 }
@@ -38,6 +40,8 @@ class Discussion
     self.user_name = response["display_username"]
     self.user_title = response["user_title"]
     self.timestamp = response["created_at"]
+    self.post_number = response["post_number"]
+    self.reply_to_post_number = response["reply_to_post_number"]
 
     true
   rescue DiscourseApi::UnauthenticatedError
