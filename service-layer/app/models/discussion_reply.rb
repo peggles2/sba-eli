@@ -23,6 +23,7 @@ class DiscussionReply
 
     self.response = client.create_post(
       topic_id: discussion_id,
+      reply_to_post_number: reply_to_post_number,
       raw: raw,
       api_username: username,
     )
