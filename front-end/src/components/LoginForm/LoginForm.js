@@ -64,7 +64,7 @@ export class LoginForm extends React.Component {
               <Grid.Column width={4}>
                 <hr/>
               </Grid.Column>
-              <Grid.Column className='orText' width={2}>
+              <Grid.Column className='orText' width={1}>
                 OR
               </Grid.Column>
               <Grid.Column width={4}>

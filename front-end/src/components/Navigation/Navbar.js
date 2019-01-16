@@ -62,7 +62,7 @@ export class Navbar extends Component {
           <Menu.Item header onClick={() => this.props.history.push('/')}>
             <img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/>
           </Menu.Item>
-          <Dropdown text='Learning Paths' item>
+          <Dropdown text='Learning Paths' item id="navbar-learning-paths">
             <Dropdown.Menu>
               <NavigationLearningPath />
             </Dropdown.Menu>
