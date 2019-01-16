@@ -1,13 +1,12 @@
 import React, {Component} from "react";
 import {Form, Input, Grid, TextArea} from "semantic-ui-react";
+import {connect} from "react-redux";
 
-export default class DiscussionPost extends Component {
+export class DiscussionPost extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      //TODO: update this logic when we have signon working
-      signedIn: true,
       parentId: this.props.parent.id
     };
   };
@@ -23,7 +22,7 @@ export default class DiscussionPost extends Component {
   }
 
   ifRegistered() {
-    if (this.state.signedIn) { 
+    if (this.props.isUserLoggedIn) { 
       return <Grid.Row centered>
         <Grid.Column width={15}>
           <Form method="POST" action="/discuss">
@@ -48,3 +47,11 @@ export default class DiscussionPost extends Component {
     return (this.ifRegistered())
   }
 }  
+
+const mapStateToProps = store => {
+  return {
+    isUserLoggedIn: store.login.isUserLoggedIn
+  }
+}
+
+export default connect(mapStateToProps)(DiscussionPost)
