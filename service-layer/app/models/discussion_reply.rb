@@ -1,24 +1,83 @@
 class DiscussionReply
   include ActiveModel::Model
 
-  attr_accessor :discussion_id, :raw, :response, :user
+  attr_accessor :id,
+                :discussion_id,
+                :body,
+                :raw,
+                :response,
+                :user_img,
+                :user_name,
+                :user_title,
+                :timestamp,
+                :post_number,
+                :reply_to_post_number,
+                :user
 
   validates :discussion_id, presence: true
   validates :raw, presence: true, length: { minimum: 20 }
   validates :user, presence: true
 
   def create
-    return unless valid?
+    return false unless valid?
 
     self.response = client.create_post(
       topic_id: discussion_id,
       raw: raw,
       api_username: username,
     )
+
+    self.id = response["id"]
+    self.body = response["cooked"]
+    self.user_name = response["display_username"]
+    self.user_title = response["user_title"]
+    self.timestamp = response["created_at"]
+
     true
   rescue DiscourseApi::UnauthenticatedError
     errors.add(:user, "is unable to post. Please contact the administrator.")
     false
+  end
+
+  def content_type
+    "comment"
+  end
+
+  def replies=(value)
+    @replies = value
+  end
+
+  def replies
+    @replies || []
+  end
+
+  class << self
+    def from_discourse_list(reponse)
+      posts_hash = reponse["post_stream"]["posts"]
+
+      # create collection of all top level posts
+      post_list = posts_hash.reject { |r| r["reply_to_post_number"].present? }.
+        map { |reply| DiscussionReply.from_hash(reply) }
+
+      # fill top level posts with replies
+      post_list.each do |post|
+        post.replies = posts_hash.
+          select { |r| r["reply_to_post_number"].to_i == post.post_number.to_i }.
+          map { |reply| DiscussionReply.from_hash(reply) }
+      end
+    end
+
+    def from_hash(reply)
+      DiscussionReply.new(
+        id: reply["id"],
+        body: reply["cooked"],
+        user_name: reply["display_username"],
+        user_title: reply["user_title"],
+        timestamp: reply["created_at"],
+        post_number: reply["post_number"],
+        reply_to_post_number: reply["reply_to_post_number"],
+      )
+    end
   end
 
   private
