@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :learning_events, concerns: :contentable
   resources :learning_paths, concerns: :contentable do
     resource :enroll, only: :create
+    get "progress", on: :member
   end
   resources :learning_objectives, concerns: :contentable
   resource :request_password, only: :create
