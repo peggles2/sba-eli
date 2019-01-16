@@ -42,7 +42,7 @@ RSpec.describe PasswordComplexityValidator do
     it { is_expected.to_not be_valid }
   end
 
-  specials = %w( ! @ # + = ^ $ * . [ ] { } \( \) ? - " % & \/ \\ \, > < ' : ; | _ ~ `)
+  specials = %w(!@#+=^$*.[]{}\(\)?-"%&\/\\\,><':;|_~`)
   specials.each do |c|
     let(:password) { "Passw0rd1234#{c}" }
     it "a password with a #{c} has a special character" do
