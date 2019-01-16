@@ -15,7 +15,7 @@ class PasswordComplexityValidator < ActiveModel::EachValidator
   end
 
   def validate_special_characters(record, attribute, value)
-    specials = %w(!@#+=^$*.[]{}\(\)?-"%&\/\\\,><':;|_~`)
+    specials = %w(! @ # + = ^ $ * . [ ] { } \( \) ? - " % & \/ \\ \ , > < ' : ; | _ ~ `)
     unless specials.any? { |s| value.include? s }
       default = "Must include at least one special character"
       record.errors[attribute] << (options[:message] || default)
