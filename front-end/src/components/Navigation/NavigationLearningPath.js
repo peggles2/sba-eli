@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Dropdown, Header } from "semantic-ui-react";
+import { Dropdown, Header, Image } from "semantic-ui-react";
 import NavigationLearningObjective from "./NavigationLearningObjective";
 import axios from "axios";
 import { connect } from "react-redux";
+
+import './Navbar.scss'
 
 export class NavigationLearningPath extends Component {
   constructor(props) {
@@ -67,8 +69,9 @@ export class NavigationLearningPath extends Component {
   }
 
   render() {
-    return this.state.learningPaths.map(lp => (
-      <Dropdown.Item key={lp.id} style={{ width: "300px" }}>
+    const learningPaths = this.state.learningPaths || [];
+    return learningPaths.map(lp => (
+      <Dropdown.Item key={lp.id} className='learning-path-item'>
         {this.renderPathForLoggedIn(lp)}
       </Dropdown.Item>
     ));

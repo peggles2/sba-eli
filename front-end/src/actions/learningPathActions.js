@@ -1,32 +1,39 @@
 import axios from "axios";
 
-const baseUrl = process.env.REACT_APP_SERVICE_HOST;
+function axiosConfig(state, params = null) {
+  let authConfig = {};
+  if (state.login.isUserLoggedIn) {
+    const { access_token } = state.login.userData;
+    authConfig = { headers: { AUTHORIZATION: access_token } };
+  }
 
-function axiosHeaders(token) {
-  return { AUTHORIZATION: token };
-}
-
-export function getLearningPaths() {
   return {
-    type: "GET_LEARNING_PATHS",
-    payload: axios.get(baseUrl + "/learning_paths")
+    params: params,
+    baseURL: process.env.REACT_APP_SERVICE_HOST,
+    ...authConfig
   };
 }
 
-export function enrollUserInPath(id, token) {
+export function getLearningPaths() {
+  return (dispatch, getState) => {
+    dispatch({
+      type: "GET_LEARNING_PATHS",
+      payload: axios.get("/learning_paths", axiosConfig(getState()))
+    });
+  };
+}
+
+export function enrollUserInPath(id, state) {
   return {
     type: "ENROLL_USER_IN_PATH",
-    payload: axios.post(baseUrl + `/learning_paths/${id}/enroll`, {
-      headers: axiosHeaders(token)
-    })
+    payload: axios.post(`/learning_paths/${id}/enroll`, {}, axiosConfig(state))
   };
 }
 
 export function getPathWithTopics(id) {
   return (dispatch, getState) => {
     if (getState().login.isUserLoggedIn) {
-      const { access_token } = getState().login.userData;
-      dispatch(enrollUserInPath(id, access_token));
+      dispatch(enrollUserInPath(id, getState()));
     } else {
       dispatch(getLearningPath(id));
       dispatch(getTopicsForPath(id));
@@ -35,9 +42,11 @@ export function getPathWithTopics(id) {
 }
 
 export function getLearningPath(id) {
-  return {
-    type: "GET_LEARNING_PATH",
-    payload: axios.get(baseUrl + "/learning_paths/" + id)
+  return (dispatch, getState) => {
+    dispatch({
+      type: "GET_LEARNING_PATH",
+      payload: axios.get(`/learning_paths/${id}`, axiosConfig(getState()))
+    });
   };
 }
 
@@ -46,11 +55,13 @@ export function getTopicsForPath(pathId) {
     course_id: pathId
   };
 
-  return {
-    type: "GET_TOPICS_FOR_LEARNING_PATH",
-    payload: axios.get(baseUrl + `/learning_objectives/`, {
-      params: topicParams
-    }),
-    topicPathId: pathId
+  return (dispatch, getState) => {
+    dispatch({
+      type: "GET_TOPICS_FOR_LEARNING_PATH",
+      payload: axios.get(
+        `/learning_objectives/`,
+        axiosConfig(getState(), topicParams)
+      )
+    });
   };
 }

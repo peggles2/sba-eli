@@ -19,6 +19,13 @@ export class LearningPath extends React.Component {
     this.props.dispatch(getPathWithTopics(id));
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.isUserLoggedIn !== prevProps.isUserLoggedIn) {
+      const id = this.props.match.params.id;
+      this.props.dispatch(getPathWithTopics(id));
+    }
+  }
+
   renderRightColumnContent() {
     const isLearningEvent =
       this.props.match.params.topicId && this.props.match.params.eventId;
@@ -105,7 +112,8 @@ export class LearningPath extends React.Component {
 const mapStateToProps = store => {
   return {
     learningPath: store.learningPath.learningPath,
-    topicsList: store.learningPath.topicsList
+    topicsList: store.learningPath.topicsList,
+    isUserLoggedIn: store.login.isUserLoggedIn
   };
 };
 

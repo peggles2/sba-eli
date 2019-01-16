@@ -39,7 +39,7 @@ export default class TopicContentEventList extends Component {
     const { course_id, module_id } = this.props;
     const url = `/learning_paths/${course_id}/learning_objectives/${module_id}/learning_events/`;
 
-    if (eventList.length) {
+    if (eventList && eventList.length) {
       return eventList.map(event => {
         return (
           <Grid
