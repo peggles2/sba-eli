@@ -3,7 +3,7 @@ import { Card, Image } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-class LearningPathsItem extends Component {
+export class LearningPathsItem extends Component {
   render() {
     return (
       <Card>

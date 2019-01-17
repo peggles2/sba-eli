@@ -14,6 +14,8 @@ export default function reducer(state=defaultValue, action) {
       return {...state, userData: {}, userLoading: false, userError: action.payload};
     case 'LOGIN_FULFILLED':
       return {...state, userData: action.payload.data, userLoading: false, userError: null, isUserLoggedIn: true};
+    case 'LOGOUT_FULFILLED':
+      return {...state, userData: {}, userLoading: false, userError: null, isUserLoggedIn: false};
     default:
       break;
   }

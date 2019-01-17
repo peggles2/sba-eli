@@ -17,3 +17,12 @@ export function loginUser(userData) {
     payload: axios.post(url, userData)
   }
 }
+
+export function logoutUser(token) {
+  const url = process.env.REACT_APP_SERVICE_HOST + "/session"
+
+  return {
+    type: 'LOGOUT',
+    payload: axios.delete(url, {headers: {'AUTHORIZATION': token}})
+  }
+}

@@ -40,7 +40,7 @@ export default class LearningObjective extends Component {
   }
 
   render() {
-    const learningObjective = this.state.learningObjective;
+    const learningObjective = this.state.learningObjective || {};
     return (
       <div>
         <MetaTags metaTitle={learningObjective.name}
