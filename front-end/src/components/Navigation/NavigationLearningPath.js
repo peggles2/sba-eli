@@ -13,10 +13,6 @@ export default class NavigationLearningPath extends Component {
     };
   };
 
-  handleItemClick = (e, {name}) => this.setState({
-    activeItem: name
-  });
-
   componentDidMount() {
     this.fetchData();
   }
@@ -40,7 +36,7 @@ export default class NavigationLearningPath extends Component {
       <Dropdown.Item key={lp.id} style={{width: '300px'}}>
         <Dropdown pointing='left' fluid text={lp.name}>
           <Dropdown.Menu style={{width: '450px' }}>
-            <Header as='h1'><Link to={`/learning_paths/${lp.id}`} onClick={this.handleItemClick}>{lp.name}</Link></Header>
+            <Header as='h1'><Link to={`/learning_paths/${lp.id}`}>{lp.name}</Link></Header>
             <NavigationLearningObjective learningPathId={lp.id} />
           </Dropdown.Menu>
         </Dropdown>

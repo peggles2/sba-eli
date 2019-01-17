@@ -12,10 +12,6 @@ export default class NavigationLearningObjective extends Component {
     };
   }
 
-  handleItemClick = (e, {name}) => this.setState({
-    activeItem: name
-  });
-
   componentDidMount() {
     this.fetchData();
   }
@@ -52,7 +48,7 @@ export default class NavigationLearningObjective extends Component {
     const learningObjectivePath = `/learning_paths/${this.props.learningPathId}/learning_objectives/`
 
     const topics = this.state.learningObjectives.map((lo, index) => (
-      <List.Item key={'learning_objective_' + index}><Link to={learningObjectivePath + lo.id} onClick={this.handleItemClick}>{lo.name}</Link></List.Item>
+      <List.Item key={'learning_objective_' + index}><Link to={learningObjectivePath + lo.id}>{lo.name}</Link></List.Item>
     ));
 
     return (
