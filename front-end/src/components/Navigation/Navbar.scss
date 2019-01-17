@@ -1,7 +1,108 @@
 @import "../../assets/styles/base";
 
-.navbar.ui.menu img.logo {
-  width: 4.5em;
+.navbar.ui.menu {
+  height: 65px;
+  background-color: $dark-blue;
+
+  a {
+    padding-bottom: 0;
+  }
+
+  .dropdown {
+    padding-bottom: 0;
+    margin-right: 20px;
+  }
+
+  #navbar-learning-paths.active {
+    background-color: $grey1;
+
+    .learning-path-item {
+      background-color: $grey1 !important;
+    }
+
+    .learning-path-item:hover {
+      background-color: $light-blue !important;
+
+      .text {
+        color: white;
+      }
+    }
+  }
+
+  .dropdown.visible {
+    .text {
+      color: black;
+    }
+
+    img {
+      margin-right: 20px;
+    }
+
+    .topic-summary {
+      margin-left: 15px;
+
+      .path-description {
+        white-space: normal;
+        margin-top: 15px;
+      }
+    }
+  }
+
+
+  .search-bar {
+    padding: 0;
+    padding-top: 13px;
+
+    .fields {
+      margin-bottom: 0;
+
+      .search-input {
+        padding-right: 0;
+      }
+    }
+
+    .button {
+      background-color: $light-blue;
+      color: white;
+    }
+  }
+
+  .text {
+    color: white;
+    font-size: 1.2em;
+  }
+
+  img.logo {
+    width: 2.5em;
+  }
+
+  .registrationButtons {
+    padding-bottom: 0;
+
+    .button {
+      background-color: $dark-blue;
+      color: white;
+    }
+  }
+
+  .userButtons {
+    color: white;
+
+    a {
+      color: white;
+    }
+
+    padding-bottom: 0;
+  }
+
+  .greeting {
+    padding-bottom: 11px;
+  }
+
+  .logoutLink {
+    margin-right: 100px;
+    cursor: pointer;
+  }
 }
 
 .ui.button.invisible {

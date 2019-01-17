@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 
 import "./RegistrationModal.scss"
 
-class RegistrationModal extends React.Component {
+export class RegistrationModal extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,10 +30,10 @@ class RegistrationModal extends React.Component {
       <Modal.Content>
         <Grid>
           <Grid.Row stretched columns={16}>
-            <Grid.Column width={13}>
+            <Grid.Column width={14}>
               <h2>{this.getTitle(this.props.type)}</h2>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={2}>
               <Button className='close-icon' icon><Icon link name='close' size='large' onClick={this.close}/></Button>
             </Grid.Column>
           </Grid.Row>
