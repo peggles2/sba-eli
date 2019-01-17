@@ -16,22 +16,22 @@ export class LearningEventDiscussion extends Component {
     return null
   }
 
-  componentDidUpdate(prevProps) { 
-    if((this.props.parent_id !== prevProps.parent_id) && 
-       (this.props.parent_content_type !== prevProps.parent_content_type)) {
+  componentDidUpdate(prevProps) {
+    if ((this.props.parent_id !== prevProps.parent_id) &&
+        (this.props.parent_content_type !== prevProps.parent_content_type)) {
       this.props.dispatch(getDiscussion(this.props.parent_content_type, this.props.parent_id))
     }
   }
 
   componentDidMount() {
-    if((this.props.parent_id !== null) && 
-       (this.props.parent_content_type !== null)) {
+    if ((this.props.parent_id !== null) &&
+        (this.props.parent_content_type !== null)) {
       this.props.dispatch(getDiscussion(this.props.parent_content_type, this.props.parent_id))
     }
   }
 
   render() {
-    return ( 
+    return (
         <Grid id="mle-comments">
           <Grid.Row stretched centered columns={15} className="mle-comments-header-row">
             <Grid.Column width={15}>
@@ -39,12 +39,14 @@ export class LearningEventDiscussion extends Component {
                       className="mle-comments-header">Comments {this.commentCount()}</Header>
             </Grid.Column>
           </Grid.Row>
-          <DiscussionPost />
-          <Discussion replies={this.props.replies} parent_content_type={this.props.parent_content_type} parent_id={this.props.parent_id} />
+          <DiscussionPost/>
+          <Discussion replies={this.props.replies} 
+                      parent_content_type={this.props.parent_content_type}
+                      parent_id={this.props.parent_id}/>
         </Grid>
     )
   }
-}  
+}
 
 const mapStateToProps = store => {
   return {

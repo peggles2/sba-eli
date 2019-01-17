@@ -15,7 +15,7 @@ export class DiscussionPost extends Component {
   }
 
   ifRegistered() {
-    if (this.props.isUserLoggedIn) { 
+    if (this.props.isUserLoggedIn) {
       return <Grid.Row centered>
         <Grid.Column width={15}>
           <Form method="POST" action="/discuss">
@@ -39,7 +39,7 @@ export class DiscussionPost extends Component {
   render() {
     return (this.ifRegistered(this.props.parent_id))
   }
-}  
+}
 
 const mapStateToProps = store => {
   return {

@@ -6,9 +6,9 @@ import Discussion from "./Discussion";
 export class UserComment extends Component {
 
   replyLink(parent_content_type, parent_id, reply) {
-    const replyLink = this.props.isUserLoggedIn 
-                      ? <a className="reply-link" href={`#/discussion/content_type/${parent_id}`}>Reply</a>
-                      : null
+    const replyLink = this.props.isUserLoggedIn
+        ? <a className="reply-link" href={`#/discussion/content_type/${parent_id}`}>Reply</a>
+        : null
     if (parent_content_type !== "comment" && reply && reply.replies) {
       return <Grid.Row>
         {replyLink}
@@ -38,7 +38,7 @@ export class UserComment extends Component {
     month[9] = "October";
     month[10] = "November";
     month[11] = "December";
-    
+
     if (timestamp) {
       const date = new Date(timestamp)
       return month[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()
@@ -50,11 +50,11 @@ export class UserComment extends Component {
 
     return <Grid.Row className='user-comment' width={16}>
       <Grid.Column width={1}>
-        <Image className='user-image' 
-               size='tiny' 
-               circular  
-               verticalAlign='middle' 
-               src={this.userImage(reply.user_img)} 
+        <Image className='user-image'
+               size='tiny'
+               circular
+               verticalAlign='middle'
+               src={this.userImage(reply.user_img)}
                alt={reply.user_name}/>
       </Grid.Column>
       <Grid.Column width={14} className='discussion-post'>
@@ -79,6 +79,7 @@ export class UserComment extends Component {
     </Grid.Row>
   }
 }
+
 const mapStateToProps = store => {
   return {
     isUserLoggedIn: store.login.isUserLoggedIn
