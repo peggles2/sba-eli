@@ -12,7 +12,7 @@ export class UserComment extends Component {
     if (parent_content_type !== "comment" && reply && reply.replies) {
       return <Grid.Row>
         {replyLink}
-        <Discussion replies={reply} parent_content_type={reply.content_type} parent_id={reply.id}/>
+        <Discussion replies={reply.replies} parent_content_type={reply.content_type} parent_id={reply.id}/>
       </Grid.Row>
     }
   }
