@@ -9,7 +9,6 @@ class DiscussionsController < ApplicationController
                             response = DiscourseClient.create.topic_posts(
                               discussion_map.discussion_id,
                             )
-                            Rails.logger.info response
                             @post_count = response["post_stream"]["posts"].size
                             DiscussionReply.from_discourse_list(response)
                           else
