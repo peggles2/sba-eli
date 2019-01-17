@@ -28,8 +28,10 @@ describe "EnrollsController" do
           headers: authenticated_header(email: email, id: user_id)
         json = JSON.parse(response.body)
         expect(response).to be_successful
-        expect(json["user_id"]).to eq(user_id)
-        expect(json["course_id"]).to eq(learning_path_id)
+        expect(json["enrollment"]["user_id"]).to eq(user_id)
+        expect(json["enrollment"]["course_id"]).to eq(learning_path_id)
+        expect(json["learningPath"]["id"]).to eq(learning_path_id)
+        expect(json["topicsList"].length).to eq(2)
       end
     end
   end

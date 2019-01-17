@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resource :custom_content
   end
 
-  put "learning_paths/:learning_path_id/learning_objectives/"\
+  post "learning_paths/:learning_path_id/learning_objectives/"\
       ":learning_objective_id/learning_events/:id/done",
       to: "learning_event_done#update"
 
@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   resource :search, only: :show
   resource :session, only: %I[create destroy]
   resource :sign_up, only: :create
-  resources :users
   resource :discussion, only: :show
+  resources :users do
+    resources :enrollments, only: :index
+  end
 end
 # rubocop:enable Metrics/BlockLength

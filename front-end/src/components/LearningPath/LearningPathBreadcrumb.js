@@ -3,7 +3,7 @@ import { Breadcrumb } from "semantic-ui-react";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-class LearningPathBreadCrumb extends Component {
+export class LearningPathBreadcrumb extends Component {
   render() {
     const { id } = this.props;
     return (
@@ -20,4 +20,4 @@ class LearningPathBreadCrumb extends Component {
 
 export default connect((store) => {
   return {}
-})(withRouter(LearningPathBreadCrumb));
+})(withRouter(LearningPathBreadcrumb));

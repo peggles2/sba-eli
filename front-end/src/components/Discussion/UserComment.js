@@ -12,7 +12,7 @@ export class UserComment extends Component {
     if (parent_content_type !== "comment" && reply && reply.replies) {
       return <Grid.Row>
         {replyLink}
-        <Discussion replies={reply} parent_content_type={reply.content_type} parent_id={reply.id}/>
+        <Discussion replies={reply.replies} parent_content_type={reply.content_type} parent_id={reply.id}/>
       </Grid.Row>
     }
   }
@@ -22,6 +22,27 @@ export class UserComment extends Component {
       return image
     }
     return "http://picsum.photos/45"
+  }
+
+  formatDate(timestamp) {
+    var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    
+    if (timestamp) {
+      const date = new Date(timestamp)
+      return month[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()
+    }
   }
 
   render() {
@@ -42,7 +63,7 @@ export class UserComment extends Component {
             <Grid.Column className='username'>
               {reply.user_name}
               <span className='post-date'>
-                {reply.timestamp}
+                {this.formatDate(reply.timestamp)}
                 </span>
             </Grid.Column>
           </Grid.Row>

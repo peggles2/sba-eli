@@ -27,11 +27,28 @@ module Mocks
       response_body["course_id"] = learning_path_id
       response_body["user_id"] = user_id
 
-      url = "#{ENV['CANVAS_HOST']}/api/v1/courses/#{learning_path_id}/enrollments"
-      stub_authorized_request_with_body(:post, url, body).to_return(
+      enroll_url = "#{ENV['CANVAS_HOST']}/api/v1/courses/#{learning_path_id}/enrollments"
+      enroll_response = stub_authorized_request_with_body(:post, enroll_url, body).to_return(
         status: status,
         body: response_body.to_json,
       )
+
+      path_url = "#{ENV['CANVAS_HOST']}/api/v1/courses/#{learning_path_id}"
+      path_response = stub_authorized_request(:get, path_url).to_return(
+        status: status,
+        body: "{ \"id\": #{learning_path_id}}",
+      )
+
+      topics_url = "#{ENV['CANVAS_HOST']}/api/v1/courses/#{learning_path_id}/modules"\
+        "?as_user_id=#{user_id}"
+      topics_response = stub_authorized_request(:get, topics_url).to_return(
+        status: status,
+        body: "[{},{}]",
+      )
+
+      { "enrollment": enroll_response,
+        "learningPath": path_response,
+        "topicsList": topics_response }
     end
   end
 end
