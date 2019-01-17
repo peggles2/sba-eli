@@ -63,7 +63,7 @@ export class Navbar extends Component {
             <img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/>
           </Menu.Item>
           <Dropdown text='Learning Paths' item id="navbar-learning-paths">
-            <Dropdown.Menu>
+            <Dropdown.Menu className='navigation-learning-path-menu'>
               <NavigationLearningPath />
             </Dropdown.Menu>
           </Dropdown>

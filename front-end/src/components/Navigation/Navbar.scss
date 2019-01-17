@@ -2,7 +2,7 @@
 
 .navbar.ui.menu {
   height: 65px;
-  background-color: $dark-blue;
+  background-color: $sba-navy;
 
   a {
     padding-bottom: 0;
@@ -14,44 +14,47 @@
   }
 
   .text {
-    color: white;
+    color: $sba-white;
   }
 
   .icon {
-    color: white;
+    color: $sba-white;
   }
 
   #navbar-learning-paths.active {
-    background-color: $grey1;
+    background-color: $sba-grey-one;
 
     .icon {
-      color: black;
+      color: $sba-dark-grey;
     }
     
     .menu {
-      background-color: $grey1;
+      background-color: $sba-grey-one;
     }
 
     .text {
-      color: black;
+      color: $sba-dark-grey;
     }
 
     a {
-      color: black;
+      color: $sba-dark-grey;
     }
 
     .learning-path-item {
-      background-color: $grey1 !important;
-      margin: 20px;
+      padding: 20px !important;
     }
 
     .learning-path-item:hover {
-      background-color: $light-blue !important;
+      background-color: $sba-blue !important;
+
+      .text {
+        color: $sba-white;
+      }
     }
 
     .navigation-learning-path.dropdown.visible {
       .menu {
-        background-color: white;
+        background-color: $sba-white;
       }
     
       img {
@@ -86,8 +89,8 @@
     }
 
     .button {
-      background-color: $light-blue;
-      color: white;
+      background-color: $sba-blue;
+      color: $sba-white;
     }
   }
 
@@ -99,16 +102,16 @@
     padding-bottom: 0;
 
     .button {
-      background-color: $dark-blue;
-      color: white;
+      background-color: $sba-navy;
+      color: $sba-white;
     }
   }
 
   .userButtons {
-    color: white;
+    color: $sba-white;
 
     a {
-      color: white;
+      color: $sba-white;
     }
 
     padding-bottom: 0;
