@@ -5,9 +5,7 @@ import UserComment from "../UserComment";
 describe('UserComment', () => {
   it('should render the correct amount of top level replies', () => {
     const mleDiscussion = {
-      id: 987,
-      content_type: "learning event",
-      reply_count: 234,
+      post_count: 5,
       replies: [
         {
           id: 123,
@@ -16,6 +14,8 @@ describe('UserComment', () => {
           user_name: "Georgina Foreman",
           timestamp: "September 1, 2018 1pm",
           user_title: "Small Business Owner Extraordinaire",
+          post_number: 1,
+          reply_to_post_number: null,
           body: "Nested replies. Liquorice wafer gummi bears dessert muffin tootsie roll powder brownie. Gummi bears sugar plum biscuit chocolate cake dessert apple pie. Lemon drops macaroon fruitcake",
           replies: [
             {
@@ -25,6 +25,8 @@ describe('UserComment', () => {
               user_name: "Penelope Grant",
               timestamp: "January 1, 2018 1pm",
               user_title: "Small Business Person",
+              post_number: 3,
+              reply_to_post_number: 1,
               body: "sugar plum biscuit chocolate cake dessert apple pie. Lemon drops macaroon fruitcake",
               replies: []
             }
@@ -37,6 +39,8 @@ describe('UserComment', () => {
           user_name: "Regina Miles",
           timestamp: "September 1, 2018 1:05pm",
           user_title: "Medium Business Owner",
+          post_number: 2,
+          reply_to_post_number: null,
           body: "Empty replies array. Gummi bears sugar plum biscuit chocolate cake dessert apple pie. Liquorice wafer gummi bears dessert muffin tootsie roll powder brownie. Lemon drops macaroon fruitcake",
           replies: []
         }
