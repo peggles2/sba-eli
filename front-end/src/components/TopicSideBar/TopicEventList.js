@@ -45,12 +45,17 @@ export default class TopicEventList extends Component {
           event_id && event_id.toString() === event.id.toString()
             ? "event-list-accordion-item active-event"
             : "event-list-accordion-item";
+
+        const completed =
+          event.completion_requirement && event.completion_requirement.completed
+            ? "check"
+            : "image";
         return (
           <Item key={"eventListItem" + index} className={itemClassName}>
             <Item.Header>
               <Icon
                 className={"event-list-item-icon"}
-                name="image"
+                name={completed}
                 size="big"
               />
               <Link className={"event-list-item-link"} to={url + event.id}>

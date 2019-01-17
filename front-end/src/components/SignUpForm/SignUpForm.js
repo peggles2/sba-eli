@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import "./SignUpForm.scss";
 
-class SignUpForm extends React.Component {
+export class SignUpForm extends React.Component {
   state = this.getState(this.props);
 
   getState(props) {
@@ -73,15 +73,20 @@ class SignUpForm extends React.Component {
     }
   }
 
+  getError(field) {
+    if (this.hasError(field)) {
+      return <Message negative content={this.getFieldError(field)}/>
+    }
+  }
+
   getField(field, fieldName, required) {
     return <Form.Field required={required}>
               <label>{fieldName}</label>
-              <Message negative className={this.hasError(field) ? '' : 'noError'}
-                       content={this.getFieldError(field)}></Message>
+              {this.getError(field)}
               <Form.Input placeholder={fieldName}
                    value={this.state[field]}
                    onChange={this.getChangeHandler(field).bind(this)}
-                   error={this.hasError(field)}/>
+                   error={false}/>
             </Form.Field>
   }
 
@@ -96,36 +101,45 @@ class SignUpForm extends React.Component {
           {this.getField('email', 'Email', true)}
           <Form.Field required>
               <label>Password</label>
-              <Message negative className={this.hasError('password') ? '' : 'noError'}
-                       content={this.getFieldError('password')}></Message>
+              {this.getError('password')}
               <Form.Input placeholder="Password" type="password"
                    value={this.state.password}
                    onChange={this.getChangeHandler('password').bind(this)}
                    error={this.hasError('password')}/> <br />
           </Form.Field>
           <Form.Group grouped required>
-            <label>Are you in business?</label>
-            <Form.Field
-              control='input'
-              type='radio'
-              label='Yes'
-              value='1'
-              name='in_business'
-              onChange={this.getChangeHandler('in_business').bind(this)}
-            />
-            <Form.Field
-              control='input'
-              label='No'
-              type='radio'
-              value='2'
-              name='in_business'
-              onChange={this.getChangeHandler('in_business').bind(this)}
-            />
+            <Grid>
+              <Grid.Row>
+                <Grid.Column width={5} className='horizontalQuestion'>
+                  <label>Are you in business?</label>
+                </Grid.Column>
+                <Grid.Column width={2}>
+                  <Form.Field
+                    control='input'
+                    type='radio'
+                    label='Yes'
+                    value='1'
+                    name='in_business'
+                    onChange={this.getChangeHandler('in_business').bind(this)}
+                  />
+                </Grid.Column>
+                <Grid.Column width={2}>
+                  <Form.Field
+                    control='input'
+                    label='No'
+                    type='radio'
+                    value='2'
+                    name='in_business'
+                    onChange={this.getChangeHandler('in_business').bind(this)}
+                  />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Form.Group>
           <hr/>
-          <Grid>
+          <Grid className='registrationActions'>
             <Grid.Row columns={16}>
-              <Grid.Column width={10}>Already have an account? <a href="/" onClick={(e) => {e.preventDefault(); this.props.dispatch(toggleLogin(true))}}>Log in</a></Grid.Column>
+              <Grid.Column width={12} className='switchToLogin'>Already have an account? <a href="/" onClick={(e) => {e.preventDefault(); this.props.dispatch(toggleLogin(true))}}>Log in</a></Grid.Column>
               <Grid.Column><Button className="submit" type="submit">Submit</Button></Grid.Column>
             </Grid.Row>
           </Grid>
