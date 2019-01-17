@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   concern :contentable do
     resource :custom_content
@@ -28,3 +29,4 @@ Rails.application.routes.draw do
   resources :users
   resource :discussion, only: :show
 end
+# rubocop:enable Metrics/BlockLength
