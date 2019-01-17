@@ -23,6 +23,13 @@ export class LearningEventDiscussion extends Component {
     }
   }
 
+  componentDidMount() {
+    if((this.props.parent_id !== null) && 
+       (this.props.parent_content_type !== null)) {
+      this.props.dispatch(getDiscussion(this.props.parent_content_type, this.props.parent_id))
+    }
+  }
+
   render() {
     return ( 
         <Grid id="mle-comments">
