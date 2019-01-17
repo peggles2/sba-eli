@@ -16,9 +16,11 @@ export class LearningEventDiscussion extends Component {
     return null
   }
 
-  componentDidMount() {
-    //TODO this needs to be a dynamic call
-    this.props.dispatch(getDiscussion("infographic", 8))
+  componentDidUpdate(prevProps) { 
+    if((this.props.parent_id !== prevProps.parent_id) && 
+       (this.props.parent_content_type !== prevProps.parent_content_type)) {
+      this.props.dispatch(getDiscussion(this.props.parent_content_type, this.props.parent_id))
+    }
   }
 
   render() {
