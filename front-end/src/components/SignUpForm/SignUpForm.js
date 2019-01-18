@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Container, Form, Grid, Message} from 'semantic-ui-react';
-import { toggleLogin, toggleRegister } from '../../actions/navbarActions';
+import { toggleLogin } from '../../actions/navbarActions';
 import { registerUser } from '../../actions/registrationActions';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
