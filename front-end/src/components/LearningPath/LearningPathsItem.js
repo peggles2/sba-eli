@@ -17,10 +17,7 @@ export class LearningPathsItem extends Component {
     const isUserLoggedIn = this.props.isUserLoggedIn;
 
     this.getTopicsList();
-
-    if(isUserLoggedIn) {
-      this.getCompletedMicroLearningEvents();
-    }
+    this.getCompletedMicroLearningEvents();
   }
 
   learningPathProgress = (total) => {
@@ -44,17 +41,20 @@ export class LearningPathsItem extends Component {
       .then(res => {
         const topicsList = res.data
         this.setState({ topicsList })
-      })
+      });
   }
 
   getCompletedMicroLearningEvents = () => {
     const baseUrl = process.env.REACT_APP_SERVICE_HOST;
     const id = this.props.id;
+    const url = baseUrl + `/learning_paths/${id}/progress`
 
-    axios.get(baseUrl + `/learning_paths/${id}/progress`)
-      .then(res => {
-        const completed = res.data.course_progress.requirement.completed_count;
-        this.setState({completedMLE: completed})
+    axios.get(url)
+      .then(response => {
+        const data = response.data
+        // const completed = res.data.course_progress.requirement.completed_count;
+        // this.setState({completedMLE: completed})
+        console.log("DATA: ", data);
       });
   }
 

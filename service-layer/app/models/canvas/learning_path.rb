@@ -44,10 +44,11 @@ module Canvas
       options = base_options.merge!(body: params)
       JSON.parse post("/courses/#{id}/enrollments", options).body
     end
-  end
 
-  def self.progress(id)
-    uri = masquerade_current_user("/courses/#{id}?include[]=course_progress")
-    JSON.parse get(uri).body
+    def self.check_progress(id)
+      uri = "/courses/#{id}?include[]=course_progress&as_user_id=#{Current.user.&id}"
+      p uri
+      JSON.parse get(uri, base_options).body
+    end
   end
 end

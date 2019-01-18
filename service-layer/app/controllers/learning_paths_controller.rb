@@ -25,7 +25,7 @@ class LearningPathsController < ApplicationController
   end
 
   def progress
-    @learning_path = Canvas::LearningPath.progress(params[:id])
+    @learning_path = Canvas::LearningPath.check_progress(params[:id])
     render json: @learning_path
   end
 end
