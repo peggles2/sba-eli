@@ -4,12 +4,6 @@ import LearningPathAbout from '../LearningPathAbout';
 import { shallow } from 'enzyme';
 
 describe('LearningPathAbout', () => {
-  it('should render correctly', () => {
-    const wrapper = shallow(<LearningPathAbout />);
-    
-    expect(wrapper).toMatchSnapshot();
-  });
-  
   it('should properly page by icon clicks', () => {
     const wrapper = shallow(<LearningPathAbout />);
     
