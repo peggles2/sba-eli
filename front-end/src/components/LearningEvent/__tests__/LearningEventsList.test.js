@@ -4,12 +4,6 @@ import LearningEventsList from "../LearningEventsList";
 import { shallow, mount } from "enzyme";
 
 describe("LearningEventsList", () => {
-  it("should render correctly", () => {
-    const wrapper = shallow(<LearningEventsList />);
-
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it("should render a <List>", () => {
     const wrapper = shallow(<LearningEventsList />);
 
