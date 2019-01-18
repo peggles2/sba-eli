@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - run: pip install --user truffleHog
-      - run: /home/circleci/.local/bin/trufflehog --regex --entropy=False ./
+      - run: /home/circleci/.local/bin/trufflehog --since_commit 65cd594d64625ba2a0fc316d37bd1e6eef738877 --regex --entropy=False ./
 
   rubocop:
     docker:
