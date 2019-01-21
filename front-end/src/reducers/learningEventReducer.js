@@ -36,14 +36,14 @@ export default function reducer(state = defaultValue, action) {
     case "GET_LEARNING_EVENTS":
       return {
         ...state,
-        learningEvents: {},
+        learningEvents: [],
         learningEventsLoading: true,
         learningEventsError: null
       };
     case "GET_LEARNING_EVENTS_FAILURE":
       return {
         ...state,
-        learningEvents: {},
+        learningEvents: [],
         learningEventsLoading: false,
         learningEventsError: action.payload
       };

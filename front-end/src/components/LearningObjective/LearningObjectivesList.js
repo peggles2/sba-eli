@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { List } from "semantic-ui-react";
+import { connect } from "react-redux";
 
 import LearningObjectivesItem from "./LearningObjectivesItem";
+import { getLearningObjectives } from '../../actions/learningObjectiveActions';
 
-export default class LearningObjectivesList extends Component {
+export class LearningObjectivesList extends Component {
   constructor(props) {
     super(props);
 
@@ -18,21 +19,7 @@ export default class LearningObjectivesList extends Component {
   }
 
   objectivesList() {
-    const url = process.env.REACT_APP_SERVICE_HOST + `/learning_objectives/`;
-
-    const objectiveParams = {
-      course_id: this.props.course_id
-    };
-
-    axios
-      .get(url, { params: objectiveParams })
-      .then(res => {
-        const objectivesList = res.data;
-        this.setState({ objectivesList });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.props.dispatch(getLearningObjectives(this.props.course_id));
   }
 
   renderObjectivesList(objectives = []) {
@@ -45,6 +32,14 @@ export default class LearningObjectivesList extends Component {
   }
 
   render() {
-    return <List>{this.renderObjectivesList(this.state.objectivesList)}</List>;
+    return <List>{this.renderObjectivesList(this.props.learningObjectives)}</List>;
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    learningObjectives: store.learningObjective.learningObjectives
+  };
+};
+
+export default connect(mapStateToProps)(LearningObjectivesList);

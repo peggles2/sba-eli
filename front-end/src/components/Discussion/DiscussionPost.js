@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {Form, Input, Grid, TextArea} from "semantic-ui-react";
+import { connect } from "react-redux";
 
-export default class DiscussionPost extends Component {
+class DiscussionPost extends Component {
   constructor(props) {
     super(props);
 
@@ -47,4 +48,12 @@ export default class DiscussionPost extends Component {
   render() {
     return (this.ifRegistered())
   }
-}  
+} 
+
+const mapStateToProps = store => {
+  return {
+    isUserLoggedIn: store.login.isUserLoggedIn
+  };
+};
+
+export default connect(mapStateToProps)(DiscussionPost);

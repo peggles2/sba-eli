@@ -1,46 +1,21 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { connect } from "react-redux";
 import { Header } from "semantic-ui-react";
 import LearningEventsList from "../LearningEvent/LearningEventsList";
 import MetaTags from '../SEO/MetaTags'
+import { getLearningObjective } from '../../actions/learningObjectiveActions';
 
-export default class LearningObjective extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      learningObjective: {}
-    };
-  }
-
+export class LearningObjective extends Component {
   componentDidMount() {
     this.setLearningObjective();
   }
 
   setLearningObjective() {
-    const objective_id = this.props.match.params.id;
-    const url =
-      process.env.REACT_APP_SERVICE_HOST +
-      `/learning_objectives/${objective_id}`;
-
-    const objectiveParams = {
-      course_id: this.props.match.params.course_id
-    };
-
-    axios
-      .get(url, { params: objectiveParams })
-      .then(res => {
-        const learningObjective = res.data;
-
-        this.setState({ learningObjective });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.props.dispatch(getLearningObjective(this.props.match.params.id, this.props.match.params.course_id));
   }
 
   render() {
-    const learningObjective = this.state.learningObjective || {};
+    const learningObjective = this.props.learningObjective || {};
     return (
       <div>
         <MetaTags metaTitle={learningObjective.name}
@@ -56,3 +31,11 @@ export default class LearningObjective extends Component {
     );
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    learningObjective: store.learningObjective.learningObjective
+  };
+};
+
+export default connect(mapStateToProps)(LearningObjective);

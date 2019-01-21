@@ -1,41 +1,21 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { Divider, List } from "semantic-ui-react";
-import axios from "axios";
+import { connect } from "react-redux";
 
-export default class NavigationLearningObjective extends Component {
-  constructor(props) {
-    super(props);
+import { getLearningObjectives } from '../../actions/learningObjectiveActions';
 
-    this.state = {
-      learningObjectives: []
-    };
-  }
-
+export class NavigationLearningObjective extends Component {
   componentDidMount() {
     this.fetchData();
   }
 
   fetchData() {
-    const url =
-      process.env.REACT_APP_SERVICE_HOST +
-      "/learning_objectives/" +
-      "?course_id=" +
-      this.props.learningPathId;
-
-    axios
-      .get(url)
-      .then(res => {
-        const learningObjectives = res.data;
-        this.setState({ learningObjectives });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    this.props.dispatch(getLearningObjectives(this.props.learningPathId));
   }
 
   topicNumber() {
-    const objectives = this.state.learningObjectives || [];
+    const objectives = this.props.learningObjectives || [];
     const topicNumber = objectives.length;
 
     if (topicNumber === 1) {
@@ -51,7 +31,7 @@ export default class NavigationLearningObjective extends Component {
 
   render() {
     const learningObjectivePath = `/learning_paths/${this.props.learningPathId}/learning_objectives/`
-    const objectives = this.state.learningObjectives || [];
+    const objectives = this.props.learningObjectives || [];
     const topics = objectives.map((lo, index) => (
       <List.Item key={'learning_objective_' + index}><Link to={learningObjectivePath + lo.id}>{this.elide(lo.name)}</Link></List.Item>
     ));
@@ -66,3 +46,11 @@ export default class NavigationLearningObjective extends Component {
     )
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    learningObjectives: store.learningObjective.learningObjectives
+  };
+};
+
+export default connect(mapStateToProps)(NavigationLearningObjective);

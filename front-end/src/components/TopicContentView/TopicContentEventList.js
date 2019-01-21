@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Icon, Grid } from "semantic-ui-react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getLearningEvents } from "../../actions/learningEventActions";
 
-export default class TopicContentEventList extends Component {
+export class TopicContentEventList extends Component {
   constructor(props) {
     super(props);
 
@@ -17,22 +18,7 @@ export default class TopicContentEventList extends Component {
   }
 
   eventsList() {
-    const url = process.env.REACT_APP_SERVICE_HOST + `/learning_events/`;
-
-    const eventParams = {
-      course_id: this.props.course_id,
-      module_id: this.props.module_id
-    };
-
-    axios
-      .get(url, { params: eventParams })
-      .then(res => {
-        const eventsList = res.data;
-        this.setState({ eventsList });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.props.dispatch(getLearningEvents(this.props.course_id, this.props.module_id));
   }
 
   renderEventList(eventList) {
@@ -82,6 +68,14 @@ export default class TopicContentEventList extends Component {
   }
 
   render() {
-    return this.renderEventList(this.state.eventsList);
+    return this.renderEventList(this.props.learningEvents);
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    learningEvents: store.learningEvent.learningEvents
+  };
+};
+
+export default connect(mapStateToProps)(TopicContentEventList)
