@@ -45,17 +45,25 @@ export class LearningPathsItem extends Component {
   }
 
   getCompletedMicroLearningEvents = () => {
+    const isUserLoggedIn = this.props.isUserLoggedIn;
     const baseUrl = process.env.REACT_APP_SERVICE_HOST;
     const id = this.props.id;
     const url = baseUrl + `/learning_paths/${id}/progress`
 
-    axios.get(url)
-      .then(response => {
-        const data = response.data
-        // const completed = res.data.course_progress.requirement.completed_count;
-        // this.setState({completedMLE: completed})
-        console.log("DATA: ", data);
-      });
+    if (isUserLoggedIn) {
+      const accessToken = this.props.accessToken;
+      console.log("ACCESS TOKEN " + accessToken)
+      const auth_header = { headers: { "AUTHORIZATION": accessToken } }
+
+      axios.get(url, auth_header)
+        .then(response => {
+          const data = response.data
+          // const completed = res.data.course_progress.requirement.completed_count;
+          // this.setState({completedMLE: completed})
+          console.log("DATA: ", data);
+        });
+    }
+
   }
 
   totalMicroLearningEvents = () => {
@@ -95,8 +103,10 @@ export class LearningPathsItem extends Component {
 };
 
 const mapStateToProps = (store) => {
+  const { login } = store
   return {
-    isUserLoggedIn: store.login.isUserLoggedIn,
+    isUserLoggedIn: login.isUserLoggedIn,
+    accessToken: login.userData.access_token
   }
 }
 
