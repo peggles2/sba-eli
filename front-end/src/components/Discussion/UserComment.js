@@ -7,7 +7,7 @@ export class UserComment extends Component {
 
   replyLink(parent_content_type, parent_id, reply) {
     const replyLink = this.props.isUserLoggedIn
-        ? <a className="reply-link" href={`#/discussion/content_type/${parent_id}`}>Reply</a>
+        ? <a className="reply-link" href={`#/discussion/${parent_content_type}/${parent_id}`}>Reply</a>
         : null
     if (parent_content_type !== "comment" && reply && reply.replies) {
       return <Grid.Row>
