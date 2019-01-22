@@ -43,8 +43,8 @@ export class NavigationLearningPath extends Component {
     const { isUserLoggedIn } = this.props;
     if (isUserLoggedIn) {
       return (
-        <Dropdown pointing="left" fluid text={lp.name}>
-          <Dropdown.Menu style={{ width: "450px" }}>
+        <Dropdown className='navigation-learning-path' pointing="left" fluid text={lp.name}>
+          <Dropdown.Menu>
             <Header as="h1">
               <Link
                 to={`/learning_paths/${lp.id}`}

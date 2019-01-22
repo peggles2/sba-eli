@@ -34,7 +34,7 @@ export class Navbar extends Component {
   }
 
   logoutLink() {
-    return <div class='logoutLink'>
+    return <div className='logoutLink'>
             <a onClick={() => this.props.dispatch(logoutUser(this.props.accessToken))}>Log out</a>
            </div>
   }
@@ -48,9 +48,9 @@ export class Navbar extends Component {
   }
 
   userButtons() {
-    return <Menu.Item className='userButtons'>
-              <div onMouseEnter={() => { this.setState({userButtonHover: true})}}
-                 onMouseLeave={() => { this.setState({userButtonHover: false})}}>
+    return <Menu.Item className='userButtons' onMouseEnter={() => { this.setState({userButtonHover: true})}}
+                                              onMouseLeave={() => { this.setState({userButtonHover: false})}}>
+              <div>
                  {this.state.userButtonHover ? this.logoutLink() : this.greeting()}
               </div>
            </Menu.Item>
@@ -63,7 +63,7 @@ export class Navbar extends Component {
             <img className='logo' src={`/Ascent_Logo_Stacked.png`} alt="Ascent"/>
           </Menu.Item>
           <Dropdown text='Learning Paths' item id="navbar-learning-paths">
-            <Dropdown.Menu>
+            <Dropdown.Menu className='navigation-learning-path-menu'>
               <NavigationLearningPath />
             </Dropdown.Menu>
           </Dropdown>
