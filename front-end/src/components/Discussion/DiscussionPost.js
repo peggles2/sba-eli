@@ -37,7 +37,7 @@ export class DiscussionPost extends Component {
   }
 
   render() {
-    return (this.ifRegistered(this.props.parent_id))
+    return (this.ifRegistered())
   }
 }
 
