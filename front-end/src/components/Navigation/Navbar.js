@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import {Button, Dropdown, Form, Menu, Input} from 'semantic-ui-react';
+import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
 import RegistrationModal from '../RegistrationModal/RegistrationModal';
 import { toggleRegister, toggleLogin } from '../../actions/navbarActions';
@@ -34,7 +34,7 @@ export class Navbar extends Component {
   }
 
   logoutLink() {
-    return <div class='logoutLink'>
+    return <div className='logoutLink'>
             <a onClick={() => this.props.dispatch(logoutUser(this.props.accessToken))}>Log out</a>
            </div>
   }
@@ -48,9 +48,9 @@ export class Navbar extends Component {
   }
 
   userButtons() {
-    return <Menu.Item className='userButtons'>
-              <div onMouseEnter={() => { this.setState({userButtonHover: true})}}
-                 onMouseLeave={() => { this.setState({userButtonHover: false})}}>
+    return <Menu.Item className='userButtons' onMouseEnter={() => { this.setState({userButtonHover: true})}}
+                                              onMouseLeave={() => { this.setState({userButtonHover: false})}}>
+              <div>
                  {this.state.userButtonHover ? this.logoutLink() : this.greeting()}
               </div>
            </Menu.Item>

@@ -90,9 +90,7 @@ export class LearningPathsItem extends Component {
           alt="learning path image placeholder"
         />
         <Card.Content>
-          <Card.Header aria-label={`Link to Learning Path ` + this.props.name}>
-            <a onClick={() => { this.props.history.push('/learning_paths/' + this.props.id)}}>{this.props.name}</a>
-          </Card.Header>
+          <Card.Header><a href={'/learning_paths/' + this.props.id}>{this.props.name}</a></Card.Header>
           <Card.Meta>{this.props.course_code}</Card.Meta>
           <Card.Description>{learningPathDescription}</Card.Description>
         </Card.Content>
