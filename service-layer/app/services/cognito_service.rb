@@ -8,7 +8,7 @@ module CognitoService
   end
 
   def self.sign_up(email, password)
-    result = client.sign_up(
+    client.sign_up(
       client_id: ENV["AWS_COGNITO_CLIENT_ID"],
       username: email,
       password: password,
@@ -19,7 +19,6 @@ module CognitoService
         },
       ],
     )
-    Rails.logger.debug("signup response #{result.inspect}")
   end
 
   def self.authenticate(email, password)

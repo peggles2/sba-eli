@@ -1,4 +1,6 @@
 class DiscussionsController < ApplicationController
+  before_action :valid_session?, only: :create
+
   def index
     discussion_map = DiscussionMap.find_by(
       content_type: params[:content_type],
