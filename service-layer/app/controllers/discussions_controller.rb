@@ -1,4 +1,6 @@
 class DiscussionsController < ApplicationController
+  before_action :valid_session?, only: :create
+
   def index
     discussion_map = DiscussionMap.find_by(
       content_type: params[:content_type],
@@ -9,7 +11,6 @@ class DiscussionsController < ApplicationController
                             response = DiscourseClient.create.topic_posts(
                               discussion_map.discussion_id,
                             )
-                            Rails.logger.info response
                             @post_count = response["post_stream"]["posts"].size
                             DiscussionReply.from_discourse_list(response)
                           else

@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   concern :contentable do
     resource :custom_content
@@ -30,3 +31,4 @@ Rails.application.routes.draw do
     resources :enrollments, only: :index
   end
 end
+# rubocop:enable Metrics/BlockLength
