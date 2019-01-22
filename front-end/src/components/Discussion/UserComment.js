@@ -47,8 +47,8 @@ export class UserComment extends Component {
 
   render() {
     var reply = this.props.replies
-
-    if (reply && reply.length && reply.length > 0) { 
+    
+    if (reply && reply !== null && reply.id) {
       return <Grid.Row className='user-comment' width={16}>
         <Grid.Column width={1}>
           <Image className='user-image'
