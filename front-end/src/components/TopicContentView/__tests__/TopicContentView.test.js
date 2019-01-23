@@ -1,15 +1,15 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import TopicContentView from "../TopicContentView";
 import { Item } from "semantic-ui-react";
 
-import { Provider } from 'react-redux'
-import { getMockStore } from '../../../store';
+import { Provider } from "react-redux";
+import { getMockStore } from "../../../store";
 
 describe("TopicContentView", () => {
   const initialState = {
     learningEvent: {
-      LearningEvents: []
+      learningEventsCollection: {}
     },
     learningObjective: {
       learningObjectives: []
@@ -20,17 +20,17 @@ describe("TopicContentView", () => {
     login: {
       isUserLoggedIn: true,
       userData: {
-        access_token: ''
+        access_token: ""
       }
     }
-  }
+  };
   const mockStore = getMockStore();
   let store;
 
-  beforeEach(()=> {
+  beforeEach(() => {
     store = mockStore(initialState);
-  })
-  
+  });
+
   it("should render a <Item.Group>", () => {
     const topicsList = [{ name: "Test", id: 1 }];
     const wrapper = mount(
