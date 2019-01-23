@@ -6,6 +6,7 @@ import navbar from "./navbarReducer";
 import registration from "./registrationReducer";
 import learningEvent from "./learningEventReducer";
 import login from "./loginReducer";
+import discussion from "./discussionReducer";
 
 export default combineReducers({
   aboutModal,
@@ -13,5 +14,6 @@ export default combineReducers({
   navbar,
   registration,
   learningEvent,
-  login
+  login,
+  discussion
 });
