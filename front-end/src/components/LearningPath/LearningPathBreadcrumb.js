@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 export class LearningPathBreadcrumb extends Component {
   render() {
-    const { id } = this.props;
     return (
       <Breadcrumb>
         <Breadcrumb.Section onClick={() => this.props.history.push('/')}>Home</Breadcrumb.Section>

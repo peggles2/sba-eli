@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Dropdown, Header, Image } from "semantic-ui-react";
+import { Dropdown, Header } from "semantic-ui-react";
 import NavigationLearningObjective from "./NavigationLearningObjective";
 import axios from "axios";
 import { connect } from "react-redux";
