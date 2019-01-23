@@ -8,30 +8,50 @@ module SecurityConcern
   end
 
   def authenticate_request
-    if session_cookie
-      response = Canvas::User.read_user(session_cookie)
-      Current.user = User.from_canvas_json(response)
-    end
+    authenticate_request_with_token || authenticate_request_with_cookie
   end
 
   def session_cookie
-    cookies.encrypted[SESSION_KEY]
+    session[SESSION_KEY]
   end
 
   def sign_in(user)
     Current.user = user
-    cookies.encrypted[SESSION_KEY] = user.id
+    session[SESSION_KEY] = user.id
   end
 
   def sign_out
-    cookies.delete SESSION_KEY
+    session[SESSION_KEY] = nil
+  end
+
+  def authenticate_request_with_cookie
+    if session_cookie
+      response = Canvas::User.read_user(session_cookie)
+      Current.user = User.from_canvas_json(response)
+      true
+    end
+  end
+
+  def authenticate_request_with_token
+    token = request.headers["HTTP_AUTHORIZATION"]
+    return unless token
+
+    begin
+      cognito_response = CognitoService.get_user(token)
+      user_response = Canvas::User.fetch_by_email(cognito_response[:username])
+      Current.user = User.from_canvas_json(user_response)
+      Current.access_token = token
+      true
+    rescue Aws::CognitoIdentityProvider::Errors::NotAuthorizedException
+      false
+    end
   end
 
   def valid_session?
-    (head 403 && return) unless Current.user
+    return_forbidden unless Current.user
   end
 
   def return_forbidden
-    head 403 && return
+    render json: { error: "Not Authorized" }, status: :unauthorized
   end
 end

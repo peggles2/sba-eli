@@ -5,11 +5,12 @@ namespace :db do
 
     begin
       ActiveRecord::Base.establish_connection
-      %w[content_tags context_modules courses fearless_tags fearless_taggings].each do |table_name|
+      %w[content_tags context_modules courses pseudonyms fearless_tags
+         fearless_taggings users].each do |table_name|
         next if TABLES_TO_SKIP.include?(table_name)
 
         conter = "000"
-        file_path = Rails.root.join("spec", "fixture", "#{table_name}.yml")
+        file_path = Rails.root.join("spec", "fixtures", "#{table_name}.yml")
         File.open(file_path, "w") do |file|
           rows = ActiveRecord::Base.connection.select_all("SELECT * FROM #{table_name}")
           data = rows.each_with_object({}) do |record, hash|

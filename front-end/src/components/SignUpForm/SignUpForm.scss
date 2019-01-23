@@ -1,0 +1,32 @@
+@import "../../assets/styles/base";
+
+.noError {
+  display: none;
+}
+
+#registrationModal {
+  .close-icon {
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .ui.message {
+    padding: .8em 1.5em;
+  }
+
+  .horizontalQuestion {
+    padding-top: 5px;
+  }
+
+  .switchToLogin {
+    padding-top: 10px;
+  }
+
+  .registrationActions {
+    padding-top: 10px;
+
+    .button.submit {
+      margin-left: 18px;
+    }
+  }
+}

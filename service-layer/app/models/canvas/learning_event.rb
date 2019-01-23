@@ -6,11 +6,12 @@ module Canvas
     base_uri ENV["CANVAS_HOST"] + "/api/v1"
 
     def self.all(course_id, module_id)
-      JSON.parse get("/courses/#{course_id}/modules/#{module_id}/items", base_options).body
+      uri = masquerade_current_user("/courses/#{course_id}/modules/#{module_id}/items")
+      JSON.parse get(uri, base_options).body
     end
 
     def self.find(course_id, module_id, id)
-      url = "/courses/#{course_id}/modules/#{module_id}/items/#{id}"
+      url = masquerade_current_user("/courses/#{course_id}/modules/#{module_id}/items/#{id}")
       learning_event = get(url, base_options)
       if learning_event["url"]
         learning_event["eventContent"] = get(learning_event["url"], base_options)
@@ -26,6 +27,12 @@ module Canvas
 
     def self.destroy(course_id, module_id, id)
       JSON.parse delete("/courses/#{course_id}/modules/#{module_id}/items/#{id}", base_options).body
+    end
+
+    def self.done(course_id, module_id, id)
+      uri = masquerade_current_user("/courses/#{course_id}/modules/#{module_id}/"\
+            "items/#{id}/mark_read")
+      JSON.parse post(uri, base_options).body
     end
   end
 end
