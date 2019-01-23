@@ -2,23 +2,17 @@ import React, { Component } from "react";
 import { Icon, Grid } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getLearningEvents } from "../../actions/learningEventActions";
+import { getLearningEventsIfNeeded } from "../../actions/learningEventActions";
 
 export class TopicContentEventList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      eventsList: []
-    };
-  }
-
   componentDidMount() {
     this.eventsList();
   }
 
   eventsList() {
-    this.props.dispatch(getLearningEvents(this.props.course_id, this.props.module_id));
+    this.props.dispatch(
+      getLearningEventsIfNeeded(this.props.course_id, this.props.module_id)
+    );
   }
 
   renderEventList(eventList) {
@@ -68,14 +62,19 @@ export class TopicContentEventList extends Component {
   }
 
   render() {
-    return this.renderEventList(this.props.learningEvents);
+    const { module_id, course_id } = this.props;
+    const learningEvents = this.props.learningEventsCollection[course_id]
+      ? this.props.learningEventsCollection[course_id][module_id]
+      : [];
+
+    return this.renderEventList(learningEvents);
   }
 }
 
 const mapStateToProps = store => {
   return {
-    learningEvents: store.learningEvent.learningEvents
+    learningEventsCollection: store.learningEvent.learningEventsCollection
   };
 };
 
-export default connect(mapStateToProps)(TopicContentEventList)
+export default connect(mapStateToProps)(TopicContentEventList);
