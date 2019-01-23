@@ -92,7 +92,12 @@ export class LearningEventQuiz extends Component {
   }
 
   renderResults(){
-    return JSON.stringify(this.props.results)
+    const { results } = this.props
+
+    return <div>
+      <h3>{results.category.name}</h3>
+      <div>{results.category.description}</div>
+    </div>
   }
 
   render() {
@@ -104,14 +109,14 @@ export class LearningEventQuiz extends Component {
         }} />
         <Divider />
         {
-          this.props.quiz && this.props.quiz.questions ?
-            this.renderQuestions() : 
-          this.props.results ?
+           this.props.results ?
             this.renderResults() :
-            this.renderStart()
+           this.props.quiz && this.props.quiz.questions ?
+            this.renderQuestions() :
+            <span />
           }
         {
-          this.props.quiz.questions && 
+          (this.props.quiz.questions && !this.props.results) &&
           <div style={{textAlign: "right"}}>
             <Button className="cyan" onClick={this.viewResults} >
               View Results

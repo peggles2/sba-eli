@@ -10,10 +10,11 @@ class QuizzesController < ApplicationController
   
   def show
     begin
-      submission = Canvas::Quiz.start_submission params[:learning_path_id], params[:id]
-
+      # Commenting out to ignore submissionss for assessment purposes. We can get submission objects once 
+      # we actually start grading quizes
+      # submission = Canvas::Quiz.start_submission params[:learning_path_id], params[:id]
+      submission = nil
       @quiz = Canvas::Quiz.find params[:learning_path_id], params[:id], submission
-
       render json: @quiz, status: :ok
     rescue Exception => e
       render json: e.message, status: :bad_request
@@ -25,6 +26,29 @@ class QuizzesController < ApplicationController
       @submissions = Canvas::Quiz.get_submissions params[:learning_path_id], params[:id]
 
       render json: @submissions, status: :ok
+    rescue Exception => e
+      render json: e.message, status: :bad_request
+    end
+  end
+
+  def assessment
+    begin
+      Assessment.create(
+        description: params[:quiz][:description],
+        name: params[:quiz][:name],
+        course_id: params[:learning_path_id],
+        quiz_id: params[:id],
+        minimum: params[:quiz][:minimum],
+        maximum: params[:quiz][:maximum]
+        )
+    rescue Exception => e
+      render json: e.message, status: :bad_request
+    end
+  end
+
+  def assessments
+    begin
+      render json: Assessment.where(quiz_id: params[:id])
     rescue Exception => e
       render json: e.message, status: :bad_request
     end
@@ -47,11 +71,10 @@ class QuizzesController < ApplicationController
   # }
   def create
     begin
-      quiz_answer_resp = Canvas::Quiz.submit params
-      pp quiz_answer_resp
-      end_submission_resp = Canvas::Quiz.end_submission params[:learning_path_id], params
-      pp end_submission_resp
-      render json: end_submission_resp, status: :ok
+      assessment = Assessment.where(quiz_id: params[:quiz_id])
+      quiz_answer_resp = Canvas::Quiz.grade params[:learning_path_id], params[:quiz_id], assessment.to_a, params[:quiz][:quiz_questions]
+      
+      render json: quiz_answer_resp, status: :ok
     rescue Exception => e
       render json: e.message, status: :bad_request
     end
