@@ -15,6 +15,7 @@ function eventWrapper() {
   const props = {
     learningEvent,
     match,
+    learningEventsCollection: {},
 
     dispatch: () => {}
   };
