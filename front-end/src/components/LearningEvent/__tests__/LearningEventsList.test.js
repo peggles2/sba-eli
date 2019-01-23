@@ -5,13 +5,22 @@ import { shallow, mount } from "enzyme";
 
 describe("LearningEventsList", () => {
   it("should render a <List>", () => {
-    const wrapper = shallow(<LearningEventsList dispatch={() => {}} />);
+    const wrapper = shallow(
+      <LearningEventsList learningEventsCollection={{}} dispatch={() => {}} />
+    );
 
     expect(wrapper.find(List).length).toEqual(1);
   });
 
   it("should render at least one <List.Item>", () => {
-    const wrapper = mount(<LearningEventsList dispatch={() => {}} course_id="1" module_id="1" />);
+    const wrapper = mount(
+      <LearningEventsList
+        learningEventsCollection={{}}
+        dispatch={() => {}}
+        course_id="1"
+        module_id="1"
+      />
+    );
 
     expect(wrapper.find("li").length).toBeGreaterThanOrEqual(1);
   });
