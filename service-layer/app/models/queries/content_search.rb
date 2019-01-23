@@ -47,7 +47,7 @@ module Queries
           #{construct_account_clause}
           #{construct_course_worklow_clause}
           #{construct_name_sql}
-          #{construct_all_tags_serach('t', 'name')}
+          #{construct_all_tags_search('t', 'name')}
         UNION ALL
         -- Search learning objectives
         SELECT DISTINCT
@@ -73,7 +73,7 @@ module Queries
           #{construct_account_clause}
           #{construct_generic_workflow_clause('cm')}
           #{construct_name_sql('cm')}
-          #{construct_all_tags_serach('t', 'name')}
+          #{construct_all_tags_search('t', 'name')}
         UNION ALL
         -- Search learning learning_event
         SELECT DISTINCT
@@ -99,13 +99,13 @@ module Queries
           #{construct_account_clause}
           #{construct_generic_workflow_clause('ct')}
           #{construct_name_sql('ct', 'title')}
-          #{construct_all_tags_serach('t', 'name')}
+          #{construct_all_tags_search('t', 'name')}
       SQL
     end
 
     # contructs the SQL to search for custom tags within the database. These are
     # used for searching durations, media_types and subjects
-    def construct_all_tags_serach(table, field)
+    def construct_all_tags_search(table, field)
       sql_array = [subjects, media_types, durations].map { |a| a if a.any? }.compact
       sql_strings = sql_array.map do |values|
         "(#{construct_tag_search(table, field, values)})"

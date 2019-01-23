@@ -8,6 +8,7 @@ import learningEvent from "./learningEventReducer";
 import learningObjective from "./learningObjectiveReducer";
 import login from "./loginReducer";
 import search from "./searchReducer";
+import discussion from "./discussionReducer";
 
 export default combineReducers({
   aboutModal,
@@ -17,5 +18,6 @@ export default combineReducers({
   learningEvent,
   learningObjective,
   login,
-  search
+  search,
+  discussion
 });

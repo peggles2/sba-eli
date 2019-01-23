@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import {Button, Dropdown, Form, Menu, Input} from 'semantic-ui-react';
+import {Button, Dropdown, Form, Menu} from 'semantic-ui-react';
 import NavigationLearningPath from './NavigationLearningPath';
 import RegistrationModal from '../RegistrationModal/RegistrationModal';
 import { toggleRegister, toggleLogin } from '../../actions/navbarActions';

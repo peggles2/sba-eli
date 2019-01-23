@@ -68,7 +68,6 @@ export class RegistrationModal extends React.Component {
         return 'Register'
       default:
         return '';
-        break;
     }
   }
 }
