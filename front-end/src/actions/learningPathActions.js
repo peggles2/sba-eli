@@ -33,28 +33,28 @@ export function enrollUserInPath(id, state) {
 export function getLearningPathQuizzes(course_id) {
   return {
     type: 'GET_LEARNING_PATH_QUIZZES',
-    payload: axios.get(baseUrl + `/learning_paths/${course_id}/quizzes`)
+    payload: axios.get(`/learning_paths/${course_id}/quizzes`, axiosConfig(state))
   };
 }
 
 export function getQuiz(course_id, content_id) {    
   return {
     type: 'GET_LEARNING_PATH_QUIZ',
-    payload: axios.get(baseUrl + `/learning_paths/${course_id}/quizzes/${content_id}`)
+    payload: axios.get(`/learning_paths/${course_id}/quizzes/${content_id}`, axiosConfig(state))
   };  
 }
 
 export function getQuizSubmissions(course_id, content_id) {
   return {
     type: 'GET_LEARNING_PATH_QUIZ_SUBMISSIONS',
-    payload: axios.get(baseUrl + `/learning_paths/${course_id}/quizzes/${content_id}/submissions`)
+    payload: axios.get(`/learning_paths/${course_id}/quizzes/${content_id}/submissions`, axiosConfig(state))
   };  
 }
 export function submitQuiz(course_id, content_id, quiz) {
   quiz.quiz_id = content_id
   return {
     type: 'SUBMIT_QUIZ',
-    payload: axios.post(baseUrl + `/learning_paths/${course_id}/quizzes`, quiz)
+    payload: axios.post(`/learning_paths/${course_id}/quizzes`, quiz, axiosConfig(state))
   };  
 }
 
