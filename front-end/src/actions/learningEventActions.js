@@ -1,5 +1,5 @@
 import axios from "axios";
-import axiosConfig from './axiosConfig';
+import axiosConfig from "./axiosConfig";
 
 export function getLearningEvent(course_id, module_id, event_id) {
   const url = `/learning_events/${event_id}`;
@@ -14,6 +14,21 @@ export function getLearningEvent(course_id, module_id, event_id) {
       payload: axios.get(url, axiosConfig(getState(), eventParams))
     });
   };
+}
+
+export function getLearningEventsIfNeeded(course_id, module_id) {
+  return (dispatch, getState) => {
+    if (shouldGetLearningEvents(course_id, module_id, getState())) {
+      dispatch(getLearningEvents(course_id, module_id));
+    }
+  };
+}
+
+function shouldGetLearningEvents(course_id, module_id, state) {
+  const learningEventsObj =
+    state.learningEvent.learningEventsCollection[course_id];
+
+  return !(learningEventsObj && learningEventsObj[module_id]);
 }
 
 export function getLearningEvents(course_id, module_id) {
