@@ -49,7 +49,6 @@ export class LearningEvent extends Component {
 
     return (
       <div>
-        <LearningEventManager event={event} courseId={this.props.match.params.course_id} />
         <Container className="learning-event-container">
           <MetaTags
             metaTitle={learningEvent.title}
@@ -57,7 +56,7 @@ export class LearningEvent extends Component {
             canonicalUrl=""
           />
           <LearningEventHeader event={learningEvent} topicTitle={topicTitle} />
-          <LearningEventManager event={learningEvent} />
+          <LearningEventManager event={learningEvent} courseId={this.props.match.params.id} />
           <Divider />
           <LearningEventFooter
             courseId={this.props.match.params.id}

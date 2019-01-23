@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Divider, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
-import { getLearningPathQuizzes, getQuizSubmissions, getQuiz, submitQuiz } from "../../../actions/learningPathActions";
+import { getLearningPathQuizzes, clearQuizSubmission, getQuiz, submitQuiz } from "../../../actions/learningPathActions";
 import { MultipleChoiceQuestion, MultipleAnswerQuestion, ShortAnswerQuestion } from "./LearningEventQuestions";
 
 //Placeholder for testing purposes to handle unaccounted learning event types
@@ -12,9 +12,9 @@ export class LearningEventQuiz extends Component {
     super(props);
 
     this.state = {
-
       answers: {
-      }
+      },
+      results: null
     };
 
     this.beginQuiz = this.beginQuiz.bind(this)
@@ -25,17 +25,17 @@ export class LearningEventQuiz extends Component {
   componentDidMount() {
     this.props.dispatch(getLearningPathQuizzes(this.props.courseId))
     if(this.props.event) {
-      this.props.dispatch(getQuizSubmissions(this.props.courseId, this.props.event.content_id)).then(() => this.beginQuiz())
+      this.beginQuiz()
     }
   }
 
   componentDidUpdate(prevProps) {
     if(this.props.event && this.props.event.content_id != prevProps.event.content_id) {
-      this.props.dispatch(getQuizSubmissions(this.props.courseId, this.props.event.content_id)).then(() => this.beginQuiz())
+      this.beginQuiz()
     }
-    // if(this.props.submissions.length && ! prevProps.submissions.length) {
-    //   this.beginQuiz()
-    // }
+    else if(this.props.results && !this.state.results){
+      this.setState({results: this.props.results})
+    }
   }
 
   recordAnswer(id, answer){
@@ -45,6 +45,8 @@ export class LearningEventQuiz extends Component {
   }
 
   beginQuiz(){
+    this.setState({results: null, answers: {}})
+    this.props.dispatch(clearQuizSubmission())
     this.props.dispatch(getQuiz(this.props.courseId, this.props.event.content_id));
   }
 
@@ -92,8 +94,8 @@ export class LearningEventQuiz extends Component {
   }
 
   renderResults(){
-    const { results } = this.props
-
+    const { results } = this.state
+console.log("RESULTS", this.state)
     return <div>
       <h3>{results.category.name}</h3>
       <div>{results.category.description}</div>
@@ -109,7 +111,7 @@ export class LearningEventQuiz extends Component {
         }} />
         <Divider />
         {
-           this.props.results ?
+           this.state.results ?
             this.renderResults() :
            this.props.quiz && this.props.quiz.questions ?
             this.renderQuestions() :

@@ -49,7 +49,6 @@ export default class LearningEventManager extends Component {
 
   renderEventContentByType() {
     const event = this.props.event;
-
     switch(event.type) {
       case 'Page':
         return <LearningEventPage event={event} />;

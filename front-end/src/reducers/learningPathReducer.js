@@ -138,6 +138,8 @@ export default function reducer(state = defaultValue, action) {
       return {...state, quizSubmissions: action.payload.data, quizSubmissionsLoading: false, quizSubmissionsError: null} 
     case 'SUBMIT_QUIZ':
       return {...state, submitQuiz: null, submitQuizLoading: true, submitQuizError: null} 
+    case 'CLEAR_SUBMIT_QUIZ':
+      return {...state, submitQuiz: null, submitQuizLoading: false, submitQuizError: null} 
     case 'SUBMIT_QUIZ_FAILURE':
       return {...state, submitQuiz: null, submitQuizLoading: false, submitQuizError: action.payload} 
     case 'SUBMIT_QUIZ_FULFILLED':
