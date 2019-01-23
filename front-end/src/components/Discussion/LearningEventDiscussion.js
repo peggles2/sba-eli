@@ -10,27 +10,31 @@ import "./LearningEventDiscussion.scss";
 export class LearningEventDiscussion extends Component {
 
   commentCount() {
-    if (this.props.replies && this.props.reply_count > 0) {
-      return <span className="comment-count">({this.props.reply_count})</span>
+    const properties = this.props
+    if (properties.replies && properties.reply_count > 0) {
+      return <span className="comment-count">({properties.reply_count})</span>
     }
     return null
   }
 
   componentDidUpdate(prevProps) {
-    if ((this.props.parent_id !== prevProps.parent_id) &&
-        (this.props.parent_content_type !== prevProps.parent_content_type)) {
-      this.props.dispatch(getDiscussion(this.props.parent_content_type, this.props.parent_id))
+    const properties = this.props
+    if ((properties.parent_id !== prevProps.parent_id) &&
+        (properties.parent_content_type !== prevProps.parent_content_type)) {
+      properties.dispatch(getDiscussion(properties.parent_content_type, properties.parent_id))
     }
   }
 
   componentDidMount() {
-    if ((this.props.parent_id !== null) &&
-        (this.props.parent_content_type !== null)) {
-      this.props.dispatch(getDiscussion(this.props.parent_content_type, this.props.parent_id))
+    const properties = this.props
+    if ((properties.parent_id !== null) &&
+        (properties.parent_content_type !== null)) {
+      properties.dispatch(getDiscussion(properties.parent_content_type, properties.parent_id))
     }
   }
 
   render() {
+    const properties = this.props
     return (
         <Grid id="mle-comments">
           <Grid.Row stretched centered columns={15} className="mle-comments-header-row">
@@ -40,9 +44,9 @@ export class LearningEventDiscussion extends Component {
             </Grid.Column>
           </Grid.Row>
           <DiscussionPost/>
-          <Discussion replies={this.props.replies} 
-                      parent_content_type={this.props.parent_content_type}
-                      parent_id={this.props.parent_id}/>
+          <Discussion replies={properties.replies}
+                      parent_content_type={properties.parent_content_type}
+                      parent_id={properties.parent_id}/>
         </Grid>
     )
   }
