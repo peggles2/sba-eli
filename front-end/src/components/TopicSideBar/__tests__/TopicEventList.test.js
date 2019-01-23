@@ -41,8 +41,6 @@ describe("TopicProgressBar", () => {
     };
 
     const wrapper = shallow(<TopicEventList {...props} />);
-    // const eventsList = [];
-    // wrapper.setState({ eventsList });
 
     expect(wrapper.find(Item.Group).exists()).toBe(true);
   });
