@@ -1,16 +1,16 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import { Item } from "semantic-ui-react";
-import ConnectedTopicEventeList, { TopicEventList } from "../TopicEventList";
+import ConnectedTopicEventList, { TopicEventList } from "../TopicEventList";
 import { Link, MemoryRouter } from "react-router-dom";
 
-import { Provider } from 'react-redux'
-import { getMockStore } from '../../../store';
+import { Provider } from "react-redux";
+import { getMockStore } from "../../../store";
 
 describe("TopicProgressBar", () => {
   const initialState = {
     learningEvent: {
-      LearningEvents: []
+      learningEventsCollection: {}
     },
     learningObjective: {
       learningObjectives: []
@@ -21,34 +21,43 @@ describe("TopicProgressBar", () => {
     login: {
       isUserLoggedIn: true,
       userData: {
-        access_token: ''
+        access_token: ""
       }
     }
-  }
+  };
   const mockStore = getMockStore();
   let store;
 
-  beforeEach(()=> {
+  beforeEach(() => {
     store = mockStore(initialState);
-  })
+  });
 
   it("should render an Item.Group", () => {
-    const props = { course_id: 1, module_id: 1, dispatch: ()=>{} };
+    const props = {
+      course_id: 1,
+      module_id: 1,
+      dispatch: () => {},
+      learningEventsCollection: { 1: { 1: [{ id: 1, title: "Test" }] } }
+    };
 
     const wrapper = shallow(<TopicEventList {...props} />);
-    const eventsList = [{ id: 1, title: "Test" }];
-    wrapper.setState({ eventsList });
+    // const eventsList = [];
+    // wrapper.setState({ eventsList });
 
     expect(wrapper.find(Item.Group).exists()).toBe(true);
   });
 
   it("should render a Link with the proper title", () => {
-    const props = { course_id: 1, module_id: 1 };
+    const props = {
+      course_id: 1,
+      module_id: 1,
+      learningEventsCollection: { 1: { 1: [{ id: 1, title: "Test" }] } }
+    };
 
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <ConnectedTopicEventeList {...props} />
+          <ConnectedTopicEventList {...props} />
         </MemoryRouter>
       </Provider>
     );
