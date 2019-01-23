@@ -30,7 +30,7 @@ export class LearningEventQuiz extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.event && this.props.event.content_id != prevProps.event.content_id) {
+    if(this.props.event && this.props.event.content_id !== prevProps.event.content_id) {
       this.beginQuiz()
     }
     else if(this.props.results && !this.state.results){
@@ -95,11 +95,12 @@ export class LearningEventQuiz extends Component {
 
   renderResults(){
     const { results } = this.state
-console.log("RESULTS", this.state)
-    return <div>
+
+    return results ? <div>
       <h3>{results.category.name}</h3>
       <div>{results.category.description}</div>
-    </div>
+    </div> :
+    <span><em>Yous submission does not match any results</em></span>
   }
 
   render() {
@@ -120,7 +121,7 @@ console.log("RESULTS", this.state)
         {
           (this.props.quiz.questions && !this.props.results) &&
           <div style={{textAlign: "right"}}>
-            <Button className="cyan" onClick={this.viewResults} >
+            <Button className="gold" onClick={this.viewResults} >
               View Results
             </Button>
           </div>
@@ -130,12 +131,14 @@ console.log("RESULTS", this.state)
   }
 }
 
-export default connect((store) => {
-  return {
+const mapStateToProps = (store) => {
+  return { 
     quizzes: store.learningPath.quizzes,
     quiz: store.learningPath.quiz,
     submissions: store.learningPath.quizSubmissions,
     submissionsLoading: store.learningPath.quizSubmissionsLoading,
     results: store.learningPath.submitQuiz
   }
-})(withRouter(LearningEventQuiz));
+};
+
+export default withRouter(connect(mapStateToProps)(LearningEventQuiz));

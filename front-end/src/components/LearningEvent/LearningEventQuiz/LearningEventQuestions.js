@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Form, Radio, Input, Divider } from "semantic-ui-react";
 
-//TODO: wil not work for anything other than display until we figure out how to do it with answers
 export class MultipleAnswerQuestion extends Component {
 
     state = {}
