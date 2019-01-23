@@ -66,6 +66,11 @@ module Canvas
       JSON.parse response
     end
 
+    def self.enrollments(user_id)
+      response = get(enrollments_url(user_id), base_options).body
+      JSON.parse response
+    end
+
     def self.canvas_accounts_url
       "/accounts/#{ENV['CANVAS_ACCOUNT_ID']}/users/"
     end
@@ -76,6 +81,10 @@ module Canvas
 
     def self.canvas_custom_data_url(user_id)
       "/users/#{user_id}/custom_data/"
+    end
+
+    def self.enrollments_url(user_id)
+      "/users/#{user_id}/enrollments"
     end
   end
 end

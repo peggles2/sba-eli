@@ -1,21 +1,35 @@
 import React from "react";
+import { shallow, mount } from "enzyme";
+import { LearningPathBreadcrumb } from "../LearningPathBreadcrumb";
 import { Breadcrumb } from "semantic-ui-react";
-import LearningPathBreadcrumb from "../LearningPathBreadcrumb";
-import { shallow } from "enzyme";
 
 describe("LearningPathBreadcrumb", () => {
-  it("should render correctly", () => {
-    const item = { id: 1, pathName: "LP 1" };
-    const wrapper = shallow(<LearningPathBreadcrumb {...item} />);
+  it("should render a breadcrumb", () => {
+    const wrapper = shallow(<LearningPathBreadcrumb/>);
+    expect(wrapper.find(Breadcrumb).length).toBe(1);
+  })
 
-    expect(wrapper).toMatchSnapshot();
-  });
+  it("should have a link to home", () => {
+    const history = [];
+    const wrapper = mount(<LearningPathBreadcrumb history={history} id={3} pathName={'foo'}/>);
+    
+    expect(wrapper.find(Breadcrumb).length).toBe(1);
+    expect(wrapper.find(Breadcrumb.Section).length).toBe(2);
 
-  it("should render a <Breadcrumb>", () => {
-    const item = { id: 1, pathName: "LP 1" };
-    const wrapper = shallow(<LearningPathBreadcrumb {...item} />);
+    wrapper.find(Breadcrumb.Section).first().simulate('click');
+    expect(history.length).toBe(1);
+    expect(history[0]).toBe('/');
+  })
 
-    expect(wrapper.find(Breadcrumb).exists()).toBe(true);
-    expect(wrapper.find(Breadcrumb.Section).exists()).toBe(true);
-  });
+  it("should have a link to the learning path", () => {
+    const history = [];
+    const wrapper = mount(<LearningPathBreadcrumb history={history} id={3} pathName={'foo'}/>);
+    
+    expect(wrapper.find(Breadcrumb).length).toBe(1);
+    expect(wrapper.find(Breadcrumb.Section).length).toBe(2);
+
+    wrapper.find(Breadcrumb.Section).at(1).simulate('click');
+    expect(history.length).toBe(1);
+    expect(history[0]).toBe('/learning_paths/3');
+  })  
 });

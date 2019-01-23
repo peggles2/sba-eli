@@ -7,4 +7,14 @@ module RequestHelper
         },
       )
   end
+
+  def stub_authorized_request_with_body(method, url, body)
+    stub_request(method, url).
+      with(
+        body: body,
+        headers: {
+          "Authorization" => "Bearer #{ENV['CANVAS_TOKEN']}",
+        },
+      )
+  end
 end

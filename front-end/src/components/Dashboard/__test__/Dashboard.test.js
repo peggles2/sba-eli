@@ -1,7 +1,10 @@
 import React from "react";
-import Dashboard from "../Dashboard";
+import { Dashboard } from "../Dashboard";
+import DashboardSplash from "../DashboardSplash";
+import DashboardHeader from "../DashboardHeader";
+import DashboardCTA from "../DashboardCTA";
 import LearningPaths from "../../LearningPath/LearningPaths";
-import {shallow} from "enzyme";
+import { shallow } from "enzyme";
 import MetaTags from "../../SEO/MetaTags";
 
 describe("Dashboard", () => {
@@ -28,5 +31,42 @@ describe("Dashboard", () => {
     const wrapper = shallow(<Dashboard />);
 
     expect(wrapper.find(LearningPaths).length).toEqual(1);
+  });
+});
+
+
+describe("Dashboard when user is logged in", () => {
+
+  it("should render a DashboardHeader", () => {
+    const wrapper = shallow(<Dashboard isUserLoggedIn={true}/>);
+
+    expect(wrapper.find(DashboardHeader).exists()).toBe(true);
+  });
+
+  it("should render a Dashboard Call To Action", () => {
+    const wrapper = shallow(<Dashboard isUserLoggedIn={true}/>);
+
+    expect(wrapper.find(DashboardCTA).exists()).toBe(true);
+  });
+
+  it("should not render a DashboardSplash", () => {
+    const wrapper = shallow(<Dashboard isUserLoggedIn={true}/>);
+
+    expect(wrapper.find(DashboardSplash).exists()).toBe(false);
+  });
+});
+
+describe("Dashboard when user is not logged in", () => {
+
+  it("should render a DashboardSplash", () => {
+    const wrapper = shallow(<Dashboard isUserLoggedIn={false}/>);
+
+    expect(wrapper.find(DashboardSplash).exists()).toBe(true);
+  });
+
+  it("should not render a Dashboard Call To Action", () => {
+    const wrapper = shallow(<Dashboard isUserLoggedIn={false}/>);
+
+    expect(wrapper.find(DashboardCTA).exists()).toBe(false);
   });
 });

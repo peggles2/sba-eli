@@ -5,12 +5,6 @@ import { Grid } from "semantic-ui-react";
 import { MemoryRouter } from "react-router-dom";
 
 describe("TopicContentViewList", () => {
-  it("should render correctly", () => {
-    const wrapper = shallow(<TopicContentEventList />);
-
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it("should render a <Grid>", () => {
     const props = {
       course_id: 1,

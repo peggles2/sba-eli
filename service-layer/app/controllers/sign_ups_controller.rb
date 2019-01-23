@@ -2,13 +2,12 @@ class SignUpsController < ApplicationController
   def create
     params.delete(:sign_up)
     params.delete(:format)
-    new_account = UserCreationService.new(model_params)
+    new_account = UserCreationService.new(model_params).create
 
-    if new_account.create
-      render json: new_account.user, status: :created
-    else
-      render_error(new_account.to_json, :unprocessable_entity)
-    end
+    status = :unprocessable_entity
+    status = :created unless new_account.errors.any?
+
+    render json: new_account, status: status
   end
 
   private
