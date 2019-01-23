@@ -69,4 +69,10 @@ module CognitoService
       access_token: access_token,
     )
   end
+
+  def self.sign_out(access_token)
+    client.global_sign_out(
+      access_token: access_token,
+    )
+  end
 end
