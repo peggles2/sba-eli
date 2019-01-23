@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   resources :learning_events, concerns: :contentable
   resources :learning_paths, concerns: :contentable do
     resource :enroll, only: :create
+    resources :quizzes do 
+      get 'submissions', :on => :member
+      post 'assessment', :on => :member
+      get 'assessments', :on => :member
+    end
+
   end
   resources :learning_objectives, concerns: :contentable
   resource :request_password, only: :create
