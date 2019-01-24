@@ -1,38 +1,18 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Item, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getLearningEventsIfNeeded } from "../../actions/learningEventActions";
 
-export default class TopicEventList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      eventsList: []
-    };
-  }
-
+export class TopicEventList extends Component {
   componentDidMount() {
     this.eventsList();
   }
 
   eventsList() {
-    const url = process.env.REACT_APP_SERVICE_HOST + `/learning_events/`;
-
-    const eventParams = {
-      course_id: this.props.course_id,
-      module_id: this.props.module_id
-    };
-
-    axios
-      .get(url, { params: eventParams })
-      .then(res => {
-        const eventsList = res.data;
-        this.setState({ eventsList });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.props.dispatch(
+      getLearningEventsIfNeeded(this.props.course_id, this.props.module_id)
+    );
   }
 
   renderEventsList(events = []) {
@@ -80,10 +60,21 @@ export default class TopicEventList extends Component {
   }
 
   render() {
+    const { module_id, course_id } = this.props;
+    const learningEvents = this.props.learningEventsCollection[course_id]
+      ? this.props.learningEventsCollection[course_id][module_id]
+      : [];
+
     return (
-      <Item.Group divided>
-        {this.renderEventsList(this.state.eventsList)}
-      </Item.Group>
+      <Item.Group divided>{this.renderEventsList(learningEvents)}</Item.Group>
     );
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    learningEventsCollection: store.learningEvent.learningEventsCollection
+  };
+};
+
+export default connect(mapStateToProps)(TopicEventList);

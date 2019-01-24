@@ -1,10 +1,10 @@
 require "rails_helper"
 
-# rubocop:disable MixinUsage
-include Mocks::CognitoHelper
-# rubocop:enable MixinUsage
-
 describe "UserCreationService" do
+  include Mocks::CognitoHelper
+  include Mocks::DiscourseHelper
+  include Mocks::UsersHelper
+
   subject do
     UserCreationService.new(
       first_name: "Jane",
@@ -65,9 +65,9 @@ describe "UserCreationService" do
       }
     end
     it "creates a new user" do
-      VCR.use_cassette("successful_user_creation") do
-        expect(subject.create).to be_truthy
-      end
+      stub_create_user
+      stub_discourse_create_user
+      expect(subject.create).to be_truthy
     end
   end
 end

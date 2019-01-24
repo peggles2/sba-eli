@@ -2,6 +2,7 @@ require "rails_helper"
 
 describe "SignUps" do
   include Mocks::CognitoHelper
+  include Mocks::DiscourseHelper
   include Mocks::UsersHelper
 
   uri = "/sign_up"
@@ -28,7 +29,9 @@ describe "SignUps" do
             email: email,
             password: password,
           }
+
           stub_create_user
+          stub_discourse_create_user
           post uri, params: params
 
           expect(response).to be_successful

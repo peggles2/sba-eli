@@ -1,0 +1,26 @@
+@import "../../assets/styles/base";
+
+//Free Form Page HTML
+//This styling should be specifically for the content being entered 
+//and not for the learning event page itself
+.learning-event-container blockquote { 
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.learning-event-body {
+    padding: 45px;
+    
+    hr { 
+      margin: 3rem 0;
+      border: 0;
+      border-top: 2px solid $sba-white;
+    }
+  
+    p {
+      line-height: 1.5;
+    }
+}
+  

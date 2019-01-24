@@ -1,7 +1,7 @@
 const defaultValue = {
   userData: {
     email: '',
-    password: '',
+    password: ''
   },
   isUserLoggedIn: false
 };

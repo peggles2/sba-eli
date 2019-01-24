@@ -2,52 +2,79 @@
 
 .navbar.ui.menu {
   height: 65px;
-  background-color: $dark-blue;
+  background-color: $sba-navy;
 
   a {
     padding-bottom: 0;
   }
 
-  .dropdown {
+  .dropdown.navigation-learning-path {
     padding-bottom: 0;
     margin-right: 20px;
   }
 
+  .text {
+    color: $sba-white;
+  }
+
+  .icon {
+    color: $sba-white;
+  }
+
   #navbar-learning-paths.active {
-    background-color: $grey1;
+    background-color: $sba-grey-one;
+
+    .icon {
+      color: $sba-dark-grey;
+    }
+
+    .menu {
+      background-color: $sba-grey-one;
+    }
+
+    .text {
+      color: $sba-dark-grey;
+    }
+
+    a {
+      color: $sba-dark-grey;
+    }
 
     .learning-path-item {
-      background-color: $grey1 !important;
+      padding: 20px !important;
     }
 
     .learning-path-item:hover {
-      background-color: $light-blue !important;
+      background-color: $sba-blue !important;
 
       .text {
-        color: white;
+        color: $sba-white;
+      }
+    }
+
+    .navigation-learning-path.dropdown.visible {
+      .menu {
+        background-color: $sba-white;
+      }
+
+      img {
+        margin-right: 20px;
+      }
+
+      .topic-summary {
+        margin-left: 15px;
+
+        .path-description {
+          white-space: normal;
+          margin-top: 15px;
+        }
       }
     }
   }
 
-  .dropdown.visible {
-    .text {
-      color: black;
-    }
-
-    img {
-      margin-right: 20px;
-    }
-
-    .topic-summary {
-      margin-left: 15px;
-
-      .path-description {
-        white-space: normal;
-        margin-top: 15px;
-      }
-    }
+  #navbar-learning-paths {
+    padding-top: 24px;
   }
-
 
   .search-bar {
     padding: 0;
@@ -62,14 +89,9 @@
     }
 
     .button {
-      background-color: $light-blue;
-      color: white;
+      background-color: $sba-blue;
+      color: $sba-white;
     }
-  }
-
-  .text {
-    color: white;
-    font-size: 1.2em;
   }
 
   img.logo {
@@ -80,16 +102,16 @@
     padding-bottom: 0;
 
     .button {
-      background-color: $dark-blue;
-      color: white;
+      background-color: $sba-navy;
+      color: $sba-white;
     }
   }
 
   .userButtons {
-    color: white;
+    color: $sba-white;
 
     a {
-      color: white;
+      color: $sba-white;
     }
 
     padding-bottom: 0;
@@ -100,7 +122,7 @@
   }
 
   .logoutLink {
-    margin-right: 100px;
+    margin-right: 90px;
     cursor: pointer;
   }
 }

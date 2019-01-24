@@ -22,6 +22,7 @@ module SecurityConcern
 
   def sign_out
     session[SESSION_KEY] = nil
+    CognitoService.sign_out(Current.access_token) if Current.access_token
   end
 
   def authenticate_request_with_cookie

@@ -18,8 +18,7 @@ describe("LearningPathsItem", () => {
     const history = [];
     const wrapper = mount(<LearningPathsItem history={history} id={1}/>);
     
-    wrapper.find('a').first().simulate('click');
-    expect(history.length).toBe(1);
-    expect(history[0]).toBe('/learning_paths/1');
+    let href = wrapper.find('a').first().getDOMNode().getAttribute('href');
+    expect(href).toBe('/learning_paths/1');
   })  
 });
