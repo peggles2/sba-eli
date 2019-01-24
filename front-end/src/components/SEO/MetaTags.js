@@ -50,15 +50,17 @@ export default class MetaTags extends Component {
       }
     ];
 
-    const linkProp = {
-      rel: "canonical",
-      href: this.getCanonicalUrl(this.props.canonicalUrl)
-    };
+    const linkProps = [
+      {
+        rel: "canonical",
+        href: this.getCanonicalUrl(this.props.canonicalUrl)
+      }
+    ];
     return (
       <Helmet
         title={this.getMetaTitle(this.props.metaTitle)}
         meta={metaProps}
-        link={linkProp}
+        link={linkProps}
       />
     );
   }
