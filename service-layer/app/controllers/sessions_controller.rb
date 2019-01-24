@@ -1,8 +1,6 @@
 class SessionsController < ApplicationController
   include SecurityConcern
-
-  skip_before_action :authenticate_request, only: :create
-  before_action :valid_session?, only: :destroy
+  skip_before_action :authenticate_request
 
   def create
     @cognito_response = CognitoService.authenticate(params[:email], params[:password])
