@@ -5,7 +5,9 @@ import learningPath from "./learningPathReducer";
 import navbar from "./navbarReducer";
 import registration from "./registrationReducer";
 import learningEvent from "./learningEventReducer";
+import learningObjective from "./learningObjectiveReducer";
 import login from "./loginReducer";
+import search from "./searchReducer";
 import discussion from "./discussionReducer";
 
 export default combineReducers({
@@ -14,6 +16,8 @@ export default combineReducers({
   navbar,
   registration,
   learningEvent,
+  learningObjective,
   login,
+  search,
   discussion
 });

@@ -12,7 +12,7 @@ import LearningEventDiscussion from "../Discussion/LearningEventDiscussion";
 
 import {
   getLearningEvent,
-  getLearningEvents
+  getLearningEventsIfNeeded
 } from "../../actions/learningEventActions";
 
 export class LearningEvent extends Component {
@@ -41,11 +41,16 @@ export class LearningEvent extends Component {
       eventId: event_id
     } = this.props.match.params;
     this.props.dispatch(getLearningEvent(course_id, module_id, event_id));
-    this.props.dispatch(getLearningEvents(course_id, module_id));
+    this.props.dispatch(getLearningEventsIfNeeded(course_id, module_id));
   }
 
   render() {
     const { learningEvent, topicTitle } = this.props;
+
+    const { id: course_id, topicId: module_id } = this.props.match.params;
+    const learningEvents = this.props.learningEventsCollection[course_id]
+      ? this.props.learningEventsCollection[course_id][module_id]
+      : [];
 
     return (
       <div>
@@ -59,9 +64,9 @@ export class LearningEvent extends Component {
           <LearningEventManager event={learningEvent} />
           <Divider />
           <LearningEventFooter
-            courseId={this.props.match.params.id}
-            module={this.props.learningEvents}
-            event={this.props.learningEvent}
+            courseId={course_id}
+            module={learningEvents}
+            event={learningEvent}
           />
         </Container>
         <LearningEventDiscussion parent_content_type={this.parent_content_type} parent_id={this.parent_id} />
@@ -73,7 +78,7 @@ export class LearningEvent extends Component {
 const mapStateToProps = store => {
   return {
     learningEvent: store.learningEvent.learningEvent,
-    learningEvents: store.learningEvent.learningEvents
+    learningEventsCollection: store.learningEvent.learningEventsCollection
   };
 };
 
