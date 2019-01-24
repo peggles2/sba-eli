@@ -46,7 +46,7 @@ module Canvas
     end
 
     def self.check_progress(id)
-      uri = "/courses/#{id}?include[]=course_progress&as_user_id=#{Current.user.&id}"
+      uri = "/courses/#{id}?include[]=course_progress&as_user_id=#{Current.user&.id}"
       p uri
       JSON.parse get(uri, base_options).body
     end

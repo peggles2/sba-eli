@@ -5,7 +5,9 @@ import axios from "axios";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { getLearningEvents } from "../../actions/learningEventActions";
+// import { getLearningEvents } from "../../actions/learningEventActions";
+// import { getLearningPathProgress } from "../../actions/learningPathActions";
+import { getLearningPathProgressIfNeeded } from "../../actions/learningPathActions";
 
 export class LearningPathsItem extends Component {
   state = {
@@ -15,9 +17,12 @@ export class LearningPathsItem extends Component {
 
   componentDidMount() {
     const isUserLoggedIn = this.props.isUserLoggedIn;
+    const { dispatch, id } = this.props
 
-    this.getTopicsList();
+    // this.props.dispatch(getLearningPathProgress(id));
+    dispatch(getLearningPathProgressIfNeeded(id));
     this.getCompletedMicroLearningEvents();
+    this.getTopicsList();
   }
 
   learningPathProgress = (total) => {
@@ -46,24 +51,14 @@ export class LearningPathsItem extends Component {
 
   getCompletedMicroLearningEvents = () => {
     const isUserLoggedIn = this.props.isUserLoggedIn;
-    const baseUrl = process.env.REACT_APP_SERVICE_HOST;
-    const id = this.props.id;
-    const url = baseUrl + `/learning_paths/${id}/progress`
 
     if (isUserLoggedIn) {
-      const accessToken = this.props.accessToken;
-      console.log("ACCESS TOKEN " + accessToken)
-      const auth_header = { headers: { "AUTHORIZATION": accessToken } }
+      // const courseProgress = this.props.learningPathProgress;
 
-      axios.get(url, auth_header)
-        .then(response => {
-          const data = response.data
-          // const completed = res.data.course_progress.requirement.completed_count;
-          // this.setState({completedMLE: completed})
-          console.log("DATA: ", data);
-        });
+      // const courseProgress = this.props.learningPathProgress.course_progress;
+      // const completed = courseProgress.requirement_completed_count;
+      // this.setState( { completedMLE: completed } )
     }
-
   }
 
   totalMicroLearningEvents = () => {
@@ -104,7 +99,7 @@ const mapStateToProps = (store) => {
   const { login } = store
   return {
     isUserLoggedIn: login.isUserLoggedIn,
-    accessToken: login.userData.access_token
+    learningPathsProgressCollection: store.learningPath.learningPathsProgressCollection,
   }
 }
 

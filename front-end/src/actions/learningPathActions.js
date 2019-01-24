@@ -50,6 +50,33 @@ export function getLearningPath(id) {
   };
 }
 
+export function getLearningPathProgress(id) {
+  return(dispatch, getState) => {
+    dispatch({
+      type: "GET_LEARNING_PATH_PROGRESS",
+      payload: axios.get(`/learning_paths/${id}/progress`, axiosConfig(getState()))
+    });
+  };
+}
+
+function shouldGetLearningPathProgress(state, id) {
+  const learningPathsObj = state.learningPath.learningPathsProgressCollection[id]
+
+  if(!learningPathsObj) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export function getLearningPathProgressIfNeeded(id) {
+  return(dispatch, getState) => {
+    if(shouldGetLearningPathProgress(getState(), id)) {
+      dispatch(getLearningPathProgress(id))
+    }
+  }
+}
+
 export function getTopicsForPath(pathId) {
   const topicParams = {
     course_id: pathId
