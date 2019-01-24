@@ -17,11 +17,11 @@ RSpec.describe EmailValidator do
         1.2,
         1,
         "email",
-        "müller@example.net",
+        "müller@example.com",
         "mÜller@example.net",
-        "test@example.net..",
-        "comma,@example.net",
-        "commA,@Example.net",
+        "test@example.com..",
+        "comma,@example.com",
+        "commA,@Example.com",
         "$%^&@$%^&.com",
       ].each do |email|
         subject.email = email
@@ -140,11 +140,13 @@ RSpec.describe EmailValidator do
         clothing
         cloud
         club
+        co
         coach
         codes
         coffee
         college
         cologne
+        com
         community
         company
         compare
@@ -205,6 +207,7 @@ RSpec.describe EmailValidator do
         eat
         eco
         ecom
+        edu
         education
         email
         energy
@@ -298,6 +301,7 @@ RSpec.describe EmailValidator do
         inc
         indians
         industries
+        info
         ink
         institute
         insurance
@@ -357,6 +361,7 @@ RSpec.describe EmailValidator do
         marketing
         markets
         mba
+        me
         med
         media
         medical
@@ -365,6 +370,7 @@ RSpec.describe EmailValidator do
         men
         menu
         miami
+        mil
         mls
         mobile
         moda
@@ -381,6 +387,7 @@ RSpec.describe EmailValidator do
         mutualfunds
         nagoya
         navy
+        net
         network
         new
         news
@@ -392,6 +399,7 @@ RSpec.describe EmailValidator do
         one
         onl
         online
+        org
         organic
         osaka
         page
@@ -549,6 +557,7 @@ RSpec.describe EmailValidator do
         tunes
         university
         uno
+        us
         vacations
         vegas
         ventures
