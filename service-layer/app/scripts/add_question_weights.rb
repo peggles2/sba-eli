@@ -52,6 +52,19 @@ def map_questions(questions)
     }.flatten
 end
 
+def sendUpdatedWeights(course_id, quiz_id, questions, weights)
+    questions.each do |question|
+        if (question["answers"])
+            question["answers"].each do |answer|
+                if(weights[answer["id"].to_s])
+                    answer["weight"] = weights[answer["id"].to_s].to_f
+                end
+            end
+        end
+        puts put_quiz_question(course_id, quiz_id, question)
+    end
+end
+
 course_id = ARGV[0]
 quiz_id = ARGV[1]
 map = ARGV[2]
@@ -64,18 +77,21 @@ if(!course_id or !quiz_id)
         "If not specified the script will return all questions and answers\n\t\t\t"\
         "for the specified quiz."
 elsif(!map) 
-    pp map_questions(q)
-else
-    revised_questions = []
-    weights = JSON.parse(map)
-    q.each do |question|
-        if (question["answers"])
-            question["answers"].each do |answer|
-                if(weights[answer["id"].to_s])
-                    answer["weight"] = weights[answer["id"].to_s]
-                    puts put_quiz_question(course_id, quiz_id, question)
-                end
-            end
+    weights = Hash.new
+    map_questions(q).each do |question|
+        puts question[:question]
+        question[:answers].each do |answer|
+            puts "\tAnswer: " + 
+                answer[:text] + "\n\tCurrent weight is ("  +
+                answer[:weight].to_s + 
+                ").\n\tEnter for no change"
+            w = STDIN.gets.chomp
+            weights[answer[:id].to_s] = w.empty? ? answer[:weight] : w
         end
     end
+
+    sendUpdatedWeights(course_id, quiz_id, q, weights)
+else
+    weights = JSON.parse(map)
+    sendUpdatedWeights(course_id, quiz_id, q, weights)
 end
