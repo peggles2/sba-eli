@@ -32,16 +32,26 @@ export class NavigationLearningObjective extends Component {
     return text.length < 60 ? text : text.substr(0, 60) + "...";
   }
 
+  getFirstEventPath(pathId, objectiveId) {
+    return (
+      `/learning_paths/${pathId}` +
+      `/learning_objectives/${objectiveId}` +
+      "/learning_events/first"
+    );
+  }
+
   render() {
-    const learningObjectivePath = `/learning_paths/${
-      this.props.learningPathId
-    }/learning_objectives/`;
+    const pathId = this.props.learningPathId;
     const objectives = this.props.learningObjectives || [];
-    const topics = objectives.map((lo, index) => (
-      <List.Item key={"learning_objective_" + index}>
-        <Link to={learningObjectivePath + lo.id}>{this.elide(lo.name)}</Link>
-      </List.Item>
-    ));
+    const topics = objectives.map((lo, index) => {
+      return (
+        <List.Item key={"learning_objective_" + index}>
+          <Link to={this.getFirstEventPath(pathId, lo.id)}>
+            {this.elide(lo.name)}
+          </Link>
+        </List.Item>
+      );
+    });
 
     return (
       <div className="topic-summary">
