@@ -12,7 +12,8 @@ import LearningEventDiscussion from "../Discussion/LearningEventDiscussion";
 
 import {
   getLearningEvent,
-  getLearningEventsIfNeeded
+  getLearningEventsIfNeeded,
+  getFirstLearningEvent
 } from "../../actions/learningEventActions";
 
 export class LearningEvent extends Component {
@@ -35,13 +36,16 @@ export class LearningEvent extends Component {
   }
 
   setLearningEvent() {
-    const {
-      id: course_id,
-      topicId: module_id,
-      eventId: event_id
-    } = this.props.match.params;
-    this.props.dispatch(getLearningEvent(course_id, module_id, event_id));
-    this.props.dispatch(getLearningEventsIfNeeded(course_id, module_id));
+    const { id: course_id, topicId: module_id } = this.props.match.params;
+
+    let event_id = this.props.match.params.eventId;
+
+    if (event_id === eventProps.first) {
+      this.props.dispatch(getFirstLearningEvent(course_id, module_id));
+    } else {
+      this.props.dispatch(getLearningEventsIfNeeded(course_id, module_id));
+      this.props.dispatch(getLearningEvent(course_id, module_id, event_id));
+    }
   }
 
   render() {
@@ -69,11 +73,18 @@ export class LearningEvent extends Component {
             event={learningEvent}
           />
         </Container>
-        <LearningEventDiscussion parent_content_type={this.parent_content_type} parent_id={this.parent_id} />
+        <LearningEventDiscussion
+          parent_content_type={this.parent_content_type}
+          parent_id={this.parent_id}
+        />
       </div>
     );
   }
 }
+
+const eventProps = {
+  first: "first"
+};
 
 const mapStateToProps = store => {
   return {
