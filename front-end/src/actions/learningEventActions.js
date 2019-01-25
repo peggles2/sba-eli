@@ -1,6 +1,8 @@
 import axios from "axios";
 import axiosConfig from "./axiosConfig";
 
+import { getTopicsForPath } from "./learningPathActions";
+
 export function getLearningEvent(course_id, module_id, event_id) {
   const url = `/learning_events/${event_id}`;
 
@@ -50,9 +52,13 @@ export function completeLearningEvent(path_id, objective_id, event_id) {
   const url = `/learning_paths/${path_id}/learning_objectives/${objective_id}/learning_events/${event_id}/done`;
 
   return (dispatch, getState) => {
-    dispatch({
+    const response = dispatch({
       type: "COMPLETE_LEARNING_EVENT",
       payload: axios.post(url, {}, axiosConfig(getState()))
+    });
+
+    response.then(() => {
+      dispatch(getTopicsForPath(path_id));
     });
   };
 }
