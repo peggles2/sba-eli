@@ -11,7 +11,10 @@ export class NavigationLearningObjective extends Component {
   }
 
   fetchData() {
-    this.props.dispatch(getLearningObjectives(this.props.learningPathId));
+    const overrideAuth = true;
+    this.props.dispatch(
+      getLearningObjectives(this.props.learningPathId, overrideAuth)
+    );
   }
 
   topicNumber() {
