@@ -17,7 +17,7 @@ export function getLearningObjective(objective_id, course_id) {
   };
 }
 
-export function getLearningObjectives(course_id) {
+export function getLearningObjectives(course_id, overrideAuth = true) {
   let params = {
     course_id: course_id
   };
@@ -27,7 +27,7 @@ export function getLearningObjectives(course_id) {
       type: "GET_LEARNING_OBJECTIVES",
       payload: axios.get(
         `/learning_objectives/`,
-        axiosConfig(getState(), params)
+        axiosConfig(getState(), params, overrideAuth)
       )
     });
   };
