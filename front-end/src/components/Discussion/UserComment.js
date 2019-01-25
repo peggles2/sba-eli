@@ -2,12 +2,13 @@ import React, {Component} from "react";
 import {Grid, Image} from "semantic-ui-react";
 import {connect} from "react-redux";
 import Discussion from "./Discussion";
+import ReplyLink from "./ReplyLink";
 
 export class UserComment extends Component {
 
   replyLink(parent_content_type, parent_id, reply) {
     const replyLink = this.props.isUserLoggedIn
-        ? <a className="reply-link" href={`#/discussion/${parent_content_type}/${parent_id}`}>Reply</a>
+        ? <ReplyLink parent_content_type={reply.content_type} parent_id={parent_id} />
         : null
     if (parent_content_type !== "comment" && reply && reply.replies) {
       return <Grid.Row>
