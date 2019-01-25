@@ -1,6 +1,6 @@
-export default function axiosConfig(state, params = null) {
+export default function axiosConfig(state, params = null, overrideAuth = false) {
   let authConfig = {};
-  if (state.login.isUserLoggedIn) {
+  if (state.login.isUserLoggedIn && !overrideAuth) {
     const { access_token } = state.login.userData;
     authConfig = { headers: { AUTHORIZATION: access_token } };
   }
