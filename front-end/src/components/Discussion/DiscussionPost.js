@@ -14,7 +14,8 @@ export class DiscussionPost extends Component {
   }
 
   ifRegistered() {
-    if (this.props.isUserLoggedIn) {
+    const {isUserLoggedIn, parent_id, parent_content_type} = this.props
+    if (isUserLoggedIn) {
       return (
           <Grid.Row centered>
             <Grid.Column width={15}>
@@ -34,8 +35,13 @@ export class DiscussionPost extends Component {
                 </Form.Group>
                 <Input
                     type="hidden"
-                    name="content_id"
-                    value={this.props.parent_id}
+                    name="parent_id"
+                    value={parent_id}
+                />
+                <Input
+                    type = "hidden"
+                    name = "parent_content_type"
+                    value = {parent_content_type}
                 />
               </Form>
             </Grid.Column>
