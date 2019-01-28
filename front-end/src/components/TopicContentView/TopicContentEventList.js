@@ -15,6 +15,25 @@ export class TopicContentEventList extends Component {
     );
   }
 
+  getCustomData(event, field, defaultValue) {
+    if (!event || !event.custom_data || !field){
+      return defaultValue;
+    }
+    return event.custom_data[field];
+  };
+
+  getThumbnail(event){
+    const url = this.getCustomData(event, 'thumbnail_url', undefined);
+    if (url) {
+      return <img className="topic-content-event-grid-icon" href={url}/>
+    } else {
+      return <Icon
+                name={"image"}
+                className={"topic-content-event-grid-icon"}
+              />
+    }
+  }
+
   renderEventList(eventList) {
     const { course_id, module_id } = this.props;
     const url = `/learning_paths/${course_id}/learning_objectives/${module_id}/learning_events/`;
@@ -33,10 +52,7 @@ export class TopicContentEventList extends Component {
               largeScreen={1}
               widescreen={1}
             >
-              <Icon
-                name={"image"}
-                className={"topic-content-event-grid-icon"}
-              />
+              {this.getThumbnail(event)}
             </Grid.Column>
             <Grid.Column
               mobile={12}
@@ -51,7 +67,9 @@ export class TopicContentEventList extends Component {
               >
                 {event.title}
               </Link>
-              <div className={"topic-content-event-grid-meta"}>Event Type</div>
+              <div className={"topic-content-event-grid-meta"}>
+                {this.getCustomData(event, 'event_type', 'Article')} ({this.getCustomData(event, 'time', 'unknown')})
+              </div>
             </Grid.Column>
           </Grid>
         );

@@ -1,0 +1,2 @@
+class TopicCustomData < FearlessRecord
+end

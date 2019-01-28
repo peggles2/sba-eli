@@ -1,0 +1,2 @@
+class EventCustomData < FearlessRecord
+end

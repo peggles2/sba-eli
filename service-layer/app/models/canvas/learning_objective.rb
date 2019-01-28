@@ -7,12 +7,20 @@ module Canvas
 
     def self.all(course_id)
       uri = masquerade_current_user("/courses/#{course_id}/modules")
-      JSON.parse get(uri, base_options).body
+      result = JSON.parse get(uri, base_options).body
+      result.each do |topic|
+        custom_data = TopicCustomData.where(topic_id: topic['id']).first
+        topic['custom_data'] = custom_data if custom_data
+      end
+      result
     end
 
     def self.find(course_id, id)
       uri = masquerade_current_user("/courses/#{course_id}/modules/#{id}")
-      JSON.parse get(uri, base_options).body
+      result = JSON.parse get(uri, base_options).body
+      custom_data = TopicCustomData.where(topic_id: result['id']).first
+      result['custom_data'] = custom_data if custom_data
+      result
     end
 
     def self.create(course_id, le_params)
