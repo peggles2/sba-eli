@@ -55,16 +55,24 @@ export function getFirstLearningEvent(course_id, module_id) {
     const response = dispatch(getLearningEventsIfNeeded(course_id, module_id));
 
     response.then(() => {
-      const eventCollection = getState().learningEvent.learningEventsCollection;
-      const learningEvents = eventCollection[course_id]
-        ? eventCollection[course_id][module_id]
-        : [];
+      const learningEvents = eventsFromCollectionForTopic(
+        getState(),
+        course_id,
+        module_id
+      );
 
       if (learningEvents[0]) {
         dispatch(getLearningEvent(course_id, module_id, learningEvents[0].id));
       }
     });
   };
+}
+
+function eventsFromCollectionForTopic(state, course_id, module_id) {
+  const eventCollection = state.learningEvent.learningEventsCollection;
+  return eventCollection[course_id]
+    ? eventCollection[course_id][module_id]
+    : [];
 }
 
 export function completeLearningEvent(path_id, objective_id, event_id) {
