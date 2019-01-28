@@ -52,29 +52,32 @@ export function getLearningPath(id) {
 
 export function getLearningPathProgress(id) {
   return(dispatch, getState) => {
-    dispatch({
-      type: "GET_LEARNING_PATH_PROGRESS",
-      payload: axios.get(`/learning_paths/${id}/progress`, axiosConfig(getState()))
+    const request = axios.get(`/learning_paths/${id}/progress`, axiosConfig(getState()));
+    request.then((res) => {
+      if (typeof res.data.course_progress === 'undefined') {
+        dispatch({
+          type: "GET_COMPLETED_MLE_REJECTED",
+          payload: res.data,
+        });
+      } else if (res.data.course_progress.error) {
+        dispatch({
+          type: "GET_COMPLETED_MLE_REJECTED",
+          payload: res.data.course_progress,
+        });
+      } else {
+        dispatch({
+          type: "GET_COMPLETED_MLE",
+          payload: res.data.course_progress,
+        });
+      };
+    });
+    request.catch((err) => {
+      dispatch({
+        type: "GET_COMPLETED_MLE_REJECTED",
+        payload: err,
+      })
     });
   };
-}
-
-function shouldGetLearningPathProgress(state, id) {
-  const learningPathsObj = state.learningPath.learningPathsProgressCollection[id]
-
-  if(!learningPathsObj) {
-    return true
-  } else {
-    return false
-  }
-}
-
-export function getLearningPathProgressIfNeeded(id) {
-  return(dispatch, getState) => {
-    if(shouldGetLearningPathProgress(getState(), id)) {
-      dispatch(getLearningPathProgress(id))
-    }
-  }
 }
 
 export function getTopicsForPath(pathId) {

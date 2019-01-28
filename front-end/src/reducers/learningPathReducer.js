@@ -7,10 +7,8 @@ const defaultValue = {
   learningPathLoading: false,
   learningPathError: null,
 
-  learningPathProgress: {},
-  learningPathProgressLoading: false,
-  learningPathProgressError: null,
-  learningPathsProgressCollection: {},
+  completedMLE: {},
+  completedMLEError: null,
 
   topicsList: [],
   pathTopicsLoading: true,
@@ -63,30 +61,17 @@ export default function reducer(state = defaultValue, action) {
         learningPathLoading: false,
         learningPathError: null
       };
-    case "GET_LEARNING_PATH_PROGRESS":
+    case "GET_COMPLETED_MLE":
       return {
         ...state,
-        learningPathProgress: {},
-        learningPathProgressLoading: true,
-        learningPathProgressError: null
+        completedMLE: action.payload,
+        completedMLEError: null
       };
-    case "GET_LEARNING_PATH_PROGRESS_FAILURE":
+    case "GET_COMPLETED_MLE_REJECTED":
       return {
         ...state,
-        learningPathProgress: {},
-        learningPathProgressLoading: false,
-        learningPathProgressError: action.payload
-      };
-    case "GET_LEARNING_PATH_PROGRESS_FULFILLED":
-      const id  = action.payload.data.id;
-      return {
-        ...state,
-        learningPathProgressLoading: false,
-        learningPathProgressError: null,
-        learningPathsProgressCollection: {
-          ...state.learningPathsProgressCollection,
-          [id]: action.payload.data
-        }
+        completedMLE: null,
+        completedMLEError: action.payload,
       };
     case "GET_TOPICS_FOR_LEARNING_PATH":
       return {

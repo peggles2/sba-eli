@@ -5,9 +5,7 @@ import axios from "axios";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
-// import { getLearningEvents } from "../../actions/learningEventActions";
-// import { getLearningPathProgress } from "../../actions/learningPathActions";
-import { getLearningPathProgressIfNeeded } from "../../actions/learningPathActions";
+import { getLearningPathProgress } from "../../actions/learningPathActions";
 
 export class LearningPathsItem extends Component {
   state = {
@@ -17,19 +15,27 @@ export class LearningPathsItem extends Component {
 
   componentDidMount() {
     const isUserLoggedIn = this.props.isUserLoggedIn;
-    const { dispatch, id } = this.props
+    const id = this.props.id
 
-    // this.props.dispatch(getLearningPathProgress(id));
-    dispatch(getLearningPathProgressIfNeeded(id));
-    this.getCompletedMicroLearningEvents();
     this.getTopicsList();
+    this.props.getCompletedMLE(id);
   }
+
 
   learningPathProgress = (total) => {
     const isUserLoggedIn = this.props.isUserLoggedIn;
 
     if(isUserLoggedIn) {
-      const completed = this.state.completedMLE;
+      const { completedMLE, completedMLEError } = this.props
+      let completed = 0;
+
+      if(completedMLEError) {
+        completed = 0;
+      } else {
+        completed = completedMLE.requirement_completed_count;
+      }
+
+      console.log("COMPLETED: ", completed)
 
       return (
         <Card.Content>
@@ -47,18 +53,6 @@ export class LearningPathsItem extends Component {
         const topicsList = res.data
         this.setState({ topicsList })
       });
-  }
-
-  getCompletedMicroLearningEvents = () => {
-    const isUserLoggedIn = this.props.isUserLoggedIn;
-
-    if (isUserLoggedIn) {
-      // const courseProgress = this.props.learningPathProgress;
-
-      // const courseProgress = this.props.learningPathProgress.course_progress;
-      // const completed = courseProgress.requirement_completed_count;
-      // this.setState( { completedMLE: completed } )
-    }
   }
 
   totalMicroLearningEvents = () => {
@@ -96,11 +90,20 @@ export class LearningPathsItem extends Component {
 };
 
 const mapStateToProps = (store) => {
-  const { login } = store
   return {
-    isUserLoggedIn: login.isUserLoggedIn,
-    learningPathsProgressCollection: store.learningPath.learningPathsProgressCollection,
+    isUserLoggedIn: store.login.isUserLoggedIn,
+    learningPathProgress: store.learningPath.learningPathProgress,
+    completedMLE: store.learningPath.completedMLE,
+    completedMLEError: store.learningPath.completedMLEError,
   }
 }
 
-export default withRouter(connect(mapStateToProps)(LearningPathsItem));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCompletedMLE: (id) => {
+      dispatch(getLearningPathProgress(id));
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LearningPathsItem));
