@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown, Header } from "semantic-ui-react";
 import NavigationLearningObjective from "./NavigationLearningObjective";
-import axios from "axios";
 import { connect } from "react-redux";
+import { getLearningPaths } from "../../actions/learningPathActions";
 
 import './Navbar.scss'
 
@@ -26,17 +26,7 @@ export class NavigationLearningPath extends Component {
   }
 
   fetchData() {
-    const url = process.env.REACT_APP_SERVICE_HOST + "/learning_paths";
-
-    axios
-      .get(url)
-      .then(res => {
-        const learningPaths = res.data;
-        this.setState({ learningPaths });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    this.props.dispatch(getLearningPaths());
   }
 
   renderPathForLoggedIn(lp) {
@@ -58,18 +48,16 @@ export class NavigationLearningPath extends Component {
         </Dropdown>
       );
     } else {
-      return (
-        <Dropdown.Item>
-          <Link to={`/learning_paths/${lp.id}`} onClick={this.handleItemClick}>
-            {lp.name}
-          </Link>
-        </Dropdown.Item>
+      return (        
+        <Link to={`/learning_paths/${lp.id}`} onClick={this.handleItemClick}>
+          {lp.name}
+        </Link>
       );
     }
   }
 
   render() {
-    const learningPaths = this.state.learningPaths || [];
+    const learningPaths = this.props.learningPaths || [];
     return learningPaths.map(lp => (
       <Dropdown.Item key={lp.id} className='learning-path-item'>
         {this.renderPathForLoggedIn(lp)}
@@ -79,7 +67,10 @@ export class NavigationLearningPath extends Component {
 }
 
 const mapStateToProps = store => {
-  return { isUserLoggedIn: store.login.isUserLoggedIn };
+  return { 
+    isUserLoggedIn: store.login.isUserLoggedIn,
+    learningPaths: store.learningPath.learningPaths
+  };
 };
 
 export default connect(mapStateToProps)(NavigationLearningPath);

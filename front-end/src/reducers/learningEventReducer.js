@@ -3,7 +3,7 @@ const defaultValue = {
   learningEventLoading: false,
   learningEventError: null,
 
-  learningEvents: [],
+  learningEventsCollection: {},
   learningEventsLoading: false,
   learningEventsError: null,
 
@@ -36,25 +36,29 @@ export default function reducer(state = defaultValue, action) {
     case "GET_LEARNING_EVENTS":
       return {
         ...state,
-        learningEvents: {},
         learningEventsLoading: true,
         learningEventsError: null
       };
     case "GET_LEARNING_EVENTS_FAILURE":
       return {
         ...state,
-        learningEvents: {},
         learningEventsLoading: false,
         learningEventsError: action.payload
       };
     case "GET_LEARNING_EVENTS_FULFILLED":
+      const { course_id, module_id } = action.payload.config.params;
       return {
         ...state,
-        learningEvents: action.payload.data,
         learningEventsLoading: false,
-        learningEventsError: null
+        learningEventsError: null,
+        learningEventsCollection: {
+          ...state.learningEventsCollection,
+          [course_id]: {
+            ...state.learningEventsCollection[course_id],
+            [module_id]: action.payload.data
+          }
+        }
       };
-
     case "COMPLETE_LEARNING_EVENT":
       return {
         ...state,

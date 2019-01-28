@@ -2,6 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import LearningObjectives from "../LearningObjectives";
 import LearningObjectivesList from "../LearningObjectivesList";
+import { Helmet } from "react-helmet";
 import MetaTags from "../../SEO/MetaTags";
 
 describe("LearningObjectives", () => {
@@ -11,11 +12,14 @@ describe("LearningObjectives", () => {
 
     expect(wrapper.find(MetaTags).exists()).toBe(true);
     const metaWrapper = wrapper.find(MetaTags).dive();
+    const helmetProps = metaWrapper.find(Helmet).props();
 
-    expect(metaWrapper.find('title').text()).toBe("SBA Learning Objectives");
-    expect(metaWrapper.find("meta[name='author']").exists()).toBe(false);
-    expect(metaWrapper.find("meta[name='description']").exists()).toBe(true);
-    expect(metaWrapper.find("meta[name='description']").props().content).toBe("Description for the Learning Objectives landing page");
+    expect(helmetProps.title).toBe("SBA Learning Objectives");
+    expect(helmetProps.meta[0].name).toBe("description");
+    expect(helmetProps.meta[0].content).toBe(
+      "Description for the Learning Objectives landing page"
+    );
+
     //TODO: add Canonical URL validation when we have final urls
   });
 

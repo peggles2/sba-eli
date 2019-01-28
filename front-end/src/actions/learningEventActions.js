@@ -1,18 +1,7 @@
 import axios from "axios";
+import axiosConfig from "./axiosConfig";
 
-function axiosConfig(state, params = null) {
-  let authConfig = {};
-  if (state.login.isUserLoggedIn) {
-    const { access_token } = state.login.userData;
-    authConfig = { headers: { AUTHORIZATION: access_token } };
-  }
-
-  return {
-    params: params,
-    baseURL: process.env.REACT_APP_SERVICE_HOST,
-    ...authConfig
-  };
-}
+import { getTopicsForPath } from "./learningPathActions";
 
 export function getLearningEvent(course_id, module_id, event_id) {
   const url = `/learning_events/${event_id}`;
@@ -27,6 +16,21 @@ export function getLearningEvent(course_id, module_id, event_id) {
       payload: axios.get(url, axiosConfig(getState(), eventParams))
     });
   };
+}
+
+export function getLearningEventsIfNeeded(course_id, module_id) {
+  return (dispatch, getState) => {
+    if (shouldGetLearningEvents(course_id, module_id, getState())) {
+      dispatch(getLearningEvents(course_id, module_id));
+    }
+  };
+}
+
+function shouldGetLearningEvents(course_id, module_id, state) {
+  const learningEventsObj =
+    state.learningEvent.learningEventsCollection[course_id];
+
+  return !(learningEventsObj && learningEventsObj[module_id]);
 }
 
 export function getLearningEvents(course_id, module_id) {
@@ -48,9 +52,13 @@ export function completeLearningEvent(path_id, objective_id, event_id) {
   const url = `/learning_paths/${path_id}/learning_objectives/${objective_id}/learning_events/${event_id}/done`;
 
   return (dispatch, getState) => {
-    dispatch({
+    const response = dispatch({
       type: "COMPLETE_LEARNING_EVENT",
       payload: axios.post(url, {}, axiosConfig(getState()))
+    });
+
+    response.then(() => {
+      dispatch(getTopicsForPath(path_id));
     });
   };
 }

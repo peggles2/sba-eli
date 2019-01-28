@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
-import store from './store';
+import { getStore } from './store';
 
 import './index.scss';
 import App from './App';
@@ -11,7 +11,7 @@ import * as serviceWorker from './serviceWorker';
 require('dotenv').config();
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={getStore()}>
     <App />
   </Provider>,
   document.getElementById('root'));
