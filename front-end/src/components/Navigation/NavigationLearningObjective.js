@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Divider, List } from "semantic-ui-react";
 import { connect } from "react-redux";
 
-import { getLearningObjectives } from "../../actions/learningObjectiveActions";
+import { getLearningObjectivesForAdmin } from "../../actions/learningObjectiveActions";
 
 export class NavigationLearningObjective extends Component {
   componentDidMount() {
@@ -11,9 +11,8 @@ export class NavigationLearningObjective extends Component {
   }
 
   fetchData() {
-    const overrideAuth = true;
     this.props.dispatch(
-      getLearningObjectives(this.props.learningPathId, overrideAuth)
+      getLearningObjectivesForAdmin(this.props.learningPathId)
     );
   }
 

@@ -3,7 +3,7 @@ import { List } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import LearningObjectivesItem from "./LearningObjectivesItem";
-import { getLearningObjectives } from '../../actions/learningObjectiveActions';
+import { getLearningObjectivesForAdmin } from '../../actions/learningObjectiveActions';
 
 export class LearningObjectivesList extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export class LearningObjectivesList extends Component {
   }
 
   objectivesList() {
-    this.props.dispatch(getLearningObjectives(this.props.course_id));
+    this.props.dispatch(getLearningObjectivesForAdmin(this.props.course_id));
   }
 
   renderObjectivesList(objectives = []) {
