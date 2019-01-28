@@ -1,0 +1,67 @@
+@import "../../assets/styles/base";
+
+.share-modal-share {
+  display: inline-block;
+  margin-left: 6%;
+
+}
+
+.share-modal-share > div {
+  cursor: pointer;
+}
+
+.share-modal-button {
+  margin-right: 5px;
+  float: right;
+  cursor: pointer;
+}
+
+.share-model-button-group {
+  text-align: justify;
+}
+
+.share-model-button-group > div {
+  width: 18%; /* Declare your value. Can be in relative units. */
+  display: inline-block;
+  vertical-align: top;
+}
+
+.share-model-button-group:after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+}
+
+div.share-text-input > input {
+  width: 400px !important;
+  border-radius: 0 !important;
+}
+
+.share-close-button {
+  background-color: $sba-white !important;
+  border: 0 !important;
+  margin: 0 !important;
+  font-size: 1.25rem !important;
+  padding: 0 !important;
+  color: $sba-grey-one !important
+}
+
+.share-copy-button {
+  color: $sba-white !important;
+  background-color: $sba-blue !important;
+}
+
+.share-facebook-icon {
+  color: $sba-facebook-blue;
+  cursor: pointer;
+}
+
+.share-twitter-icon {
+  color: $sba-twitter-blue;
+  cursor: pointer;
+}
+
+.share-linkedin-icon {
+  color: $sba-linkedin-blue;
+  cursor: pointer;
+}
