@@ -9,6 +9,7 @@ export default class Discussion extends Component {
       return reply.map((reply, index) => {
         return (
             <UserComment key={index}
+                         post_id={index + 1}
                          parent_content_type={parent_content_type}
                          parent_id={parent_id}
                          replies={reply}/>

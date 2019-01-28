@@ -6,9 +6,9 @@ import ReplyLink from "./ReplyLink";
 
 export class UserComment extends Component {
 
-  replyLink(parent_content_type, parent_id, reply) {
+  replyLink(post_id, parent_content_type, parent_id, reply) {
     const replyLink = this.props.isUserLoggedIn
-        ? <ReplyLink parent_content_type={reply.content_type} parent_id={parent_id} />
+        ? <ReplyLink post_id={post_id} parent_content_type={reply.content_type} parent_id={parent_id} />
         : null
     if (parent_content_type !== "comment" && reply && reply.replies) {
       return <Grid.Row>

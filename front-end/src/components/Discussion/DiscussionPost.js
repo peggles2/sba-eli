@@ -3,9 +3,11 @@ import {Form, Input, Grid, TextArea} from "semantic-ui-react";
 import {connect} from "react-redux";
 
 export class DiscussionPost extends Component {
-  clearPost(event) {
+  clearPost(event, post_id) {
     event.preventDefault();
-    document.getElementById("discussion-input").value = "";
+    if (document.getElementById("discussion_input_" + post_id)) {
+      document.getElementById("discussion_input_" + post_id).value = "";
+    }
   }
 
   submitPost(event) {
@@ -15,6 +17,7 @@ export class DiscussionPost extends Component {
 
   ifRegistered() {
     const {isUserLoggedIn, parent_id, parent_content_type} = this.props
+    var post_id = this.props.post_id ? this.props.post_id : 0
     if (isUserLoggedIn) {
       return (
           <Grid.Row centered>
@@ -23,10 +26,11 @@ export class DiscussionPost extends Component {
               <TextArea
                   focus="true"
                   placeholder="Share your thoughts..."
-                  id="discussion-input"
+                  className="discussion_input"
+                  id={"discussion_input_" + post_id}
               />
                 <Form.Group className="post_buttons">
-                  <Form.Button id="clear_post" onClick={this.clearPost}>
+                  <Form.Button id={"clear_post_" + post_id} onClick={e => this.clearPost(e, post_id)}>
                     Clear
                   </Form.Button>
                   <Form.Button primary id="submit_post" onClick={this.submitPost}>
@@ -39,9 +43,9 @@ export class DiscussionPost extends Component {
                     value={parent_id}
                 />
                 <Input
-                    type = "hidden"
-                    name = "parent_content_type"
-                    value = {parent_content_type}
+                    type="hidden"
+                    name="parent_content_type"
+                    value={parent_content_type}
                 />
               </Form>
             </Grid.Column>
