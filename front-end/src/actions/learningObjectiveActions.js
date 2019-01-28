@@ -1,5 +1,5 @@
 import axios from "axios";
-import axiosConfig from "./axiosConfig";
+import axiosConfig, { axiosConfigForAdmin } from "./axiosConfig";
 
 export function getLearningObjective(objective_id, course_id) {
   let params = {
@@ -17,7 +17,7 @@ export function getLearningObjective(objective_id, course_id) {
   };
 }
 
-export function getLearningObjectives(course_id, overrideAuth = true) {
+export function getLearningObjectives(course_id) {
   let params = {
     course_id: course_id
   };
@@ -27,8 +27,21 @@ export function getLearningObjectives(course_id, overrideAuth = true) {
       type: "GET_LEARNING_OBJECTIVES",
       payload: axios.get(
         `/learning_objectives/`,
-        axiosConfig(getState(), params, overrideAuth)
+        axiosConfig(getState(), params)
       )
+    });
+  };
+}
+
+export function getLearningObjectivesForAdmin(course_id) {
+  let params = {
+    course_id: course_id
+  };
+
+  return dispatch => {
+    dispatch({
+      type: "GET_LEARNING_OBJECTIVES",
+      payload: axios.get(`/learning_objectives/`, axiosConfigForAdmin(params))
     });
   };
 }
