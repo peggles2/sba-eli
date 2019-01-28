@@ -9,8 +9,8 @@ module Canvas
       uri = masquerade_current_user("/courses/#{course_id}/modules")
       result = JSON.parse get(uri, base_options).body
       result.each do |topic|
-        custom_data = TopicCustomData.where(topic_id: topic['id']).first
-        topic['custom_data'] = custom_data if custom_data
+        custom_data = TopicCustomData.where(topic_id: topic["id"]).first
+        topic["custom_data"] = custom_data if custom_data
       end
       result
     end
@@ -18,8 +18,8 @@ module Canvas
     def self.find(course_id, id)
       uri = masquerade_current_user("/courses/#{course_id}/modules/#{id}")
       result = JSON.parse get(uri, base_options).body
-      custom_data = TopicCustomData.where(topic_id: result['id']).first
-      result['custom_data'] = custom_data if custom_data
+      custom_data = TopicCustomData.where(topic_id: result["id"]).first
+      result["custom_data"] = custom_data if custom_data
       result
     end
 
