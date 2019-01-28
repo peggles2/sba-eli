@@ -36,9 +36,11 @@ export class LearningEvent extends Component {
   }
 
   setLearningEvent() {
-    const { id: course_id, topicId: module_id } = this.props.match.params;
-
-    let event_id = this.props.match.params.eventId;
+    const {
+      id: course_id,
+      topicId: module_id,
+      eventId: event_id
+    } = this.props.match.params;
 
     if (event_id === eventProps.first) {
       this.props.dispatch(getFirstLearningEvent(course_id, module_id));
