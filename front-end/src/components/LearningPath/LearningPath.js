@@ -1,20 +1,14 @@
 import React from "react";
-import { Header, Divider, Grid, Button, Icon } from "semantic-ui-react";
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-  TwitterShareButton,
-  TwitterIcon,
-} from 'react-share';
+import { Header, Divider, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+
 import TopicSideBar from "../TopicSideBar/TopicSidebar";
 import TopicContentView from "../TopicContentView/TopicContentView";
 import LearningEvent from "../LearningEvent/LearningEvent";
 import LearningPathBreadCrumb from "./LearningPathBreadcrumb";
 import MetaTags from "../SEO/MetaTags";
+import ShareModal from "../ShareModal/ShareModal";
 
 import { getPathWithTopics } from "../../actions/learningPathActions";
 
@@ -84,35 +78,10 @@ export class LearningPath extends React.Component {
           <Grid.Column mobile={15} tablet={15} computer={15}>
             <Header as="h2" className={"path-header"}>
               {this.props.learningPath.name}
-              <Button className={"path-header-share mobile hidden"}>
-                Share &nbsp; <Icon name={"share"} />
-              </Button>
-              <FacebookShareButton
-                url={window.location.href}
-                quote={this.state.learningPath.name}
-                className="path-header-share path-header-share-button" >
-                <FacebookIcon
-                  size={32}
-                  round />
-              </FacebookShareButton>
-              <TwitterShareButton
-                url={window.location.href}
-                title={this.state.learningPath.name}
-                className="path-header-share path-header-share-button" >
-                <TwitterIcon
-                  size={32}
-                  round />
-              </TwitterShareButton>
-              <LinkedinShareButton
-                url={window.location.href}
-                title={this.state.learningPath.name}
-                windowWidth={750}
-                windowHeight={600}
-                className="path-header-share path-header-share-button">
-                <LinkedinIcon
-                  size={32}
-                  round />
-              </LinkedinShareButton>
+              <ShareModal contentType={'Learning Path'}
+                          title={this.props.learningPath.name}
+                          description={this.props.learningPath.description}
+                          location={window.location.href} />
             </Header>
           </Grid.Column>
         </Grid.Row>
