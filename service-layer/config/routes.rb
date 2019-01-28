@@ -12,9 +12,8 @@ Rails.application.routes.draw do
   resources :learning_paths, concerns: :contentable do
     resource :enroll, only: :create
     resources :quizzes do 
+        resources :assessment, only: [:index, :create, :destroy, :update]
       get 'submissions', :on => :member
-      post 'assessment', :on => :member
-      get 'assessments', :on => :member
     end
 
   end

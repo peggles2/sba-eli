@@ -31,29 +31,6 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def assessment
-    begin
-      Assessment.create(
-        description: params[:quiz][:description],
-        name: params[:quiz][:name],
-        course_id: params[:learning_path_id],
-        quiz_id: params[:id],
-        minimum: params[:quiz][:minimum],
-        maximum: params[:quiz][:maximum]
-        )
-    rescue Exception => e
-      render json: e.message, status: :bad_request
-    end
-  end
-
-  def assessments
-    begin
-      render json: Assessment.where(quiz_id: params[:id])
-    rescue Exception => e
-      render json: e.message, status: :bad_request
-    end
-  end
-
   ##
   # a submission looks like this:
   # {
