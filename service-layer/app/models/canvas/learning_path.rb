@@ -45,9 +45,13 @@ module Canvas
       JSON.parse post("/courses/#{id}/enrollments", options).body
     end
 
+    def self.progress
+      uri = "/courses/?include[]=course_progress&as_user_id=#{Current.user&.id}"
+      JSON.parse get(uri, base_options).body
+    end
+
     def self.check_progress(id)
       uri = "/courses/#{id}?include[]=course_progress&as_user_id=#{Current.user&.id}"
-      p uri
       JSON.parse get(uri, base_options).body
     end
   end
