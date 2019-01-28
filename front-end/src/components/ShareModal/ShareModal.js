@@ -24,7 +24,6 @@ export default class ShareModal extends React.Component {
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => {
-    console.log("handling close");
     this.setState({ modalOpen: false })
     this.setState({ textHasBeenCopied: '' })
   }
