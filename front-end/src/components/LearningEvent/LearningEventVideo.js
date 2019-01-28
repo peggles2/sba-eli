@@ -69,14 +69,10 @@ export class LearningEventVideo extends Component {
     const { event, isUserLoggedIn, match } = this.props;
 
     if (isUserLoggedIn && !event.completion_requirement.completed) {
-      const {
-        id: path_id,
-        topicId: objective_id,
-        eventId: event_id
-      } = match.params;
+      const { id: path_id, topicId: objective_id } = match.params;
 
       this.props.dispatch(
-        completeLearningEvent(path_id, objective_id, event_id)
+        completeLearningEvent(path_id, objective_id, event.id)
       );
     }
   };
