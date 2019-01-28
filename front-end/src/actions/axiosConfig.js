@@ -17,6 +17,6 @@ export default function axiosConfigForUser(state, params = null) {
 export function axiosConfigForAdmin(params = null) {
   return {
     params: params,
-    baseURL: process.env.REACT_APP_SERVICE_HOST
+    baseURL: baseUrl
   };
 }
