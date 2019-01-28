@@ -99,8 +99,8 @@ module Canvas
       raise Exception, questions unless res.code == 200
       questions = JSON.parse questions
       answer_key = questions.map{|q| [q["id"].to_s, q["answers"].map{|a| [a["id"].to_s, a["weight"]]}.to_h]}.to_h
-      total = quiz.inject(0.0){|sum,q| sum + answer_key[q[:id]][q[:answer].to_s] } 
-
+      total = quiz.inject(0.0){|sum,q| sum + answer_key[q[:id].to_s][q[:answer].to_s] } 
+      
       found = nil
       assessments.each do |assessment|
         if (assessment.minimum <= total && assessment.maximum >= total)

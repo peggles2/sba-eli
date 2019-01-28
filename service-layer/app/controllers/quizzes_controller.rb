@@ -48,6 +48,7 @@ class QuizzesController < ApplicationController
   # }
   def create
     begin
+      pp params
       assessment = Assessment.where(quiz_id: params[:quiz_id])
       quiz_answer_resp = Canvas::Quiz.grade params[:learning_path_id], params[:quiz_id], assessment.to_a, params[:quiz][:quiz_questions]
       

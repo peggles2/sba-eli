@@ -13,6 +13,6 @@
 #  updated_at  :datetime         not null
 #
 
-class Assessment < ApplicationRecord
+class Assessment < FearlessRecord
     self.table_name = "fearless_assessments"
 end

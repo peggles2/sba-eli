@@ -96,7 +96,7 @@ export class LearningEventQuiz extends Component {
   renderResults(){
     const { results } = this.state
 
-    return results ? <div>
+    return results && results.category ? <div>
       <h3>{results.category.name}</h3>
       <div>{results.category.description}</div>
     </div> :
