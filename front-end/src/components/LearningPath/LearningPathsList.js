@@ -28,9 +28,10 @@ export class LearningPathsList extends React.Component {
     return <Card.Group itemsPerRow={3}>{result}</Card.Group>;
   }
 }
-
-export default connect(store => {
+const mapStateToProps = store => {
   return {
     learningPaths: store.learningPath.learningPaths
   };
-})(LearningPathsList);
+};
+
+export default withRouter(connect(mapStateToProps)(LearningPathsList));
