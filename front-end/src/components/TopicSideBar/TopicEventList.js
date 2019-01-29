@@ -31,16 +31,14 @@ export class TopicEventList extends Component {
             ? "check"
             : "image";
         return (
-          <Item key={"eventListItem" + index} className={itemClassName}>
+          <Item key={"eventListItem" + index} className={itemClassName} href={url + event.id}>
             <Item.Header>
               <Icon
                 className={"event-list-item-icon"}
                 name={completed}
                 size="big"
               />
-              <Link className={"event-list-item-link"} to={url + event.id}>
-                {event.title}
-              </Link>
+              {event.title}
             </Item.Header>
           </Item>
         );
