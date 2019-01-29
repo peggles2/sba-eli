@@ -11,9 +11,7 @@ export class LearningPathsList extends React.Component {
   }
 
   render() {
-    let result = (
-      <h3>There are no learning paths available to view at this time</h3>
-    );
+    let result = <h3>There are no journeys available to view at this time</h3>;
     if (this.props.learningPaths.length > 0) {
       result = this.props.learningPaths.map(c => (
         <LearningPathsItem

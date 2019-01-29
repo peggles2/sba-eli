@@ -15,15 +15,15 @@ export class LearningPaths extends React.Component {
     return (
       <div>
         <MetaTags
-          metaTitle="SBA Learning Paths"
-          metaDescription="Description for the Learning Path landing page"
+          metaTitle="SBA Journeys"
+          metaDescription="Description for the Journey landing page"
           canonicalUrl="https://sba.gov/learning_paths"
         />
         <Grid>
           <Grid.Row>
             <Grid.Column>
               <Container>
-                <Header as="h2">Explore All Paths</Header>
+                <Header as="h2">Explore All Journeys</Header>
                 <LearningPathAbout
                   open={this.props.displayModal}
                   handleClose={this.handleModalClose}

@@ -60,7 +60,7 @@ const LearningPathAboutPage = props => {
       ),
       controls: (
         <Button icon labelPosition="right" onClick={props.handleClose}>
-          Start First Learning Path
+          Start First Journey
           <Icon name="right arrow" />
         </Button>
       )
