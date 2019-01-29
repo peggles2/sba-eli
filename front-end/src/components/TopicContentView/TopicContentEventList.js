@@ -25,7 +25,7 @@ export class TopicContentEventList extends Component {
   getThumbnail(event){
     const url = this.getCustomData(event, 'thumbnail_url', undefined);
     if (url) {
-      return <img className="topic-content-event-grid-icon" href={url}/>
+      return <img className="topic-content-event-grid-icon" src={url}/>
     } else {
       return <Icon
                 name={"image"}
