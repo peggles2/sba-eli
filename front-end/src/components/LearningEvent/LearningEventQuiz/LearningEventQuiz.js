@@ -59,7 +59,7 @@ export class LearningEventQuiz extends Component {
     const answers = Object.keys(this.state.answers);
     const { quiz } = this.props;
 
-    if (answers.length === quiz.questions.length) {
+    if (answers && answers.length === quiz.questions.length) {
       this.setState({ viewResultsDisabled: false });
     }
   }
