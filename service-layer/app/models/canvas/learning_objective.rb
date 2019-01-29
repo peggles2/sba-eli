@@ -6,7 +6,7 @@ module Canvas
     base_uri ENV["CANVAS_HOST"] + "/api/v1"
 
     def self.all(course_id)
-      uri = masquerade_current_user("/courses/#{course_id}/modules")
+      uri = masquerade_current_user("/courses/#{course_id}/modules?per_page=100")
       JSON.parse get(uri, base_options).body
     end
 
