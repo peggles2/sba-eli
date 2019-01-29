@@ -21,7 +21,8 @@ export class LearningEventQuiz extends Component {
 
     this.state = {
       answers: {},
-      results: null
+      results: null,
+      viewResultsDisabled: true
     };
 
     this.beginQuiz = this.beginQuiz.bind(this);
@@ -51,6 +52,16 @@ export class LearningEventQuiz extends Component {
     let answers = this.state.answers;
     answers[id] = answer;
     this.setState({ answers });
+    this.checkToEnableViewResults();
+  }
+
+  checkToEnableViewResults() {
+    const answers = Object.keys(this.state.answers);
+    const { quiz } = this.props;
+
+    if (answers.length === quiz.questions.length) {
+      this.setState({ viewResultsDisabled: false });
+    }
   }
 
   beginQuiz() {
@@ -161,7 +172,11 @@ export class LearningEventQuiz extends Component {
         )}
         {this.props.quiz.questions && !this.props.results && (
           <div style={{ textAlign: "right" }}>
-            <Button className="gold" onClick={this.viewResults}>
+            <Button
+              className="gold"
+              onClick={this.viewResults}
+              disabled={this.state.viewResultsDisabled}
+            >
               View Results
             </Button>
           </div>
