@@ -37,35 +37,14 @@ export function getLearningPath(id) {
   };
 }
 
-export function getLearningPathProgress(id) {
+export function getLearningPathsProgress() {
   return(dispatch, getState) => {
-    const request = axios.get(`/learning_paths/${id}/progress`, axiosConfig(getState()));
-    request.then((res) => {
-      if (typeof res.data.course_progress === 'undefined') {
-        dispatch({
-          type: "GET_COMPLETED_MLE_REJECTED",
-          payload: res.data,
-        });
-      } else if (res.data.course_progress.error) {
-        dispatch({
-          type: "GET_COMPLETED_MLE_REJECTED",
-          payload: res.data.course_progress,
-        });
-      } else {
-        dispatch({
-          type: "GET_COMPLETED_MLE",
-          payload: res.data.course_progress,
-        });
-      };
-    });
-    request.catch((err) => {
-      dispatch({
-        type: "GET_COMPLETED_MLE_REJECTED",
-        payload: err,
-      })
+    dispatch({
+      type: "GET_LEARNING_PATHS_PROGRESS",
+      payload: axios.get("/learning_paths/progress", axiosConfig(getState())),
     });
   };
-}
+};
 
 export function getTopicsForPath(pathId) {
   const topicParams = {
