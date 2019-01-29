@@ -32,10 +32,13 @@ export  class TopicContentItem extends Component {
 
   getNumberOfLearningEvents() {
     const { topic, course_id } = this.props;
-    const learningEvents = this.props.learningEventsCollection[course_id]
-      ? this.props.learningEventsCollection[course_id][topic.id]
-      : [];
-    return learningEvents.length;
+
+    try {
+      return this.props.learningEventsCollection[course_id][topic.id].length;
+    } catch {
+      console.log('warning: events collection not properly passed into TopicContentItem');
+      return 0;
+    }
   }
 
   render() {
