@@ -67,6 +67,7 @@ export default class ShareModal extends React.Component {
               name="facebook official"
               size="huge"
               className="share-facebook-icon" />
+              <p>Facebook</p>
           </FacebookShareButton>
           <TwitterShareButton
             url={this.props.location}
@@ -76,6 +77,7 @@ export default class ShareModal extends React.Component {
               name="twitter"
               size="huge"
               className="share-twitter-icon" />
+              <p>Twitter</p>
           </TwitterShareButton>
           <LinkedinShareButton
             url={this.props.location}
@@ -87,6 +89,7 @@ export default class ShareModal extends React.Component {
               name="linkedin"
               size="huge"
               className="share-linkedin-icon" />
+              <p>LinkedIn</p>
           </LinkedinShareButton>
           <EmailShareButton
             subject={this.props.title}
@@ -96,6 +99,7 @@ export default class ShareModal extends React.Component {
             <Icon
               name="mail"
               size="huge" />
+              <p>Email</p>
           </EmailShareButton>
         </div>
         <Grid padded>
