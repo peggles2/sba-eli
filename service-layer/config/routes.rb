@@ -11,11 +11,10 @@ Rails.application.routes.draw do
   resources :learning_events, concerns: :contentable
   resources :learning_paths, concerns: :contentable do
     resource :enroll, only: :create
-    resources :quizzes do 
-        resources :assessment, only: [:index, :create, :destroy, :update]
-      get 'submissions', :on => :member
+    resources :quizzes do
+      resources :assessment, only: %I[index create destroy update]
+      get "submissions", on: :member
     end
-
   end
   resources :learning_objectives, concerns: :contentable
   resource :request_password, only: :create

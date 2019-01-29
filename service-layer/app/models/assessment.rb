@@ -14,5 +14,5 @@
 #
 
 class Assessment < FearlessRecord
-    self.table_name = "fearless_assessments"
+  self.table_name = "fearless_assessments"
 end

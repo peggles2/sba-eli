@@ -4,7 +4,7 @@ module Canvas
     include HTTParty
 
     base_uri ENV["CANVAS_HOST"] + "/api/v1"
-    
+
     def self.all(learning_path_id)
       res = get("/courses/#{learning_path_id}/quizzes", base_options)
       quizzes = res.body
@@ -17,23 +17,23 @@ module Canvas
 
       quizzes.each do |quiz|
         results << {
-          id:             quiz["id"],
-          title:          quiz["title"],
-          description:    quiz["description"]
+          id: quiz["id"],
+          title: quiz["title"],
+          description: quiz["description"],
         }
       end
 
       results
     end
-    
-    def self.find(learning_path_id, quiz_id, submission)
+
+    def self.find(learning_path_id, quiz_id, _submission)
       res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}", base_options)
       quiz = res.body
       raise Exception, quiz unless res.code == 200
 
       quiz = JSON.parse quiz
-      # Commenting out to ignore submissionss for assessment purposes. We can get submission objects once 
-      # we actually start grading quizes
+      # Commenting out to ignore submissionss for assessment purposes.
+      # We can get submission objects once we actually start grading quizes
       # res = get("/quiz_submissions/#{submission["id"]}/questions", base_options)
       res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions", base_options)
       questions = res.body
@@ -42,40 +42,40 @@ module Canvas
 
       questions = JSON.parse questions
 
-      # Commenting out to ignore submissionss for assessment purposes. We can get submission objects once 
-      # we actually start grading quizes
+      # Commenting out to ignore submissionss for assessment purposes.
+      # We can get submission objects once we actually start grading quizes
       # questions = questions["quiz_submission_questions"]
 
       result = {
-        id:                 quiz["id"],
-        title:              quiz["title"],
-        description:        quiz["description"],
-        # Commenting out to ignore submissionss for assessment purposes. We can get submission objects once 
-        # we actually start grading quizes
+        id: quiz["id"],
+        title: quiz["title"],
+        description: quiz["description"],
+        # Commenting out to ignore submissionss for assessment purposes.
+        # We can get submission objects once we actually start grading quizes
         # submission_id:      submission["id"],
         # attempt:            submission["attempt"],
         # validation_token:   submission["validation_token"],
-        questions:          []
+        questions: [],
       }
       questions.each do |question|
         answers = []
 
-        question["answers"].each do |answer|
+        question["answers"]&.each do |answer|
           a = {
             id: answer["id"],
             text: answer["text"],
-            weight: answer["weight"]
+            weight: answer["weight"],
           }
 
           answers << a
-        end unless question["answers"].nil?
+        end
 
         result[:questions] << {
-          id:               question["id"],
-          question_name:    question["question_name"],
-          question_type:    question["question_type"],
-          question_text:    question["question_text"],
-          answers:          answers
+          id: question["id"],
+          question_name: question["question_name"],
+          question_type: question["question_type"],
+          question_text: question["question_text"],
+          answers: answers,
         }
       end
 
@@ -97,36 +97,40 @@ module Canvas
       res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions", base_options)
       questions = res.body
       raise Exception, questions unless res.code == 200
+
       questions = JSON.parse questions
-      answer_key = questions.map{|q| [q["id"].to_s, q["answers"].map{|a| [a["id"].to_s, a["weight"]]}.to_h]}.to_h
-      total = quiz.inject(0.0){|sum,q| sum + answer_key[q[:id].to_s][q[:answer].to_s] } 
-      
+      answer_key = questions.map do |q|
+        [q["id"].to_s,
+         q["answers"].map { |a| [a["id"].to_s, a["weight"]] }.to_h]
+      end.to_h
+      total = quiz.reduce(0.0) { |sum, q| sum + answer_key[q[:id].to_s][q[:answer].to_s] }
+
       found = nil
       assessments.each do |assessment|
-        if (assessment.minimum <= total && assessment.maximum >= total)
+        if assessment.minimum <= total && assessment.maximum >= total
           found = assessment
         end
       end
 
       result = {
         total: total,
-        category: found
+        category: found,
       }
 
-      return result
+      result
     end
 
-    def self.start_submission(learning_path_id, quiz_id)      
+    def self.start_submission(learning_path_id, quiz_id)
       res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options)
       submissions = res.body
 
       raise Exception, submissions unless res.code == 200
 
       submissions = JSON.parse submissions
-      
-      submission = {}
 
-      if(!submissions.nil? and (submissions["quiz_submissions"].empty? or submissions["quiz_submissions"].length > 1 or !submissions["quiz_submissions"].first["finished_at"].nil?))
+      if !submissions.nil? && (submissions["quiz_submissions"].empty? ||
+         (submissions["quiz_submissions"].length > 1) ||
+          !submissions["quiz_submissions"].first["finished_at"].nil?)
         res = post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions", base_options)
         submissions = res.body
 
@@ -138,19 +142,19 @@ module Canvas
       submissions["quiz_submissions"].first
     end
 
-
     def self.submit(submission)
       options = base_options.merge!(body: {
-        attempt: submission["attempt"],
-        validation_token: submission["validation_token"],
-        quiz_questions: []
-      })
+                                      attempt: submission["attempt"],
+                                      validation_token: submission["validation_token"],
+                                      quiz_questions: [],
+                                    })
 
       submission["quiz_questions"].each do |quiz_question|
-        options[:body][:quiz_questions] << {id: quiz_question["id"], answer: quiz_question["answer"]}
+        options[:body][:quiz_questions] << { id: quiz_question["id"],
+                                             answer: quiz_question["answer"] }
       end
 
-      res = post("/quiz_submissions/#{submission["submission_id"]}/questions", options)
+      res = post("/quiz_submissions/#{submission['submission_id']}/questions", options)
       body = res.body
 
       raise Exception, body unless res.code == 200
@@ -160,12 +164,13 @@ module Canvas
 
     def self.end_submission(learning_path_id, submission)
       options = base_options.merge!(body: {
-        attempt: submission["attempt"],
-        validation_token: submission["validation_token"]
-      })
+                                      attempt: submission["attempt"],
+                                      validation_token: submission["validation_token"],
+                                    })
       quiz_id = submission[:quiz_id]
 
-      res = post("/courses/#{learning_path_id}/quizzes/#{quiz_id}/submissions/#{submission["submission_id"]}/complete", options)
+      res = post("/courses/#{learning_path_id}/quizzes/#{quiz_id}"\
+        "/submissions/#{submission['submission_id']}/complete", options)
       body = res.body
 
       raise Exception, body unless res.code == 200
