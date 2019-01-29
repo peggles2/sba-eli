@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   resource :sign_up, only: :create
   resource :discussion, only: :show
   resources :users do
-    resources :enrollments, only: :index
+    resources :enrollments, only: :index do
+      get "latest", on: :collection
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength
