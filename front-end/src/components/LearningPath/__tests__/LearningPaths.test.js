@@ -1,25 +1,30 @@
-import React from 'react';
-import { LearningPaths } from '../LearningPaths';
-import MetaTags from '../../SEO/MetaTags';
-import { shallow, mount } from 'enzyme';
+import React from "react";
+import { LearningPaths } from "../LearningPaths";
+import MetaTags from "../../SEO/MetaTags";
+import { shallow } from "enzyme";
+import { Helmet } from "react-helmet";
 
-describe('LearningPaths', () => {
+describe("LearningPaths", () => {
   it("should render meta tags with Learning Paths specific information", () => {
     const wrapper = shallow(<LearningPaths />);
 
     expect(wrapper.find(MetaTags).exists()).toBe(true);
     const metaWrapper = wrapper.find(MetaTags).dive();
+    const helmetProps = metaWrapper.find(Helmet).props();
 
-    expect(metaWrapper.find('title').text()).toBe("SBA Learning Paths");
-    expect(metaWrapper.find("meta[name='author']").exists()).toBe(false);
-    expect(metaWrapper.find("meta[name='description']").exists()).toBe(true);
-    expect(metaWrapper.find("meta[name='description']").props().content).toBe("Description for the Learning Path landing page");
+    expect(helmetProps.title).toBe("SBA Learning Paths");
+
+    expect(helmetProps.meta[0].name).toBe("description");
+    expect(helmetProps.meta[0].content).toBe(
+      "Description for the Learning Path landing page"
+    );
+
     //TODO: add Canonical URL validation when we have final urls
   });
 
-  it('should render a <div>', () => {
+  it("should render a <div>", () => {
     const wrapper = shallow(<LearningPaths />);
 
-    expect(wrapper.find('div').length).toEqual(1);
+    expect(wrapper.find("div").length).toEqual(1);
   });
 });

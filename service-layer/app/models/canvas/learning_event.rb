@@ -7,7 +7,12 @@ module Canvas
 
     def self.all(course_id, module_id)
       uri = masquerade_current_user("/courses/#{course_id}/modules/#{module_id}/items")
-      JSON.parse get(uri, base_options).body
+      results = JSON.parse get(uri, base_options).body
+      results.each do |event|
+        custom_data = EventCustomData.where(event_id: event["id"]).first
+        event["custom_data"] = custom_data if custom_data
+      end
+      results
     end
 
     def self.find(course_id, module_id, id)
@@ -16,6 +21,8 @@ module Canvas
       if learning_event["url"]
         learning_event["eventContent"] = get(learning_event["url"], base_options)
       end
+      custom_data = EventCustomData.where(event_id: learning_event["id"]).first
+      learning_event["custom_data"] = custom_data if custom_data
 
       learning_event
     end
