@@ -1,6 +1,6 @@
 development: &default
   adapter: postgresql
-  database: sba-eli_development
+  url: <%= ENV.fetch("CANVAS_DATABASE_URL", "") %>
   encoding: utf8
   min_messages: warning
   pool: <%= Integer(ENV.fetch("DB_POOL", 5)) %>
