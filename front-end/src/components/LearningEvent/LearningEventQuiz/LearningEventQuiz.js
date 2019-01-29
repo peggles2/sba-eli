@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Divider, Icon } from "semantic-ui-react";
+import { Button, Divider, Icon, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
@@ -70,6 +70,7 @@ export class LearningEventQuiz extends Component {
     this.props.dispatch(
       getQuiz(this.props.courseId, this.props.event.content_id)
     );
+    this.checkToEnableViewResults();
   }
 
   viewResults() {
@@ -140,8 +141,13 @@ export class LearningEventQuiz extends Component {
 
     return results && results.category ? (
       <div>
-        <h3>{results.category.name}</h3>
+        <Header as="h2">{results.category.name}</Header>
         <div>{results.category.description}</div>
+        <div style={{ textAlign: "right" }}>
+          <Button className="gold" onClick={this.beginQuiz}>
+            Retake Assessment
+          </Button>
+        </div>
       </div>
     ) : (
       <span>
