@@ -1,19 +1,18 @@
 class AssessmentController < ApplicationController
   
     def create
-      begin
-        Assessment.create(
-          description: params[:assessment][:description],
-          name: params[:assessment][:name],
-          course_id: params[:learning_path_id],
-          quiz_id: params[:quiz_id],
-          minimum: params[:assessment][:minimum],
-          maximum: params[:assessment][:maximum]
-          )
-
-        render json: Assessment.where(quiz_id: params[:quiz_id])
-      rescue Exception => e
-        render json: e.message, status: :bad_request
+      @assessment = Assessment.create(
+        description: params[:assessment][:description],
+        name: params[:assessment][:name],
+        course_id: params[:learning_path_id],
+        quiz_id: params[:quiz_id],
+        minimum: params[:assessment][:minimum],
+        maximum: params[:assessment][:maximum]
+        )
+      if @assessment.save
+        render json: @assessment, status: :created
+      else
+        render json: errors_for(@assessment), status: :unprocessable_entity
       end
     end
   
