@@ -85,6 +85,7 @@ export class LearningEventQuiz extends Component {
         })
   }
 
+  // this will be used if we choose to use quiz functionality in addition to assessments later
   renderStart() {
     return this.props.submissionsLoading === false && !this.props.submissions.length &&
       <Button icon labelPosition="right" primary onClick={this.beginQuiz} >
