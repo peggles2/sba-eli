@@ -32,4 +32,4 @@ const mapStateToProps = store => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(LearningPathsList));
+export default connect(mapStateToProps)(LearningPathsList);
