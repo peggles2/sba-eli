@@ -52,7 +52,7 @@ class QuizzesController < ApplicationController
       assessment = Assessment.where(quiz_id: params[:quiz_id])
       quiz_answer_resp = Canvas::Quiz.grade params[:learning_path_id], params[:quiz_id], assessment.to_a, params[:quiz][:quiz_questions]
       
-      render json: quiz_answer_resp, status: :ok
+      render json: quiz_answer_resp, status: :created
     rescue Exception => e
       render json: e.message, status: :bad_request
     end
