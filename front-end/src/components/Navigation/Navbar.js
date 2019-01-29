@@ -125,7 +125,7 @@ export class Navbar extends Component {
   }
 }
 
-export default connect(store => {
+const mapStateToProps = store => {
   return {
     modalType: store.navbar.modalType,
     open: store.navbar.open,
@@ -133,4 +133,6 @@ export default connect(store => {
     userData: store.login.userData,
     accessToken: store.login.userData.access_token
   };
-})(withRouter(Navbar));
+};
+
+export default withRouter(connect(mapStateToProps)(Navbar));

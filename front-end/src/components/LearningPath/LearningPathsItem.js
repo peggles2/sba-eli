@@ -23,6 +23,4 @@ export class LearningPathsItem extends Component {
   }
 }
 
-export default connect(store => {
-  return {};
-})(withRouter(LearningPathsItem));
+export default withRouter(connect()(LearningPathsItem));

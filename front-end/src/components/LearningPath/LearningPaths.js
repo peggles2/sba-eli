@@ -45,8 +45,10 @@ export class LearningPaths extends React.Component {
   }
 }
 
-export default connect(store => {
+const mapStateToProps = store => {
   return {
     displayModal: store.aboutModal.show
   };
-})(withRouter(LearningPaths));
+};
+
+export default withRouter(connect(mapStateToProps)(LearningPaths));
