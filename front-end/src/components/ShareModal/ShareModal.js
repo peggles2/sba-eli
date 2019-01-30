@@ -102,16 +102,14 @@ export default class ShareModal extends React.Component {
               <p>Email</p>
           </EmailShareButton>
         </div>
-        <Grid padded>
-          <Grid.Row>
-            <Grid.Column width={12}>
+        <Grid columns="equal">
+            <Grid.Column></Grid.Column>
+            <Grid.Column width={14}>
               <Input size='small' ref={this.locationRef} defaultValue={this.props.location} className="share-text-input" />
               {this.state.textHasBeenCopied}
-            </Grid.Column>
-            <Grid.Column width={4}>
               <Button content='Copy' size={'small'} onClick={this.handleCopy} className="share-copy-button" />
             </Grid.Column>
-          </Grid.Row>
+            <Grid.Column></Grid.Column>
         </Grid>
       </Modal>
   }

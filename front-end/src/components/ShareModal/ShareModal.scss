@@ -11,6 +11,7 @@
 }
 
 .share-modal-share > p {
+  margin-top: 5px;
   margin-left: 10%;
   color: $sba-navy;
 }
@@ -38,7 +39,8 @@
 }
 
 div.share-text-input > input {
-  width: 400px !important;
+  width: 390px !important;
+  margin: 5px 5px 15px 0 !important;
   border-radius: 0 !important;
 }
 
