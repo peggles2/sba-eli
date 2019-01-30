@@ -1,5 +1,4 @@
 class EnrollmentsController < ApplicationController
-
   def index
     response = Canvas::User.enrollments(params[:user_id])
     render json: response
