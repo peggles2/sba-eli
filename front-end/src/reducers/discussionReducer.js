@@ -1,6 +1,7 @@
 const defaultValue = {
   replies: [],
-  reply_count: 0
+  reply_count: 0,
+  statusCode: null
 };
 
 export default function reducer(state = defaultValue, action) {
@@ -22,6 +23,21 @@ export default function reducer(state = defaultValue, action) {
         ...state, 
         replies: action.payload.data.replies, 
         reply_count: action.payload.data.post_count
+      }
+    case 'POST_DISCUSSION':
+      return {
+        ...state,
+        statusCode: null
+      }
+    case 'POST_DISCUSSION_FAILURE':
+      return {
+        ...state,
+        statusCode: action.payload.response.data.status
+      }
+    case 'POST_DISCUSSION_FULFILLED':
+      return {
+        ...state,
+        statusCode: action.payload.response.data.status
       }
     default:
       break;
