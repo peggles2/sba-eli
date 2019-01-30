@@ -1,74 +1,66 @@
 @import "../../assets/styles/base";
 
-.share-modal-share {
-  display: inline-block;
-  margin-left: 6%;
-
-}
-
-.share-modal-share > div {
-  cursor: pointer;
-}
-
-.share-modal-share > p {
-  margin-top: 5px;
-  margin-left: 10%;
-  color: $sba-navy;
-}
-
 .share-modal-button {
   margin-right: 5px;
   float: right;
   cursor: pointer;
 }
 
-.share-model-button-group {
-  text-align: justify;
-}
-
-.share-model-button-group > div {
-  width: 18%; /* Declare your value. Can be in relative units. */
+#shareModal .share-modal-share {
   display: inline-block;
-  vertical-align: top;
+  margin-left: 6%;
 }
 
-.share-model-button-group:after {
-    content: "";
-    width: 100%;
-    display: inline-block;
+#shareModal .share-modal-share > div {
+  cursor: pointer;
 }
 
-div.share-text-input > input {
-  width: 390px !important;
+#shareModal .share-modal-share > p {
+  margin-top: 5px;
+  text-align: center;
+  color: $sba-navy;
+}
+
+#shareModal h2 {
+  color: $sba-navy;
+}
+
+#shareModal .share-method-group {
+  margin-top: 20px;
+}
+
+#shareModal div.share-method-column {
+  text-align: center !important;
+}
+
+#shareModal div.share-text-input > input {
+  width: 324px !important;
   margin: 5px 5px 15px 0 !important;
   border-radius: 0 !important;
 }
 
-.share-close-button {
-  background-color: $sba-white !important;
-  border: 0 !important;
-  margin: 0 !important;
-  font-size: 1.25rem !important;
-  padding: 0 !important;
-  color: $sba-grey-one !important
+#shareModal .share-close-button {
+  background: white;
+  padding-top: 5px;
 }
 
-.share-copy-button {
+#shareModal .share-copy-button {
+  width: 100px;
   color: $sba-white !important;
   background-color: $sba-blue !important;
 }
 
-.share-facebook-icon {
+#shareModal .share-facebook-icon {
   color: $sba-facebook-blue;
   cursor: pointer;
 }
 
-.share-twitter-icon {
+#shareModal .share-twitter-icon {
   color: $sba-twitter-blue;
   cursor: pointer;
 }
 
-.share-linkedin-icon {
+#shareModal .share-linkedin-icon {
   color: $sba-linkedin-blue;
   cursor: pointer;
 }
