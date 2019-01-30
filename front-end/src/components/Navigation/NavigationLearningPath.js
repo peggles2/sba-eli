@@ -5,7 +5,7 @@ import NavigationLearningObjective from "./NavigationLearningObjective";
 import { connect } from "react-redux";
 import { getLearningPaths } from "../../actions/learningPathActions";
 
-import './Navbar.scss'
+import "./Navbar.scss";
 
 export class NavigationLearningPath extends Component {
   constructor(props) {
@@ -29,11 +29,16 @@ export class NavigationLearningPath extends Component {
     this.props.dispatch(getLearningPaths());
   }
 
-  renderPathForLoggedIn(lp) {
-    const { isUserLoggedIn } = this.props;
-    if (isUserLoggedIn) {
-      return (
-        <Dropdown className='navigation-learning-path' pointing="left" fluid text={lp.name}>
+  render() {
+    const learningPaths = this.props.learningPaths || [];
+    return learningPaths.map(lp => (
+      <Dropdown.Item key={lp.id} className="learning-path-item">
+        <Dropdown
+          className="navigation-learning-path"
+          pointing="left"
+          fluid
+          text={lp.name}
+        >
           <Dropdown.Menu>
             <Header as="h1">
               <Link
@@ -46,29 +51,13 @@ export class NavigationLearningPath extends Component {
             <NavigationLearningObjective learningPathId={lp.id} />
           </Dropdown.Menu>
         </Dropdown>
-      );
-    } else {
-      return (        
-        <Link to={`/learning_paths/${lp.id}`} onClick={this.handleItemClick}>
-          {lp.name}
-        </Link>
-      );
-    }
-  }
-
-  render() {
-    const learningPaths = this.props.learningPaths || [];
-    return learningPaths.map(lp => (
-      <Dropdown.Item key={lp.id} className='learning-path-item'>
-        {this.renderPathForLoggedIn(lp)}
       </Dropdown.Item>
     ));
   }
 }
 
 const mapStateToProps = store => {
-  return { 
-    isUserLoggedIn: store.login.isUserLoggedIn,
+  return {
     learningPaths: store.learningPath.learningPaths
   };
 };

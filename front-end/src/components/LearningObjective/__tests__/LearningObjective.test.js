@@ -8,6 +8,7 @@ import { shallow, mount } from "enzyme";
 
 import { Provider } from "react-redux";
 import { getMockStore } from "../../../store";
+import { Helmet } from "react-helmet";
 
 describe("LearningObjective", () => {
   const title = "Learning Objective!";
@@ -52,13 +53,12 @@ describe("LearningObjective", () => {
 
     expect(wrapper.find(MetaTags).exists()).toBe(true);
     const metaWrapper = wrapper.find(MetaTags).dive();
+    const helmetProps = metaWrapper.find(Helmet).props();
 
-    expect(metaWrapper.find("title").text()).toBe(title);
-    expect(metaWrapper.find("meta[name='author']").exists()).toBe(false);
-    expect(metaWrapper.find("meta[name='description']").exists()).toBe(true);
-    expect(metaWrapper.find("meta[name='description']").props().content).toBe(
-      desc
-    );
+    expect(helmetProps.title).toBe(title);
+    expect(helmetProps.meta[0].name).toBe("description");
+    expect(helmetProps.meta[0].content).toBe(desc);
+
     //TODO: add Canonical URL validation when we have final urls
   });
 

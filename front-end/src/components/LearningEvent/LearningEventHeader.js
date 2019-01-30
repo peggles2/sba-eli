@@ -11,6 +11,13 @@ class LearningEventHeader extends Component {
     return null;
   }
 
+  getCustomData(event, field, defaultValue) {
+    if (!event || !event.custom_data || !field){
+      return defaultValue;
+    }
+    return event.custom_data[field];
+  };
+
   render() {
     const { event, topicTitle } = this.props;
     return (
@@ -29,7 +36,9 @@ class LearningEventHeader extends Component {
         </Grid.Row>
         <Grid.Row className="header-row">
           <Grid.Column width={12}>
-            <div className="event-meta">Event Type (Time)</div>
+            <div className="event-meta">
+              {this.getCustomData(event, 'event_type', 'Article')} ({this.getCustomData(event, 'time', 'unknown')})
+            </div>
           </Grid.Column>
           <Grid.Column width={4}>
             {this.showDownloadButton(event)}

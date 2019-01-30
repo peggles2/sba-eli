@@ -18,6 +18,17 @@ export default class TopicContentItem extends Component {
     }
   };
 
+  getCustomData(topic, field, defaultValue) {
+    if (!topic || !topic.custom_data || !field){
+      return defaultValue;
+    }
+    return topic.custom_data[field];
+  };
+
+  getTopicThumbnail(topic) {
+    return this.getCustomData(topic, 'thumbnail_url', '/Image_Placeholder.png');
+  }
+
   render() {
     const { topic, course_id } = this.props;
     const { listVisible, activeIndex } = this.state;
@@ -27,7 +38,7 @@ export default class TopicContentItem extends Component {
         <Item.Group className={"topic-content-item-group"}>
           <Item className="topic-content-item">
             <Item.Image
-              src="/Image_Placeholder.png"
+              src={this.getTopicThumbnail(topic)}
               className={"computer large screen widescreen only"}
             />
 
@@ -35,9 +46,9 @@ export default class TopicContentItem extends Component {
               <Item.Header className={"topic-content-item-header"}>
                 {topic.name}
               </Item.Header>
-              <Item.Meta># of Learning Events (Time)</Item.Meta>
+              <Item.Meta># of Learning Events ({this.getCustomData(topic, 'time', 'unknown')})</Item.Meta>
               <Item.Description>
-                This is a desciption for the Topic: {topic.name}
+                {this.getCustomData(topic, 'description', '')}
               </Item.Description>
               <Divider />
 

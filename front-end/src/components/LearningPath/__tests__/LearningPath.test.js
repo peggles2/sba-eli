@@ -2,6 +2,7 @@ import React from "react";
 import { Header, Grid } from "semantic-ui-react";
 import { LearningPath } from "../LearningPath";
 import LearningEvent from "../../LearningEvent/LearningEvent";
+import { Helmet } from "react-helmet";
 import MetaTags from "../../SEO/MetaTags";
 import TopicContentView from "../../TopicContentView/TopicContentView";
 import { shallow } from "enzyme";
@@ -30,13 +31,12 @@ describe("LearningPath", () => {
 
     expect(wrapper.find(MetaTags).exists()).toBe(true);
     const metaWrapper = wrapper.find(MetaTags).dive();
+    const helmetProps = metaWrapper.find(Helmet).props();
 
-    expect(metaWrapper.find("title").text()).toBe(name);
-    expect(metaWrapper.find("meta[name='author']").exists()).toBe(false);
-    expect(metaWrapper.find("meta[name='description']").exists()).toBe(true);
-    expect(metaWrapper.find("meta[name='description']").props().content).toBe(
-      desc
-    );
+    expect(helmetProps.title).toBe(name);
+    expect(helmetProps.meta[0].name).toBe("description");
+    expect(helmetProps.meta[0].content).toBe(desc);
+
     //TODO: add Canonical URL validation when we have final urls
   });
 

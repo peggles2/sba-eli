@@ -5,6 +5,7 @@ import LearningEventManager from "../LearningEventManager";
 import MetaTags from "../../SEO/MetaTags";
 import { shallow } from "enzyme";
 import LearningEventHeader from "../LearningEventHeader";
+import { Helmet } from "react-helmet";
 import LearningEventFooter from "../LearningEventFooter";
 
 function eventWrapper() {
@@ -31,15 +32,15 @@ describe("LearningEvent", () => {
 
     expect(wrapper.find(MetaTags).exists()).toBe(true);
     const metaWrapper = wrapper.find(MetaTags).dive();
+    const helmetProps = metaWrapper.find(Helmet).props();
 
-    expect(metaWrapper.find("title").text()).toBe(title);
-    expect(metaWrapper.find("meta[name='author']").exists()).toBe(false);
-    expect(metaWrapper.find("meta[name='description']").exists()).toBe(true);
-    expect(metaWrapper.find("meta[name='description']").props().content).toBe(
-      desc
-    );
+    expect(helmetProps.title).toBe(title);
+    expect(helmetProps.meta[0].name).toBe("description");
+    expect(helmetProps.meta[0].content).toBe(desc);
+
     //TODO: add Canonical URL validation when we have final urls
-    //expect(metaWrapper.find("link[rel='canonical']").props().href).toBe("https://sba.gov/eli")
+    //expect(helmetProps.link[0].rel).toBe("canonical");
+    //expect(helmetProps.link[0].href).toBe("https://sba.gov/eli");
   });
 
   it("should render a LearningEventHeader", () => {
