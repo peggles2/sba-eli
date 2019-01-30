@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Header, Divider, Grid } from "semantic-ui-react";
 import DownloadButton from "./DownloadButton";
-import ShareButton from "./ShareButton";
 import "./LearningEvent.scss";
 
 class LearningEventHeader extends Component {
@@ -10,11 +9,6 @@ class LearningEventHeader extends Component {
       return <DownloadButton className="share-button" url="" />;
     }
     return null;
-  }
-
-  renderShareButton() {
-    //Needs hooked into mobile sharing functionality when that is added
-    return <ShareButton />;
   }
 
   render() {
@@ -38,7 +32,6 @@ class LearningEventHeader extends Component {
             <div className="event-meta">Event Type (Time)</div>
           </Grid.Column>
           <Grid.Column width={4}>
-            {this.renderShareButton()}
             {this.showDownloadButton(event)}
           </Grid.Column>
         </Grid.Row>
