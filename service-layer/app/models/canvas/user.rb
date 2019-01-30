@@ -22,7 +22,7 @@ module Canvas
     end
 
     def self.read_user(user_id)
-      r.bodyesponse = get(canvas_user_url(user_id), base_options).body
+      response = get(canvas_user_url(user_id), base_options).body
       JSON.parse response
     end
 
