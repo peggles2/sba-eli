@@ -1,18 +1,5 @@
 import axios from "axios";
-
-function axiosConfig(state, params = null) {
-  let authConfig = {};
-  if (state.login.isUserLoggedIn) {
-    const { access_token } = state.login.userData;
-    authConfig = { headers: { AUTHORIZATION: access_token } };
-  }
-
-  return {
-    params: params,
-    baseURL: process.env.REACT_APP_SERVICE_HOST,
-    ...authConfig
-  };
-}
+import axiosConfig from './axiosConfig';
 
 export function getLearningPaths() {
   return (dispatch, getState) => {

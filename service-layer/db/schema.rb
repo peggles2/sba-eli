@@ -1613,6 +1613,15 @@ ActiveRecord::Schema.define(version: 2019_01_23_015312) do
     t.index ["contentable_type", "contentable_id"], name: "idx_custom_contents_contentable_type_contentable_id", unique: true
   end
 
+  create_table "fearless_discussion_maps", force: :cascade do |t|
+    t.string "discussion_id", null: false
+    t.string "content_type", null: false
+    t.integer "content_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discussion_id"], name: "index_fearless_discussion_maps_on_discussion_id", unique: true
+  end
+
   create_table "fearless_taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"

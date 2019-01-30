@@ -1,41 +1,23 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { Divider, List } from "semantic-ui-react";
-import axios from "axios";
+import { connect } from "react-redux";
 
-export default class NavigationLearningObjective extends Component {
-  constructor(props) {
-    super(props);
+import { getLearningObjectivesForAdmin } from "../../actions/learningObjectiveActions";
 
-    this.state = {
-      learningObjectives: []
-    };
-  }
-
+export class NavigationLearningObjective extends Component {
   componentDidMount() {
     this.fetchData();
   }
 
   fetchData() {
-    const url =
-      process.env.REACT_APP_SERVICE_HOST +
-      "/learning_objectives/" +
-      "?course_id=" +
-      this.props.learningPathId;
-
-    axios
-      .get(url)
-      .then(res => {
-        const learningObjectives = res.data;
-        this.setState({ learningObjectives });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    this.props.dispatch(
+      getLearningObjectivesForAdmin(this.props.learningPathId)
+    );
   }
 
   topicNumber() {
-    const objectives = this.state.learningObjectives || [];
+    const objectives = this.props.learningObjectives || [];
     const topicNumber = objectives.length;
 
     if (topicNumber === 1) {
@@ -46,23 +28,51 @@ export default class NavigationLearningObjective extends Component {
   }
 
   elide(text) {
-    return text.length < 60 ? text : text.substr(0, 60) + '...';
-  };
+    return text.length < 60 ? text : text.substr(0, 60) + "...";
+  }
+
+  getFirstEventPath(pathId, objectiveId) {
+    return (
+      `/learning_paths/${pathId}` +
+      `/learning_objectives/${objectiveId}` +
+      "/learning_events/first"
+    );
+  }
 
   render() {
-    const learningObjectivePath = `/learning_paths/${this.props.learningPathId}/learning_objectives/`
-    const objectives = this.state.learningObjectives || [];
-    const topics = objectives.map((lo, index) => (
-      <List.Item key={'learning_objective_' + index}><Link to={learningObjectivePath + lo.id}>{this.elide(lo.name)}</Link></List.Item>
-    ));
+    const pathId = this.props.learningPathId;
+    const objectives = this.props.learningObjectives || [];
+    const topics = objectives.map((lo, index) => {
+      return (
+        <List.Item key={"learning_objective_" + index}>
+          <Link to={this.getFirstEventPath(pathId, lo.id)}>
+            {this.elide(lo.name)}
+          </Link>
+        </List.Item>
+      );
+    });
 
     return (
-      <div className='topic-summary'>
-        <em>{this.topicNumber()}, 1 hour 24 minutes</em><br/>
-        <p className='path-description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu viverra dolor. In pharetra non nunc vitae cursus. Donec fermentum vestibulum orci ut aliquam. Phasellus eu arcu scelerisque, pretium massa eget, semper justo.</p>
+      <div className="topic-summary">
+        <em>{this.topicNumber()}, 1 hour 24 minutes</em>
+        <br />
+        <p className="path-description">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu
+          viverra dolor. In pharetra non nunc vitae cursus. Donec fermentum
+          vestibulum orci ut aliquam. Phasellus eu arcu scelerisque, pretium
+          massa eget, semper justo.
+        </p>
         <Divider />
-        { topics }
+        {topics}
       </div>
-    )
+    );
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    learningObjectives: store.learningObjective.learningObjectives
+  };
+};
+
+export default connect(mapStateToProps)(NavigationLearningObjective);

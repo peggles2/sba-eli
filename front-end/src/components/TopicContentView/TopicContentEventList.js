@@ -1,38 +1,37 @@
 import React, { Component } from "react";
 import { Icon, Grid } from "semantic-ui-react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getLearningEventsIfNeeded } from "../../actions/learningEventActions";
 
-export default class TopicContentEventList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      eventsList: []
-    };
-  }
-
+export class TopicContentEventList extends Component {
   componentDidMount() {
     this.eventsList();
   }
 
   eventsList() {
-    const url = process.env.REACT_APP_SERVICE_HOST + `/learning_events/`;
+    this.props.dispatch(
+      getLearningEventsIfNeeded(this.props.course_id, this.props.module_id)
+    );
+  }
 
-    const eventParams = {
-      course_id: this.props.course_id,
-      module_id: this.props.module_id
-    };
+  getCustomData(event, field, defaultValue) {
+    if (!event || !event.custom_data || !field){
+      return defaultValue;
+    }
+    return event.custom_data[field];
+  };
 
-    axios
-      .get(url, { params: eventParams })
-      .then(res => {
-        const eventsList = res.data;
-        this.setState({ eventsList });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  getThumbnail(event){
+    const url = this.getCustomData(event, 'thumbnail_url', undefined);
+    if (url) {
+      return <img className="topic-content-event-grid-icon" src={url}/>
+    } else {
+      return <Icon
+                name={"image"}
+                className={"topic-content-event-grid-icon"}
+              />
+    }
   }
 
   renderEventList(eventList) {
@@ -53,10 +52,7 @@ export default class TopicContentEventList extends Component {
               largeScreen={1}
               widescreen={1}
             >
-              <Icon
-                name={"image"}
-                className={"topic-content-event-grid-icon"}
-              />
+              {this.getThumbnail(event)}
             </Grid.Column>
             <Grid.Column
               mobile={12}
@@ -71,7 +67,9 @@ export default class TopicContentEventList extends Component {
               >
                 {event.title}
               </Link>
-              <div className={"topic-content-event-grid-meta"}>Event Type</div>
+              <div className={"topic-content-event-grid-meta"}>
+                {this.getCustomData(event, 'event_type', 'Article')} ({this.getCustomData(event, 'time', 'unknown')})
+              </div>
             </Grid.Column>
           </Grid>
         );
@@ -82,6 +80,19 @@ export default class TopicContentEventList extends Component {
   }
 
   render() {
-    return this.renderEventList(this.state.eventsList);
+    const { module_id, course_id } = this.props;
+    const learningEvents = this.props.learningEventsCollection[course_id]
+      ? this.props.learningEventsCollection[course_id][module_id]
+      : [];
+
+    return this.renderEventList(learningEvents);
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    learningEventsCollection: store.learningEvent.learningEventsCollection
+  };
+};
+
+export default connect(mapStateToProps)(TopicContentEventList);

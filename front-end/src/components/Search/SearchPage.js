@@ -1,13 +1,15 @@
 import React, {Component} from "react";
 import {Button, Grid, Header, Icon, Pagination, Segment, Sidebar} from "semantic-ui-react";
-import axios from "axios";
 import queryString from 'query-string';
 import SearchFacets from "./SearchFacets";
 import SearchResults from "./SearchResults";
 import MetaTags from '../SEO/MetaTags'
 
+import { connect } from "react-redux";
+import { search } from '../../actions/searchActions';
+
 import "./search.scss";
-export default class SearchPage extends Component {
+export class SearchPage extends Component {
 
   constructor(props) {
     super(props);
@@ -17,9 +19,7 @@ export default class SearchPage extends Component {
     this.state = {
       searchTerm: this.clean(params.searchTerm),
       urlParams: params,
-      visibleDrawer: false,
-      searchResults: [],
-      searchMetadata: []
+      visibleDrawer: false
     };
   };
 
@@ -37,51 +37,34 @@ export default class SearchPage extends Component {
   }
 
   fetchData() {
-    let url = process.env.REACT_APP_SERVICE_HOST + "/search?";
-    var parameters = {
-      keywords: this.state.urlParams && this.state.urlParams.searchTerm
+    this.props.dispatch(search(
+      this.state.urlParams && this.state.urlParams.searchTerm
         ? this.state.urlParams.searchTerm 
         : '',
-      subject: this.state.urlParams && this.state.urlParams.subject
+      this.state.urlParams && this.state.urlParams.subject
         ? this.state.urlParams.subject 
         : '',
-      media_types: this.state.urlParams && this.state.urlParams.mediaType
+      this.state.urlParams && this.state.urlParams.mediaType
         ? this.state.urlParams.mediaType 
         : '',
-      duration: this.state.urlParams && this.state.urlParams.time
+      this.state.urlParams && this.state.urlParams.time
         ? this.state.urlParams.time 
         : '',
-      per_page: 20
-    }
-    url += Object.keys(parameters).map(key => key + '=' + parameters[key]).join('&');
-    
-    axios
-        .get(encodeURI(url))
-        .then(res => {
-          const searchResultsResponse = res.data;
-          if (searchResultsResponse) {
-            const searchResults = searchResultsResponse.data;
-            const searchMetadata = searchResultsResponse.meta;
-            this.setState({searchResults});
-            this.setState({searchMetadata});
-          } 
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      20
+    ));
   }
 
   searchText() {
     //TODO: what is the correct text for these states?
     if (this.state.searchTerm !== undefined
         && this.state.searchTerm !== '') {
-      if (this.state.searchMetadata
-          && this.state.searchMetadata.pagination
-          && this.state.searchMetadata.pagination.total_count
-          && this.state.searchMetadata.pagination.total_count > 0) {
-        return this.state.searchMetadata.pagination.total_count === 1 
+      if (this.props.searchMetadata
+          && this.props.searchMetadata.pagination
+          && this.props.searchMetadata.pagination.total_count
+          && this.props.searchMetadata.pagination.total_count > 0) {
+        return this.props.searchMetadata.pagination.total_count === 1 
               ? `1 Search Result for "${this.state.searchTerm}"`
-              : `${this.state.searchMetadata.pagination.total_count} Search Results for "${this.state.searchTerm}"`
+              : `${this.props.searchMetadata.pagination.total_count} Search Results for "${this.state.searchTerm}"`
       }
       return `No Search Results were found for "${this.state.searchTerm}"`
     }
@@ -89,10 +72,10 @@ export default class SearchPage extends Component {
   }
 
   getPagination() {
-    if (this.state.searchMetadata
-        && this.state.searchMetadata.pagination
-        && this.state.searchMetadata.pagination.total_pages
-        && this.state.searchMetadata.pagination.total_pages > 1) {
+    if (this.props.searchMetadata
+        && this.props.searchMetadata.pagination
+        && this.props.searchMetadata.pagination.total_pages
+        && this.props.searchMetadata.pagination.total_pages > 1) {
       return <Pagination
                 boundaryRange={0}
                 ellipsisItem={null}
@@ -100,9 +83,9 @@ export default class SearchPage extends Component {
                 nextItem={null}
                 firstItem={null}
                 lastItem={null}
-                activePage={this.state.searchMetadata.pagination.current_page}
+                activePage={this.props.searchMetadata.pagination.current_page}
                 siblingRange={1}
-                totalPages={this.state.searchMetadata.pagination.total_pages}
+                totalPages={this.props.searchMetadata.pagination.total_pages}
             />
     }
   }
@@ -137,7 +120,7 @@ export default class SearchPage extends Component {
                   <SearchFacets urlParams={this.state.urlParams}/>
                 </Sidebar>
                 <Sidebar.Pusher>
-                  <SearchResults searchResults={this.state.searchResults}/>
+                  <SearchResults searchResults={this.props.searchResults}/>
                 </Sidebar.Pusher>
               </Sidebar.Pushable>
             </Grid.Column>
@@ -149,3 +132,14 @@ export default class SearchPage extends Component {
     )
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    searchResults: store.search.searchResults,
+    searchMetadata: store.search.searchMetadata
+  };
+};
+
+export default connect(mapStateToProps)(SearchPage);
+
+

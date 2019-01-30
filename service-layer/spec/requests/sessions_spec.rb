@@ -7,6 +7,7 @@ describe "Sessions" do
   let (:uri) { "/session" }
   let (:email) { "nick.watson@claritybizsol.com" }
   let (:valid_password) { "changeME123!" }
+  let (:auth_token) { SecureRandom.uuid }
 
   describe "POST /session" do
     it "creates a session for a valid username and password" do
@@ -51,6 +52,24 @@ describe "Sessions" do
 
           post uri, params: params
           expect(response).to have_http_status(:forbidden)
+        end
+      end
+    end
+  end
+
+  describe "DELETE /session" do
+    context do
+      before :context do
+        Aws.config[:cognitoidentityprovider] = {
+          stub_responses: {
+            global_sign_out: stub_cognito_sign_out,
+          },
+        }
+      end
+      it "deletes a session" do
+        VCR.turned_off do
+          delete uri, headers: { "Authorization": auth_token }
+          expect(response).to be_successful
         end
       end
     end

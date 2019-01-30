@@ -12,7 +12,8 @@ import LearningEventDiscussion from "../Discussion/LearningEventDiscussion";
 
 import {
   getLearningEvent,
-  getLearningEvents
+  getLearningEventsIfNeeded,
+  getFirstLearningEvent
 } from "../../actions/learningEventActions";
 
 export class LearningEvent extends Component {
@@ -40,12 +41,22 @@ export class LearningEvent extends Component {
       topicId: module_id,
       eventId: event_id
     } = this.props.match.params;
-    this.props.dispatch(getLearningEvent(course_id, module_id, event_id));
-    this.props.dispatch(getLearningEvents(course_id, module_id));
+
+    if (event_id === eventProps.first) {
+      this.props.dispatch(getFirstLearningEvent(course_id, module_id));
+    } else {
+      this.props.dispatch(getLearningEventsIfNeeded(course_id, module_id));
+      this.props.dispatch(getLearningEvent(course_id, module_id, event_id));
+    }
   }
 
   render() {
     const { learningEvent, topicTitle } = this.props;
+
+    const { id: course_id, topicId: module_id } = this.props.match.params;
+    const learningEvents = this.props.learningEventsCollection[course_id]
+      ? this.props.learningEventsCollection[course_id][module_id]
+      : [];
 
     return (
       <div>
@@ -59,21 +70,28 @@ export class LearningEvent extends Component {
           <LearningEventManager event={learningEvent} courseId={this.props.match.params.id} />
           <Divider />
           <LearningEventFooter
-            courseId={this.props.match.params.id}
-            module={this.props.learningEvents}
-            event={this.props.learningEvent}
+            courseId={course_id}
+            module={learningEvents}
+            event={learningEvent}
           />
         </Container>
-        <LearningEventDiscussion event={learningEvent} />
+        <LearningEventDiscussion
+          parent_content_type={this.parent_content_type}
+          parent_id={this.parent_id}
+        />
       </div>
     );
   }
 }
 
+const eventProps = {
+  first: "first"
+};
+
 const mapStateToProps = store => {
   return {
     learningEvent: store.learningEvent.learningEvent,
-    learningEvents: store.learningEvent.learningEvents
+    learningEventsCollection: store.learningEvent.learningEventsCollection
   };
 };
 

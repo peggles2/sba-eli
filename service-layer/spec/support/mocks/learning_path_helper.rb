@@ -40,7 +40,7 @@ module Mocks
       )
 
       topics_url = "#{ENV['CANVAS_HOST']}/api/v1/courses/#{learning_path_id}/modules"\
-        "?as_user_id=#{user_id}"
+        "?per_page=100?as_user_id=#{user_id}"
       topics_response = stub_authorized_request(:get, topics_url).to_return(
         status: status,
         body: "[{},{}]",

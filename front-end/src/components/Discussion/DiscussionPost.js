@@ -1,20 +1,11 @@
-import React, {Component} from "react";
-import {Form, Input, Grid, TextArea} from "semantic-ui-react";
+import React, { Component } from "react";
+import { Form, Input, Grid, TextArea } from "semantic-ui-react";
+import { connect } from "react-redux";
 
-export default class DiscussionPost extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      //TODO: update this logic when we have signon working
-      signedIn: true,
-      parentId: this.props.parent.id
-    };
-  };
-
+export class DiscussionPost extends Component {
   clearPost(event) {
     event.preventDefault();
-    document.getElementById('discussion-input').value = ''
+    document.getElementById("discussion-input").value = "";
   }
 
   submitPost(event) {
@@ -23,28 +14,46 @@ export default class DiscussionPost extends Component {
   }
 
   ifRegistered() {
-    if (this.state.signedIn) { 
-      return <Grid.Row centered>
-        <Grid.Column width={15}>
-          <Form method="POST" action="/discuss">
-            <TextArea focus="true" placeholder="Share your thoughts..." id='discussion-input'/>
-            <Form.Group className="post_buttons">
-              <Form.Button id='clear_post' onClick={this.clearPost}>
-                Clear
-              </Form.Button>
-              <Form.Button primary id='submit_post' onClick={this.submitPost}>
-                Add Comment
-              </Form.Button>
-            </Form.Group>
-            <Input type="hidden" name="content_id" value={this.state.parentId}/>
-          </Form>
-        </Grid.Column>
-      </Grid.Row>
+    if (this.props.isUserLoggedIn) {
+      return (
+        <Grid.Row centered>
+          <Grid.Column width={15}>
+            <Form method="POST" action="/discuss">
+              <TextArea
+                focus="true"
+                placeholder="Share your thoughts..."
+                id="discussion-input"
+              />
+              <Form.Group className="post_buttons">
+                <Form.Button id="clear_post" onClick={this.clearPost}>
+                  Clear
+                </Form.Button>
+                <Form.Button primary id="submit_post" onClick={this.submitPost}>
+                  Add Comment
+                </Form.Button>
+              </Form.Group>
+              <Input
+                type="hidden"
+                name="content_id"
+                value={this.props.parent_id}
+              />
+            </Form>
+          </Grid.Column>
+        </Grid.Row>
+      );
     }
-    return null
+    return null;
   }
 
   render() {
-    return (this.ifRegistered())
+    return this.ifRegistered();
   }
-}  
+}
+
+const mapStateToProps = store => {
+  return {
+    isUserLoggedIn: store.login.isUserLoggedIn
+  };
+};
+
+export default connect(mapStateToProps)(DiscussionPost);

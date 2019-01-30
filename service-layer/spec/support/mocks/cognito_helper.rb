@@ -113,5 +113,11 @@ module Mocks
         )
       end
     end
+
+    def stub_cognito_sign_out
+      Proc.new do
+        Seahorse::Client::Response.new(status_code: 200)
+      end
+    end
   end
 end

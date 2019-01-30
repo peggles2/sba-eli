@@ -29,6 +29,12 @@ class UserCreationService
     response = Canvas::User.create_user(build_canvas_json)
     self.user = User.from_canvas_json(response)
 
+    begin
+      DiscourseClient.create_user(user.id, email, full_name)
+    rescue DiscourseApi::UnprocessableEntity
+      Rails.logger.error "Unable to create Discourse user for #{user.id}"
+    end
+
     self
   end
 
