@@ -10,7 +10,7 @@ import { toggleModal } from '../../actions/aboutModalActions'
 
 export class LearningPaths extends React.Component {
   render () {
-    const learningPathsHeader = "Explore All Paths";
+    const journeysHeader = "Explore All Journeys";
 
     return(
       <div>
@@ -21,7 +21,7 @@ export class LearningPaths extends React.Component {
           <Grid.Row>
             <Grid.Column>
               <Container>
-                <Header as='h2'>{learningPathsHeader}</Header>
+                <Header as='h2'>{journeysHeader}</Header>
                 <LearningPathAbout open={this.props.displayModal} handleClose={this.props.handleModalClose} />
                 <Divider />
               </Container>

@@ -72,13 +72,13 @@ export class LearningPathsItem extends Component {
     const learningPathImage = `/Image_Placeholder.png`;
 
     return(
-      <Card href={'/learning_paths/' + this.props.id}>
+      <Card className="learning-path-card" href={'/learning_paths/' + this.props.id}>
         <Image
           src={learningPathImage}
           alt="Learning Path Image Placeholder"
         />
         <Card.Content>
-          <Card.Header>{this.props.name}</Card.Header>
+          <Card.Header className="learning-path-item-header">{this.props.name}</Card.Header>
           <Card.Meta>{this.props.course_code}</Card.Meta>
           <Card.Description>{learningPathDescription}</Card.Description>
         </Card.Content>

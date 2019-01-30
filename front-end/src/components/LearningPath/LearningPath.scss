@@ -18,11 +18,15 @@
   margin-top: 1em !important;
 }
 
-// LearningPathProgress
+.learning-path-item-header {
+  color: $sba-dark-grey !important;
+}
+
 .learning-path-progress-bar-row {
   padding-bottom: 0 !important;
 }
 
 .learning-path-completed-row {
   padding-top: 0 !important;
+  color: $sba-dark-grey;
 }
