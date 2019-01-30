@@ -41,16 +41,22 @@ class QuizzesController < ApplicationController
   #   }]
   # }
   def create
-    assessment = Assessment.where(quiz_id: params[:quiz_id])
-    quiz_answer_resp = Canvas::Quiz.grade(
-      params[:learning_path_id],
-      params[:quiz_id],
-      assessment.to_a,
-      params[:quiz][:quiz_questions],
-    )
+    grade_quiz = GradeQuiz.new(quiz_params)
+    quiz_answer_resp = grade_quiz.grade
 
     render json: quiz_answer_resp, status: :created
   rescue StandardError => e
     render json: e.message, status: :bad_request
   end
+end
+
+private
+
+def quiz_params
+  params.require(:quiz).permit(
+    :quiz_id,
+    quiz_questions: %I[id answer],
+  ).merge(
+    learning_path_id: params[:learning_path_id],
+  )
 end
