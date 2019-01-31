@@ -37,7 +37,6 @@ export class DiscussionPost extends Component {
       })
       .catch(error => {
         console.log(error)
-        this.state.errors = error
       })
     }
   }
