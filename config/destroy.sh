@@ -2,28 +2,28 @@
 set -eo pipefail
 
 # Delete DNS Record
-cat > change-batch.json << EOF
-{
-  "Comment": "change batch request on ${DATE}",
-  "Changes": [
-    {
-      "Action": "DELETE",
-      "ResourceRecordSet": {
-        "Name": "${BRANCH}.${DOMAIN}",
-        "Type": "A",
-        "AliasTarget": {
-          "HostedZoneId": "${HOSTED_ZONE_ID}",
-          "DNSName": "${ELB_DNS}",
-          "EvaluateTargetHealth": true
-        }
-      }
-    }
-  ]
-}
-EOF
+# cat > change-batch.json << EOF
+# {
+#   "Comment": "change batch request on ${DATE}",
+#   "Changes": [
+#     {
+#       "Action": "DELETE",
+#       "ResourceRecordSet": {
+#         "Name": "${BRANCH}.${DOMAIN}",
+#         "Type": "A",
+#         "AliasTarget": {
+#           "HostedZoneId": "${HOSTED_ZONE_ID}",
+#           "DNSName": "${ELB_DNS}",
+#           "EvaluateTargetHealth": true
+#         }
+#       }
+#     }
+#   ]
+# }
+# EOF
 
-echo "Deleting DNS Record set..."
-aws route53 change-resource-record-sets --hosted-zone-id ${HOSTED_ZONE_ID} --change-batch file://change-batch.json
+# echo "Deleting DNS Record set..."
+# aws route53 change-resource-record-sets --hosted-zone-id ${HOSTED_ZONE_ID} --change-batch file://change-batch.json
 
 echo "Destroying Fargate Service..."
 ecs-cli compose --file docker-compose-aws.yml --project-name ${BRANCH} service rm --cluster ${BRANCH}

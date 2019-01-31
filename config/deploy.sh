@@ -40,27 +40,26 @@ ecs-cli compose --project-name $BRANCH --ecs-params config/ecs-params.yml \
   --health-check-grace-period 300 --target-group-arn $TARGET_GROUP_ARN --timeout 15
 
 # Create DNS Record
-cat > change-batch.json << EOF
-{
-  "Comment": "change batch request on ${DATE}",
-  "Changes": [
-    {
-      "Action": "CREATE",
-      "ResourceRecordSet": {
-        "Name": "${BRANCH}.${DOMAIN}",
-        "Type": "A",
-        "AliasTarget": {
-          "HostedZoneId": "${HOSTED_ZONE_ID}",
-          "DNSName": "${ELB_DNS}",
-          "EvaluateTargetHealth": true
-        }
-      }
-    }
-  ]
-}
-EOF
+# cat > change-batch.json << EOF
+# {
+#   "Comment": "change batch request on ${DATE}",
+#   "Changes": [
+#     {
+#       "Action": "CREATE",
+#       "ResourceRecordSet": {
+#         "Name": "${BRANCH}.${DOMAIN}",
+#         "Type": "A",
+#         "AliasTarget": {
+#           "HostedZoneId": "${HOSTED_ZONE_ID}",
+#           "DNSName": "${ELB_DNS}",
+#           "EvaluateTargetHealth": true
+#         }
+#       }
+#     }
+#   ]
+# }
+# EOF
 
-aws route53 change-resource-record-sets --hosted-zone-id ${HOSTED_ZONE_ID} --change-batch file://change-batch.json
+# aws route53 change-resource-record-sets --hosted-zone-id ${HOSTED_ZONE_ID} --change-batch file://change-batch.json
 
-printf "Done, application is at: http://${BRANCH}.${DOMAIN}\n";
-printf "(It may take a minute for the container to register as healthy and begin receiving traffic.)\n";
+printf "Done, application is at: ${ELB_DNS}";
