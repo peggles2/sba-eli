@@ -326,6 +326,32 @@ workflows:
           filters:
             branches:
               only: /sba*/
+      - review-approval:
+          type: approval
+          requires:
+            - check_for_secrets
+            - rubocop
+            - rspec
+            - eslint
+            - jest
+            - build
+            - ux-review
+          filters:
+            branches:
+              only: /sba*/
+      - clean-up:
+          requires:
+            - check_for_secrets
+            - rubocop
+            - rspec
+            - eslint
+            - jest
+            - build
+            - ux-review
+            - review-approval
+          filters:
+            branches:
+              only: /sba*/
       - deploy-dev:
           requires:
             - check_for_secrets
