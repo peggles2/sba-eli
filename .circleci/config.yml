@@ -204,14 +204,9 @@ jobs:
           command: |
             chmod +x ./config/deploy.sh
             ./config/deploy.sh
-      - run:
-          name: Test Deployment
-          command: |
-            curl --retry 10 -Is http://${ELB_DNS} | head -n 1
-      # - run:
-      #     slack/notify:
-      #     message: "${BRANCH} is ready for UX Review http://${BRANCH}.${DOMAIN}"
-      #     color: "#42e2f4"
+      - slack/notify:
+          message: "${BRANCH} is ready for UX Review http://${ELB_DNS}"
+          color: "#42e2f4"
   clean-up:
     working_directory: ~/repo
     docker:
@@ -310,11 +305,11 @@ workflows:
             - rspec
             - eslint
             - jest
-          filters:
-            branches:
-              only:
-                - master
-                - /sbaelidev*/
+          # filters:
+          #   branches:
+          #     only:
+          #       - /sba*/
+          #       - master
       - ux-review:
           requires:
             - check_for_secrets
@@ -323,9 +318,9 @@ workflows:
             - eslint
             - jest
             - build
-          filters:
-            branches:
-              only: /sba*/
+          # filters:
+          #   branches:
+          #     only: /sba*/
       - review-approval:
           type: approval
           requires:
