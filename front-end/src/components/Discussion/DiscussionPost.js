@@ -55,7 +55,7 @@ export class DiscussionPost extends Component {
 
     if (isUserLoggedIn) {
       return (
-          <Grid.Row centered>
+          <Grid.Row className="submission_form" centered>
             <Grid.Column width={15}>
               <Form method="POST" onSubmit={e => this.submitPost(e, post_id)}>
                 <TextArea
