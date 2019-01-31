@@ -1,21 +1,25 @@
-const defaultValue = {
-  learningPaths: [],
-  learningPathsLoading: false,
-  learningPathsError: null,
+function defaultState() {
+  return {
+    learningPaths: [],
+    learningPathsLoading: false,
+    learningPathsError: null,
+  
+    learningPath: {},
+    learningPathLoading: false,
+    learningPathError: null,
+  
+    topicsList: [],
+    pathTopicsLoading: true,
+    pathTopicsError: null,
+  
+    enrollUserError: null
+  }
+}
 
-  learningPath: {},
-  learningPathLoading: false,
-  learningPathError: null,
-
-  topicsList: [],
-  pathTopicsLoading: true,
-  pathTopicsError: null,
-
-  enrollUserError: null
-};
-
-export default function reducer(state = defaultValue, action) {
+export default function reducer(state = defaultState(), action) {
   switch (action.type) {
+    case 'RESET':
+      return defaultState();
     case "GET_LEARNING_PATHS":
       return {
         ...state,
