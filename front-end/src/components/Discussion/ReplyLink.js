@@ -19,11 +19,11 @@ export class ReplyLink extends Component {
   }
 
   render() {
-    const {parent_content_type, parent_id, post_id} = this.props
+    const {parent_content_type, post_id} = this.props
 
     if (this.state.showDiscussionReplyBox) {
       return (
-          <DiscussionPost parent_id={parent_id} parent_content_type={parent_content_type} post_id={post_id} />
+          <DiscussionPost parent_content_type={parent_content_type} post_id={post_id} />
       );
     } else {
       return (

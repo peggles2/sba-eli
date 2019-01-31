@@ -30,21 +30,14 @@ export class DiscussionPost extends Component {
           postDiscussion(
               post_body_value,
               form.parent_content_type.value,
-              form.parent_id.value)
+              form.post_id.value)
       )
-      .then(result => {
-        console.log(result)
-      })
-      .catch(error => {
-        console.log(error)
-      })
     }
   }
 
   ifRegistered() {
     const {
       isUserLoggedIn,
-      parent_id,
       parent_content_type
     } = this.props
     var post_id = this.props.post_id ? this.props.post_id : 0
@@ -70,8 +63,8 @@ export class DiscussionPost extends Component {
                 </Form.Group>
                 <Input
                     type="hidden"
-                    name="parent_id"
-                    value={parent_id}
+                    name="post_id"
+                    value={post_id}
                 />
                 <Input
                     type="hidden"

@@ -6,14 +6,16 @@ import ReplyLink from "./ReplyLink";
 
 export class UserComment extends Component {
 
-  replyLink(post_id, parent_content_type, parent_id, reply) {
+  replyLink(parent_content_type, reply) {
     const replyLink = this.props.isUserLoggedIn
-        ? <ReplyLink post_id={post_id} parent_content_type={reply.content_type} parent_id={parent_id} />
+        ? <ReplyLink parent_content_type={reply.content_type} post_id={reply.id} />
         : null
     if (parent_content_type !== "comment" && reply && reply.replies) {
       return <Grid.Row>
         {replyLink}
-        <Discussion replies={reply.replies} parent_content_type={reply.content_type} parent_id={reply.id}/>
+        <Discussion replies={reply.replies} 
+                    parent_content_type={reply.content_type} 
+                    parent_id={reply.id}/>
       </Grid.Row>
     }
   }
@@ -47,8 +49,8 @@ export class UserComment extends Component {
   }
 
   render() {
-    const {replies, parent_id, parent_content_type, post_id} = this.props
-    
+    const {replies, parent_content_type} = this.props
+
     if (replies && replies !== null && replies.id) {
       return <Grid.Row className='user-comment' width={16}>
         <Grid.Column width={1}>
@@ -75,7 +77,7 @@ export class UserComment extends Component {
             <Grid.Row>
               {replies.body}
             </Grid.Row>
-            {this.replyLink(post_id, parent_content_type, parent_id, replies)}
+            {this.replyLink(parent_content_type, replies)}
           </Grid>
         </Grid.Column>
       </Grid.Row>
