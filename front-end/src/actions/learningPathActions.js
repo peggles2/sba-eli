@@ -41,10 +41,23 @@ export function getLearningPathsProgress() {
   return(dispatch, getState) => {
     dispatch({
       type: "GET_LEARNING_PATHS_PROGRESS",
-      payload: axios.get("/learning_paths/progress", axiosConfig(getState())),
+      payload: axios.get(`/learning_paths/progress`, axiosConfig(getState())),
     });
   };
 };
+
+export function getLatestUserEnrollment() {
+  return(dispatch, getState) => {
+    if ( getState().login.isUserLoggedIn ) {
+      const { id } = getState().login.userData.user;
+
+      dispatch({
+        type: "GET_LATEST_USER_ENROLLMENT",
+        payload: axios.get(`users/${id}/enrollments/latest`, axiosConfig(getState())),
+      });
+    }
+  }
+}
 
 export function getTopicsForPath(pathId) {
   const topicParams = {

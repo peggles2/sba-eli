@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container, Divider, Grid, Header, Image, Item } from "semantic-ui-react";
+import { Button, Container, Divider, Grid, Header, Image } from "semantic-ui-react";
 import LearningPathProgress from "./LearningPathProgress";
 
 export default class LearningPathResume extends Component {

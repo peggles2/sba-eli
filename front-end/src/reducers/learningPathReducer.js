@@ -15,7 +15,11 @@ const defaultValue = {
   pathTopicsLoading: true,
   pathTopicsError: null,
 
-  enrollUserError: null
+  enrollUserError: null,
+
+  latestUserEnrollment: {},
+  latestUserEnrollmentError: null,
+  hasUserStartedJourney: false,
 };
 
 export default function reducer(state = defaultValue, action) {
@@ -130,6 +134,27 @@ export default function reducer(state = defaultValue, action) {
         pathTopicsLoading: false,
         learningPathsLoading: false,
         enrollUserError: null
+      };
+    case "GET_LATEST_USER_ENROLLMENT":
+      return {
+        ...state,
+        latestUserEnrollment: {},
+        latestUserEnrollmentError: null,
+        hasUserStartedLP: false,
+      };
+    case "GET_LATEST_USER_ENROLLMENT_FAILURE":
+      return {
+        ...state,
+        latestUserEnrollment: {},
+        latestUserEnrollmentError: action.payload.data,
+        hasUserStartedLP: false,
+      };
+    case "GET_LATEST_USER_ENROLLMENT_FULFILLED":
+      return {
+        ...state,
+        latestUserEnrollment: action.payload.data,
+        latestUserEnrollmentError: null,
+        hasUserStartedJourney: true,
       };
     default:
       break;
