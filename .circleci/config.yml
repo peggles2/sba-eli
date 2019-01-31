@@ -138,8 +138,97 @@ jobs:
           key: front-end-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-
   build:
+    docker:
+      - image: circleci/python:2.7-stretch
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export TAG=$(echo $CIRCLE_SHA1 | head -c 8)' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo pip install awscli
+      - run:
+          name: Generate AWS ECR Login
+          command: |
+            echo "Configuring AWS..."
+            aws configure set default.region $AWS_DEFAULT_REGION
+            aws configure set default.output json
+            login="$(aws ecr get-login --no-include-email)"
+            ${login}
+      - run:
+          name: Build Images with Docker-Compose
+          command: |
+            docker-compose build
+          no_output_timeout: 30m
+      - run:
+          name: Create Docker ECS Repo
+          command: |
+            DEPLOYABLE_SERVICES=$(cat docker-compose.yml | grep 'image: ' | cut -d':' -f 2 | tr -d '"')
+            for SERVICE_NAME in $DEPLOYABLE_SERVICES
+            do
+              aws ecr create-repository --region ${AWS_DEFAULT_REGION} \
+                --repository-name ${SERVICE_NAME} || true
+              docker tag ${SERVICE_NAME} "${ECR_URI}/${SERVICE_NAME}:${TAG}"
+              docker push "${ECR_URI}/${SERVICE_NAME}:${TAG}"
+            done
+  ux-review:
+    docker:
+      - image: garland/aws-cli-docker
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install Dependencies
+          command: |
+            apk update && apk add --no-cache bash jq git openssh-client ca-certificates curl unzip python
+            curl -o /usr/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+            chmod +x /usr/bin/ecs-cli
+      - run:
+          name: Configure AWS CLI
+          command: |
+            echo "Configuring AWS..."
+            aws configure set default.region $AWS_DEFAULT_REGION
+            aws configure set default.output json
+      - run:
+          name: Deploy
+          command: |
+            chmod +x ./config/deploy.sh
+            ./config/deploy.sh
+      - run:
+          name: Test Deployment
+          command: |
+            curl --retry 10 -Is http://${ELB_DNS} | head -n 1
+      # - run:
+      #     slack/notify:
+      #     message: "${BRANCH} is ready for UX Review http://${BRANCH}.${DOMAIN}"
+      #     color: "#42e2f4"
+  clean-up:
+    working_directory: ~/repo
+    docker:
+      - image: garland/aws-cli-docker
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-darwin-amd64-latest
+            chmod +x /usr/local/bin/ecs-cli
+      - run:
+          name: Tear Down Cluster
+          command: |
+            chmod +x config/destroy.sh
+            ./config/destroy.sh
+  deploy-dev:
     docker:
       - image: circleci/python:2.7-stretch
     working_directory: ~/repo
@@ -189,13 +278,6 @@ jobs:
               docker push "${ECR_URI}"/"${image}":"${git_hash}"
               docker push "${ECR_URI}"/"${image}":unstable
             done
-
-  deploy:
-    docker:
-      - image: circleci/python:2.7-stretch
-    working_directory: ~/repo
-    steps:
-      - checkout
       - run:
           name: Install ECS-Deploy
           command: |
@@ -212,8 +294,6 @@ jobs:
           name: Deploy Front End
           command: |
             /home/circleci/.local/bin/ecs deploy $ECS_CLUSTER $FRONTEND_SERVICE --timeout 600
-
-
 workflows:
   version: 2
   test_build_deploy:
@@ -232,8 +312,21 @@ workflows:
             - jest
           filters:
             branches:
-              only: master
-      - deploy:
+              only:
+                - master
+                - /sbaelidev*/
+      - ux-review:
+          requires:
+            - check_for_secrets
+            - rubocop
+            - rspec
+            - eslint
+            - jest
+            - build
+          filters:
+            branches:
+              only: /sba*/
+      - deploy-dev:
           requires:
             - check_for_secrets
             - rubocop
