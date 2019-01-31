@@ -32,12 +32,16 @@ export class DiscussionPost extends Component {
               form.parent_content_type.value,
               form.parent_id.value)
       )
-          .then(result => {
-            console.log(result)
-          })
-          .catch(error => {
-            console.log(error)
-          })
+      .then(result => {
+        console.log(result)
+      })
+      .catch(error => {
+        console.log(error)
+        this.state.errors = error
+      })
+    }
+  }
+
     }
   }
 
