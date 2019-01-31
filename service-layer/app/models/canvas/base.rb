@@ -27,7 +27,7 @@ module Canvas
 
       def masquerade_current_user_paginated(uri)
         Current.user ? "#{uri}?as_user_id=#{Current.user&.id}&per_page=100" : uri + "?per_page=100"
-      endS
+      end
     end
   end
 end
