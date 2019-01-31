@@ -20,12 +20,16 @@ export class LearningPathsItem extends Component {
   completedMLEs = () => {
     let completed = 0;
 
-    if (this.props.course_progress.error) {
+    if(typeof this.props.course_progress == "undefined") {
       return completed;
     } else {
-      completed = this.props.course_progress.requirement_completed_count;
+      if (this.props.course_progress.error) {
+        return completed;
+      } else {
+        completed = this.props.course_progress.requirement_completed_count;
 
-      return completed;
+        return completed;
+      };
     };
   };
 

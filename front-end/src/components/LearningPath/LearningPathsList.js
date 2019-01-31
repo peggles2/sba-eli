@@ -50,6 +50,8 @@ export class LearningPathsList extends React.Component {
     if (isUserLoggedIn) {
       if (this.props.learningPathsProgress.length > 0) {
         result = this.learningPathsProgress();
+      } else {
+        result = this.learningPaths();
       }
     } else {
       if (this.props.learningPaths.length > 0) {
