@@ -17,15 +17,15 @@ RUN echo "Installing yarn ..." && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y yarn && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN yarn
- RUN mkdir /usr/src/api
+RUN mkdir /usr/src/api
 WORKDIR /usr/src/api
- RUN echo "gem: --no-rdoc --no-ri" > /etc/gemrc
+RUN echo "gem: --no-rdoc --no-ri" > /etc/gemrc
 ADD Gemfile /usr/src/api/Gemfile
 ADD Gemfile.lock /usr/src/api/Gemfile.lock
 RUN bundle install --jobs 20 --retry 5
 ADD . /usr/src/api
 EXPOSE 3000
- COPY ./docker-entrypoint.sh /
+COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
- ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["bundle", "exec","rails", "server", "-b", "0.0.0.0"]
