@@ -1,12 +1,16 @@
-const defaultValue = {
-  searchLoading: false,
-  searchError: null,
-  searchResults: [],
-  searchMetadata: []
-};
+function defaultState() {
+  return {
+    searchLoading: false,
+    searchError: null,
+    searchResults: [],
+    searchMetadata: []
+  }
+}
 
-export default function reducer(state=defaultValue, action) {
+export default function reducer(state=defaultState(), action) {
   switch(action.type) {
+    case 'RESET':
+      return defaultState();
     case 'SEARCH':
       return {...state, searchResults: [], searchMetadata: [], searchLoading: true, searchError: null};
     case 'SEARCH_REJECTED':
