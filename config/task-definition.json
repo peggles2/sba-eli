@@ -1,0 +1,33 @@
+[
+  {
+    "name": "${SERVICE_NAME}",
+    "image": "${ECR_URI}/${SERVICE_NAME}:${TAG}",
+    "cpu": 512,
+    "memory": 2GB,
+    "portMappings": [
+      {
+        "containerPort": "${CONTAINER_PORT}",
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [
+      {
+        "name": "AWS_DEFAULT_REGION",
+        "value": "",
+        "name": "AWS_ACCESS_KEY_ID",
+        "value": "",
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "value": ""
+      }
+    ],
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "sba-eli",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "${SERVICE_NAME}"
+      }
+    }
+  }
+]

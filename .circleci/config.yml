@@ -150,6 +150,7 @@ jobs:
           name: Setup Environment Variables
           command: |
             echo 'export TAG=$(echo $CIRCLE_SHA1 | head -c 8)' >> $BASH_ENV
+            echo 'export BRANCH=$(echo $CIRCLE_BRANCH | sed -r 's/[_]+/-/g')' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Install Dependencies
@@ -181,7 +182,7 @@ jobs:
             done
   ux-review:
     docker:
-      - image: garland/aws-cli-docker
+      - image: circleci/python:2.7-stretch
     working_directory: ~/repo
     steps:
       - checkout
@@ -190,9 +191,9 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            apk update && apk add --no-cache bash jq git openssh-client ca-certificates curl unzip python
-            curl -o /usr/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
-            chmod +x /usr/bin/ecs-cli
+            sudo pip install awscli
+            sudo curl -o /usr/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+            sudo chmod +x /usr/bin/ecs-cli
       - run:
           name: Configure AWS CLI
           command: |
@@ -205,7 +206,7 @@ jobs:
             chmod +x ./config/deploy.sh
             ./config/deploy.sh
       - slack/notify:
-          message: "${BRANCH} is ready for UX Review http://${ELB_DNS}"
+          message: "${BRANCH} is ready for UX Review http://${BRANCH}.${DOMAIN}"
           color: "#42e2f4"
   clean-up:
     working_directory: ~/repo
