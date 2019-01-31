@@ -8,6 +8,7 @@ import {
   getQuiz,
   submitQuiz
 } from "../../../actions/learningPathActions";
+import { completeLearningEvent } from "../../../actions/learningEventActions";
 import {
   MultipleChoiceQuestion,
   MultipleAnswerQuestion,
@@ -45,6 +46,17 @@ export class LearningEventQuiz extends Component {
       this.beginQuiz();
     } else if (this.props.results && !this.state.results) {
       this.setState({ results: this.props.results });
+    }
+  }
+
+  completeEvent() {
+    const { isUserLoggedIn, event } = this.props;
+    if (isUserLoggedIn && !event.completion_requirement.completed) {
+      const { id: path_id, topicId: objective_id } = this.props.match.params;
+
+      this.props.dispatch(
+        completeLearningEvent(path_id, objective_id, event.id)
+      );
     }
   }
 
@@ -90,6 +102,7 @@ export class LearningEventQuiz extends Component {
     this.props.dispatch(
       submitQuiz(this.props.courseId, this.props.event.content_id, submission)
     );
+    this.completeEvent();
   }
 
   renderQuestions() {
@@ -197,7 +210,8 @@ const mapStateToProps = store => {
     quiz: store.learningPath.quiz,
     submissions: store.learningPath.quizSubmissions,
     submissionsLoading: store.learningPath.quizSubmissionsLoading,
-    results: store.learningPath.submitQuiz
+    results: store.learningPath.submitQuiz,
+    isUserLoggedIn: store.login.isUserLoggedIn
   };
 };
 
