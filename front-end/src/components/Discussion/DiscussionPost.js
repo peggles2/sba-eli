@@ -42,9 +42,6 @@ export class DiscussionPost extends Component {
     }
   }
 
-    }
-  }
-
   ifRegistered() {
     const {
       isUserLoggedIn,
