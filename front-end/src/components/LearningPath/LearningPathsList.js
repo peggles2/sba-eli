@@ -52,20 +52,16 @@ export class LearningPathsList extends React.Component {
         result = this.learningPathsProgress();
       } else {
         result = this.learningPaths();
-      }
+      };
     } else {
       if (this.props.learningPaths.length > 0) {
         result = this.learningPaths();
-      }
-    }
+      };
+    };
 
-    return(
-      <Card.Group itemsPerRow={3}>
-        {result}
-      </Card.Group>
-    )
-  }
-}
+    return <Card.Group itemsPerRow={3}>{result}</Card.Group>;
+  };
+};
 
 const mapStateToProps = store => {
   return {
@@ -82,4 +78,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LearningPathsList))
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathsList)

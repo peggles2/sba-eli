@@ -1,28 +1,33 @@
-import React from 'react';
-import LearningPathsList from './LearningPathsList';
-import LearningPathAbout from './LearningPathAbout';
-import MetaTags from '../SEO/MetaTags'
-import { withRouter } from 'react-router-dom';
-import { Container, Divider, Grid, Header } from 'semantic-ui-react';
+import React from "react";
+import LearningPathsList from "./LearningPathsList";
+import LearningPathAbout from "./LearningPathAbout";
+import MetaTags from "../SEO/MetaTags";
+import { withRouter } from "react-router-dom";
+import { Container, Divider, Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 
-import { toggleModal } from '../../actions/aboutModalActions'
+import { toggleModal } from "../../actions/aboutModalActions";
 
 export class LearningPaths extends React.Component {
   render () {
     const journeysHeader = "Explore All Journeys";
 
-    return(
+    return (
       <div>
-        <MetaTags metaTitle="SBA Learning Paths"
-                metaDescription="Description for the Learning Path landing page"
-                canonicalUrl="https://sba.gov/learning_paths"/>
+        <MetaTags
+          metaTitle="SBA Journeys"
+          metaDescription="Description for the Journey landing page"
+          canonicalUrl="https://sba.gov/learning_paths"
+        />
         <Grid>
           <Grid.Row>
             <Grid.Column>
               <Container>
                 <Header as='h2'>{journeysHeader}</Header>
-                <LearningPathAbout open={this.props.displayModal} handleClose={this.props.handleModalClose} />
+                <LearningPathAbout
+                  open={this.props.displayModal}
+                  handleClose={this.props.handleModalClose}
+                />
                 <Divider />
               </Container>
             </Grid.Column>
