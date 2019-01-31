@@ -65,12 +65,11 @@ export class LearningEventQuiz extends Component {
   }
 
   beginQuiz() {
-    this.setState({ results: null, answers: {} });
+    this.setState({ results: null, answers: {}, viewResultsDisabled: true });
     this.props.dispatch(clearQuizSubmission());
     this.props.dispatch(
       getQuiz(this.props.courseId, this.props.event.content_id)
     );
-    this.checkToEnableViewResults();
   }
 
   viewResults() {
@@ -151,7 +150,7 @@ export class LearningEventQuiz extends Component {
       </div>
     ) : (
       <span>
-        <em>Yous submission does not match any results</em>
+        <em>Your submission does not match any results</em>
       </span>
     );
   }
