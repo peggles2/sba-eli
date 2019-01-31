@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { Item, Icon } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { getLearningEventsIfNeeded } from "../../actions/learningEventActions";
 
 export class TopicEventList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleItemClick = this.handleItemClick.bind(this);
+  }
   componentDidMount() {
     this.eventsList();
   }
@@ -15,13 +20,17 @@ export class TopicEventList extends Component {
     );
   }
 
-  getIcon(eventType){
-    switch(eventType){
+  getIcon(eventType) {
+    switch (eventType) {
       case "Quiz":
         return "pencil alternate";
       default:
         return "image";
     }
+  }
+
+  handleItemClick(url) {
+    this.props.history.push(url);
   }
 
   renderEventsList(events = []) {
@@ -40,7 +49,11 @@ export class TopicEventList extends Component {
             ? "check"
             : "image";
         return (
-          <Item key={"eventListItem" + index} className={itemClassName} href={url + event.id}>
+          <Item
+            key={"eventListItem" + index}
+            className={itemClassName}
+            onClick={() => this.handleItemClick(url + event.id)}
+          >
             <Item.Header>
               <Icon
                 className={"event-list-item-icon"}
@@ -84,4 +97,4 @@ const mapStateToProps = store => {
   };
 };
 
-export default connect(mapStateToProps)(TopicEventList);
+export default withRouter(connect(mapStateToProps)(TopicEventList));
