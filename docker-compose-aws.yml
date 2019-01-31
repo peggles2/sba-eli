@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+  nginx:
+    image: ${ECR_URI}/sba-eli-proxy:${TAG}
+    ports:
+      - "80:80"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: sba-eli
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: proxy
+  front-end:
+    image: ${ECR_URI}/sba-eli-ui:${TAG}
+    ports:
+      - "8000:8000"
+    environment:
+      - REACT_APP_SERVICE_HOST=http://${ELB_DNS}
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: sba-eli
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: ui
+  service-layer:
+    image: ${ECR_URI}/sba-eli-api:${TAG}
+    ports:
+      - "3000:3000"
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: sba-eli
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: api
