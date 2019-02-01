@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Form, Input, Grid, TextArea} from "semantic-ui-react";
 import {connect} from "react-redux";
-import {postDiscussion} from '../../actions/discussionActions'
+import {postDiscussion} from "../../actions/discussionActions"
 
 export class DiscussionPost extends Component {
 
