@@ -1,13 +1,13 @@
-import React from 'react';
-import LearningPathsList from './LearningPathsList';
-import LearningPathAbout from './LearningPathAbout';
-import LearningPathResume from './LearningPathResume';
-import MetaTags from '../SEO/MetaTags'
-import { withRouter } from 'react-router-dom';
-import { Container, Divider, Grid, Header } from 'semantic-ui-react';
+import React from "react";
+import LearningPathsList from "./LearningPathsList";
+import LearningPathAbout from "./LearningPathAbout";
+import LearningPathResume from "./LearningPathResume";
+import MetaTags from "../SEO/MetaTags";
+import { withRouter } from "react-router-dom";
+import { Container, Divider, Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 
-import { toggleModal } from '../../actions/aboutModalActions'
+import { toggleModal } from "../../actions/aboutModalActions";
 
 export class LearningPaths extends React.Component {
   learningPathResume = (isUserLoggedIn) => {
@@ -25,11 +25,13 @@ export class LearningPaths extends React.Component {
   render () {
     const isUserLoggedIn = this.props.isUserLoggedIn;
 
-    return(
+    return (
       <div>
-        <MetaTags metaTitle="SBA Learning Paths"
-                metaDescription="Description for the Learning Path landing page"
-                canonicalUrl="https://sba.gov/learning_paths"/>
+        <MetaTags
+          metaTitle="SBA Journeys"
+          metaDescription="Description for the Journey landing page"
+          canonicalUrl="https://sba.gov/learning_paths"
+        />
         <Grid>
           {this.learningPathResume(isUserLoggedIn)}
           <Divider hidden />
@@ -37,7 +39,10 @@ export class LearningPaths extends React.Component {
             <Grid.Column>
               <Container>
                 <Header as='h2'>{isUserLoggedIn ? "Other Journeys you have Explored" : "Explore All Journeys"}</Header>
-                <LearningPathAbout open={this.props.displayModal} handleClose={this.props.handleModalClose} />
+                <LearningPathAbout
+                  open={this.props.displayModal}
+                  handleClose={this.props.handleModalClose}
+                />
                 <Divider />
               </Container>
             </Grid.Column>

@@ -34,6 +34,6 @@ describe('LearningPathAbout', () => {
     
     expect(wrapper.find(Header).children().text()).toEqual("Start Your Path")
     expect(wrapper.find(Button).length).toEqual(1);
-    expect(wrapper.find(Button).children().at(0).text()).toEqual("Start First Learning Path");
+    expect(wrapper.find(Button).children().at(0).text()).toEqual("Start First Journey");
   });
 });

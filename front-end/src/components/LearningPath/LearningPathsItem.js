@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { Card, Image } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import LearningPathProgress from "./LearningPathProgress";
 
@@ -14,18 +14,22 @@ export class LearningPathsItem extends Component {
     const isUserLoggedIn = this.props.isUserLoggedIn;
     const id = this.props.id
 
-    this.getTopicsList();
+    this.getTopicsList(id);
   };
 
   completedMLEs = () => {
     let completed = 0;
 
-    if (this.props.course_progress.error) {
+    if(typeof this.props.course_progress == "undefined") {
       return completed;
     } else {
-      completed = this.props.course_progress.requirement_completed_count;
+      if (this.props.course_progress.error) {
+        return completed;
+      } else {
+        completed = this.props.course_progress.requirement_completed_count;
 
-      return completed;
+        return completed;
+      };
     };
   };
 
@@ -44,10 +48,10 @@ export class LearningPathsItem extends Component {
     };
   };
 
-  getTopicsList = () => {
+  getTopicsList = (id) => {
     const baseUrl = process.env.REACT_APP_SERVICE_HOST;
 
-    axios.get(baseUrl + `/learning_objectives/`, {params: {course_id: this.props.id}})
+    axios.get(baseUrl + `/learning_objectives/`, {params: {course_id: id}})
       .then(res => {
         const topicsList = res.data
         this.setState({ topicsList })
@@ -64,18 +68,18 @@ export class LearningPathsItem extends Component {
       return total;
     } else {
       return 0
-    }
+    };
   };
 
   render() {
     const learningPathDescription = "Maybe it means something more - something we can't yet understand."
     const learningPathImage = `/Image_Placeholder.png`;
 
-    return(
-      <Card className="learning-path-card" href={'/learning_paths/' + this.props.id}>
+    return (
+      <Card className="learning-path-card" href={"/learning_paths/" + this.props.id}>
         <Image
           src={learningPathImage}
-          alt="Learning Path Image Placeholder"
+          alt="Journey Image Placeholder"
         />
         <Card.Content>
           <Card.Header className="learning-path-item-header">{this.props.name}</Card.Header>
@@ -84,7 +88,7 @@ export class LearningPathsItem extends Component {
         </Card.Content>
         {this.learningPathProgress()}
       </Card>
-    )
+    );
   };
 };
 
