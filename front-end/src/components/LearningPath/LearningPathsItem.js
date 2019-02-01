@@ -11,8 +11,7 @@ export class LearningPathsItem extends Component {
   }
 
   componentDidMount() {
-    const isUserLoggedIn = this.props.isUserLoggedIn;
-    const id = this.props.id
+    const id = this.props.id;
 
     this.getTopicsList(id);
   };
