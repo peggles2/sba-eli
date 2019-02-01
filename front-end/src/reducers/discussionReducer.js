@@ -1,7 +1,8 @@
 const defaultValue = {
   replies: [],
   reply_count: 0,
-  statusCode: null
+  discussionErrors: {},
+  statusCodes: {}
 };
 
 export default function reducer(state = defaultValue, action) {
@@ -10,34 +11,73 @@ export default function reducer(state = defaultValue, action) {
       return {
         ...state,
         replies: [],
-        reply_count: 0
+        reply_count: 0,
+        discussionErrors: {},
+        statusCodes: {}
       }
     case 'GET_DISCUSSION_FAILURE':
       return {
         ...state,
         replies: [],
-        reply_count: 0
+        reply_count: 0,
+        discussionErrors: {},
+        statusCodes: {}
       }
     case 'GET_DISCUSSION_FULFILLED':
       return {
         ...state,
         replies: action.payload.data.replies,
-        reply_count: action.payload.data.post_count
+        reply_count: action.payload.data.post_count,
+        discussionErrors: {},
+        statusCodes: {}
       }
     case 'POST_DISCUSSION':
       return {
         ...state,
-        statusCode: null
+        discussionErrors: {
+          ...state.discussionErrors,
+          [action.payload.config.params.id]: null
+        },
+        statusCodes: {
+          ...state.statusCodes,
+          [action.payload.config.params.id]: null
+        }
+      }
+    case 'POST_DISCUSSION_REJECTED':
+      return {
+        ...state,
+        discussionErrors: {
+          ...state.discussionErrors,
+          [action.payload.config.params.id]: action.payload.response.data.errors
+        },
+        statusCodes: {
+          ...state.statusCodes,
+          [action.payload.config.params.id]: action.payload.response.status
+        }
       }
     case 'POST_DISCUSSION_FAILURE':
       return {
         ...state,
-        statusCode: action.payload.response.data.status
+        discussionErrors: {
+          ...state.discussionErrors,
+          [action.payload.config.params.id]: action.payload.response.data.errors
+        },
+        statusCodes: {
+          ...state.statusCodes,
+          [action.payload.config.params.id]: action.payload.response.status
+        }
       }
     case 'POST_DISCUSSION_FULFILLED':
       return {
         ...state,
-        statusCode: action.payload.response.data.status
+        discussionErrors: {
+          ...state.discussionErrors,
+          [action.payload.config.params.id]: null
+        },
+        statusCodes: {
+          ...state.statusCodes,
+          [action.payload.config.params.id]: 200
+        }
       }
     default:
       break;
