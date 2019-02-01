@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Grid } from "semantic-ui-react";
+import { Icon, Grid, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getLearningEventsIfNeeded } from "../../actions/learningEventActions";
@@ -16,22 +16,16 @@ export class TopicContentEventList extends Component {
   }
 
   getCustomData(event, field, defaultValue) {
-    if (!event || !event.custom_data || !field){
+    if (!event || !event.custom_data || !field || !event.custom_data[field]){
       return defaultValue;
     }
     return event.custom_data[field];
   };
 
   getThumbnail(event){
-    const url = this.getCustomData(event, 'thumbnail_url', undefined);
-    if (url) {
-      return <img className="topic-content-event-grid-icon" src={url}/>
-    } else {
-      return <Icon
-                name={"image"}
-                className={"topic-content-event-grid-icon"}
-              />
-    }
+    const defaultURL = 'https://s3.amazonaws.com/sba-eli-assets-s3-bucket-dev/Platform+Graphics/Case_Study.png';
+    const url = this.getCustomData(event, 'thumbnail_url', defaultURL);
+    return <Image className={"topic-content-event-grid-icon"} src={url} size={"massive"}/>
   }
 
   renderEventList(eventList) {
@@ -51,6 +45,7 @@ export class TopicContentEventList extends Component {
               computer={2}
               largeScreen={1}
               widescreen={1}
+              className={'icon-column'}
             >
               {this.getThumbnail(event)}
             </Grid.Column>
