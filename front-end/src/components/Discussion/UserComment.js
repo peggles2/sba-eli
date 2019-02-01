@@ -14,8 +14,7 @@ export class UserComment extends Component {
       return <Grid.Row>
         {replyLink}
         <Discussion replies={reply.replies} 
-                    parent_content_type={reply.content_type} 
-                    parent_id={reply.id}/>
+                    parent_content_type={reply.content_type}/>
       </Grid.Row>
     }
   }

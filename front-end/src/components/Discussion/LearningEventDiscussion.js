@@ -44,12 +44,10 @@ export class LearningEventDiscussion extends Component {
                       className="mle-comments-header">Comments {this.commentCount()}</Header>
             </Grid.Column>
           </Grid.Row>
-          <DiscussionPost parent_id={learning_event.id}
-                          parent_content_type={content_type} 
+          <DiscussionPost parent_content_type={content_type} 
                           post_id={learning_event.id} /> 
           <Discussion replies={replies}
-                      parent_content_type={content_type}
-                      parent_id={learning_event.id}/>
+                      parent_content_type={content_type} />
         </Grid>
     )
   }
