@@ -60,7 +60,9 @@ export class TopicEventList extends Component {
                 name={completed}
                 size="big"
               />
-              {event.title}
+              <span>
+                {event.title}
+              </span>
             </Item.Header>
           </Item>
         );
