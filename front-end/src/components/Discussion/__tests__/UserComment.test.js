@@ -118,10 +118,9 @@ describe("Discussion when user is NOT logged in", () => {
         isUserLoggedIn={false}
         parent_content_type="discussion"
         replies={comment}/>);
-    expect(wrapper.find('.user-image').exists()).toBe(true);
-    expect(wrapper.find('.username').exists()).toBe(true);
-    expect(wrapper.find('.post-date').exists()).toBe(true);
-    expect(wrapper.find('.user-title').exists()).toBe(true);
-    expect(wrapper.find('.reply-link').exists()).toBe(false);
-  });
+      expect(wrapper.find('.user-image').exists()).toBe(true);
+      expect(wrapper.find('.username').exists()).toBe(true);
+      expect(wrapper.find('.post-date').exists()).toBe(true);
+      expect(wrapper.find('.user-title').exists()).toBe(true);
+    });
 });
