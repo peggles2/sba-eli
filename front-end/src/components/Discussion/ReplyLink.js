@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
 import DiscussionPost from "./DiscussionPost";
 
 export class ReplyLink extends Component {
@@ -35,10 +34,4 @@ export class ReplyLink extends Component {
   }
 }
 
-const mapStateToProps = store => {
-  return {
-    isUserLoggedIn: store.login.isUserLoggedIn
-  }
-}
-
-export default connect(mapStateToProps)(ReplyLink)
+export default ReplyLink

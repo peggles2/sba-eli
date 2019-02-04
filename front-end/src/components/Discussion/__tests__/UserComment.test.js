@@ -1,6 +1,7 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
 import {UserComment} from "../UserComment";
+import {ReplyLink} from "../ReplyLink";
 
 describe('Discussion: User Comment View', () => {
   it('should not render null replies', () => {
@@ -95,7 +96,10 @@ describe("Discussion when user is logged in", () => {
     expect(wrapper.find('.username').exists()).toBe(true);
     expect(wrapper.find('.post-date').exists()).toBe(true);
     expect(wrapper.find('.user-title').exists()).toBe(true);
-    expect(wrapper.find('.reply-link').exists()).toBe(true);
+    
+    expect(wrapper.find(ReplyLink).exists()).toBe(true);
+    const replyWrapper = wrapper.find(ReplyLink).dive();
+    expect(replyWrapper.find('.reply-link').exists()).toBe(true);
   });
 });
 
@@ -122,5 +126,6 @@ describe("Discussion when user is NOT logged in", () => {
       expect(wrapper.find('.username').exists()).toBe(true);
       expect(wrapper.find('.post-date').exists()).toBe(true);
       expect(wrapper.find('.user-title').exists()).toBe(true);
+      expect(wrapper.find(ReplyLink).exists()).toBe(false);
     });
 });
