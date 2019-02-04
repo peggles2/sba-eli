@@ -1594,6 +1594,17 @@ ActiveRecord::Schema.define(version: 2019_01_28_193107) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "fearless_assessments", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.integer "quiz_id", null: false
+    t.string "name"
+    t.text "description"
+    t.decimal "minimum"
+    t.decimal "maximum"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fearless_custom_contents", force: :cascade do |t|
     t.string "contentable_type", null: false
     t.integer "contentable_id", null: false

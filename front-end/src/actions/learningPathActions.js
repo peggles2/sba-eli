@@ -17,6 +17,51 @@ export function enrollUserInPath(id, state) {
   };
 }
 
+export function getLearningPathQuizzes(course_id) {
+  return (dispatch, getState) => {
+    dispatch(
+      {
+        type: 'GET_LEARNING_PATH_QUIZZES',
+        payload: axios.get(`/learning_paths/${course_id}/quizzes`, axiosConfig(getState()))
+      })
+  };
+}
+
+export function getQuiz(course_id, content_id) {    
+  return (dispatch, getState) => {
+    dispatch(
+      {
+        type: 'GET_LEARNING_PATH_QUIZ',
+        payload: axios.get(`/learning_paths/${course_id}/quizzes/${content_id}`, axiosConfig(getState()))
+      })
+  };  
+}
+
+export function getQuizSubmissions(course_id, content_id) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'GET_LEARNING_PATH_QUIZ_SUBMISSIONS',
+      payload: axios.get(`/learning_paths/${course_id}/quizzes/${content_id}/submissions`, axiosConfig(getState()))
+    })
+  };  
+}
+
+export function submitQuiz(course_id, content_id, quiz) {
+  quiz.quiz_id = content_id
+  return  (dispatch, getState) => {
+    dispatch({
+      type: 'SUBMIT_QUIZ',
+      payload: axios.post(`/learning_paths/${course_id}/quizzes`, quiz, axiosConfig(getState()))
+    })
+  };  
+}
+
+export function clearQuizSubmission() {
+  return  {
+      type: 'CLEAR_SUBMIT_QUIZ'
+    }
+}
+
 export function getPathWithTopics(id) {
   return (dispatch, getState) => {
     if (getState().login.isUserLoggedIn) {
