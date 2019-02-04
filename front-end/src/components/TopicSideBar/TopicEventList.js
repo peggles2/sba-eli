@@ -44,10 +44,6 @@ export class TopicEventList extends Component {
             ? "event-list-accordion-item active-event"
             : "event-list-accordion-item";
 
-        const completed =
-          event.completion_requirement && event.completion_requirement.completed
-            ? "check"
-            : "image";
         return (
           <Item
             key={"eventListItem" + index}
@@ -57,7 +53,7 @@ export class TopicEventList extends Component {
             <Item.Header>
               <Icon
                 className={"event-list-item-icon"}
-                name={completed}
+                name={this.getIcon(event.type)}
                 size="big"
               />
               {event.title}
