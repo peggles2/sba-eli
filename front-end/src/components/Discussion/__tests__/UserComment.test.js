@@ -5,16 +5,14 @@ import {UserComment} from "../UserComment";
 describe('Discussion: User Comment View', () => {
   it('should not render null replies', () => {
     const wrapper = mount(< UserComment
-        parent_content_type="learning_event"
-        parent_id="8"
+        parent_content_type = "learning_event_Page"
         replies="null"/>);
     expect(wrapper.find('.user-comment').length).toBe(0);
   });
 
   it('should not render empty replies', () => {
     const wrapper = mount(< UserComment
-        parent_content_type="learning_event"
-        parent_id="8"
+        parent_content_type="learning_event_Page"
         replies="[]"/>);
     expect(wrapper.find('.user-comment').length).toBe(0);
   });
@@ -70,7 +68,6 @@ describe('Discussion: User Comment View', () => {
 
     const wrapper = shallow(<UserComment
         parent_content_type="infographic"
-        parent_id="8"
         replies={comment}/>);
     expect(wrapper.find('.user-comment').length).toBe(1);
   });
@@ -93,7 +90,6 @@ describe("Discussion when user is logged in", () => {
     const wrapper = shallow(<UserComment
         isUserLoggedIn={true}
         parent_content_type="quiz"
-        parent_id="8"
         replies={comment}/>);
     expect(wrapper.find('.user-image').exists()).toBe(true);
     expect(wrapper.find('.username').exists()).toBe(true);
@@ -121,7 +117,6 @@ describe("Discussion when user is NOT logged in", () => {
     const wrapper = shallow(<UserComment
         isUserLoggedIn={false}
         parent_content_type="discussion"
-        parent_id="8"
         replies={comment}/>);
     expect(wrapper.find('.user-image').exists()).toBe(true);
     expect(wrapper.find('.username').exists()).toBe(true);
