@@ -8,15 +8,19 @@ export class UserComment extends Component {
 
   replyLink(parent_content_type, reply) {
     const replyLink = this.props.isUserLoggedIn
-        ? <ReplyLink parent_content_type={reply.content_type} post_id={reply.id} />
+        ? <Grid.Row columns={1}>
+            <Grid.Column>
+              <ReplyLink parent_content_type={reply.content_type} post_id={reply.id} />
+            </Grid.Column>
+          </Grid.Row>
         : null
 
     if (parent_content_type !== "comment" && reply) {
-      return <Grid.Row>
+      return <Grid>
         {replyLink}
         <Discussion replies={reply.replies} 
                     parent_content_type={reply.content_type}/>
-      </Grid.Row>
+      </Grid>
     }
   }
 
