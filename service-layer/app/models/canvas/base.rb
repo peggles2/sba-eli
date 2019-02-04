@@ -21,8 +21,20 @@ module Canvas
         }
       end
 
+      def options_with_query(queries)
+        base_options.merge(query: queries)
+      end
+
       def masquerade_current_user(uri)
         Current.user ? "#{uri}?as_user_id=#{Current.user&.id}" : uri
+      end
+
+      def pagination_query
+        { "per_page" => 100 }
+      end
+
+      def masquerade_current_user_query
+        Current.user ? { "as_user_id" => Current.user&.id } : {}
       end
     end
   end
