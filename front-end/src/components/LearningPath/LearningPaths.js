@@ -9,9 +9,9 @@ import { connect } from "react-redux";
 import { toggleModal } from "../../actions/aboutModalActions";
 
 export class LearningPaths extends React.Component {
-  handleModalClose = () => this.props.dispatch(toggleModal(false));
+  render () {
+    const journeysHeader = "Explore All Journeys";
 
-  render() {
     return (
       <div>
         <MetaTags
@@ -23,10 +23,10 @@ export class LearningPaths extends React.Component {
           <Grid.Row>
             <Grid.Column>
               <Container>
-                <Header as="h2">Explore All Journeys</Header>
+                <Header as='h2'>{journeysHeader}</Header>
                 <LearningPathAbout
                   open={this.props.displayModal}
-                  handleClose={this.handleModalClose}
+                  handleClose={this.props.handleModalClose}
                 />
                 <Divider />
               </Container>
@@ -41,14 +41,19 @@ export class LearningPaths extends React.Component {
           </Grid.Row>
         </Grid>
       </div>
-    );
-  }
-}
-
-const mapStateToProps = store => {
-  return {
-    displayModal: store.aboutModal.show
+    )
   };
 };
 
-export default withRouter(connect(mapStateToProps)(LearningPaths));
+const mapStateToProps = store => {
+  return {
+    displayModal: store.aboutModal.show,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleModalClose: () => { dispatch(toggleModal(false)) },
+  };
+};
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LearningPaths));

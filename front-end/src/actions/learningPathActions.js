@@ -82,6 +82,15 @@ export function getLearningPath(id) {
   };
 }
 
+export function getLearningPathsProgress() {
+  return(dispatch, getState) => {
+    dispatch({
+      type: "GET_LEARNING_PATHS_PROGRESS",
+      payload: axios.get("/learning_paths/progress", axiosConfig(getState())),
+    });
+  };
+};
+
 export function getTopicsForPath(pathId) {
   const topicParams = {
     course_id: pathId

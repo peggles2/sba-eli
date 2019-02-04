@@ -3,8 +3,8 @@
 # Table name: fearless_assessments
 #
 #  id          :bigint(8)        not null, primary key
-#  course_id   :integer
-#  quiz_id     :integer
+#  course_id   :integer          not null
+#  quiz_id     :integer          not null
 #  name        :string
 #  description :text
 #  minimum     :decimal(, )

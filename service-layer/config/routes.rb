@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       resources :assessment, only: %I[index create destroy update]
       get "submissions", on: :member
     end
+    get "progress", on: :collection
+    get "check_progress", on: :member
   end
   resources :learning_objectives, concerns: :contentable
   resource :request_password, only: :create
@@ -32,7 +34,9 @@ Rails.application.routes.draw do
   resource :sign_up, only: :create
   resource :discussion, only: :show
   resources :users do
-    resources :enrollments, only: :index
+    resources :enrollments, only: :index do
+      get "latest", on: :collection
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength

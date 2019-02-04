@@ -71,6 +71,12 @@ module Canvas
       JSON.parse response
     end
 
+    def self.latest_enrollment(user_id)
+      response = get(enrollments_url(user_id), base_options).body
+      latest = JSON.parse(response).min_by { |hash| -hash["updated_at"].to_time.to_i }
+      latest
+    end
+
     def self.canvas_accounts_url
       "/accounts/#{ENV['CANVAS_ACCOUNT_ID']}/users/"
     end

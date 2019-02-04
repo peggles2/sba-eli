@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_23_015312) do
+ActiveRecord::Schema.define(version: 2019_01_28_193107) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "abstract_courses", force: :cascade do |t|
@@ -1594,8 +1595,8 @@ ActiveRecord::Schema.define(version: 2019_01_23_015312) do
   end
 
   create_table "fearless_assessments", force: :cascade do |t|
-    t.integer "course_id"
-    t.integer "quiz_id"
+    t.integer "course_id", null: false
+    t.integer "quiz_id", null: false
     t.string "name"
     t.text "description"
     t.decimal "minimum"
@@ -1620,6 +1621,17 @@ ActiveRecord::Schema.define(version: 2019_01_23_015312) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["discussion_id"], name: "index_fearless_discussion_maps_on_discussion_id", unique: true
+  end
+
+  create_table "fearless_event_custom_data", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.string "time"
+    t.string "description"
+    t.string "thumbnail_url"
+    t.string "event_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_fearless_event_custom_data_on_event_id", unique: true
   end
 
   create_table "fearless_taggings", id: :serial, force: :cascade do |t|
@@ -1647,6 +1659,16 @@ ActiveRecord::Schema.define(version: 2019_01_23_015312) do
     t.datetime "updated_at"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_fearless_tags_on_name", unique: true
+  end
+
+  create_table "fearless_topic_custom_data", force: :cascade do |t|
+    t.integer "topic_id", null: false
+    t.string "time"
+    t.string "description"
+    t.string "thumbnail_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_fearless_topic_custom_data_on_topic_id", unique: true
   end
 
   create_table "feature_flags", force: :cascade do |t|
