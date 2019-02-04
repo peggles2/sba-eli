@@ -19,7 +19,8 @@ export function postDiscussion(bodyData, content_type, content_id) {
       payload: axios.post(url, 
         {
           'discussion_reply': {
-            raw: bodyData
+            raw: bodyData,
+            reply_to_post_number: content_id
           }
         }, 
         axiosConfig(getState(), 
