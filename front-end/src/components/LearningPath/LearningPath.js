@@ -16,6 +16,10 @@ import "./LearningPath.scss";
 
 export class LearningPath extends React.Component {
   componentDidMount() {
+    this.initialFunctions();
+  }
+
+  initialFunctions() {
     const id = this.props.match.params.id;
     this.props.dispatch(getPathWithTopics(id));
   }
@@ -24,6 +28,10 @@ export class LearningPath extends React.Component {
     if (this.props.isUserLoggedIn !== prevProps.isUserLoggedIn) {
       const id = this.props.match.params.id;
       this.props.dispatch(getPathWithTopics(id));
+    }
+    
+    if(this.props.match.params.topicId !== prevProps.match.params.topicId && this.props.match.params.eventId !== prevProps.match.params.eventId) {
+      this.initialFunctions();
     }
   }
 
