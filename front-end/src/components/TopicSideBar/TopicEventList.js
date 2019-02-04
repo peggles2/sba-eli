@@ -56,7 +56,9 @@ export class TopicEventList extends Component {
                 name={this.getIcon(event.type)}
                 size="big"
               />
-              {event.title}
+              <span>
+                {event.title}
+              </span>
             </Item.Header>
           </Item>
         );
