@@ -16,7 +16,18 @@ export function postDiscussion(bodyData, content_type, content_id) {
   return (dispatch, getState) => {
     return dispatch({
       type: "POST_DISCUSSION",
-      payload: axios.post(url, {'discussion_reply': {raw: bodyData}}, axiosConfig(getState(), { id: content_id}))
+      payload: axios.post(url, 
+        {
+          'discussion_reply': {
+            raw: bodyData
+          }
+        }, 
+        axiosConfig(getState(), 
+          {
+            id: content_id
+          }
+        )
+      )
     });
   };
 }
