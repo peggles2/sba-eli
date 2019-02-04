@@ -5,14 +5,14 @@ import {ReplyLink} from "../ReplyLink";
 
 describe('Discussion: User Comment View', () => {
   it('should not render null replies', () => {
-    const wrapper = mount(< UserComment
+    const wrapper = mount(<UserComment
         parent_content_type = "learning_event_Page"
         replies="null"/>);
     expect(wrapper.find('.user-comment').length).toBe(0);
   });
 
   it('should not render empty replies', () => {
-    const wrapper = mount(< UserComment
+    const wrapper = mount(<UserComment
         parent_content_type="learning_event_Page"
         replies="[]"/>);
     expect(wrapper.find('.user-comment').length).toBe(0);
