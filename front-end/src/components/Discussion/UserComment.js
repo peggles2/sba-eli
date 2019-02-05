@@ -16,10 +16,18 @@ export class UserComment extends Component {
         : null
 
     if (parent_content_type !== "comment" && reply) {
-      return <Grid>
-        {replyLink}
-        <Discussion replies={reply.replies} 
-                    parent_content_type={reply.content_type}/>
+      return <Grid className="reply-link-wrapper">
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            {replyLink}
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Discussion replies={reply.replies} 
+                        parent_content_type={reply.content_type}/>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     }
   }
@@ -56,7 +64,7 @@ export class UserComment extends Component {
     const {replies, parent_content_type} = this.props
 
     if (replies && replies !== null && replies.id) {
-      return <Grid.Row className='user-comment' width={16}>
+      return <Grid.Row className='user-comment' columns={2}>
         <Grid.Column width={1}>
           <Image className='user-image'
                 size='tiny'
@@ -67,19 +75,23 @@ export class UserComment extends Component {
         </Grid.Column>
         <Grid.Column width={14} className='discussion-post'>
           <Grid>
-            <Grid.Row columns={2} className='user'>
+            <Grid.Row columns={1} className='user'>
               <Grid.Column className='username'>
                 {replies.user_name}
                 <span className='post-date'>
                   {this.formatDate(replies.timestamp)}
-                  </span>
+                </span>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row className='user-title'>
-              {replies.user_title}
+            <Grid.Row columns={1} className='user-title'>
+              <Grid.Column>
+                {replies.user_title}
+              </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
-              {replies.body}
+            <Grid.Row columns={1}>
+              <Grid.Column>
+                {replies.body}
+              </Grid.Column>
             </Grid.Row>
             {this.replyLink(parent_content_type, replies)}
           </Grid>
