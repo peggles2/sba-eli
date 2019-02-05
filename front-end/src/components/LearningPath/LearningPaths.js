@@ -8,14 +8,20 @@ import { Container, Divider, Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 import { toggleModal } from "../../actions/aboutModalActions";
+import { getLatestUserEnrollment } from "../../actions/learningPathActions";
 
 export class LearningPaths extends React.Component {
-  learningPathResume = (isUserLoggedIn) => {
-    if(isUserLoggedIn) {
+  componentDidMount() {
+    this.props.getLatestEnrollment();
+  };
+
+  learningPathResume = (isUserLoggedIn, hasUserStartedJourney) => {
+    if(isUserLoggedIn && hasUserStartedJourney) {
+      const id = this.props.latestUserEnrollment.course_id;
       return(
           <Grid.Row>
             <Grid.Column>
-              <LearningPathResume />
+              <LearningPathResume learningPathId={id} />
             </Grid.Column>
           </Grid.Row>
       );
@@ -24,6 +30,7 @@ export class LearningPaths extends React.Component {
 
   render () {
     const isUserLoggedIn = this.props.isUserLoggedIn;
+    const hasUserStartedJourney = this.props.hasUserStartedJourney;
 
     return (
       <div>
@@ -33,12 +40,12 @@ export class LearningPaths extends React.Component {
           canonicalUrl="https://sba.gov/learning_paths"
         />
         <Grid>
-          {this.learningPathResume(isUserLoggedIn)}
+          {this.learningPathResume(isUserLoggedIn, hasUserStartedJourney)}
           <Divider hidden />
           <Grid.Row>
             <Grid.Column>
               <Container>
-                <Header as='h2'>{isUserLoggedIn ? "Other Journeys you have Explored" : "Explore All Journeys"}</Header>
+                <Header as='h2'>{isUserLoggedIn && hasUserStartedJourney ? "Other Journeys you have Explored" : "Explore All Journeys"}</Header>
                 <LearningPathAbout
                   open={this.props.displayModal}
                   handleClose={this.props.handleModalClose}
@@ -64,12 +71,15 @@ const mapStateToProps = store => {
   return {
     displayModal: store.aboutModal.show,
     isUserLoggedIn: store.login.isUserLoggedIn,
+    hasUserStartedJourney: store.learningPath.hasUserStartedJourney,
+    latestUserEnrollment: store.learningPath.latestUserEnrollment,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     handleModalClose: () => { dispatch(toggleModal(false)) },
+    getLatestEnrollment: () => dispatch(getLatestUserEnrollment()),
   };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LearningPaths));

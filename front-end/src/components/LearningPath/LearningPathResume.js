@@ -2,13 +2,21 @@ import React, { Component } from "react";
 import { Button, Container, Divider, Grid, Header, Image } from "semantic-ui-react";
 import LearningPathProgress from "./LearningPathProgress";
 
-export default class LearningPathResume extends Component {
+import { connect } from "react-redux";
+import { getProgressOfLearningPath } from "../../actions/learningPathActions";
+
+export class LearningPathResume extends Component {
+  componentDidMount() {
+    const id = this.props.learningPathId
+    this.props.getProgressOfLearningPath(id);
+  };
+
   render () {
     const learningPathImage = `/Image_Placeholder.png`;
-    const learningPathHeader = "Entreprenerurial Leadership";
+    const learningPathHeader = this.props.learningPathProgress.name;
     const learningPathDescription = "Maybe it means something more - something we can't yet understand."
-    const complete = 2;
-    const total = 5;
+    const complete = this.props.learningPathProgress.course_progress.requirement_completed_count;
+    const total = this.props.learningPathProgress.course_progress.requirement_count;
 
     return(
       <Container>
@@ -28,11 +36,31 @@ export default class LearningPathResume extends Component {
               <p>{learningPathDescription}</p>
               <LearningPathProgress complete={complete} total={total} />
               <Divider />
-              <Button primary style={{ float: "right" }}>Resume</Button>
+              <Button
+                primary
+                style={{ float: "right" }}
+                href={"/learning_paths/" + this.props.learningPathId}
+              >
+                Resume
+              </Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
-    )
-  }
-}
+    );
+  };
+};
+
+const mapStateToProps = store => {
+  return {
+    learningPathProgress: store.learningPath.learningPathProgress,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getProgressOfLearningPath: (id) => { dispatch(getProgressOfLearningPath(id)) },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LearningPathResume);

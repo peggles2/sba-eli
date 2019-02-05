@@ -46,6 +46,15 @@ export function getLearningPathsProgress() {
   };
 };
 
+export function getProgressOfLearningPath(id) {
+  return(dispatch, getState) => {
+    dispatch({
+      type: "GET_PROGRESS_OF_LEARNING_PATH",
+      payload: axios.get(`/learning_paths/${id}/check_progress`, axiosConfig(getState())),
+    });
+  };
+};
+
 export function getLatestUserEnrollment() {
   return(dispatch, getState) => {
     if ( getState().login.isUserLoggedIn ) {

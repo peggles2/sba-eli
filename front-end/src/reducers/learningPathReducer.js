@@ -11,6 +11,9 @@ const defaultValue = {
   learningPathsProgressLoading: false,
   learningPathsProgressError: null,
 
+  learningPathProgress: {},
+  learningPathProgressError: null,
+
   topicsList: [],
   pathTopicsLoading: true,
   pathTopicsError: null,
@@ -86,6 +89,24 @@ export default function reducer(state = defaultValue, action) {
         learningPathsProgress: action.payload.data,
         learningPathsProgressLoading: false,
         learningPathsProgressError: null
+      };
+    case "GET_PROGRESS_OF_LEARNING_PATH":
+      return {
+        ...state,
+        learningPathProgress: {},
+        learningPathProgressError: null,
+      };
+    case "GET_PROGRESS_OF_LEARNING_PATH_FAILURE":
+      return {
+        ...state,
+        learningPathProgress: null,
+        learningPathProgressError: action.payload.data,
+      };
+    case "GET_PROGRESS_OF_LEARNING_PATH_FULFILLED":
+      return {
+        ...state,
+        learningPathProgress: action.payload.data,
+        learningPathProgressError: null,
       };
     case "GET_TOPICS_FOR_LEARNING_PATH":
       return {
