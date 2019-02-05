@@ -1,15 +1,19 @@
-const defaultValue = {
-  learningObjective: {},
-  learningObjectiveLoading: false,
-  learningObjectiveError: null,
+function defaultState() {
+  return {
+    learningObjective: {},
+    learningObjectiveLoading: false,
+    learningObjectiveError: null,
+  
+    learningObjectives: [],
+    learningObjectivesLoading: false,
+    learningObjectivesError: null
+  }
+}
 
-  learningObjectives: [],
-  learningObjectivesLoading: false,
-  learningObjectivesError: null
-};
-
-export default function reducer(state = defaultValue, action) {
+export default function reducer(state = defaultState(), action) {
   switch (action.type) {
+    case 'RESET':
+      return defaultState();
     case "GET_LEARNING_OBJECTIVE":
       return {
         ...state,

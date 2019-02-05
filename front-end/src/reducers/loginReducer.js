@@ -1,13 +1,17 @@
-const defaultValue = {
-  userData: {
-    email: '',
-    password: ''
-  },
-  isUserLoggedIn: false
-};
+function defaultState() {
+  return {
+    userData: {
+      email: '',
+      password: ''
+    },
+    isUserLoggedIn: false
+  }
+}
 
-export default function reducer(state=defaultValue, action) {
+export default function reducer(state=defaultState(), action) {
   switch(action.type) {
+    case 'RESET':
+      return defaultState();
     case 'LOGIN':
       return {...state, userData: {}, userLoading: true, userError: null};
     case 'LOGIN_REJECTED':
