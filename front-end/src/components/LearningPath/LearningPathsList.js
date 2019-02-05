@@ -3,6 +3,7 @@ import { Card } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import LearningPathsItem from "./LearningPathsItem";
+import './LearningPathsList.scss';
 
 import { getLearningPaths, getLearningPathsProgress } from "../../actions/learningPathActions";
 
@@ -59,9 +60,9 @@ export class LearningPathsList extends React.Component {
       };
     };
 
-    return <Card.Group itemsPerRow={3}>{result}</Card.Group>;
-  };
-};
+    return <Card.Group id="learningPathCards">{result}</Card.Group>;
+  }
+}
 
 const mapStateToProps = store => {
   return {

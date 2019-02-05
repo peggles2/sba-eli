@@ -6,11 +6,19 @@ module Canvas
     base_uri ENV["CANVAS_HOST"] + "/api/v1"
 
     def self.all
-      JSON.parse get("/courses", base_options).body
+      result = JSON.parse get("/courses", base_options).body
+      result.each do |learning_path|
+        custom_data = LearningPathCustomData.where(learning_path_id: learning_path["id"]).first
+        learning_path["custom_data"] = custom_data if custom_data
+      end
+      result
     end
 
     def self.find(id)
-      JSON.parse get("/courses/#{id}", base_options).body
+      learning_path = JSON.parse get("/courses/#{id}", base_options).body
+      custom_data = LearningPathCustomData.where(learning_path_id: learning_path["id"]).first
+      learning_path["custom_data"] = custom_data if custom_data
+      learning_path
     end
 
     def self.create(account_id, lp_params)
