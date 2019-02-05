@@ -35,7 +35,10 @@ module Canvas
       # Commenting out to ignore submissionss for assessment purposes.
       # We can get submission objects once we actually start grading quizes
       # res = get("/quiz_submissions/#{submission["id"]}/questions", base_options)
-      res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions", base_options)
+      queries = pagination_query
+
+      res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions",
+                options_with_query(queries))
       questions = res.body
 
       raise Exception, questions unless res.code == 200
