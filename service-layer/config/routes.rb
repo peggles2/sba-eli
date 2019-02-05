@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   resources :learning_events, concerns: :contentable
   resources :learning_paths, concerns: :contentable do
     resource :enroll, only: :create
+    resources :quizzes do
+      resources :assessment, only: %I[index create destroy update]
+      get "submissions", on: :member
+    end
     get "progress", on: :collection
     get "check_progress", on: :member
   end

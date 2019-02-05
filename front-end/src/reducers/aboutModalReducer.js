@@ -1,7 +1,13 @@
-export default function reducer(state={
-  show: false
-}, action) {
+function defaultState() {
+  return {
+    show: false
+  }
+}
+
+export default function reducer(state=defaultState(), action) {
   switch(action.type) {
+    case 'RESET':
+      return defaultState();
     case 'TOGGLE_ABOUT_MODAL':
       return {
         ...state,

@@ -18,23 +18,24 @@ export class LearningEventDiscussion extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {parent_content_type, parent_id} = this.props
-    if ((parent_id !== prevProps.parent_id) &&
-        (parent_content_type !== prevProps.parent_content_type)) {
-      this.props.dispatch(getDiscussion(parent_content_type, parent_id))
+    const {learning_event} = this.props
+    let content_type = "learning_event_" + learning_event.type
+    if (learning_event !== prevProps.learning_event) {
+      this.props.dispatch(getDiscussion(content_type, learning_event.id))
     }
   }
 
   componentDidMount() {
-    const {parent_content_type, parent_id} = this.props
-    if ((parent_id !== null) &&
-        (parent_content_type !== null)) {
-      this.props.dispatch(getDiscussion(parent_content_type, parent_id))
+    const {learning_event} = this.props
+    let content_type = "learning_event_" + learning_event.type
+    if (learning_event !== null) {
+      this.props.dispatch(getDiscussion(content_type, learning_event.id))
     }
   }
 
   render() {
-    const {replies, parent_content_type, parent_id} = this.props
+    const {replies, learning_event} = this.props
+    let content_type = "learning_event_" + learning_event.type
     return (
         <Grid id="mle-comments">
           <Grid.Row stretched centered columns={15} className="mle-comments-header-row">
@@ -43,10 +44,10 @@ export class LearningEventDiscussion extends Component {
                       className="mle-comments-header">Comments {this.commentCount()}</Header>
             </Grid.Column>
           </Grid.Row>
-          <DiscussionPost/>
+          <DiscussionPost parent_content_type={content_type} 
+                          post_id={learning_event.id} /> 
           <Discussion replies={replies}
-                      parent_content_type={parent_content_type}
-                      parent_id={parent_id}/>
+                      parent_content_type={content_type} />
         </Grid>
     )
   }
@@ -55,7 +56,8 @@ export class LearningEventDiscussion extends Component {
 const mapStateToProps = store => {
   return {
     replies: store.discussion.replies,
-    reply_count: store.discussion.reply_count
+    reply_count: store.discussion.reply_count,
+    learning_event: store.learningEvent.learningEvent
   }
 }
 

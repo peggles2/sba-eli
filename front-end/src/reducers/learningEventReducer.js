@@ -1,17 +1,21 @@
-const defaultValue = {
-  learningEvent: {},
-  learningEventLoading: false,
-  learningEventError: null,
+function defaultState() {
+  return {
+    learningEvent: {},
+    learningEventLoading: false,
+    learningEventError: null,
+  
+    learningEventsCollection: {},
+    learningEventsLoading: false,
+    learningEventsError: null,
+  
+    completeEventError: null
+  }
+}
 
-  learningEventsCollection: {},
-  learningEventsLoading: false,
-  learningEventsError: null,
-
-  completeEventError: null
-};
-
-export default function reducer(state = defaultValue, action) {
+export default function reducer(state = defaultState(), action) {
   switch (action.type) {
+    case 'RESET':
+      return defaultState();
     case "GET_LEARNING_EVENT":
       return {
         ...state,

@@ -4,13 +4,12 @@ import {Grid} from "semantic-ui-react";
 
 export default class Discussion extends Component {
 
-  renderComment(reply, parent_content_type, parent_id) {
+  renderComment(reply, parent_content_type) {
     if (reply && reply.length > 0) {
       return reply.map((reply, index) => {
         return (
             <UserComment key={index}
                          parent_content_type={parent_content_type}
-                         parent_id={parent_id}
                          replies={reply}/>
         );
       });
@@ -19,9 +18,10 @@ export default class Discussion extends Component {
   }
 
   render() {
+    const {replies, parent_content_type} = this.props
     return (
         <Grid>
-          {this.renderComment(this.props.replies, this.props.parent_content_type, this.props.parent_id)}
+          {this.renderComment(replies, parent_content_type)}
         </Grid>
     )
   }
