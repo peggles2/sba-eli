@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Button} from "semantic-ui-react";
 import DiscussionPost from "./DiscussionPost";
 
 export class ReplyLink extends Component {
@@ -26,9 +27,9 @@ export class ReplyLink extends Component {
       );
     } else {
       return (
-          <a className="reply-link" onClick={() => this.discussionReplyClick()}>
+          <Button className="reply-link" onClick={() => this.discussionReplyClick()}>
             Reply
-          </a>
+          </Button>
       );
     }
   }

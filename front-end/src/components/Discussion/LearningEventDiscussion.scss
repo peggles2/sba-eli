@@ -44,7 +44,12 @@
   }
 
   .reply-link {
+    padding: 0 0 10px 0;
+    border: none;
+    font: inherit;
     font-weight: bold;
-    padding-bottom: 20px;
+    color: $sba-blue;
+    background-color: transparent;
+    cursor: pointer;
   }
 }
