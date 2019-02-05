@@ -28,8 +28,8 @@ export class LearningPathsItem extends Component {
         completed = this.props.course_progress.requirement_completed_count;
 
         return completed;
-      };
-    };
+      }
+    }
   };
 
   learningPathProgress = () => {
@@ -67,7 +67,7 @@ export class LearningPathsItem extends Component {
       return total;
     } else {
       return 0
-    };
+    }
   };
 
   render() {
