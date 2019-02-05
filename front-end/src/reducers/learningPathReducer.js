@@ -1,37 +1,41 @@
-const defaultValue = {
-  learningPaths: [],
-  learningPathsLoading: false,
-  learningPathsError: null,
+function defaultState() {
+  return {
+    learningPaths: [],
+    learningPathsLoading: false,
+    learningPathsError: null,
 
-  learningPath: {},
-  learningPathLoading: false,
-  learningPathError: null,
+    learningPath: {},
+    learningPathLoading: false,
+    learningPathError: null,
 
-  learningPathsProgress: [],
-  learningPathsProgressLoading: false,
-  learningPathsProgressError: null,
+    learningPathsProgress: [],
+    learningPathsProgressLoading: false,
+    learningPathsProgressError: null,
 
-  topicsList: [],
-  pathTopicsLoading: true,
-  pathTopicsError: null,
+    topicsList: [],
+    pathTopicsLoading: true,
+    pathTopicsError: null,
 
-  enrollUserError: null,
-  quizzes: [],
-  quizzesLoading: null,
-  quizzesError: null,
-  quiz: {},
-  quizLoading: null,
-  quizError: null,
-  quizSubmissions: [],
-  quizSubmissionsLoading: null,
-  quizSubmissionsError: null,
-  submitQuiz: null,
-  submitQuizLoading: null,
-  submitQuizError: null
-};
+    enrollUserError: null,
+    quizzes: [],
+    quizzesLoading: null,
+    quizzesError: null,
+    quiz: {},
+    quizLoading: null,
+    quizError: null,
+    quizSubmissions: [],
+    quizSubmissionsLoading: null,
+    quizSubmissionsError: null,
+    submitQuiz: null,
+    submitQuizLoading: null,
+    submitQuizError: null
+  }
+}
 
-export default function reducer(state = defaultValue, action) {
+export default function reducer(state = defaultState(), action) {
   switch (action.type) {
+    case 'RESET':
+      return defaultState();
     case "GET_LEARNING_PATHS":
       return {
         ...state,

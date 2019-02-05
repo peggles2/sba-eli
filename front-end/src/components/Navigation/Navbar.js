@@ -7,7 +7,7 @@ import { toggleRegister, toggleLogin } from "../../actions/navbarActions";
 import "./Navbar.scss";
 
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/registrationActions";
+import { logoutUserAndReset } from '../../actions/registrationActions';
 
 export class Navbar extends Component {
   state = {
@@ -53,7 +53,7 @@ export class Navbar extends Component {
       <div className="logoutLink">
         <a
           onClick={() =>
-            this.props.dispatch(logoutUser(this.props.accessToken))
+            this.props.dispatch(logoutUserAndReset(this.props.accessToken))
           }
         >
           Log out
