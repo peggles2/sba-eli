@@ -29,8 +29,8 @@ module Canvas
         Current.user ? "#{uri}?as_user_id=#{Current.user&.id}" : uri
       end
 
-      def pagination_query
-        { "per_page" => 100 }
+      def pagination_query(per_page = 100)
+        { "per_page" => per_page }
       end
 
       def masquerade_current_user_query
