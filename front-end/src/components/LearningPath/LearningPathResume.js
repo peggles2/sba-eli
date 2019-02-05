@@ -11,12 +11,35 @@ export class LearningPathResume extends Component {
     this.props.getProgressOfLearningPath(id);
   };
 
+  componentDidUpdate(prevProps) {
+    const prev = prevProps.isUserLoggedIn;
+    const next = this.props.isUserLoggedIn;
+
+    if(prev !== next) {
+      const id = this.props.learningPathId
+      this.props.getProgressOfLearningPath(id);
+    };
+  };
+
+  learningPathProgress = () => {
+    let complete = 0;
+    let total = 0;
+
+    const courseProgress = this.props.learningPathProgress.course_progress;
+    if(typeof courseProgress !== "undefined") {
+      complete = this.props.learningPathProgress.course_progress.requirement_completed_count;
+      total = this.props.learningPathProgress.course_progress.requirement_count;
+    };
+
+    return (
+      <LearningPathProgress complete={complete} total={total} />
+    );
+  }
+
   render () {
     const learningPathImage = `/Image_Placeholder.png`;
     const learningPathHeader = this.props.learningPathProgress.name;
     const learningPathDescription = "Maybe it means something more - something we can't yet understand."
-    const complete = this.props.learningPathProgress.course_progress.requirement_completed_count;
-    const total = this.props.learningPathProgress.course_progress.requirement_count;
 
     return(
       <Container>
@@ -34,7 +57,7 @@ export class LearningPathResume extends Component {
             <Grid.Column width={10} className="learning-path-resume-content">
               <Header as='h2'>{learningPathHeader}</Header>
               <p>{learningPathDescription}</p>
-              <LearningPathProgress complete={complete} total={total} />
+              { this.learningPathProgress() }
               <Divider />
               <Button
                 primary
@@ -53,6 +76,7 @@ export class LearningPathResume extends Component {
 
 const mapStateToProps = store => {
   return {
+    isUserLoggedIn: store.login.isUserLoggedIn,
     learningPathProgress: store.learningPath.learningPathProgress,
   };
 };

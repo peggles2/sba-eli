@@ -161,21 +161,28 @@ export default function reducer(state = defaultValue, action) {
         ...state,
         latestUserEnrollment: {},
         latestUserEnrollmentError: null,
-        hasUserStartedLP: false,
       };
     case "GET_LATEST_USER_ENROLLMENT_FAILURE":
       return {
         ...state,
         latestUserEnrollment: {},
         latestUserEnrollmentError: action.payload.data,
-        hasUserStartedLP: false,
       };
     case "GET_LATEST_USER_ENROLLMENT_FULFILLED":
       return {
         ...state,
         latestUserEnrollment: action.payload.data,
         latestUserEnrollmentError: null,
+      };
+    case "USER_HAS_STARTED_JOURNEY":
+      return {
+        ...state,
         hasUserStartedJourney: true,
+      };
+    case "USER_HAS_NOT_STARTED_JOURNEY":
+      return {
+        ...state,
+        hasUserStartedJourney: false,
       };
     default:
       break;

@@ -26,7 +26,7 @@ export function getPathWithTopics(id) {
       dispatch(getTopicsForPath(id));
     }
   };
-}
+};
 
 export function getLearningPath(id) {
   return (dispatch, getState) => {
@@ -35,7 +35,7 @@ export function getLearningPath(id) {
       payload: axios.get(`/learning_paths/${id}`, axiosConfig(getState()))
     });
   };
-}
+};
 
 export function getLearningPathsProgress() {
   return(dispatch, getState) => {
@@ -60,13 +60,22 @@ export function getLatestUserEnrollment() {
     if ( getState().login.isUserLoggedIn ) {
       const { id } = getState().login.userData.user;
 
+      const request = axios.get(`users/${id}/enrollments/latest`, axiosConfig(getState()))
+
       dispatch({
         type: "GET_LATEST_USER_ENROLLMENT",
-        payload: axios.get(`users/${id}/enrollments/latest`, axiosConfig(getState())),
+        payload: request,
       });
-    }
-  }
-}
+      request.then((res) => {
+        if(res.data === null) {
+          dispatch({ type: "USER_HAS_NOT_STARTED_JOURNEY" });
+        } else {
+          dispatch({ type: "USER_HAS_STARTED_JOURNEY" });
+        };
+      });
+    };
+  };
+};
 
 export function getTopicsForPath(pathId) {
   const topicParams = {

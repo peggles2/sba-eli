@@ -15,6 +15,15 @@ export class LearningPaths extends React.Component {
     this.props.getLatestEnrollment();
   };
 
+  componentDidUpdate(prevProps) {
+    const prev = prevProps.isUserLoggedIn;
+    const next = this.props.isUserLoggedIn;
+
+    if(prev !== next) {
+      this.props.getLatestEnrollment();
+    };
+  };
+
   learningPathResume = (isUserLoggedIn, hasUserStartedJourney) => {
     if(isUserLoggedIn && hasUserStartedJourney) {
       const id = this.props.latestUserEnrollment.course_id;
