@@ -10,14 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< Updated upstream
-ActiveRecord::Schema.define(version: 2019_01_28_193107) do
-=======
 ActiveRecord::Schema.define(version: 2019_02_01_180344) do
->>>>>>> Stashed changes
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "abstract_courses", id: false, force: :cascade do |t|
@@ -1454,8 +1449,6 @@ ActiveRecord::Schema.define(version: 2019_02_01_180344) do
     t.index ["event_id"], name: "index_fearless_event_custom_data_on_event_id", unique: true
   end
 
-<<<<<<< Updated upstream
-=======
   create_table "fearless_learning_path_custom_data", force: :cascade do |t|
     t.integer "learning_path_id", null: false
     t.string "time"
@@ -1466,7 +1459,6 @@ ActiveRecord::Schema.define(version: 2019_02_01_180344) do
     t.index ["learning_path_id"], name: "index_fearless_learning_path_custom_data_on_learning_path_id", unique: true
   end
 
->>>>>>> Stashed changes
   create_table "fearless_taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -1504,12 +1496,8 @@ ActiveRecord::Schema.define(version: 2019_02_01_180344) do
     t.index ["topic_id"], name: "index_fearless_topic_custom_data_on_topic_id", unique: true
   end
 
-<<<<<<< Updated upstream
-  create_table "feature_flags", force: :cascade do |t|
-=======
   create_table "feature_flags", id: false, force: :cascade do |t|
     t.bigint "id", null: false
->>>>>>> Stashed changes
     t.bigint "context_id", null: false
     t.string "context_type", limit: 255, null: false
     t.string "feature", limit: 255, null: false
