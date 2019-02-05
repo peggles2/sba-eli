@@ -97,7 +97,10 @@ module Canvas
     end
 
     def self.grade(learning_path_id, quiz_id, assessments, quiz)
-      res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions", base_options)
+      queries = pagination_query
+
+      res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions",
+                options_with_query(queries))
       questions = res.body
       raise Exception, questions unless res.code == 200
 
