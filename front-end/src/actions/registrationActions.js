@@ -30,7 +30,7 @@ export function logoutUser(token) {
 
 export function logoutUserAndReset(token) {
   return dispatch => {
-    return dispatch(logout(token)).then(action => {
+    return dispatch(logoutUser(token)).then(action => {
       dispatch(reset())
     });
   };
