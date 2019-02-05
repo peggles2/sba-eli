@@ -1,20 +1,19 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
 import {UserComment} from "../UserComment";
+import {ReplyLink} from "../ReplyLink";
 
 describe('Discussion: User Comment View', () => {
   it('should not render null replies', () => {
-    const wrapper = mount(< UserComment
-        parent_content_type="learning_event"
-        parent_id="8"
+    const wrapper = mount(<UserComment
+        parent_content_type = "learning_event_Page"
         replies="null"/>);
     expect(wrapper.find('.user-comment').length).toBe(0);
   });
 
   it('should not render empty replies', () => {
-    const wrapper = mount(< UserComment
-        parent_content_type="learning_event"
-        parent_id="8"
+    const wrapper = mount(<UserComment
+        parent_content_type="learning_event_Page"
         replies="[]"/>);
     expect(wrapper.find('.user-comment').length).toBe(0);
   });
@@ -70,7 +69,6 @@ describe('Discussion: User Comment View', () => {
 
     const wrapper = shallow(<UserComment
         parent_content_type="infographic"
-        parent_id="8"
         replies={comment}/>);
     expect(wrapper.find('.user-comment').length).toBe(1);
   });
@@ -93,13 +91,15 @@ describe("Discussion when user is logged in", () => {
     const wrapper = shallow(<UserComment
         isUserLoggedIn={true}
         parent_content_type="quiz"
-        parent_id="8"
         replies={comment}/>);
     expect(wrapper.find('.user-image').exists()).toBe(true);
     expect(wrapper.find('.username').exists()).toBe(true);
     expect(wrapper.find('.post-date').exists()).toBe(true);
     expect(wrapper.find('.user-title').exists()).toBe(true);
-    expect(wrapper.find('.reply-link').exists()).toBe(true);
+    
+    expect(wrapper.find(ReplyLink).exists()).toBe(true);
+    const replyWrapper = wrapper.find(ReplyLink).dive();
+    expect(replyWrapper.find('.reply-link').exists()).toBe(true);
   });
 });
 
@@ -121,12 +121,11 @@ describe("Discussion when user is NOT logged in", () => {
     const wrapper = shallow(<UserComment
         isUserLoggedIn={false}
         parent_content_type="discussion"
-        parent_id="8"
         replies={comment}/>);
-    expect(wrapper.find('.user-image').exists()).toBe(true);
-    expect(wrapper.find('.username').exists()).toBe(true);
-    expect(wrapper.find('.post-date').exists()).toBe(true);
-    expect(wrapper.find('.user-title').exists()).toBe(true);
-    expect(wrapper.find('.reply-link').exists()).toBe(false);
-  });
+      expect(wrapper.find('.user-image').exists()).toBe(true);
+      expect(wrapper.find('.username').exists()).toBe(true);
+      expect(wrapper.find('.post-date').exists()).toBe(true);
+      expect(wrapper.find('.user-title').exists()).toBe(true);
+      expect(wrapper.find(ReplyLink).exists()).toBe(false);
+    });
 });

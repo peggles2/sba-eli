@@ -2,18 +2,33 @@ import React, {Component} from "react";
 import {Grid, Image} from "semantic-ui-react";
 import {connect} from "react-redux";
 import Discussion from "./Discussion";
+import ReplyLink from "./ReplyLink";
 
 export class UserComment extends Component {
 
-  replyLink(parent_content_type, parent_id, reply) {
+  replyLink(parent_content_type, reply) {
     const replyLink = this.props.isUserLoggedIn
-        ? <a className="reply-link" href={`#/discussion/${parent_content_type}/${parent_id}`}>Reply</a>
+        ? <Grid.Row columns={1}>
+            <Grid.Column>
+              <ReplyLink parent_content_type={reply.content_type} post_id={reply.id} />
+            </Grid.Column>
+          </Grid.Row>
         : null
-    if (parent_content_type !== "comment" && reply && reply.replies) {
-      return <Grid.Row>
-        {replyLink}
-        <Discussion replies={reply.replies} parent_content_type={reply.content_type} parent_id={reply.id}/>
-      </Grid.Row>
+
+    if (parent_content_type !== "comment" && reply) {
+      return <Grid className="reply-link-wrapper">
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            {replyLink}
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Discussion replies={reply.replies} 
+                        parent_content_type={reply.content_type}/>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     }
   }
 
@@ -25,7 +40,7 @@ export class UserComment extends Component {
   }
 
   formatDate(timestamp) {
-    var month = [];
+    let month = [];
     month[0] = "January";
     month[1] = "February";
     month[2] = "March";
@@ -46,35 +61,39 @@ export class UserComment extends Component {
   }
 
   render() {
-    var reply = this.props.replies
-    
-    if (reply && reply !== null && reply.id) {
-      return <Grid.Row className='user-comment' width={16}>
+    const {replies, parent_content_type} = this.props
+
+    if (replies && replies !== null && replies.id) {
+      return <Grid.Row className='user-comment' columns={2}>
         <Grid.Column width={1}>
           <Image className='user-image'
                 size='tiny'
                 circular
                 verticalAlign='middle'
-                src={this.userImage(reply.user_img)}
-                alt={reply.user_name}/>
+                src={this.userImage(replies.user_img)}
+                alt={replies.user_name}/>
         </Grid.Column>
         <Grid.Column width={14} className='discussion-post'>
           <Grid>
-            <Grid.Row columns={2} className='user'>
+            <Grid.Row columns={1} className='user'>
               <Grid.Column className='username'>
-                {reply.user_name}
+                {replies.user_name}
                 <span className='post-date'>
-                  {this.formatDate(reply.timestamp)}
-                  </span>
+                  {this.formatDate(replies.timestamp)}
+                </span>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row className='user-title'>
-              {reply.user_title}
+            <Grid.Row columns={1} className='user-title'>
+              <Grid.Column>
+                {replies.user_title}
+              </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
-              {reply.body}
+            <Grid.Row columns={1}>
+              <Grid.Column>
+                {replies.body}
+              </Grid.Column>
             </Grid.Row>
-            {this.replyLink(this.props.parent_content_type, this.props.parent_id, reply)}
+            {this.replyLink(parent_content_type, replies)}
           </Grid>
         </Grid.Column>
       </Grid.Row>

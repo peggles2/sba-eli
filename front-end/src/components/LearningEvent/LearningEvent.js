@@ -75,10 +75,7 @@ export class LearningEvent extends Component {
             event={learningEvent}
           />
         </Container>
-        <LearningEventDiscussion
-          parent_content_type={this.parent_content_type}
-          parent_id={this.parent_id}
-        />
+        <LearningEventDiscussion />
       </div>
     );
   }
