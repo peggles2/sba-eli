@@ -2561,36 +2561,6 @@ ActiveRecord::Schema.define(version: 2019_02_01_180344) do
     t.datetime "client_timestamp"
   end
 
-  create_table "quiz_submission_events_2018_10", id: false, force: :cascade do |t|
-    t.bigint "id", default: -> { "nextval('quiz_submission_events_id_seq'::regclass)" }, null: false
-    t.integer "attempt", null: false
-    t.string "event_type", limit: 255, null: false
-    t.bigint "quiz_submission_id", null: false
-    t.text "event_data"
-    t.datetime "created_at", null: false
-    t.datetime "client_timestamp"
-  end
-
-  create_table "quiz_submission_events_2018_11", id: false, force: :cascade do |t|
-    t.bigint "id", default: -> { "nextval('quiz_submission_events_id_seq'::regclass)" }, null: false
-    t.integer "attempt", null: false
-    t.string "event_type", limit: 255, null: false
-    t.bigint "quiz_submission_id", null: false
-    t.text "event_data"
-    t.datetime "created_at", null: false
-    t.datetime "client_timestamp"
-  end
-
-  create_table "quiz_submission_events_2018_12", id: false, force: :cascade do |t|
-    t.bigint "id", default: -> { "nextval('quiz_submission_events_id_seq'::regclass)" }, null: false
-    t.integer "attempt", null: false
-    t.string "event_type", limit: 255, null: false
-    t.bigint "quiz_submission_id", null: false
-    t.text "event_data"
-    t.datetime "created_at", null: false
-    t.datetime "client_timestamp"
-  end
-
   create_table "quiz_submission_snapshots", id: false, force: :cascade do |t|
     t.bigint "id", null: false
     t.bigint "quiz_submission_id"
