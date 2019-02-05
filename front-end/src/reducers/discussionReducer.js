@@ -5,7 +5,7 @@ const defaultValue = {
   statusCodes: {}
 };
 
-export default function reducer(state = defaultValue, action) {
+export default function reducer(state = defaultState(), action) {
   switch (action.type) {
     case 'RESET':
       return defaultState();
