@@ -20,9 +20,9 @@ export class DiscussionPost extends Component {
 
   submitPost(event, post_id, parent_content_type) {
     event.preventDefault();
-    var post_body = document.getElementById("discussion_input_" + post_id)
+    let post_body = document.getElementById("discussion_input_" + post_id)
     if (post_body) {
-      var post_body_value = post_body.value.replace(/(<([^>]+)>)/ig, "");
+      let post_body_value = post_body.value.replace(/(<([^>]+)>)/ig, "");
 
       this.props.dispatch(
           postDiscussion(
@@ -66,7 +66,7 @@ export class DiscussionPost extends Component {
       isUserLoggedIn,
       parent_content_type
     } = this.props
-    var post_id = this.props.post_id ? this.props.post_id : 0
+    let post_id = this.props.post_id ? this.props.post_id : 0
 
     if (isUserLoggedIn) {
       return (

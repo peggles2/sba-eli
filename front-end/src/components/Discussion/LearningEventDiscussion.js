@@ -19,7 +19,7 @@ export class LearningEventDiscussion extends Component {
 
   componentDidUpdate(prevProps) {
     const {learning_event} = this.props
-    var content_type = "learning_event_" + learning_event.type
+    let content_type = "learning_event_" + learning_event.type
     if (learning_event !== prevProps.learning_event) {
       this.props.dispatch(getDiscussion(content_type, learning_event.id))
     }
@@ -27,7 +27,7 @@ export class LearningEventDiscussion extends Component {
 
   componentDidMount() {
     const {learning_event} = this.props
-    var content_type = "learning_event_" + learning_event.type
+    let content_type = "learning_event_" + learning_event.type
     if (learning_event !== null) {
       this.props.dispatch(getDiscussion(content_type, learning_event.id))
     }
@@ -35,7 +35,7 @@ export class LearningEventDiscussion extends Component {
 
   render() {
     const {replies, learning_event} = this.props
-    var content_type = "learning_event_" + learning_event.type
+    let content_type = "learning_event_" + learning_event.type
     return (
         <Grid id="mle-comments">
           <Grid.Row stretched centered columns={15} className="mle-comments-header-row">
