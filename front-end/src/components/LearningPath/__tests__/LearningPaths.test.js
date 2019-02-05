@@ -12,11 +12,11 @@ describe("LearningPaths", () => {
     const metaWrapper = wrapper.find(MetaTags).dive();
     const helmetProps = metaWrapper.find(Helmet).props();
 
-    expect(helmetProps.title).toBe("SBA Learning Paths");
+    expect(helmetProps.title).toBe("SBA Journeys");
 
     expect(helmetProps.meta[0].name).toBe("description");
     expect(helmetProps.meta[0].content).toBe(
-      "Description for the Learning Path landing page"
+      "Description for the Journey landing page"
     );
 
     //TODO: add Canonical URL validation when we have final urls

@@ -1,8 +1,11 @@
 class EnrollmentsController < ApplicationController
-  before_action :valid_session?
-
   def index
     response = Canvas::User.enrollments(params[:user_id])
+    render json: response
+  end
+
+  def latest
+    response = Canvas::User.latest_enrollment(params[:user_id])
     render json: response
   end
 end
