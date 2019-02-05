@@ -129,7 +129,7 @@ jobs:
       - run: yarn install
       - run:
           name: Run Test
-          command: yarn test
+          command: yarn test --maxWorkers=2
           no_output_timeout: 30m
       - save_cache:
           key: front-end-dependencies-{{ checksum "yarn.lock" }}

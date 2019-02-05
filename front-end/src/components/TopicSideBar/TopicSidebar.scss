@@ -34,6 +34,10 @@
   color: $sba-navy;
 }
 
+.header i.icon.big {
+  float: left;
+}
+
 .topic-accordion-title {
   color: $sba-navy !important;
   font-size: 16px !important;
@@ -55,20 +59,21 @@
 }
 
 /* TopicEventList */
-.event-list-accordion-item:hover,
-.event-list-accordion-item.active-event {
-  background-color: $sba-grey-one !important;
-}
-
-.event-list-item-link {
+.event-list-accordion-item {
   color: $sba-navy !important;
   font-weight: 600;
-}
+  cursor: pointer;
 
-.event-list-item-icon {
-  color: $sba-navy;
-  padding-right: 1.5em !important;
-  padding-left: 1em !important;
+  &:hover,
+  &.active-event {
+    background-color: $sba-grey-one !important;
+  }
+
+  .event-list-item-icon {
+    color: $sba-navy;
+    padding-right: 1.5em !important;
+    padding-left: 1em !important;
+  }
 }
 
 /* TopicProgress */

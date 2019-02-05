@@ -1,0 +1,69 @@
+@import "../../assets/styles/base";
+
+.share-modal-button {
+  margin-right: 5px;
+  float: right;
+  cursor: pointer;
+}
+
+
+#shareModal {
+  .share-modal-share {
+    display: inline-block;
+    margin-left: 6%;
+
+    div {
+      cursor: pointer;
+    }
+
+    p {
+      margin-top: 5px;
+      text-align: center;
+      color: $sba-navy;
+    }
+  }
+
+  h2 {
+    color: $sba-navy;
+  }
+
+  .share-method-group {
+    margin-top: 20px;
+  }
+
+  div.share-method-column {
+    text-align: center !important;
+  }
+
+  div.share-text-input > input {
+    width: 324px !important;
+    margin: 5px 5px 15px 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .share-close-button {
+    background: white;
+    padding-top: 5px;
+  }
+
+  .share-copy-button {
+    width: 100px;
+    color: $sba-white !important;
+    background-color: $sba-blue !important;
+  }
+
+  .share-facebook-icon {
+    color: $sba-facebook-blue;
+    cursor: pointer;
+  }
+
+  .share-twitter-icon {
+    color: $sba-twitter-blue;
+    cursor: pointer;
+  }
+
+  .share-linkedin-icon {
+    color: $sba-linkedin-blue;
+    cursor: pointer;
+  }
+}

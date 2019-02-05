@@ -7,6 +7,8 @@ const defaultValue = {
 
 export default function reducer(state = defaultValue, action) {
   switch (action.type) {
+    case 'RESET':
+      return defaultState();
     case 'GET_DISCUSSION':
       return {
         ...state,
@@ -82,6 +84,5 @@ export default function reducer(state = defaultValue, action) {
     default:
       break;
   };
-
   return state;
 }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { reset } from './globalActions';
 
 export function registerUser(userData) {
   const url = process.env.REACT_APP_SERVICE_HOST + "/sign_up";
@@ -25,4 +26,12 @@ export function logoutUser(token) {
     type: 'LOGOUT',
     payload: axios.delete(url, {headers: {'AUTHORIZATION': token}})
   }
+}
+
+export function logoutUserAndReset(token) {
+  return dispatch => {
+    return dispatch(logout(token)).then(action => {
+      dispatch(reset())
+    });
+  };
 }
