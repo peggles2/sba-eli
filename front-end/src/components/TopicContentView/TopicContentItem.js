@@ -59,9 +59,6 @@ export default class TopicContentItem extends Component {
               >
                 <Icon name={listVisible ? "chevron up" : "chevron down"} />
               </Button>
-              <Button icon className={"topic-content-share-button"}>
-                <Icon name={"share"} />
-              </Button>
             </Item.Content>
           </Item>
         </Item.Group>

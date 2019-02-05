@@ -10,8 +10,9 @@
   margin-left: 0 !important;
 }
 
+
 // LearningEventPage
-.learning-event-body {
+.learning-event-body, .learning-event-quiz  {
   padding-left: 45px;
   padding-right: 45px;
 }
@@ -88,6 +89,10 @@
   font-weight: bold;
 }
 
+button.ui.gold {
+  background-color: $sba-gold ;
+}
+
 .small-text {
   font-size: 25px;
 }
@@ -99,4 +104,16 @@
 .page-navigation-buttons-wrapper {
   width: 100%;
   text-align: right;
+}
+
+.question .ui.form > .field {
+  margin: 0px;
+}
+
+.question > p {
+  margin: 0 0 .5em;
+}
+
+.inline-form {
+  display: inline-block;
 }

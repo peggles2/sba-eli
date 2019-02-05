@@ -1,10 +1,16 @@
 import RegistrationModal from '../components/RegistrationModal/RegistrationModal';
 
-export default function reducer(state={
-  open: false,
-  modalType: 'signup'
-}, action) {
+function defaultState() {
+  return {
+    open: false,
+    modalType: 'signup'
+  }
+}
+
+export default function reducer(state=defaultState(), action) {
   switch(action.type) {
+    case 'RESET':
+      return defaultState();
     case 'TOGGLE_LOGIN_MODAL':
       return {
         ...state,
