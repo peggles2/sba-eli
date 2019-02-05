@@ -1,8 +1,10 @@
-const defaultValue = {
-  replies: [],
-  reply_count: 0,
-  discussionErrors: {},
-  statusCodes: {}
+function defaultState() {
+  return {
+    replies: [],
+    reply_count: 0,
+    discussionErrors: {},
+    statusCodes: {}
+  }
 };
 
 export default function reducer(state = defaultState(), action) {

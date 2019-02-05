@@ -1,4 +1,5 @@
-const defaultValue = {
+function defaultState() {
+  return {}
 };
 
 export default function reducer(state = defaultState(), action) {
