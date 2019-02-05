@@ -183,5 +183,18 @@ module Canvas
 
       JSON.parse body
     end
+
+    def self.put_quiz_question(course_id, quiz_id, question)
+      q = {
+        quiz_id: question[:quiz_id],
+        id: question[:id],
+        question: question.except(:quiz_id, :id),
+      }
+
+      options = base_options.merge(body: q.to_json)
+      options[:headers]["Content-Type"] = "application/json"
+      uri = "/courses/#{course_id}/quizzes/#{quiz_id}/questions/#{question[:id]}"
+      put(uri, options)
+    end
   end
 end
