@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+ip=$(ecs-cli ps --cluster $BRANCH | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -n 1)
+
 # Delete DNS Record
 cat > change-batch.json << EOF
 {
@@ -14,7 +16,7 @@ cat > change-batch.json << EOF
         "TTL": 60,
         "ResourceRecords": [
           {
-            "Value":"${ELB_DNS}"
+            "Value":"${ip}"
           }
         ]
       }
@@ -32,8 +34,4 @@ ecs-cli compose --file docker-compose-aws.yml --project-name ${BRANCH} service r
 echo "Destroying cluster..."
 aws ecs delete-cluster --cluster ${BRANCH}
 
-echo "Destroying Load Balancer ..."
-aws elbv2 delete-listener --listener-arn ${LISTENER_ARN}
-aws elbv2 delete-target-group --target-group-arn ${TARGET_GROUP_ARN}
-aws elbv2 delete-load-balancer --load-balancer-arn ${LB_ARN}
 echo "Operation Completed."

@@ -332,9 +332,9 @@ workflows:
             - jest
             - build
             - ux-review
-          filters:
-            branches:
-              only: /sba*/
+          # filters:
+          #   branches:
+          #     only: /sba*/
       - clean-up:
           requires:
             - check_for_secrets
@@ -345,9 +345,9 @@ workflows:
             - build
             - ux-review
             - review-approval
-          filters:
-            branches:
-              only: /sba*/
+          # filters:
+          #   branches:
+          #     only: /sba*/
       - deploy-dev:
           requires:
             - check_for_secrets
