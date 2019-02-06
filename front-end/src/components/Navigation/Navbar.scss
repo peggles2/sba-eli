@@ -41,7 +41,11 @@
     }
 
     .learning-path-item {
-      padding: 20px !important;
+      padding: 0px !important;
+
+      .navigation-learning-path {
+        padding: 20px !important;
+      }
     }
 
     .learning-path-item:hover {
