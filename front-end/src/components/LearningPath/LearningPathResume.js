@@ -12,11 +12,11 @@ export class LearningPathResume extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const prev = prevProps.isUserLoggedIn;
-    const next = this.props.isUserLoggedIn;
+    const prev = prevProps.learningPathId;
+    const next = this.props.learningPathId;
 
     if(prev !== next) {
-      const id = this.props.learningPathId
+      const id = this.props.learningPathId;
       this.props.getProgressOfLearningPath(id);
     };
   };
