@@ -14,7 +14,11 @@ import "./Dashboard.scss";
 export class Dashboard extends Component {
 
   componentDidMount() {
-    this.props.getLatestEnrollment();
+    const isUserLoggedIn = this.props.isUserLoggedIn;
+
+    if(isUserLoggedIn) {
+      this.props.getLatestEnrollment();
+    }
   }
 
   dashboardHeader = (isUserLoggedIn) => {

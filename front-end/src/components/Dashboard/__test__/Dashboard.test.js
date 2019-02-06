@@ -38,19 +38,33 @@ describe("Dashboard", () => {
 
 describe("Dashboard when user is logged in", () => {
   it("should render a DashboardHeader", () => {
-    const wrapper = shallow(<Dashboard isUserLoggedIn={true} />);
+    const props = {
+      isUserLoggedIn: true,
+      getLatestEnrollment: jest.fn(),
+    }
+
+    const wrapper = shallow(<Dashboard {...props}/>);
 
     expect(wrapper.find(DashboardHeader).exists()).toBe(true);
   });
 
   it("should render a Dashboard Call To Action", () => {
-    const wrapper = shallow(<Dashboard isUserLoggedIn={true} />);
+    const props = {
+      isUserLoggedIn: true,
+      hasUserStartedJourney: false,
+      getLatestEnrollment: jest.fn(),
+    }
+    const wrapper = shallow(<Dashboard {...props}/>);
 
     expect(wrapper.find(DashboardCTA).exists()).toBe(true);
   });
 
   it("should not render a DashboardSplash", () => {
-    const wrapper = shallow(<Dashboard isUserLoggedIn={true} />);
+    const props = {
+      isUserLoggedIn: true,
+      getLatestEnrollment: jest.fn(),
+    }
+    const wrapper = shallow(<Dashboard {...props}/>);
 
     expect(wrapper.find(DashboardSplash).exists()).toBe(false);
   });
