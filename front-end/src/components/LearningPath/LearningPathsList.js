@@ -17,6 +17,7 @@ export class LearningPathsList extends React.Component {
     const next = this.props.isUserLoggedIn;
 
     if(prev !== next) {
+      this.props.getLearningPaths();
       this.props.getLearningPathsProgress();
     };
   };
