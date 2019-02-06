@@ -56,11 +56,14 @@
   &:hover {
     background-color: #f2f3f4 !important;
   }
+
+  .icon-column {
+    padding: 0 !important;
+  }
 }
 
 .topic-content-event-grid-icon {
   color: $sba-navy;
-  font-size: 45px !important;
 }
 
 .topic-content-event-grid-header {
