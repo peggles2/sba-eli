@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Divider, List } from "semantic-ui-react";
 import { connect } from "react-redux";
+import "./Navbar.scss";
 
 import { getLearningObjectivesForAdmin } from "../../actions/learningObjectiveActions";
 
@@ -44,8 +45,14 @@ export class NavigationLearningObjective extends Component {
     const objectives = this.props.learningObjectives || [];
     const topics = objectives.map((lo, index) => {
       return (
-        <List.Item key={"learning_objective_" + index}>
-          <Link to={this.getFirstEventPath(pathId, lo.id)}>
+        <List.Item
+          className="navbar-topic-item"
+          key={"learning_objective_" + index}
+        >
+          <Link
+            className="navbar-topic-item-link"
+            to={this.getFirstEventPath(pathId, lo.id)}
+          >
             {this.elide(lo.name)}
           </Link>
         </List.Item>
