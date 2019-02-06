@@ -1,18 +1,22 @@
-const defaultValue = {
-  userData: {
-    first_name: '',
-    middle_name: '',
-    last_name: '',
-    zip_code: '',
-    email: '',
-    in_business: '',
-    password: '',
-    errors: {}
+function defaultState() {
+  return {
+    userData: {
+      first_name: '',
+      middle_name: '',
+      last_name: '',
+      zip_code: '',
+      email: '',
+      in_business: '',
+      password: '',
+      errors: {}
+    }
   }
-};
+}
 
-export default function reducer(state=defaultValue, action) {
+export default function reducer(state=defaultState(), action) {
   switch(action.type) {
+    case 'RESET':
+      return defaultState();
     case 'REGISTER':
       return {...state, userData: {}, userLoading: true, userError: null};
     case 'REGISTER_REJECTED':

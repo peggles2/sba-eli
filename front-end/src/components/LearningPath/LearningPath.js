@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Divider, Grid, Button, Icon } from "semantic-ui-react";
+import { Header, Divider, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -8,6 +8,7 @@ import TopicContentView from "../TopicContentView/TopicContentView";
 import LearningEvent from "../LearningEvent/LearningEvent";
 import LearningPathBreadCrumb from "./LearningPathBreadcrumb";
 import MetaTags from "../SEO/MetaTags";
+import ShareModal from "../ShareModal/ShareModal";
 
 import { getPathWithTopics } from "../../actions/learningPathActions";
 
@@ -15,6 +16,10 @@ import "./LearningPath.scss";
 
 export class LearningPath extends React.Component {
   componentDidMount() {
+    this.initialFunctions();
+  }
+
+  initialFunctions() {
     const id = this.props.match.params.id;
     this.props.dispatch(getPathWithTopics(id));
   }
@@ -23,6 +28,10 @@ export class LearningPath extends React.Component {
     if (this.props.isUserLoggedIn !== prevProps.isUserLoggedIn) {
       const id = this.props.match.params.id;
       this.props.dispatch(getPathWithTopics(id));
+    }
+    
+    if(this.props.match.params.topicId !== prevProps.match.params.topicId && this.props.match.params.eventId !== prevProps.match.params.eventId) {
+      this.initialFunctions();
     }
   }
 
@@ -77,9 +86,10 @@ export class LearningPath extends React.Component {
           <Grid.Column mobile={15} tablet={15} computer={15}>
             <Header as="h2" className={"path-header"}>
               {this.props.learningPath.name}
-              <Button className={"path-header-share mobile hidden"}>
-                Share &nbsp; <Icon name={"share"} />
-              </Button>
+              <ShareModal contentType={'Learning Path'}
+                          title={this.props.learningPath.name}
+                          description={this.props.learningPath.description}
+                          location={window.location.href} />
             </Header>
           </Grid.Column>
         </Grid.Row>

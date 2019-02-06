@@ -18,9 +18,13 @@ export function getStore() {
   // ex:  storage.createMiddleware(engine, ['ACTION_TYPE'])
   const storageMiddleware = storage.createMiddleware(engine);
 
-  const middleware = applyMiddleware(logger, thunk, promise(), storageMiddleware);
+  let middleware = [thunk, promise(), storageMiddleware]
+  
+  if (process.env.NODE_ENV !== 'production') {   
+    middleware = [...middleware, logger]
+  }
 
-  const store = createStore(storageReducer, middleware);
+  const store = createStore(storageReducer, applyMiddleware(...middleware));
   const load = storage.createLoader(engine);
 
   load(store)

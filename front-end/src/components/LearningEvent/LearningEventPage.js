@@ -18,7 +18,9 @@ export class LearningEventPage extends Component {
 
   completeEvent() {
     const { isUserLoggedIn, event } = this.props;
-    if (isUserLoggedIn && !event.completion_requirement.completed) {
+    if (isUserLoggedIn &&
+        event.completion_requirement && 
+        !event.completion_requirement.completed) {
       const { id: path_id, topicId: objective_id } = this.props.match.params;
 
       this.props.dispatch(

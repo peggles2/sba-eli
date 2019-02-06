@@ -23,4 +23,14 @@ class LearningPathsController < ApplicationController
     @learning_path = Canvas::LearningPath.destroy(params[:id])
     render json: @learning_path
   end
+
+  def progress
+    @learning_path = Canvas::LearningPath.progress
+    render json: @learning_path
+  end
+
+  def check_progress
+    @learning_path = Canvas::LearningPath.check_progress(params[:id])
+    render json: @learning_path
+  end
 end

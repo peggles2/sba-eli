@@ -67,7 +67,7 @@ export class LearningEvent extends Component {
             canonicalUrl=""
           />
           <LearningEventHeader event={learningEvent} topicTitle={topicTitle} />
-          <LearningEventManager event={learningEvent} />
+          <LearningEventManager event={learningEvent} courseId={this.props.match.params.id} />
           <Divider />
           <LearningEventFooter
             courseId={course_id}
@@ -75,10 +75,7 @@ export class LearningEvent extends Component {
             event={learningEvent}
           />
         </Container>
-        <LearningEventDiscussion
-          parent_content_type={this.parent_content_type}
-          parent_id={this.parent_id}
-        />
+        <LearningEventDiscussion />
       </div>
     );
   }
