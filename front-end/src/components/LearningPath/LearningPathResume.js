@@ -27,7 +27,7 @@ export class LearningPathResume extends Component {
 
     const courseProgress = this.props.learningPathProgress.course_progress;
 
-    if(typeof courseProgress !== "undefined") {
+    if(courseProgress) {
       complete = courseProgress.requirement_completed_count;
       total = courseProgress.requirement_count;
     };
