@@ -203,13 +203,17 @@ jobs:
             chmod +x ./config/deploy.sh
             ./config/deploy.sh
       - slack/approval:
-          message: "${BRANCH} is ready for UX Review http://${BRANCH}.${DOMAIN}. If approved, go to https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID} to continue workflow"
-          color: "#42e2f4"
+          message: "Branch ${BRANCH} is awaiting UX review http://${BRANCH}.${DOMAIN}"
+          color: "#e8f441"
+          url: "https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}"
   clean-up:
     working_directory: ~/repo
     docker:
       - image: circleci/python:2.7-stretch
     steps:
+      - slack/notify:
+          message: "${BRANCH} has been approved!"
+          color: "#41f49d"
       - checkout
       - run:
           name: Install Dependencies
@@ -290,7 +294,6 @@ jobs:
             /home/circleci/.local/bin/ecs deploy $ECS_CLUSTER $FRONTEND_SERVICE --timeout 600
 workflows:
   version: 2
-
   test_build_review:
     jobs:
       - check_for_secrets
@@ -323,7 +326,6 @@ workflows:
             - jest
             - build
             - review
-
       - clean-up:
           requires:
             - check_for_secrets
