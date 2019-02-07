@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -ex
 
-BRANCH=$(echo ${CIRCLE_BRANCH} | sed -r 's/[_]+/-/g')
 IP=$(ecs-cli ps --cluster ${BRANCH} | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -n 1)
 
 # Delete DNS Record
