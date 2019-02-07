@@ -12,11 +12,19 @@ function defaultState() {
     learningPathsProgressLoading: false,
     learningPathsProgressError: null,
 
+    learningPathProgress: {},
+    learningPathProgressError: null,
+
+    latestUserEnrollment: {},
+    latestUserEnrollmentError: null,
+    hasUserStartedJourney: false,
+
     topicsList: [],
     pathTopicsLoading: true,
     pathTopicsError: null,
 
     enrollUserError: null,
+
     quizzes: [],
     quizzesLoading: null,
     quizzesError: null,
@@ -99,6 +107,24 @@ export default function reducer(state = defaultState(), action) {
         learningPathsProgressLoading: false,
         learningPathsProgressError: null
       };
+    case "GET_PROGRESS_OF_LEARNING_PATH":
+      return {
+        ...state,
+        learningPathProgress: {},
+        learningPathProgressError: null,
+      };
+    case "GET_PROGRESS_OF_LEARNING_PATH_FAILURE":
+      return {
+        ...state,
+        learningPathProgress: null,
+        learningPathProgressError: action.payload.data,
+      };
+    case "GET_PROGRESS_OF_LEARNING_PATH_FULFILLED":
+      return {
+        ...state,
+        learningPathProgress: action.payload.data,
+        learningPathProgressError: null,
+      };
     case "GET_TOPICS_FOR_LEARNING_PATH":
       return {
         ...state,
@@ -146,6 +172,34 @@ export default function reducer(state = defaultState(), action) {
         pathTopicsLoading: false,
         learningPathsLoading: false,
         enrollUserError: null
+      };
+    case "GET_LATEST_USER_ENROLLMENT":
+      return {
+        ...state,
+        latestUserEnrollment: {},
+        latestUserEnrollmentError: null,
+      };
+    case "GET_LATEST_USER_ENROLLMENT_FAILURE":
+      return {
+        ...state,
+        latestUserEnrollment: {},
+        latestUserEnrollmentError: action.payload.data,
+      };
+    case "GET_LATEST_USER_ENROLLMENT_FULFILLED":
+      return {
+        ...state,
+        latestUserEnrollment: action.payload.data,
+        latestUserEnrollmentError: null,
+      };
+    case "USER_HAS_STARTED_JOURNEY":
+      return {
+        ...state,
+        hasUserStartedJourney: true,
+      };
+    case "USER_HAS_NOT_STARTED_JOURNEY":
+      return {
+        ...state,
+        hasUserStartedJourney: false,
       };
     case 'GET_LEARNING_PATH_QUIZZES':
       return {...state, quizzes: [], quizzesLoading: true, quizzesError: null} 

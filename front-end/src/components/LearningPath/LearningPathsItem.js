@@ -6,37 +6,38 @@ import { connect } from "react-redux";
 import LearningPathProgress from "./LearningPathProgress";
 
 export class LearningPathsItem extends Component {
-  state = {
-    topicsList: [],
-  }
 
-  componentDidMount() {
-    const id = this.props.id;
-
-    this.getTopicsList(id);
-  };
-
-  completedMLEs = () => {
+  completedMicroLearningEvents = () => {
     let completed = 0;
 
-    if(typeof this.props.course_progress == "undefined") {
+    const courseProgress = this.props.course_progress;
+
+    if(!courseProgress.error && courseProgress.requirement_completed_count) {
+      completed = courseProgress.requirement_completed_count;
       return completed;
     } else {
-      if (this.props.course_progress.error) {
-        return completed;
-      } else {
-        completed = this.props.course_progress.requirement_completed_count;
+      return completed;
+    };
+  };
 
-        return completed;
-      }
-    }
+  totalMicroLearningEvents = () => {
+    let total = 0;
+
+    const courseProgress = this.props.course_progress;
+
+    if(!courseProgress.error && courseProgress.requirement_count) {
+      total = courseProgress.requirement_count;
+      return total;
+    } else {
+      return total;
+    };
   };
 
   learningPathProgress = () => {
-    const isUserLoggedIn = this.props.isUserLoggedIn;
+    const { isUserLoggedIn, hasUserStartedJourney } = this.props
 
-    if(isUserLoggedIn) {
-      const completed = this.completedMLEs();
+    if(isUserLoggedIn && hasUserStartedJourney) {
+      const completed = this.completedMicroLearningEvents();
       const total = this.totalMicroLearningEvents();
 
       return (
@@ -45,29 +46,6 @@ export class LearningPathsItem extends Component {
         </Card.Content>
       );
     };
-  };
-
-  getTopicsList = (id) => {
-    const baseUrl = process.env.REACT_APP_SERVICE_HOST;
-
-    axios.get(baseUrl + `/learning_objectives/`, {params: {course_id: id}})
-      .then(res => {
-        const topicsList = res.data
-        this.setState({ topicsList })
-      });
-  };
-
-  totalMicroLearningEvents = () => {
-    const reducer = (totalList, number) => totalList + number;
-    const topicsList = this.state.topicsList;
-
-    if(topicsList.length > 0) {
-      const total = topicsList.map(topic => topic.items_count).reduce(reducer);
-
-      return total;
-    } else {
-      return 0
-    }
   };
 
   render() {
@@ -94,6 +72,7 @@ export class LearningPathsItem extends Component {
 const mapStateToProps = store => {
   return {
     isUserLoggedIn: store.login.isUserLoggedIn,
+    hasUserStartedJourney: store.learningPath.hasUserStartedJourney,
   };
 };
 

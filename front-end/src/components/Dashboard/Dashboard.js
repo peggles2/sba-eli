@@ -7,10 +7,19 @@ import DashboardCTA from "./DashboardCTA";
 import MetaTags from "../SEO/MetaTags";
 
 import { connect } from "react-redux";
+import { getLatestUserEnrollment } from "../../actions/learningPathActions";
 
 import "./Dashboard.scss";
 
 export class Dashboard extends Component {
+
+  componentDidMount() {
+    const isUserLoggedIn = this.props.isUserLoggedIn;
+
+    if(isUserLoggedIn) {
+      this.props.getLatestEnrollment();
+    }
+  }
 
   dashboardHeader = (isUserLoggedIn) => {
     if(isUserLoggedIn) {
@@ -18,15 +27,17 @@ export class Dashboard extends Component {
     }
   }
 
-  splash = (isUserLoggedIn) => {
-    if(isUserLoggedIn) {
+  splash = (isUserLoggedIn, hasUserStartedJourney) => {
+    if(isUserLoggedIn && !hasUserStartedJourney) {
       return <DashboardCTA />;
-    } 
-    return <DashboardSplash />;
+    } else if(!isUserLoggedIn) {
+      return <DashboardSplash />;
+    }
   }
 
   render() {
     const isUserLoggedIn = this.props.isUserLoggedIn;
+    const hasUserStartedJourney = this.props.hasUserStartedJourney;
 
     return (
       <div className="dashboard">
@@ -34,7 +45,7 @@ export class Dashboard extends Component {
                   metaDescription="Description for the dashboard"
                   canonicalUrl="https://sba.gov/eli"/>
         { this.dashboardHeader(isUserLoggedIn) }
-        { this.splash(isUserLoggedIn) }
+        { this.splash(isUserLoggedIn, hasUserStartedJourney) }
         <Divider hidden />
         <LearningPaths />
       </div>
@@ -42,8 +53,17 @@ export class Dashboard extends Component {
   }
 };
 
-const mapStateToProps = (store) => {
-  return { isUserLoggedIn: store.login.isUserLoggedIn }
+const mapStateToProps = store => {
+  return {
+    isUserLoggedIn: store.login.isUserLoggedIn,
+    hasUserStartedJourney: store.learningPath.hasUserStartedJourney,
+  };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = dispatch => {
+  return {
+    getLatestEnrollment: () => dispatch(getLatestUserEnrollment()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
