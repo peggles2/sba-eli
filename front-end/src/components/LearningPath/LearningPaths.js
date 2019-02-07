@@ -16,10 +16,10 @@ export class LearningPaths extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    const prev = prevProps.isUserLoggedIn;
-    const next = this.props.isUserLoggedIn;
+    const prevLoggedIn = prevProps.isUserLoggedIn;
+    const nextLoggedIn = this.props.isUserLoggedIn;
 
-    if(prev !== next) {
+    if(prevLoggedIn !== nextLoggedIn) {
       this.props.getLatestEnrollment();
     };
   };

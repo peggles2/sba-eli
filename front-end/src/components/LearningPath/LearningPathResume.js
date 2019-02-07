@@ -12,10 +12,10 @@ export class LearningPathResume extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const prev = prevProps.learningPathId;
-    const next = this.props.learningPathId;
+    const prevId = prevProps.learningPathId;
+    const nextId = this.props.learningPathId;
 
-    if(prev !== next) {
+    if(prevId !== nextId) {
       const id = this.props.learningPathId;
       this.props.getProgressOfLearningPath(id);
     };
@@ -26,9 +26,10 @@ export class LearningPathResume extends Component {
     let total = 0;
 
     const courseProgress = this.props.learningPathProgress.course_progress;
+
     if(typeof courseProgress !== "undefined") {
-      complete = this.props.learningPathProgress.course_progress.requirement_completed_count;
-      total = this.props.learningPathProgress.course_progress.requirement_count;
+      complete = courseProgress.requirement_completed_count;
+      total = courseProgress.requirement_count;
     };
 
     return (
@@ -41,7 +42,7 @@ export class LearningPathResume extends Component {
     const learningPathHeader = this.props.learningPathProgress.name;
     const learningPathDescription = "Maybe it means something more - something we can't yet understand."
 
-    return(
+    return (
       <Container>
         <Grid>
           <Grid.Row>
