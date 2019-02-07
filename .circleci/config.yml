@@ -223,7 +223,7 @@ jobs:
           command: |
             echo 'export TAG=$(echo $CIRCLE_SHA1 | head -c 8)' >> $BASH_ENV
             echo 'export BRANCH=$(echo $CIRCLE_BRANCH | sed -r 's/[_]+/-/g')' >> $BASH_ENV
-            source $BASH_ENV            
+            source $BASH_ENV
       - slack/notify:
           message: "${BRANCH} has been approved!"
           color: "#41f49d"
@@ -319,6 +319,9 @@ workflows:
             - rspec
             - eslint
             - jest
+          filters:
+            branches:
+              ignore: master
       - review:
           requires:
             - check_for_secrets
@@ -327,6 +330,9 @@ workflows:
             - eslint
             - jest
             - build
+          filters:
+            branches:
+              ignore: master
       - review-approval:
           type: approval
           requires:
@@ -337,6 +343,9 @@ workflows:
             - jest
             - build
             - review
+          filters:
+            branches:
+              ignore: master
       - clean-up:
           requires:
             - check_for_secrets
@@ -347,6 +356,9 @@ workflows:
             - build
             - review
             - review-approval
+          filters:
+            branches:
+              ignore: master
   build_deploy:
     jobs:
       - deploy-dev:
