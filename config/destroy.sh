@@ -13,7 +13,7 @@ cat > change-batch.json << EOF
       "Action": "DELETE",
       "ResourceRecordSet": {
         "Name": "${BRANCH}.${DOMAIN}",
-        "Type": "CNAME",
+        "Type": "A",
         "TTL": 60,
         "ResourceRecords": [
           {
