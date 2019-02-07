@@ -203,7 +203,7 @@ jobs:
             chmod +x ./config/deploy.sh
             ./config/deploy.sh
       - slack/approval:
-          message: "${BRANCH} is ready for UX Review http://${BRANCH}.${DOMAIN}"
+          message: "${BRANCH} is ready for UX Review http://${BRANCH}.${DOMAIN}. If approved, go to https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID} to continue workflow"
           color: "#42e2f4"
   clean-up:
     working_directory: ~/repo
