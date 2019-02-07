@@ -27,14 +27,14 @@ export function getLearningPathQuizzes(course_id) {
   };
 }
 
-export function getQuiz(course_id, content_id) {    
+export function getQuiz(course_id, content_id) {
   return (dispatch, getState) => {
     dispatch(
       {
         type: 'GET_LEARNING_PATH_QUIZ',
         payload: axios.get(`/learning_paths/${course_id}/quizzes/${content_id}`, axiosConfig(getState()))
       })
-  };  
+  };
 }
 
 export function getQuizSubmissions(course_id, content_id) {
@@ -43,7 +43,7 @@ export function getQuizSubmissions(course_id, content_id) {
       type: 'GET_LEARNING_PATH_QUIZ_SUBMISSIONS',
       payload: axios.get(`/learning_paths/${course_id}/quizzes/${content_id}/submissions`, axiosConfig(getState()))
     })
-  };  
+  };
 }
 
 export function submitQuiz(course_id, content_id, quiz) {
@@ -53,7 +53,7 @@ export function submitQuiz(course_id, content_id, quiz) {
       type: 'SUBMIT_QUIZ',
       payload: axios.post(`/learning_paths/${course_id}/quizzes`, quiz, axiosConfig(getState()))
     })
-  };  
+  };
 }
 
 export function clearQuizSubmission() {
@@ -105,14 +105,11 @@ export function getLatestUserEnrollment() {
     if ( getState().login.isUserLoggedIn ) {
       const { id } = getState().login.userData.user;
 
-      const request = axios.get(`users/${id}/enrollments/latest`, axiosConfig(getState()))
-
       dispatch({
         type: "GET_LATEST_USER_ENROLLMENT",
-        payload: request,
-      });
-      request.then((res) => {
-        if(res.data === null) {
+        payload: axios.get(`users/${id}/enrollments/latest`, axiosConfig(getState())),
+      }).then((res) => {
+        if(res.value.data === null) {
           dispatch({ type: "USER_HAS_NOT_STARTED_JOURNEY" });
         } else {
           dispatch({ type: "USER_HAS_STARTED_JOURNEY" });
