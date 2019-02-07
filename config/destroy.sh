@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-set -eo pipefail
+set -ex
 
-ip=$(ecs-cli ps --cluster $BRANCH | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -n 1)
+BRANCH=$(echo ${CIRCLE_BRANCH} | sed -r 's/[_]+/-/g')
+IP=$(ecs-cli ps --cluster ${BRANCH} | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -n 1)
 
 # Delete DNS Record
 cat > change-batch.json << EOF
@@ -16,7 +17,7 @@ cat > change-batch.json << EOF
         "TTL": 60,
         "ResourceRecords": [
           {
-            "Value":"${ip}"
+            "Value":"${IP}"
           }
         ]
       }

@@ -12,7 +12,6 @@ jobs:
       - checkout
       - run: pip install --user truffleHog
       - run: /home/circleci/.local/bin/trufflehog --since_commit 65cd594d64625ba2a0fc316d37bd1e6eef738877 --regex --entropy=False ./
-
   rubocop:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
@@ -33,7 +32,6 @@ jobs:
           key: service-layer-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-
   rspec:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
@@ -94,7 +92,6 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
   eslint:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
@@ -180,7 +177,7 @@ jobs:
               docker tag ${SERVICE_NAME} "${ECR_URI}/${SERVICE_NAME}:${TAG}"
               docker push "${ECR_URI}/${SERVICE_NAME}:${TAG}"
             done
-  ux-review:
+  review:
     docker:
       - image: circleci/python:2.7-stretch
     working_directory: ~/repo
@@ -205,20 +202,21 @@ jobs:
           command: |
             chmod +x ./config/deploy.sh
             ./config/deploy.sh
-      - slack/notify:
+      - slack/approval:
           message: "${BRANCH} is ready for UX Review http://${BRANCH}.${DOMAIN}"
           color: "#42e2f4"
   clean-up:
     working_directory: ~/repo
     docker:
-      - image: garland/aws-cli-docker
+      - image: circleci/python:2.7-stretch
     steps:
       - checkout
       - run:
           name: Install Dependencies
           command: |
-            curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-darwin-amd64-latest
-            chmod +x /usr/local/bin/ecs-cli
+            sudo pip install awscli
+            sudo curl -o /usr/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+            sudo chmod +x /usr/bin/ecs-cli
       - run:
           name: Tear Down Cluster
           command: |
@@ -278,10 +276,10 @@ jobs:
           name: Install ECS-Deploy
           command: |
             pip install ecs-deploy --user
-      - run:
-          name: Run Database Migration
-          command: |
-            /home/circleci/.local/bin/ecs run $ECS_CLUSTER $BACKEND_TASK -c $BACKEND_CONTAINER "bin/rails db:migrate RAILS_ENV=development"
+      # - run:
+      #     name: Run Database Migration
+      #     command: |
+      #       /home/circleci/.local/bin/ecs run $ECS_CLUSTER $BACKEND_TASK -c $BACKEND_CONTAINER "bin/rails db:migrate RAILS_ENV=development"
       - run:
           name: Deploy Service Layer
           command: |
@@ -292,7 +290,8 @@ jobs:
             /home/circleci/.local/bin/ecs deploy $ECS_CLUSTER $FRONTEND_SERVICE --timeout 600
 workflows:
   version: 2
-  test_build_deploy:
+
+  test_build_review:
     jobs:
       - check_for_secrets
       - rubocop
@@ -306,12 +305,7 @@ workflows:
             - rspec
             - eslint
             - jest
-          # filters:
-          #   branches:
-          #     only:
-          #       - /sba*/
-          #       - master
-      - ux-review:
+      - review:
           requires:
             - check_for_secrets
             - rubocop
@@ -319,9 +313,6 @@ workflows:
             - eslint
             - jest
             - build
-          # filters:
-          #   branches:
-          #     only: /sba*/
       - review-approval:
           type: approval
           requires:
@@ -331,10 +322,8 @@ workflows:
             - eslint
             - jest
             - build
-            - ux-review
-          # filters:
-          #   branches:
-          #     only: /sba*/
+            - review
+
       - clean-up:
           requires:
             - check_for_secrets
@@ -343,19 +332,11 @@ workflows:
             - eslint
             - jest
             - build
-            - ux-review
+            - review
             - review-approval
-          # filters:
-          #   branches:
-          #     only: /sba*/
+  build_deploy:
+    jobs:
       - deploy-dev:
-          requires:
-            - check_for_secrets
-            - rubocop
-            - rspec
-            - eslint
-            - jest
-            - build
           filters:
             branches:
               only: master

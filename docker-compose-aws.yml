@@ -2,11 +2,11 @@ version: '2'
 
 services:
   proxy:
-    build : ./proxy
     image: ${ECR_URI}/sba-eli-proxy:${TAG}
     ports:
       - "80:80"
       - "8080:8080"
+      - "443:443"
     command: --api --logLevel=INFO
     logging:
       driver: awslogs
@@ -35,7 +35,6 @@ services:
         awslogs-stream-prefix: ui
     labels:
       - traefik.frontend.rule=PathPrefixStrip:/
-      # - traefik.backend=client
       - traefik.port=8000
 
   service-layer:
@@ -54,5 +53,4 @@ services:
         awslogs-stream-prefix: api
     labels:
       - traefik.frontend.rule=PathPrefix:/api
-      # - traefik.backend=api
       - traefik.port=3000

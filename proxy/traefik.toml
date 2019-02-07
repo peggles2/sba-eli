@@ -11,17 +11,28 @@ logLevel = "DEBUG"
 address = ":8080"
 readOnly = true
 
-defaultEntryPoints = ["http"]
+defaultEntryPoints = ["http","https"]
 
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
 
-################################################################
-# ECS Provider
-################################################################
+[acme]
+  email = "dougforcett@eli.fearless.tech"
+  storage = "acme.json"
+  entryPoint = "https"
+  OnHostRule = true
+  caServer = "https://acme-v02.api.letsencrypt.org/directory"
+    [acme.dnsChallenge]
+    provider = "route53"
+    delayBeforeCheck= 0
 
-# Enable ECS Provider.
+[[acme.domains]]
+main = "BRANCH.DOMAIN"
+
 
 [ecs]
 clusters = ["CLUSTER"]

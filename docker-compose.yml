@@ -7,6 +7,7 @@ services:
     ports:
       - 80:80
       - 8080:8080
+      - 443:443
     command: --api --docker
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -19,7 +20,6 @@ services:
       - 8000:8000
     labels:
       traefik.frontend.rule: PathPrefixStrip:/
-      # traefik.backend: client
       traefik.port: 8000
   service-layer:
     build: ./service-layer
@@ -32,5 +32,4 @@ services:
       - AWS_SECRET_ACCESS_KEY
     labels:
       traefik.frontend.rule: PathPrefix:/api
-      # traefik.backend: api
       traefik.port: 3000
