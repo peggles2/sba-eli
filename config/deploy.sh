@@ -49,5 +49,5 @@ aws route53 change-resource-record-sets --hosted-zone-id ${HOSTED_ZONE_ID} \
 
 createCluster
 createService
-updateDns
 sleep 60
+updateDns
