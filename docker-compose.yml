@@ -1,15 +1,35 @@
 version: '2'
 
 services:
+  proxy:
+    build : ./proxy
+    image: sba-eli-proxy
+    ports:
+      - 80:80
+      - 8080:8080
+      - 443:443
+    command: --api --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   front-end:
     build: ./front-end
     image: sba-eli-ui
+    environment:
+      - REACT_APP_SERVICE_HOST=http://localhost
     ports:
-      - "8000:8000"
+      - 8000:8000
+    labels:
+      traefik.frontend.rule: PathPrefixStrip:/
+      traefik.port: 8000
   service-layer:
     build: ./service-layer
     image: sba-eli-api
     ports:
-      - "3000:3000"
-    links:
-      - front-end
+      - 3000:3000
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+    labels:
+      traefik.frontend.rule: PathPrefix:/api
+      traefik.port: 3000

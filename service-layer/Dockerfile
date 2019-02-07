@@ -16,16 +16,27 @@ RUN echo "Installing yarn ..." && \
     apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y yarn && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update && \
+    apt-get install -y \
+        python3 \
+        python3-pip \
+        python3-setuptools \
+        groff \
+        less \
+        jq \
+    && pip3 install --upgrade pip \
+    && apt-get clean
+RUN pip3 --no-cache-dir install --upgrade awscli
 RUN yarn
- RUN mkdir /usr/src/api
+RUN mkdir /usr/src/api
 WORKDIR /usr/src/api
- RUN echo "gem: --no-rdoc --no-ri" > /etc/gemrc
+RUN echo "gem: --no-rdoc --no-ri" > /etc/gemrc
 ADD Gemfile /usr/src/api/Gemfile
 ADD Gemfile.lock /usr/src/api/Gemfile.lock
 RUN bundle install --jobs 20 --retry 5
 ADD . /usr/src/api
 EXPOSE 3000
- COPY ./docker-entrypoint.sh /
+COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
- ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["bundle", "exec","rails", "server", "-b", "0.0.0.0"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD bash -c "bin/rails db:migrate RAILS_ENV=development && bundle exec rails server -b 0.0.0.0"

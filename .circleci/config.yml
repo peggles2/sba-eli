@@ -1,4 +1,7 @@
-version: 2
+version: 2.1
+
+orbs:
+  slack: circleci/slack@1.0.0
 
 jobs:
   check_for_secrets:
@@ -9,7 +12,6 @@ jobs:
       - checkout
       - run: pip install --user truffleHog
       - run: /home/circleci/.local/bin/trufflehog --since_commit 65cd594d64625ba2a0fc316d37bd1e6eef738877 --regex --entropy=False ./
-
   rubocop:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
@@ -30,7 +32,6 @@ jobs:
           key: service-layer-dependencies-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-
   rspec:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
@@ -91,7 +92,6 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-
   eslint:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
@@ -135,8 +135,109 @@ jobs:
           key: front-end-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-
   build:
+    docker:
+      - image: circleci/python:2.7-stretch
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export TAG=$(echo $CIRCLE_SHA1 | head -c 8)' >> $BASH_ENV
+            echo 'export BRANCH=$(echo $CIRCLE_BRANCH | sed -r 's/[_]+/-/g')' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo pip install awscli
+      - run:
+          name: Generate AWS ECR Login
+          command: |
+            echo "Configuring AWS..."
+            aws configure set default.region $AWS_DEFAULT_REGION
+            aws configure set default.output json
+            login="$(aws ecr get-login --no-include-email)"
+            ${login}
+      - run:
+          name: Build Images with Docker-Compose
+          command: |
+            docker-compose build
+          no_output_timeout: 30m
+      - run:
+          name: Create Docker ECS Repo
+          command: |
+            DEPLOYABLE_SERVICES=$(cat docker-compose.yml | grep 'image: ' | cut -d':' -f 2 | tr -d '"')
+            for SERVICE_NAME in $DEPLOYABLE_SERVICES
+            do
+              aws ecr create-repository --region ${AWS_DEFAULT_REGION} \
+                --repository-name ${SERVICE_NAME} || true
+              docker tag ${SERVICE_NAME} "${ECR_URI}/${SERVICE_NAME}:${TAG}"
+              docker push "${ECR_URI}/${SERVICE_NAME}:${TAG}"
+            done
+  review:
+    docker:
+      - image: circleci/python:2.7-stretch
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo pip install awscli
+            sudo curl -o /usr/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+            sudo chmod +x /usr/bin/ecs-cli
+      - run:
+          name: Configure AWS CLI
+          command: |
+            echo "Configuring AWS..."
+            aws configure set default.region $AWS_DEFAULT_REGION
+            aws configure set default.output json
+      - run:
+          name: Deploy
+          command: |
+            chmod +x ./config/deploy.sh
+            ./config/deploy.sh
+      - slack/approval:
+          message: "Branch ${BRANCH} is awaiting UX review http://${BRANCH}.${DOMAIN}"
+          color: "#e8f441"
+          url: "https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}"
+  clean-up:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/python:2.7-stretch
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo pip install awscli
+            sudo curl -o /usr/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+            sudo chmod +x /usr/bin/ecs-cli
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export TAG=$(echo $CIRCLE_SHA1 | head -c 8)' >> $BASH_ENV
+            echo 'export BRANCH=$(echo $CIRCLE_BRANCH | sed -r 's/[_]+/-/g')' >> $BASH_ENV
+            source $BASH_ENV            
+      - slack/notify:
+          message: "${BRANCH} has been approved!"
+          color: "#41f49d"
+      - run:
+          name: Tear Down On-Demand Environment
+          command: |
+            chmod +x config/destroy.sh
+            ./config/destroy.sh
+      - run:
+          name: Failed - Tear Down On-Demand Environment
+          command: echo "Environment tear down failed, contact DevOps support"
+          when: on_fail
+
+  deploy-dev:
     docker:
       - image: circleci/python:2.7-stretch
     working_directory: ~/repo
@@ -186,21 +287,14 @@ jobs:
               docker push "${ECR_URI}"/"${image}":"${git_hash}"
               docker push "${ECR_URI}"/"${image}":unstable
             done
-
-  deploy:
-    docker:
-      - image: circleci/python:2.7-stretch
-    working_directory: ~/repo
-    steps:
-      - checkout
       - run:
           name: Install ECS-Deploy
           command: |
             pip install ecs-deploy --user
-      - run:
-          name: Run Database Migration
-          command: |
-            /home/circleci/.local/bin/ecs run $ECS_CLUSTER $BACKEND_TASK -c $BACKEND_CONTAINER "bin/rails db:migrate RAILS_ENV=development"
+      # - run:
+      #     name: Run Database Migration
+      #     command: |
+      #       /home/circleci/.local/bin/ecs run $ECS_CLUSTER $BACKEND_TASK -c $BACKEND_CONTAINER "bin/rails db:migrate RAILS_ENV=development"
       - run:
           name: Deploy Service Layer
           command: |
@@ -209,11 +303,9 @@ jobs:
           name: Deploy Front End
           command: |
             /home/circleci/.local/bin/ecs deploy $ECS_CLUSTER $FRONTEND_SERVICE --timeout 600
-
-
 workflows:
   version: 2
-  test_build_deploy:
+  test_build_review:
     jobs:
       - check_for_secrets
       - rubocop
@@ -227,10 +319,7 @@ workflows:
             - rspec
             - eslint
             - jest
-          filters:
-            branches:
-              only: master
-      - deploy:
+      - review:
           requires:
             - check_for_secrets
             - rubocop
@@ -238,6 +327,29 @@ workflows:
             - eslint
             - jest
             - build
+      - review-approval:
+          type: approval
+          requires:
+            - check_for_secrets
+            - rubocop
+            - rspec
+            - eslint
+            - jest
+            - build
+            - review
+      - clean-up:
+          requires:
+            - check_for_secrets
+            - rubocop
+            - rspec
+            - eslint
+            - jest
+            - build
+            - review
+            - review-approval
+  build_deploy:
+    jobs:
+      - deploy-dev:
           filters:
             branches:
               only: master

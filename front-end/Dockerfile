@@ -3,5 +3,5 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN yarn install
 COPY . .
-EXPOSE 3000
- CMD ["yarn", "start"]
+EXPOSE 3000 8000
+CMD ["yarn", "start"]

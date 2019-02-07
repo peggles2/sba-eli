@@ -1,0 +1,46 @@
+# enable logging on the debug level
+logLevel = "DEBUG"
+
+# log requests. It defaults to logging to stdout
+# the filters are for logging only requests that get certain http status codes, in this case we log everything
+[accessLog]
+  [accessLog.filters]
+    statusCodes = ["0-600"]
+
+[api]
+address = ":8080"
+readOnly = true
+
+defaultEntryPoints = ["http","https"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+
+[acme]
+  email = "dougforcett@eli.fearless.tech"
+  storage = "acme.json"
+  entryPoint = "https"
+  OnHostRule = true
+  caServer = "https://acme-v02.api.letsencrypt.org/directory"
+    [acme.dnsChallenge]
+    provider = "route53"
+    delayBeforeCheck= 0
+
+[[acme.domains]]
+main = "BRANCH.DOMAIN"
+
+
+[ecs]
+clusters = ["CLUSTER"]
+watch = true
+domain = "BRANCH.DOMAIN"
+autoDiscoverClusters = false
+refreshSeconds = 15
+exposedByDefault = true
+region = "AWS_DEFAULT_REGION"
+accessKeyID = "AWS_ACCESS_KEY_ID"
+secretAccessKey = "AWS_SECRET_ACCESS_KEY"
