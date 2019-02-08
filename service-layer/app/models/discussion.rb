@@ -47,6 +47,9 @@ class Discussion
   rescue DiscourseApi::UnauthenticatedError
     errors.add(:user, " is unable to post. Please contact the administrator.")
     false
+  rescue DiscourseApi::Error
+    errors.add("An error was detected trying to post. Please contact the administrator.")
+    false
   end
 
   private
