@@ -2,7 +2,7 @@
 #
 # Table name: courses
 #
-#  id                                   :bigint(8)        not null, primary key
+#  id                                   :bigint(8)        not null
 #  name                                 :string(255)
 #  account_id                           :bigint(8)        not null
 #  group_weighting_scheme               :string(255)
@@ -52,32 +52,6 @@
 #  show_announcements_on_home_page      :boolean
 #  home_page_announcement_limit         :integer
 #  latest_outcome_import_id             :bigint(8)
-#
-# Indexes
-#
-#  index_courses_on_abstract_course_id                 (abstract_course_id) WHERE (abstract_course_id IS NOT NULL)
-#  index_courses_on_account_id                         (account_id)
-#  index_courses_on_enrollment_term_id                 (enrollment_term_id)
-#  index_courses_on_integration_id                     (integration_id,root_account_id) UNIQUE WHERE (integration_id IS NOT NULL)
-#  index_courses_on_lti_context_id                     (lti_context_id) UNIQUE
-#  index_courses_on_root_account_id                    (root_account_id)
-#  index_courses_on_self_enrollment_code               (self_enrollment_code) UNIQUE WHERE (self_enrollment_code IS NOT NULL)
-#  index_courses_on_sis_batch_id                       (sis_batch_id) WHERE (sis_batch_id IS NOT NULL)
-#  index_courses_on_sis_source_id_and_root_account_id  (sis_source_id,root_account_id) UNIQUE WHERE (sis_source_id IS NOT NULL)
-#  index_courses_on_template_course_id                 (template_course_id)
-#  index_courses_on_uuid                               (uuid)
-#  index_courses_on_wiki_id                            (wiki_id) WHERE (wiki_id IS NOT NULL)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (abstract_course_id => abstract_courses.id)
-#  fk_rails_...  (account_id => accounts.id)
-#  fk_rails_...  (enrollment_term_id => enrollment_terms.id)
-#  fk_rails_...  (latest_outcome_import_id => outcome_imports.id)
-#  fk_rails_...  (root_account_id => accounts.id)
-#  fk_rails_...  (sis_batch_id => sis_batches.id)
-#  fk_rails_...  (template_course_id => courses.id)
-#  fk_rails_...  (wiki_id => wikis.id)
 #
 
 class LearningPath < ApplicationRecord
