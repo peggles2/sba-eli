@@ -90,7 +90,7 @@ export class UserComment extends Component {
             </Grid.Row>
             <Grid.Row columns={1}>
               <Grid.Column>
-                {replies.body}
+                {replies.body.replace(/(<([^>]+)>)/ig, "")}
               </Grid.Column>
             </Grid.Row>
             {this.replyLink(parent_content_type, replies)}
