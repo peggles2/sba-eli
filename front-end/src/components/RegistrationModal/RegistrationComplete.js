@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Grid} from "semantic-ui-react";
-import "./RegistrationModal.scss";
 
 export default class RegistrationComplete extends Component {
   render() {
@@ -10,12 +9,12 @@ export default class RegistrationComplete extends Component {
                 <img className='logo' src={`/modal-graphic-2x.png`} alt="Ascent"/>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row className='registration-message' centered columns={16}>
+            <Grid.Row className='success-message' centered columns={16}>
               <Grid.Column width={3}>
                 <span >Congrats!</span>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row className='registration-message' centered columns={14}>
+            <Grid.Row className='success-message' centered columns={14}>
               <Grid.Column width={8}>
                 <span>You've successfully registered!</span>
               </Grid.Column>

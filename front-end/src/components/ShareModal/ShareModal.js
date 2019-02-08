@@ -48,7 +48,7 @@ export default class ShareModal extends React.Component {
               <h2>Share this {this.props.contentType}</h2>
             </Grid.Column>
             <Grid.Column width={2}>
-              <Button className='share-close-button' onClick={this.handleClose} icon><Icon link name='close' size='large'/></Button>
+              <Button className='eli-modal-close-button' onClick={this.handleClose} icon><Icon link name='close' size='large'/></Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
