@@ -6,8 +6,10 @@ module Canvas
     base_uri ENV["CANVAS_HOST"] + "/api/v1"
 
     def self.all(course_id, module_id)
-      uri = masquerade_current_user("/courses/#{course_id}/modules/#{module_id}/items")
-      results = JSON.parse get(uri, base_options).body
+      uri = "/courses/#{course_id}/modules/#{module_id}/items"
+      options = custom_options(masquerade: true, per_page: 100)
+
+      results = JSON.parse get(uri, options).body
       results.each do |event|
         custom_data = EventCustomData.where(event_id: event["id"]).first
         event["custom_data"] = custom_data if custom_data
@@ -16,8 +18,10 @@ module Canvas
     end
 
     def self.find(course_id, module_id, id)
-      url = masquerade_current_user("/courses/#{course_id}/modules/#{module_id}/items/#{id}")
-      learning_event = get(url, base_options)
+      uri = "/courses/#{course_id}/modules/#{module_id}/items/#{id}"
+      options = custom_options(masquerade: true)
+
+      learning_event = get(uri, options)
       if learning_event["url"]
         learning_event["eventContent"] = get(learning_event["url"], base_options)
       end
@@ -37,9 +41,10 @@ module Canvas
     end
 
     def self.done(course_id, module_id, id)
-      uri = masquerade_current_user("/courses/#{course_id}/modules/#{module_id}/"\
-            "items/#{id}/mark_read")
-      JSON.parse post(uri, base_options).body
+      uri = "/courses/#{course_id}/modules/#{module_id}/items/#{id}/mark_read"
+      options = custom_options(masquerade: true)
+
+      JSON.parse post(uri, options).body
     end
   end
 end
