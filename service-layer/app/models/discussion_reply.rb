@@ -15,7 +15,7 @@ class DiscussionReply
                 :user
 
   validates :discussion_id, presence: true
-  validates :raw, presence: true, length: { minimum: 20 }
+  validates :raw, presence: true
   validates :user, presence: true
 
   def create

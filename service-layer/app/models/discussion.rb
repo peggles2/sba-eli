@@ -17,7 +17,7 @@ class Discussion
                 :reply_to_post_number,
                 :user
 
-  validates :raw, presence: true, length: { minimum: 20 }
+  validates :raw, presence: true
   validates :user, :content_type, :content_id, presence: true
 
   def create
