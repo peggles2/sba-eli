@@ -37,7 +37,7 @@ class DiscussionReply
       self.post_number = response["post_number"]
       self.reply_to_post_number = response["reply_to_post_number"]
     else
-      #How do we want to capture the null that comes back from discourse?
+      # How do we want to capture the null that comes back from discourse?
     end
 
     true
