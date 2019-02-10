@@ -21,12 +21,14 @@ module Canvas
         }
       end
 
-      def options_with_query(queries)
-        base_options.merge(query: queries)
-      end
+      def custom_options(options = {})
+        per_page = options.fetch(:per_page, nil)
+        masquerade = options.fetch(:masquerade, false)
+        query = options.fetch(:query, {})
 
-      def masquerade_current_user(uri)
-        Current.user ? "#{uri}?as_user_id=#{Current.user&.id}" : uri
+        query.merge!(masquerade_current_user_query) if masquerade
+        query.merge!(pagination_query(per_page)) if per_page
+        base_options.merge(query: query)
       end
 
       def pagination_query(per_page = 100)

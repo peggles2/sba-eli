@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import { Accordion, Item } from "semantic-ui-react";
 
-import TopicContentItem from "../TopicContentItem";
+import { TopicContentItem } from "../TopicContentItem";
 
 describe("TopicProgressBar", () => {
   it("should render all base parts of TopicContentItem", () => {
@@ -32,8 +32,9 @@ describe("TopicProgressBar", () => {
 
   it("should handle the click on event list expander properly", () => {
     const topic = { id: 1, name: "Test" };
-    const props = { course_id: 1, topic };
-
+    const learningEventsCollection = { 1: { 1: [] }}
+    const props = { course_id: 1, topic, learningEventsCollection };
+    
     const wrapper = shallow(<TopicContentItem {...props} />);
 
     expect(wrapper.state("listVisible")).toBe(true);

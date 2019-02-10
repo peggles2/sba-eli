@@ -35,10 +35,10 @@ module Canvas
       # Commenting out to ignore submissionss for assessment purposes.
       # We can get submission objects once we actually start grading quizes
       # res = get("/quiz_submissions/#{submission["id"]}/questions", base_options)
-      queries = pagination_query
+      uri = "/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions"
+      options = custom_options(per_page: 100)
 
-      res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions",
-                options_with_query(queries))
+      res = get(uri, options)
       questions = res.body
 
       raise Exception, questions unless res.code == 200
@@ -97,10 +97,10 @@ module Canvas
     end
 
     def self.grade(learning_path_id, quiz_id, assessments, quiz)
-      queries = pagination_query
+      uri = "/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions"
+      options = custom_options(per_page: 100)
 
-      res = get("/courses/#{learning_path_id}/quizzes/#{quiz_id}/questions",
-                options_with_query(queries))
+      res = get(uri, options)
       questions = res.body
       raise Exception, questions unless res.code == 200
 
@@ -182,6 +182,19 @@ module Canvas
       raise Exception, body unless res.code == 200
 
       JSON.parse body
+    end
+
+    def self.put_quiz_question(course_id, quiz_id, question)
+      q = {
+        quiz_id: question[:quiz_id],
+        id: question[:id],
+        question: question.except(:quiz_id, :id),
+      }
+
+      options = base_options.merge(body: q.to_json)
+      options[:headers]["Content-Type"] = "application/json"
+      uri = "/courses/#{course_id}/quizzes/#{quiz_id}/questions/#{question[:id]}"
+      put(uri, options)
     end
   end
 end

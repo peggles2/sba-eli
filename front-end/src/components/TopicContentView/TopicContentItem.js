@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import TopicContentEventList from "./TopicContentEventList";
 import { Item, Button, Icon, Divider, Accordion } from "semantic-ui-react";
+import { connect } from "react-redux";
 
-export default class TopicContentItem extends Component {
+export  class TopicContentItem extends Component {
   state = { listVisible: true, activeIndex: 0 };
 
   //Using this as a collapse element, no other option in semantic. Open sets the index of accordion
@@ -29,6 +30,17 @@ export default class TopicContentItem extends Component {
     return this.getCustomData(topic, 'thumbnail_url', '/Image_Placeholder.png');
   }
 
+  getNumberOfLearningEvents() {
+    const { topic, course_id } = this.props;
+
+    try {
+      return this.props.learningEventsCollection[course_id][topic.id].length;
+    } catch {
+      console.log('warning: events collection not properly passed into TopicContentItem');
+      return 0;
+    }
+  }
+
   render() {
     const { topic, course_id } = this.props;
     const { listVisible, activeIndex } = this.state;
@@ -46,7 +58,7 @@ export default class TopicContentItem extends Component {
               <Item.Header className={"topic-content-item-header"}>
                 {topic.name}
               </Item.Header>
-              <Item.Meta># of Learning Events ({this.getCustomData(topic, 'time', 'unknown')})</Item.Meta>
+              <Item.Meta>{this.getNumberOfLearningEvents()} Learning Events ({this.getCustomData(topic, 'time', 'unknown')})</Item.Meta>
               <Item.Description>
                 {this.getCustomData(topic, 'description', '')}
               </Item.Description>
@@ -80,3 +92,11 @@ export default class TopicContentItem extends Component {
     );
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    learningEventsCollection: store.learningEvent.learningEventsCollection
+  };
+};
+
+export default connect(mapStateToProps)(TopicContentItem);

@@ -6,8 +6,10 @@ module Canvas
     base_uri ENV["CANVAS_HOST"] + "/api/v1"
 
     def self.all(course_id)
-      uri = masquerade_current_user("/courses/#{course_id}/modules?per_page=100")
-      result = JSON.parse get(uri, base_options).body
+      uri = "/courses/#{course_id}/modules"
+      options = custom_options(masquerade: true, per_page: 100)
+
+      result = JSON.parse get(uri, options).body
       result.each do |topic|
         custom_data = TopicCustomData.where(topic_id: topic["id"]).first
         topic["custom_data"] = custom_data if custom_data
@@ -16,8 +18,10 @@ module Canvas
     end
 
     def self.find(course_id, id)
-      uri = masquerade_current_user("/courses/#{course_id}/modules/#{id}")
-      result = JSON.parse get(uri, base_options).body
+      uri = "/courses/#{course_id}/modules/#{id}"
+      options = custom_options(masquerade: true)
+
+      result = JSON.parse get(uri, options).body
       custom_data = TopicCustomData.where(topic_id: result["id"]).first
       result["custom_data"] = custom_data if custom_data
       result

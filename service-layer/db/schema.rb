@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_193107) do
+ActiveRecord::Schema.define(version: 2019_02_01_180344) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "abstract_courses", force: :cascade do |t|
@@ -1632,6 +1631,16 @@ ActiveRecord::Schema.define(version: 2019_01_28_193107) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_fearless_event_custom_data_on_event_id", unique: true
+  end
+
+  create_table "fearless_learning_path_custom_data", force: :cascade do |t|
+    t.integer "learning_path_id", null: false
+    t.string "time"
+    t.string "description"
+    t.string "thumbnail_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["learning_path_id"], name: "index_fearless_learning_path_custom_data_on_learning_path_id", unique: true
   end
 
   create_table "fearless_taggings", id: :serial, force: :cascade do |t|
