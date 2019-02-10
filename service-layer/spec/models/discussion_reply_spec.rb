@@ -32,11 +32,6 @@ describe "DiscussionReply" do
     expect(subject).to_not be_valid
   end
 
-  it "is invalid if the raw value is under 20 characters" do
-    subject.raw = "Under 20"
-    expect(subject).to_not be_valid
-  end
-
   it "creates a new post" do
     VCR.turned_off do
       stub_discourse_create_post

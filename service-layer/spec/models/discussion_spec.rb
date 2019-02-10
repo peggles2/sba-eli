@@ -38,11 +38,6 @@ describe "Discussion" do
     expect(subject).to_not be_valid
   end
 
-  it "is invalid if the raw value is under 20 characters" do
-    subject.raw = "Under 20"
-    expect(subject).to_not be_valid
-  end
-
   it "is invalid without user" do
     subject.user = nil
     expect(subject).to_not be_valid
