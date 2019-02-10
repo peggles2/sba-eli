@@ -25,16 +25,16 @@ class Discussion
 
     topic_id = 10
 
-    if !response.nil? 
+    if !response.nil?
       # Topic did not need to be moderated and the response came back as expected
       topic_id = response["topic_id"]
-    else 
+    else
       # Since we get back a null response for items that go into moderation
-      # We can set the topic value manually by checking our table and grabbing 
+      # We can set the topic value manually by checking our table and grabbing
       # heighest value topic id
       topic_id = DiscussionMap.maximum("discussion_id")
 
-      # If there are no values in our table, start the topic id beyond the 
+      # If there are no values in our table, start the topic id beyond the
       # default topic ids in discourse
       if topic_id.nil? || topic_id.to_i < 10
         topic_id = 9
@@ -43,7 +43,7 @@ class Discussion
       # Increment whatever id is the max by one to get the next available id
       topic_id = topic_id.to_i + 1
     end
-  
+
     self.response = client.create_topic(
       topic_id: topic_id,
       skip_validations: true,
