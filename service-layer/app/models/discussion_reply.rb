@@ -28,7 +28,7 @@ class DiscussionReply
       api_username: username,
     )
 
-    if !self.response.nil?
+    if !response.nil?
       self.id = response["id"]
       self.body = response["cooked"]
       self.user_name = response["display_username"]

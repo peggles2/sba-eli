@@ -25,7 +25,7 @@ class Discussion
 
     topic_id = 10
 
-    if !self.response.nil? 
+    if !response.nil? 
       # Topic did not need to be moderated and the response came back as expected
       topic_id = response["topic_id"]
     else 
@@ -57,7 +57,7 @@ class Discussion
       discussion_id: topic_id,
     )
 
-    if !self.response.nil?
+    if !response.nil?
       self.id = response["id"]
       self.body = response["cooked"]
       self.user_name = response["display_username"]
