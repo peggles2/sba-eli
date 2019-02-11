@@ -14,22 +14,20 @@ export class TopicProgress extends Component {
   };
 
   getCompletedTopics = () => {
-    const error = this.props.learningPathProgress.errors;
-
-    if(!error) {
-      return this.props.learningPathProgress.course_progress.requirement_completed_count;
-    } else {
+    if(this.props.learningPathProgress.errors) {
       return 0;
+    } else {
+      return this.props.learningPathProgress.course_progress.requirement_completed_count;
     }
   };
 
   getTotalTopics = () => {
     const error = this.props.learningPathProgress.errors;
 
-    if(!error) {
-      return this.props.learningPathProgress.course_progress.requirement_count;
-    } else {
+    if(this.props.learningPathProgress.errors) {
       return this.props.topicsComplete;
+    } else {
+      return this.props.learningPathProgress.course_progress.requirement_count;
     }
   };
 

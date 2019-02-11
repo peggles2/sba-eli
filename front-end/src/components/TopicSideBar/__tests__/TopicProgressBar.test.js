@@ -28,20 +28,38 @@ describe("TopicProgressBar", () => {
   });
 
   it("should show a progress bar if logged in and not all topics complete", () => {
-    const props = { isUserLoggedIn: true, topicsComplete: 2, topicsTotal: 10 };
+    const props = {
+      isUserLoggedIn: true,
+      topicsTotal: 10,
+      learningPathProgress: {
+        course_progress: {
+          requirement_completed_count: 2,
+          requirement_count: 10,
+        },
+      },
+      getProgressOfLearningPath: jest.fn()
+    };
 
     const wrapper = shallow(<TopicProgress {...props} />);
-    wrapper.setState({ isLoggedIn: true });
 
     expect(wrapper.find(Grid).exists()).toBe(true);
     expect(wrapper.find(Progress).exists()).toBe(true);
   });
 
   it("should show a appropriate text if logged in and all topics complete", () => {
-    const props = { isUserLoggedIn: true, topicsComplete: 10, topicsTotal: 10 };
+    const props = {
+      isUserLoggedIn: true,
+      topicsTotal: 10,
+      learningPathProgress: {
+        course_progress: {
+          requirement_completed_count: 10,
+          requirement_count: 10,
+        },
+      },
+      getProgressOfLearningPath: jest.fn()
+    };
 
     const wrapper = shallow(<TopicProgress {...props} />);
-    wrapper.setState({ isLoggedIn: true });
 
     expect(wrapper.find(Grid).exists()).toBe(true);
 
