@@ -11,6 +11,12 @@ export class DiscussionPost extends Component {
     this.submitPost = this.submitPost.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.post_id !== prevProps.post_id) {
+      this.clearPostById(this.props.post_id)
+    }
+  }
+
   clearPost(event, post_id) {
     event.preventDefault();
     this.clearPostById(post_id)
