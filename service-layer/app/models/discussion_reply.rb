@@ -63,6 +63,9 @@ class DiscussionReply
     def from_discourse_list(reponse)
       posts_hash = reponse["post_stream"]["posts"]
 
+      # remove the initial system generated post
+      posts_hash.delete_at(0)
+
       # create collection of all top level posts
       post_list = posts_hash.reject { |r| r["reply_to_post_number"].present? }.
         map { |reply| DiscussionReply.from_hash(reply) }
