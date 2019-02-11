@@ -13,6 +13,10 @@ export class DiscussionPost extends Component {
 
   clearPost(event, post_id) {
     event.preventDefault();
+    this.clearPostById(post_id)
+  }
+
+  clearPostById(post_id) {
     if (document.getElementById("discussion_input_" + post_id)) {
       document.getElementById("discussion_input_" + post_id).value = "";
     }
@@ -53,6 +57,7 @@ export class DiscussionPost extends Component {
           <ul>{this.getErrorList(post_id)}</ul>
         </Message>
       } else {
+        this.clearPostById(post_id)
         return <Message positive>
           <Message.Header>Post submitted</Message.Header>
           <p>If you are new to our system, your post will be moderated before going live</p>
