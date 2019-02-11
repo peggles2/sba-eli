@@ -23,38 +23,35 @@ class Discussion
   def create
     return false unless valid?
 
-    topic_id = 10
+    # Create the dicussion topic with a user that has elevated trust level
 
-    if !response.nil?
-      # Topic did not need to be moderated and the response came back as expected
-      topic_id = response["topic_id"]
-    else
-      # Since we get back a null response for items that go into moderation
-      # We can set the topic value manually by checking our table and grabbing
-      # heighest value topic id
-      topic_id = DiscussionMap.maximum("discussion_id")
-
-      # If there are no values in our table, start the topic id beyond the
-      # default topic ids in discourse
-      if topic_id.nil? || topic_id.to_i < 10
-        topic_id = 9
-      end
-
-      # Increment whatever id is the max by one to get the next available id
-      topic_id = topic_id.to_i + 1
-    end
-
-    self.response = client.create_topic(
-      topic_id: topic_id,
+    topic_reponse = DiscourseClient.create.create_topic(
       skip_validations: true,
       title: "Discussion #{content_type} #{content_id}",
-      raw: raw,
+      raw: "System generated first reply for #{content_type} #{content_id}. Disregard",
     )
 
-    DiscussionMap.create!(
+    Rails.logger.info "* Discourse Topic Reply **************************************"
+    Rails.logger.info topic_reponse
+
+    discussion_map = DiscussionMap.create!(
       content_type: content_type,
       content_id: content_id,
-      discussion_id: topic_id,
+      discussion_id: topic_reponse["topic_id"],
+    )
+
+    Rails.logger.info "* Discussion Map discussion_id *******************************"
+    Rails.logger.info discussion_map.discussion_id
+
+    # Create reply to dicussion topic for a general user.
+    # The topic return may contain a null response, because users that do not
+    # have an appropriate level of trust, or who are under the approve post count
+    # will be placed in to moderation for review
+
+    self.response = client.create_post(
+      topic_id: discussion_map.discussion_id,
+      raw: raw,
+      api_username: username,
     )
 
     if !response.nil?
@@ -65,8 +62,6 @@ class Discussion
       self.timestamp = response["created_at"]
       self.post_number = response["post_number"]
       self.reply_to_post_number = response["reply_to_post_number"]
-    else
-      # How do we want to capture the null that comes back from discourse?
     end
 
     true
