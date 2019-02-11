@@ -63,6 +63,7 @@ export default class TopicSideBar extends Component {
           </Accordion>
 
           <TopicProgress
+            course_id={this.props.course_id}
             topicsComplete={topicsComplete}
             topicsTotal={topics.length}
           />

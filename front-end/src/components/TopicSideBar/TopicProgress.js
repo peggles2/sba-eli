@@ -2,15 +2,43 @@ import React, { Component } from "react";
 import { Grid, Icon, Progress, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-export default class TopicProgress extends Component {
-  state = { isLoggedIn: true };
+import { connect } from "react-redux";
+import { getProgressOfLearningPath } from "../../actions/learningPathActions";
+
+export class TopicProgress extends Component {
+  componentDidMount() {
+    if(this.props.isUserLoggedIn) {
+      const id = this.props.course_id;
+      this.props.getProgressOfLearningPath(id);
+    };
+  };
+
+  getCompletedTopics = () => {
+    const error = this.props.learningPathProgress.errors;
+
+    if(!error) {
+      return this.props.learningPathProgress.course_progress.requirement_completed_count;
+    } else {
+      return 0;
+    }
+  };
+
+  getTotalTopics = () => {
+    const error = this.props.learningPathProgress.errors;
+
+    if(!error) {
+      return this.props.learningPathProgress.course_progress.requirement_count;
+    } else {
+      return this.props.topicsComplete;
+    }
+  };
 
   renderForSessionState() {
-    const { isLoggedIn } = this.state;
-    if (isLoggedIn) {
-      //show progress bar or completed journey
-      const { topicsComplete, topicsTotal } = this.props;
-      const pathComplete = topicsComplete === topicsTotal; //Logic for path complete
+    const { isUserLoggedIn } = this.props;
+    if (isUserLoggedIn) {
+      const topicsComplete = this.getCompletedTopics();
+      const topicsTotal = this.getTotalTopics();
+      const pathComplete = topicsComplete === topicsTotal;
       if (pathComplete) {
         //display "you completed your journey!"
         return (
@@ -92,5 +120,20 @@ export default class TopicProgress extends Component {
     return (
       <Grid className={"topic-progress"}>{this.renderForSessionState()}</Grid>
     );
-  }
-}
+  };
+};
+
+const mapStateToProps = store => {
+  return {
+    isUserLoggedIn: store.login.isUserLoggedIn,
+    learningPathProgress: store.learningPath.learningPathProgress,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getProgressOfLearningPath: (id) => { dispatch(getProgressOfLearningPath(id)) },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopicProgress);
