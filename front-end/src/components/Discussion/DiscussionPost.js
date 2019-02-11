@@ -17,7 +17,7 @@ export class DiscussionPost extends Component {
   }
 
   clearPostById(post_id) {
-    if (document.getElementById("discussion_input_" + post_id)) {
+    if (post_id && document.getElementById("discussion_input_" + post_id)) {
       document.getElementById("discussion_input_" + post_id).value = "";
     }
   }
