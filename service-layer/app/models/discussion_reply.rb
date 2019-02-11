@@ -36,8 +36,6 @@ class DiscussionReply
       self.timestamp = response["created_at"]
       self.post_number = response["post_number"]
       self.reply_to_post_number = response["reply_to_post_number"]
-    else
-      # How do we want to capture the null that comes back from discourse?
     end
 
     true
