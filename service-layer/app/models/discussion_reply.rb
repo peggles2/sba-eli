@@ -60,8 +60,8 @@ class DiscussionReply
   end
 
   class << self
-    def from_discourse_list(reponse)
-      posts_hash = reponse["post_stream"]["posts"]
+    def from_discourse_list(response)
+      posts_hash = response["post_stream"]["posts"]
 
       # remove the initial system generated post
       posts_hash.delete_at(0)
