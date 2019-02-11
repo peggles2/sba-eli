@@ -8,8 +8,6 @@ import {toggleLogin, toggleRegister} from '../../actions/navbarActions';
 import {connect} from "react-redux";
 import { withRouter } from 'react-router-dom';
 
-import "./RegistrationModal.scss"
-
 export class RegistrationModal extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +23,7 @@ export class RegistrationModal extends React.Component {
   render() {
     return <Modal id="registrationModal"
                   open={this.props.open}
-                  closeOnDimmerClick={false} 
+                  closeOnDimmerClick={false}
                   size={'tiny'}>
       <Modal.Content>
         <Grid>
@@ -34,7 +32,7 @@ export class RegistrationModal extends React.Component {
               <h2>{this.getTitle(this.props.type)}</h2>
             </Grid.Column>
             <Grid.Column width={2}>
-              <Button className='close-icon' icon><Icon link name='close' size='large' onClick={this.close}/></Button>
+              <Button className='eli-modal-close-button' onClick={this.close} icon><Icon link name='close' size='large'/></Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
