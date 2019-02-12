@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Card, Image } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 import { connect } from "react-redux";
 import LearningPathProgress from "./LearningPathProgress";
 
