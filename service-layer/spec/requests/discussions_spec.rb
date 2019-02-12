@@ -33,8 +33,7 @@ describe "DiscussionsController" do
             },
           },
           headers: authenticated_header(email: email, id: user_id)
-        json = JSON.parse(response.body)
-        puts json
+
         expect(response).to be_successful
       end
     end

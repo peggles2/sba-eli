@@ -11,6 +11,43 @@ module Mocks
       stub_authorized_request(:get, url).to_return(status: status, body: response_body)
     end
 
+    def stub_get_learning_path(options = {})
+      learning_path_id = options.fetch(:learning_path_id, 1)
+      status = options.fetch(:status, 200)
+      url = "#{ENV['CANVAS_HOST']}/api/v1/courses/#{learning_path_id}"
+
+      response_body = options.fetch(:response_body,
+                                  json_hash("learning_paths/learning_path.json"))
+
+      response_body["id"] = learning_path_id
+      stub_authorized_request(:get, url).to_return(status: status, body: response_body.to_json)
+    end
+
+    def stub_update_learning_path(options = {})
+      learning_path_id = options.fetch(:learning_path_id, 1)
+      name = options.fetch(:name, 1)
+      status = options.fetch(:status, 201)
+      url = "#{ENV['CANVAS_HOST']}/api/v1/courses/#{learning_path_id}"
+
+      response_body = options.fetch(:response_body,
+                                  json_hash("learning_paths/learning_path.json"))
+
+      response_body["id"] = learning_path_id
+      response_body["name"] = name
+
+      stub_authorized_request(:put, url).to_return(status: status, body: response_body.to_json)
+    end
+
+    def stub_delete_learning_path(options = {})
+      learning_path_id = options.fetch(:learning_path_id, 1)
+      status = options.fetch(:status, 200)
+      url = "#{ENV['CANVAS_HOST']}/api/v1/courses/#{learning_path_id}"
+
+      response_body = { "delete": true }.to_json
+
+      stub_authorized_request(:delete, url).to_return(status: status, body: response_body)
+    end
+
     def stub_enroll_in_learning_path(options = {})
       status = options.fetch(:status, 200)
       learning_path_id = options.fetch(:learning_path_id, 6)
