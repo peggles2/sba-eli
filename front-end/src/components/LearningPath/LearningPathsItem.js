@@ -13,10 +13,8 @@ export class LearningPathsItem extends Component {
 
     if(!courseProgress.error && courseProgress.requirement_completed_count) {
       completed = courseProgress.requirement_completed_count;
-      return completed;
-    } else {
-      return completed;
     } 
+    return completed;
   };
 
   totalMicroLearningEvents = () => {
@@ -26,10 +24,8 @@ export class LearningPathsItem extends Component {
 
     if(!courseProgress.error && courseProgress.requirement_count) {
       total = courseProgress.requirement_count;
-      return total;
-    } else {
-      return total;
     }
+    return total;
   };
 
   learningPathProgress = () => {
