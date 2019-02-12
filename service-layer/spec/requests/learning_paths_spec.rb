@@ -83,67 +83,70 @@
 require "rails_helper"
 
 describe "LearningPaths" do
+  include Mocks::LearningPathHelper
   fixtures :courses
 
   describe "GET /learning_paths" do
     it "gets a list of all courses" do
-      VCR.use_cassette("learning_paths/get_learning_paths") do
-        get "/learning_paths"
+      stub_fetch_all_learning_paths
+      get "/learning_paths"
 
-        json = JSON.parse(response.body)
+      json = JSON.parse(response.body)
 
-        expect(response).to be_successful
-        expect(json.size).to eq(3)
-        expect(json[0]["name"]).to eq("Avengers")
-      end
+      expect(response).to be_successful
+      expect(json.size).to eq(2)
+      expect(json[0]["name"]).to eq("Test Course")
     end
   end
 
   describe "GET /learning_paths/:id" do
     it "gets a single learning path" do
-      VCR.use_cassette("learning_paths/get_lp") do
-        learning_path_id = 1
+      learning_path_id = 1
+      stub_get_learning_path(learning_path_id: learning_path_id)
 
-        get "/learning_paths/#{learning_path_id}"
+      get "/learning_paths/#{learning_path_id}"
 
-        json = JSON.parse(response.body)
+      json = JSON.parse(response.body)
 
-        expect(response).to be_successful
-        expect(json["name"]).to eq("Avengers")
-      end
+      expect(response).to be_successful
+      expect(json["name"]).to eq("Test Course")
     end
   end
 
   describe "UPDATE /learning_paths/:id" do
     it "updates a learning path" do
-      VCR.use_cassette("learning_paths/update_lp") do
-        learning_path_id = 2
+      learning_path_id = 2
+      name = "Foo"
 
-        params = {
-          name: "foo",
-        }
+      stub_update_learning_path(
+        learning_path_id: learning_path_id,
+        name: name,
+      )
 
-        put "/learning_paths/#{learning_path_id}", params: params
+      params = {
+        name: name,
+      }
 
-        json = JSON.parse(response.body)
+      put "/learning_paths/#{learning_path_id}", params: params
 
-        expect(response).to be_successful
-        expect(json["name"]).to eq("foo")
-      end
+      json = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(json["name"]).to eq(name)
     end
   end
 
   describe "DELETE /learning_paths/:id" do
     it "deletes a learning path" do
-      VCR.use_cassette("learning_paths/delete_lp") do
-        learning_path_id = 3
-        delete "/learning_paths/#{learning_path_id}"
+      learning_path_id = 3
+      stub_delete_learning_path(learning_path_id: learning_path_id)
 
-        json = JSON.parse(response.body)
+      delete "/learning_paths/#{learning_path_id}"
 
-        expect(response).to be_successful
-        expect(json["delete"]).to eq(true)
-      end
+      json = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(json["delete"]).to eq(true)
     end
   end
 
