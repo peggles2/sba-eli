@@ -5,6 +5,10 @@
   margin-bottom: 20px;
   border: $main-border;
   border-radius: 0.28571429rem;
+
+  .content {
+    padding-top: 0 !important;
+  }
 }
 
 .topic-content-select {
@@ -20,6 +24,7 @@
 
 .topic-content-item-group {
   margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .topic-content-item {
