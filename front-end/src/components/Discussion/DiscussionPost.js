@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Form, Grid, Message, TextArea} from "semantic-ui-react";
+import {StripHtmlTags} from "../HelperFunctions"
 import {connect} from "react-redux";
 import {postDiscussion} from "../../actions/discussionActions"
 
@@ -11,9 +12,19 @@ export class DiscussionPost extends Component {
     this.submitPost = this.submitPost.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.post_id !== prevProps.post_id) {
+      this.clearPostById(this.props.post_id)
+    }
+  }
+
   clearPost(event, post_id) {
     event.preventDefault();
-    if (document.getElementById("discussion_input_" + post_id)) {
+    this.clearPostById(post_id)
+  }
+
+  clearPostById(post_id) {
+    if (post_id && document.getElementById("discussion_input_" + post_id)) {
       document.getElementById("discussion_input_" + post_id).value = "";
     }
   }
@@ -22,7 +33,7 @@ export class DiscussionPost extends Component {
     event.preventDefault();
     let post_body = document.getElementById("discussion_input_" + post_id)
     if (post_body) {
-      let post_body_value = post_body.value.replace(/(<([^>]+)>)/ig, "");
+      let post_body_value = StripHtmlTags(post_body.value);
 
       this.props.dispatch(
           postDiscussion(
@@ -53,6 +64,7 @@ export class DiscussionPost extends Component {
           <ul>{this.getErrorList(post_id)}</ul>
         </Message>
       } else {
+        this.clearPostById(post_id)
         return <Message positive>
           <Message.Header>Post submitted</Message.Header>
           <p>If you are new to our system, your post will be moderated before going live</p>

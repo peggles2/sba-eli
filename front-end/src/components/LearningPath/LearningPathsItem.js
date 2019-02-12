@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Card, Image } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 import { connect } from "react-redux";
 import LearningPathProgress from "./LearningPathProgress";
 
@@ -14,10 +13,8 @@ export class LearningPathsItem extends Component {
 
     if(!courseProgress.error && courseProgress.requirement_completed_count) {
       completed = courseProgress.requirement_completed_count;
-      return completed;
-    } else {
-      return completed;
-    };
+    } 
+    return completed;
   };
 
   totalMicroLearningEvents = () => {
@@ -27,10 +24,8 @@ export class LearningPathsItem extends Component {
 
     if(!courseProgress.error && courseProgress.requirement_count) {
       total = courseProgress.requirement_count;
-      return total;
-    } else {
-      return total;
-    };
+    }
+    return total;
   };
 
   learningPathProgress = () => {

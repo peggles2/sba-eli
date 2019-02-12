@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Grid, Image } from "semantic-ui-react";
+import { Grid, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getLearningEventsIfNeeded } from "../../actions/learningEventActions";

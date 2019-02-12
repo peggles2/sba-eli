@@ -24,6 +24,7 @@ describe "DiscussionsController" do
     it "Creates new discussion a new post" do
       VCR.turned_off do
         stub_get_user_request(id: user_id, email: email)
+        stub_discourse_create_post(username: ENV["DISCOURSE_USER"])
         stub_discourse_create_post(user_id: user_id)
         post "/discussions/#{content_type}/#{content_id}",
           params: {

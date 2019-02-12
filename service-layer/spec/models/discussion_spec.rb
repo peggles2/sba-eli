@@ -38,11 +38,6 @@ describe "Discussion" do
     expect(subject).to_not be_valid
   end
 
-  it "is invalid if the raw value is under 20 characters" do
-    subject.raw = "Under 20"
-    expect(subject).to_not be_valid
-  end
-
   it "is invalid without user" do
     subject.user = nil
     expect(subject).to_not be_valid
@@ -50,6 +45,7 @@ describe "Discussion" do
 
   it "creates a new discussion" do
     VCR.turned_off do
+      stub_discourse_create_post(username: ENV["DISCOURSE_USER"])
       stub_discourse_create_post(user_id: subject.user.id)
       expect(subject.create).to be_truthy
     end
