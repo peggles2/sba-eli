@@ -41,7 +41,11 @@
     }
 
     .learning-path-item {
-      padding: 20px !important;
+      padding: 0px !important;
+
+      .navigation-learning-path {
+        padding: 20px !important;
+      }
     }
 
     .learning-path-item:hover {
@@ -129,4 +133,15 @@
 
 .ui.button.invisible {
   display: none;
+}
+
+// NavigationLearningObjective.js
+.navbar-topic-item {
+  padding: 0px !important;
+
+  .navbar-topic-item-link {
+    padding: 13px 16px !important;
+    display: inline-block;
+    width: 100%;
+  }
 }
