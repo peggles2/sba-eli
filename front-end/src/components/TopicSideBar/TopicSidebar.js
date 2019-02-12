@@ -26,7 +26,6 @@ export default class TopicSideBar extends Component {
     const { event_id } = this.props;
 
     if (topics.length) {
-      let topicsComplete = 0;
       return (
         <Container fluid className={"topic-container"}>
           <Accordion>
@@ -34,7 +33,6 @@ export default class TopicSideBar extends Component {
               let topicCircle = idx + 1;
               if (topic.completed_at) {
                 topicCircle = <Icon name="checkmark" />;
-                topicsComplete++;
               }
               return (
                 <React.Fragment key={"topicSidebar" + idx}>
