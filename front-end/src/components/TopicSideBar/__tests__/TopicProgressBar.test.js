@@ -1,5 +1,6 @@
 import React from "react";
 import { TopicProgress } from "../TopicProgress";
+import RegisterButton  from "../../Buttons/RegisterButton";
 import { shallow } from "enzyme";
 import { Grid, Button, Progress } from "semantic-ui-react";
 
@@ -13,11 +14,9 @@ describe("TopicProgressBar", () => {
   it("should show a register button and appropriate text if logged out", () => {
     const props = { isUserLoggedIn: false }
     const wrapper = shallow(<TopicProgress {...props}/>);
-    // wrapper.setState({ isLoggedIn: false });
 
     expect(wrapper.find(Grid).exists()).toBe(true);
-    expect(wrapper.find(Button).exists()).toBe(true);
-
+    expect(wrapper.find(RegisterButton).exists()).toBe(true)
     expect(
       wrapper
         .find(Grid.Column)

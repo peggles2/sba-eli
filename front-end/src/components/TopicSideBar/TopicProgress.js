@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Grid, Icon, Progress, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Grid, Icon, Progress } from "semantic-ui-react";
+import RegisterButton from "../Buttons/RegisterButton";
 
 import { connect } from "react-redux";
 import { getProgressOfLearningPath } from "../../actions/learningPathActions";
@@ -98,9 +98,7 @@ export class TopicProgress extends Component {
           </Grid.Row>
           <Grid.Row className={"topic-progress-register-row"}>
             <Grid.Column textAlign={"center"}>
-              <Link to={`/signup`}>
-                <Button primary>Register</Button>
-              </Link>
+              <RegisterButton />
             </Grid.Column>
           </Grid.Row>
         </React.Fragment>
