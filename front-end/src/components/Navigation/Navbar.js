@@ -51,13 +51,13 @@ export class Navbar extends Component {
   logoutLink() {
     return (
       <div className="logoutLink">
-        <a
+        <Button className="logout-link-button"
           onClick={() =>
             this.props.dispatch(logoutUserAndReset(this.props.accessToken))
           }
         >
           Log out
-        </a>
+        </Button>
       </div>
     );
   }
