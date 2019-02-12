@@ -25,12 +25,12 @@ export class LearningPath extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.isUserLoggedIn !== prevProps.isUserLoggedIn) {
-      const id = this.props.match.params.id;
-      this.props.dispatch(getPathWithTopics(id));
-    }
-    
-    if(this.props.match.params.topicId !== prevProps.match.params.topicId && this.props.match.params.eventId !== prevProps.match.params.eventId) {
+    const { isUserLoggedIn } = this.props;
+    const { id } = this.props.match.params;
+    const { isUserLoggedIn: prevIsUserLoggedIn } = prevProps;
+    const { id: prevId } = prevProps.match.params;
+
+    if (id !== prevId || isUserLoggedIn !== prevIsUserLoggedIn) {
       this.initialFunctions();
     }
   }

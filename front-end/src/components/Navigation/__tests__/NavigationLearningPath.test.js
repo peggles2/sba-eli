@@ -4,8 +4,8 @@ import { Dropdown } from "semantic-ui-react";
 import NavigationLearningPath from "../NavigationLearningPath";
 import { shallow, mount } from "enzyme";
 
-import { Provider } from 'react-redux'
-import { getMockStore } from '../../../store';
+import { Provider } from "react-redux";
+import { getMockStore } from "../../../store";
 
 describe("NavigationLearningPath", () => {
   const initialState = {
@@ -13,7 +13,7 @@ describe("NavigationLearningPath", () => {
       LearningEvents: []
     },
     learningObjective: {
-      learningObjectives: []
+      adminObjectivesCollection: {}
     },
     learningPath: {
       learningPaths: [
@@ -25,16 +25,16 @@ describe("NavigationLearningPath", () => {
     login: {
       isUserLoggedIn: true,
       userData: {
-        access_token: ''
+        access_token: ""
       }
     }
-  }
+  };
   const mockStore = getMockStore();
   let store;
 
-  beforeEach(()=> {
+  beforeEach(() => {
     store = mockStore(initialState);
-  })
+  });
 
   it("should render a <Dropdown>", () => {
     const wrapper = mount(

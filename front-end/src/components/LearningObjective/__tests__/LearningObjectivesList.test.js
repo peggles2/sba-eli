@@ -1,10 +1,12 @@
 import React from "react";
 import { List } from "semantic-ui-react";
-import ConnectedLearningObjectivesList, { LearningObjectivesList } from "../LearningObjectivesList";
+import ConnectedLearningObjectivesList, {
+  LearningObjectivesList
+} from "../LearningObjectivesList";
 import { shallow, mount } from "enzyme";
 
-import { Provider } from 'react-redux'
-import { getMockStore } from '../../../store';
+import { Provider } from "react-redux";
+import { getMockStore } from "../../../store";
 
 describe("LearningObjectivesList", () => {
   const initialState = {
@@ -12,30 +14,40 @@ describe("LearningObjectivesList", () => {
       LearningEvents: []
     },
     learningObjective: {
-      learningObjectives: []
+      adminObjectivesCollection: {}
     },
     login: {
       isUserLoggedIn: true,
       userData: {
-        access_token: ''
+        access_token: ""
       }
     }
-  }
+  };
   const mockStore = getMockStore();
   let store;
 
-  beforeEach(()=> {
+  beforeEach(() => {
     store = mockStore(initialState);
-  })
+  });
 
   it("should render a <List>", () => {
-    const wrapper = shallow(<LearningObjectivesList dispatch={()=>{}} />);
+    const wrapper = shallow(
+      <LearningObjectivesList
+        dispatch={() => {}}
+        adminObjectivesCollection={{}}
+        course_id={1}
+      />
+    );
 
     expect(wrapper.find(List).length).toEqual(1);
   });
 
   it("should render at least one <li>", () => {
-    const wrapper = mount(<Provider store={store}><ConnectedLearningObjectivesList course_id="1" /></Provider>);
+    const wrapper = mount(
+      <Provider store={store}>
+        <ConnectedLearningObjectivesList course_id="1" />
+      </Provider>
+    );
 
     expect(wrapper.find(List).length).toBeGreaterThanOrEqual(1);
   });
