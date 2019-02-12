@@ -15,7 +15,7 @@ class DiscussionReply
                 :user
 
   validates :discussion_id, presence: true
-  validates :raw, presence: true, length: { minimum: 20 }
+  validates :raw, presence: true
   validates :user, presence: true
 
   def create
@@ -28,17 +28,15 @@ class DiscussionReply
       api_username: username,
     )
 
-    self.id = response["id"]
-    self.body = response["cooked"]
-    self.user_name = response["display_username"]
-    self.user_title = response["user_title"]
-    self.timestamp = response["created_at"]
-    self.post_number = response["post_number"]
-    self.reply_to_post_number = response["reply_to_post_number"]
+    set_from_response(response)
 
     true
   rescue DiscourseApi::UnauthenticatedError
     errors.add(:user, " is unable to post. Please contact the administrator.")
+    false
+  rescue DiscourseApi::Error => e
+    Rail.logger.error e
+    errors.add("An error was detected trying to post. Please contact the administrator.")
     false
   end
 
@@ -54,9 +52,24 @@ class DiscussionReply
     @replies || []
   end
 
+  def set_from_response(response)
+    if !response.nil?
+      self.id = response["id"]
+      self.body = response["cooked"]
+      self.user_name = response["display_username"]
+      self.user_title = response["user_title"]
+      self.timestamp = response["created_at"]
+      self.post_number = response["post_number"]
+      self.reply_to_post_number = response["reply_to_post_number"]
+    end
+  end
+
   class << self
-    def from_discourse_list(reponse)
-      posts_hash = reponse["post_stream"]["posts"]
+    def from_discourse_list(response)
+      posts_hash = response["post_stream"]["posts"]
+
+      # remove the initial system generated post
+      posts_hash.delete_at(0)
 
       # create collection of all top level posts
       post_list = posts_hash.reject { |r| r["reply_to_post_number"].present? }.
@@ -70,16 +83,10 @@ class DiscussionReply
       end
     end
 
-    def from_hash(reply)
-      DiscussionReply.new(
-        id: reply["id"],
-        body: reply["cooked"],
-        user_name: reply["display_username"],
-        user_title: reply["user_title"],
-        timestamp: reply["created_at"],
-        post_number: reply["post_number"],
-        reply_to_post_number: reply["reply_to_post_number"],
-      )
+    def from_hash(hash)
+      reply = DiscussionReply.new
+      reply.set_from_response(hash)
+      reply
     end
   end
 

@@ -12,16 +12,17 @@ export function getDiscussion(content_type, content_id) {
 
 export function postDiscussion(bodyData, content_type, content_id) {
   const url = "/discussions/" + content_type + "/" + content_id
+  let replyBody = {raw: bodyData}
+  if (content_type === "comment") {
+    replyBody["reply_to_post_number"] = content_id;
+  }
 
   return (dispatch, getState) => {
     return dispatch({
       type: "POST_DISCUSSION",
       payload: axios.post(url, 
         {
-          'discussion_reply': {
-            raw: bodyData,
-            reply_to_post_number: content_id
-          }
+          'discussion_reply': replyBody
         }, 
         axiosConfig(getState(), 
           {

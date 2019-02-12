@@ -12,6 +12,8 @@ class DiscussionsController < ApplicationController
                               discussion_map.discussion_id,
                             )
                             @post_count = response["post_stream"]["posts"].size
+                            # remove the count for the initial system generated post
+                            @post_count = @post_count.positive? ? @post_count - 1 : 0
                             DiscussionReply.from_discourse_list(response)
                           else
                             @post_count = 0
