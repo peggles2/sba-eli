@@ -16,7 +16,7 @@ export class LearningPathsItem extends Component {
       return completed;
     } else {
       return completed;
-    };
+    } 
   };
 
   totalMicroLearningEvents = () => {
@@ -29,7 +29,7 @@ export class LearningPathsItem extends Component {
       return total;
     } else {
       return total;
-    };
+    }
   };
 
   learningPathProgress = () => {
