@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import LearningPathsItem from "./LearningPathsItem";
 import './LearningPathsList.scss';
