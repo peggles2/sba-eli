@@ -64,7 +64,6 @@ export default class TopicSideBar extends Component {
 
           <TopicProgress
             course_id={this.props.course_id}
-            topicsComplete={topicsComplete}
             topicsTotal={topics.length}
           />
         </Container>

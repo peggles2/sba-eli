@@ -23,7 +23,7 @@ export class TopicProgress extends Component {
 
   getTotalTopics() {
     if(this.props.learningPathProgressError) {
-      return this.props.topicsComplete;
+      return this.props.topicsTotal;
     } else {
       return this.props.learningPathProgress.course_progress.requirement_count;
     }
