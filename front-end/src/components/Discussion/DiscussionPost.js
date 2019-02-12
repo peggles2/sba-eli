@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Form, Grid, Message, TextArea} from "semantic-ui-react";
+import {StripHtmlTags} from "../HelperFunctions"
 import {connect} from "react-redux";
 import {postDiscussion} from "../../actions/discussionActions"
 
@@ -32,7 +33,7 @@ export class DiscussionPost extends Component {
     event.preventDefault();
     let post_body = document.getElementById("discussion_input_" + post_id)
     if (post_body) {
-      let post_body_value = post_body.value.replace(/(<([^>]+)>)/ig, "");
+      let post_body_value = StripHtmlTags(post_body.value);
 
       this.props.dispatch(
           postDiscussion(

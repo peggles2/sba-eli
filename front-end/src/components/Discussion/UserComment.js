@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Grid, Image} from "semantic-ui-react";
+import {StripHtmlTags} from "../HelperFunctions"
 import {connect} from "react-redux";
 import Discussion from "./Discussion";
 import ReplyLink from "./ReplyLink";
@@ -90,7 +91,7 @@ export class UserComment extends Component {
             </Grid.Row>
             <Grid.Row columns={1}>
               <Grid.Column>
-                {replies.body.replace(/(<([^>]+)>)/ig, "")}
+                {StripHtmlTags(replies.body)}
               </Grid.Column>
             </Grid.Row>
             {this.replyLink(parent_content_type, replies)}
