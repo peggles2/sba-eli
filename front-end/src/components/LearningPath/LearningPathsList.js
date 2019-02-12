@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import { Card } from "semantic-ui-react";
 import { connect } from "react-redux";
 import LearningPathsItem from "./LearningPathsItem";
@@ -6,7 +6,7 @@ import './LearningPathsList.scss';
 
 import { getLearningPaths, getLearningPathsProgress } from "../../actions/learningPathActions";
 
-export class LearningPathsList extends React.Component {
+export class LearningPathsList extends Component {
   componentDidMount() {
     this.props.getLearningPaths();
     this.props.getLearningPathsProgress();
