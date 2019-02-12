@@ -28,15 +28,7 @@ class DiscussionReply
       api_username: username,
     )
 
-    if !response.nil?
-      self.id = response["id"]
-      self.body = response["cooked"]
-      self.user_name = response["display_username"]
-      self.user_title = response["user_title"]
-      self.timestamp = response["created_at"]
-      self.post_number = response["post_number"]
-      self.reply_to_post_number = response["reply_to_post_number"]
-    end
+    set_from_response(response)
 
     true
   rescue DiscourseApi::UnauthenticatedError
@@ -59,6 +51,18 @@ class DiscussionReply
     @replies || []
   end
 
+  def set_from_response(response)
+    if !response.nil?
+      self.id = response["id"]
+      self.body = response["cooked"]
+      self.user_name = response["display_username"]
+      self.user_title = response["user_title"]
+      self.timestamp = response["created_at"]
+      self.post_number = response["post_number"]
+      self.reply_to_post_number = response["reply_to_post_number"]
+    end
+  end
+
   class << self
     def from_discourse_list(response)
       posts_hash = response["post_stream"]["posts"]
@@ -78,16 +82,10 @@ class DiscussionReply
       end
     end
 
-    def from_hash(reply)
-      DiscussionReply.new(
-        id: reply["id"],
-        body: reply["cooked"],
-        user_name: reply["display_username"],
-        user_title: reply["user_title"],
-        timestamp: reply["created_at"],
-        post_number: reply["post_number"],
-        reply_to_post_number: reply["reply_to_post_number"],
-      )
+    def from_hash(hash)
+      reply = DiscussionReply.new
+      reply.set_from_response(hash)
+      reply
     end
   end
 
