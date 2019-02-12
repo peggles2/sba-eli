@@ -30,7 +30,10 @@ export class LearningEvent extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.match !== prevProps.match) {
+    const { isUserLoggedIn, match } = this.props;
+    const { isUserLoggedIn: prevIsUserLoggedIn, match: prevMatch } = prevProps;
+
+    if (match !== prevMatch || isUserLoggedIn !== prevIsUserLoggedIn) {
       this.setLearningEvent();
     }
   }
@@ -67,7 +70,10 @@ export class LearningEvent extends Component {
             canonicalUrl=""
           />
           <LearningEventHeader event={learningEvent} topicTitle={topicTitle} />
-          <LearningEventManager event={learningEvent} courseId={this.props.match.params.id} />
+          <LearningEventManager
+            event={learningEvent}
+            courseId={this.props.match.params.id}
+          />
           <Divider />
           <LearningEventFooter
             courseId={course_id}
@@ -88,7 +94,8 @@ const eventProps = {
 const mapStateToProps = store => {
   return {
     learningEvent: store.learningEvent.learningEvent,
-    learningEventsCollection: store.learningEvent.learningEventsCollection
+    learningEventsCollection: store.learningEvent.learningEventsCollection,
+    isUserLoggedIn: store.login.isUserLoggedIn
   };
 };
 
