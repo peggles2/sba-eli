@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Item, Icon } from "semantic-ui-react";
+import { Item, Icon, Image } from "semantic-ui-react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { getLearningEventsIfNeeded } from "../../actions/learningEventActions";
@@ -20,14 +20,12 @@ export class TopicEventList extends Component {
     );
   }
 
-  getIcon(eventType) {
-    switch (eventType) {
-      case "Quiz":
-        return "pencil alternate";
-      default:
-        return "image";
+  getCustomData(event, field, defaultValue) {
+    if (!event || !event.custom_data || !field){
+      return defaultValue;
     }
-  }
+    return event.custom_data[field];
+  };
 
   handleItemClick(url) {
     this.props.history.push(url);
@@ -44,22 +42,18 @@ export class TopicEventList extends Component {
             ? "event-list-accordion-item active-event"
             : "event-list-accordion-item";
 
+        const eventType = this.getCustomData(event, 'event_type', event.type);
+        const imageUrl = "https://s3.amazonaws.com/sba-eli-assets-s3-bucket-dev/Platform+Graphics/Left+Nav+Icons/" + eventType + "-nav.png";
         return (
           <Item
             key={"eventListItem" + index}
             className={itemClassName}
             onClick={() => this.handleItemClick(url + event.id)}
           >
-            <Item.Header>
-              <Icon
-                className={"event-list-item-icon"}
-                name={this.getIcon(event.type)}
-                size="big"
-              />
-              <span>
-                {event.title}
-              </span>
-            </Item.Header>
+            <Item.Image src={imageUrl} size="tiny"/>
+            <Item.Content>
+              <Item.Description>{event.title}</Item.Description>
+            </Item.Content>
           </Item>
         );
       });
