@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Divider, List } from "semantic-ui-react";
 import { connect } from "react-redux";
 
-import { getLearningObjectivesForAdmin } from "../../actions/learningObjectiveActions";
+import { getObjectivesForAdminIfNeeded } from "../../actions/learningObjectiveActions";
 
 export class NavigationLearningObjective extends Component {
   componentDidMount() {
@@ -12,12 +12,12 @@ export class NavigationLearningObjective extends Component {
 
   fetchData() {
     this.props.dispatch(
-      getLearningObjectivesForAdmin(this.props.learningPathId)
+      getObjectivesForAdminIfNeeded(this.props.learningPathId)
     );
   }
 
   topicNumber() {
-    const objectives = this.props.learningObjectives || [];
+    const objectives = this.getObjectivesFromCollection();
     const topicNumber = objectives.length;
 
     if (topicNumber === 1) {
@@ -39,9 +39,14 @@ export class NavigationLearningObjective extends Component {
     );
   }
 
+  getObjectivesFromCollection() {
+    const { adminObjectivesCollection, learningPathId: pathId } = this.props;
+    return adminObjectivesCollection[pathId] || [];
+  }
+
   render() {
-    const pathId = this.props.learningPathId;
-    const objectives = this.props.learningObjectives || [];
+    const { learningPathId: pathId } = this.props;
+    const objectives = this.getObjectivesFromCollection();
     const topics = objectives.map((lo, index) => {
       return (
         <List.Item key={"learning_objective_" + index}>
@@ -71,7 +76,7 @@ export class NavigationLearningObjective extends Component {
 
 const mapStateToProps = store => {
   return {
-    learningObjectives: store.learningObjective.learningObjectives
+    adminObjectivesCollection: store.learningObjective.adminObjectivesCollection
   };
 };
 
