@@ -129,6 +129,11 @@
     margin-right: 90px;
     cursor: pointer;
   }
+
+  .logout-link-button {
+    @include button-as-link;
+    color: $sba-white;
+  }
 }
 
 .ui.button.invisible {
