@@ -107,7 +107,7 @@ jobs:
           keys:
             - front-end-dependencies-{{ checksum "package-lock.json" }}
       - run: npm install
-      - run: npm eslint ./src
+      - run: ./node_modules/.bin/eslint src
       - save_cache:
           key: front-end-dependencies-{{ checksum "package-lock.json" }}
           paths:
