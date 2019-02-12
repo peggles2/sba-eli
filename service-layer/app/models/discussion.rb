@@ -31,17 +31,11 @@ class Discussion
       raw: "System generated first reply for #{content_type} #{content_id}. Disregard",
     )
 
-    # Rails.logger.info "* Discourse Topic Reply **************************************"
-    # Rails.logger.info topic_reponse
-
     discussion_map = DiscussionMap.create!(
       content_type: content_type,
       content_id: content_id,
       discussion_id: topic_reponse["topic_id"],
     )
-
-    # Rails.logger.info "* Discussion Map discussion_id *******************************"
-    # Rails.logger.info discussion_map.discussion_id
 
     # Create reply to dicussion topic for a general user.
     # The topic return may contain a null response, because users that do not
