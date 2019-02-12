@@ -34,7 +34,8 @@ class DiscussionReply
   rescue DiscourseApi::UnauthenticatedError
     errors.add(:user, " is unable to post. Please contact the administrator.")
     false
-  rescue DiscourseApi::Error
+  rescue DiscourseApi::Error => e
+    Rail.logger.error e
     errors.add("An error was detected trying to post. Please contact the administrator.")
     false
   end
