@@ -3,16 +3,20 @@ function defaultState() {
     learningObjective: {},
     learningObjectiveLoading: false,
     learningObjectiveError: null,
-  
+
     learningObjectives: [],
     learningObjectivesLoading: false,
-    learningObjectivesError: null
-  }
+    learningObjectivesError: null,
+
+    adminObjectivesCollection: {},
+    adminObjectivesErrors: {},
+    adminObjectivesLoading: {}
+  };
 }
 
 export default function reducer(state = defaultState(), action) {
   switch (action.type) {
-    case 'RESET':
+    case "RESET":
       return defaultState();
     case "GET_LEARNING_OBJECTIVE":
       return {
@@ -56,6 +60,56 @@ export default function reducer(state = defaultState(), action) {
         learningObjectivesLoading: false,
         learningObjectivesError: null
       };
+    case "GET_LEARNING_OBJECTIVES_ADMIN": {
+      const { course_id } = action.payload.config.params;
+      return {
+        ...state,
+        adminObjectivesCollection: {
+          ...state.adminObjectivesCollection,
+          [course_id]: []
+        },
+        adminObjectivesErrors: {
+          ...state.adminObjectivesErrors,
+          [course_id]: null
+        },
+        adminObjectivesLoading: {
+          ...state.adminObjectivesLoading,
+          [course_id]: true
+        }
+      };
+    }
+    case "GET_LEARNING_OBJECTIVES_ADMIN_FAILURE": {
+      const { course_id } = action.payload.config.params;
+      return {
+        ...state,
+        adminObjectivesErrors: {
+          ...state.adminObjectivesErrors,
+          [course_id]: action.payload
+        },
+        adminObjectivesLoading: {
+          ...state.adminObjectivesLoading,
+          [course_id]: false
+        }
+      };
+    }
+    case "GET_LEARNING_OBJECTIVES_ADMIN_FULFILLED": {
+      const { course_id } = action.payload.config.params;
+      return {
+        ...state,
+        adminObjectivesCollection: {
+          ...state.adminObjectivesCollection,
+          [course_id]: action.payload.data
+        },
+        adminObjectivesErrors: {
+          ...state.adminObjectivesErrors,
+          [course_id]: null
+        },
+        adminObjectivesLoading: {
+          ...state.adminObjectivesLoading,
+          [course_id]: false
+        }
+      };
+    }
     default:
       break;
   }

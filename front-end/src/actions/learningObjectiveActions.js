@@ -40,8 +40,22 @@ export function getLearningObjectivesForAdmin(course_id) {
 
   return dispatch => {
     dispatch({
-      type: "GET_LEARNING_OBJECTIVES",
+      type: "GET_LEARNING_OBJECTIVES_ADMIN",
       payload: axios.get(`/learning_objectives/`, axiosConfigForAdmin(params))
     });
   };
+}
+
+export function getObjectivesForAdminIfNeeded(course_id) {
+  return (dispatch, getState) => {
+    if (shouldGetObjectivesForAdmin(course_id, getState())) {
+      return dispatch(getLearningObjectivesForAdmin(course_id));
+    } else {
+      return Promise.resolve();
+    }
+  };
+}
+
+function shouldGetObjectivesForAdmin(course_id, state) {
+  return !state.learningObjective.adminObjectivesCollection[course_id];
 }
