@@ -96,6 +96,13 @@ export function getProgressOfLearningPath(id) {
     dispatch({
       type: "GET_PROGRESS_OF_LEARNING_PATH",
       payload: axios.get(`/learning_paths/${id}/check_progress`, axiosConfig(getState())),
+    }).then((res) => {
+      if(res.value.data.course_progress.error) {
+        dispatch({
+          type: "GET_PROGRESS_OF_LEARNING_PATH_FAILURE",
+          payload: res.value,
+        });
+      };
     });
   };
 };

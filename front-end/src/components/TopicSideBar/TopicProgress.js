@@ -13,18 +13,16 @@ export class TopicProgress extends Component {
     };
   };
 
-  getCompletedTopics = () => {
-    if(this.props.learningPathProgress.errors) {
+  getCompletedTopics() {
+    if(this.props.learningPathProgressError) {
       return 0;
     } else {
       return this.props.learningPathProgress.course_progress.requirement_completed_count;
     }
   };
 
-  getTotalTopics = () => {
-    const error = this.props.learningPathProgress.errors;
-
-    if(this.props.learningPathProgress.errors) {
+  getTotalTopics() {
+    if(this.props.learningPathProgressError) {
       return this.props.topicsComplete;
     } else {
       return this.props.learningPathProgress.course_progress.requirement_count;
@@ -125,6 +123,7 @@ const mapStateToProps = store => {
   return {
     isUserLoggedIn: store.login.isUserLoggedIn,
     learningPathProgress: store.learningPath.learningPathProgress,
+    learningPathProgressError: store.learningPath.learningPathProgressError,
   };
 };
 

@@ -13,6 +13,7 @@ function defaultState() {
     learningPathsProgressError: null,
 
     learningPathProgress: {},
+    learningPathProgressLoading: false,
     learningPathProgressError: null,
 
     latestUserEnrollment: {},
@@ -111,19 +112,22 @@ export default function reducer(state = defaultState(), action) {
       return {
         ...state,
         learningPathProgress: {},
+        learningPathProgressLoading: true,
         learningPathProgressError: null,
       };
     case "GET_PROGRESS_OF_LEARNING_PATH_FAILURE":
       return {
         ...state,
         learningPathProgress: null,
+        learningPathProgressLoading: false,
         learningPathProgressError: action.payload.data,
       };
     case "GET_PROGRESS_OF_LEARNING_PATH_FULFILLED":
       return {
         ...state,
         learningPathProgress: action.payload.data,
-        learningPathProgressError: null,
+        learningPathProgressLoading: false,
+        learningPathProgressError: false,
       };
     case "GET_TOPICS_FOR_LEARNING_PATH":
       return {
@@ -202,31 +206,31 @@ export default function reducer(state = defaultState(), action) {
         hasUserStartedJourney: false,
       };
     case 'GET_LEARNING_PATH_QUIZZES':
-      return {...state, quizzes: [], quizzesLoading: true, quizzesError: null} 
+      return {...state, quizzes: [], quizzesLoading: true, quizzesError: null}
     case 'GET_LEARNING_PATH_QUIZZES_FAILURE':
-      return {...state, quizzes: [], quizzesLoading: false, quizzesError: action.payload} 
+      return {...state, quizzes: [], quizzesLoading: false, quizzesError: action.payload}
     case 'GET_LEARNING_PATH_QUIZZES_FULFILLED':
-      return {...state, quizzes: action.payload.data, quizzesLoading: false, quizzesError: null} 
+      return {...state, quizzes: action.payload.data, quizzesLoading: false, quizzesError: null}
     case 'GET_LEARNING_PATH_QUIZ':
-      return {...state, quiz: {}, quizLoading: true, quizError: null} 
+      return {...state, quiz: {}, quizLoading: true, quizError: null}
     case 'GET_LEARNING_PATH_QUIZ_FAILURE':
-      return {...state, quiz: {}, quizLoading: false, quizError: action.payload} 
+      return {...state, quiz: {}, quizLoading: false, quizError: action.payload}
     case 'GET_LEARNING_PATH_QUIZ_FULFILLED':
-      return {...state, quiz: action.payload.data, quizLoading: false, quizError: null} 
+      return {...state, quiz: action.payload.data, quizLoading: false, quizError: null}
     case 'GET_LEARNING_PATH_QUIZ_SUBMISSIONS':
-      return {...state, quizSubmissions: [], quizSubmissionsLoading: true, quizSubmissionsError: null} 
+      return {...state, quizSubmissions: [], quizSubmissionsLoading: true, quizSubmissionsError: null}
     case 'GET_LEARNING_PATH_QUIZ_SUBMISSIONS_FAILURE':
-      return {...state, quizSubmissions: [], quizSubmissionsLoading: false, quizSubmissionsError: action.payload} 
+      return {...state, quizSubmissions: [], quizSubmissionsLoading: false, quizSubmissionsError: action.payload}
     case 'GET_LEARNING_PATH_QUIZ_SUBMISSIONS_FULFILLED':
-      return {...state, quizSubmissions: action.payload.data, quizSubmissionsLoading: false, quizSubmissionsError: null} 
+      return {...state, quizSubmissions: action.payload.data, quizSubmissionsLoading: false, quizSubmissionsError: null}
     case 'SUBMIT_QUIZ':
-      return {...state, submitQuiz: null, submitQuizLoading: true, submitQuizError: null} 
+      return {...state, submitQuiz: null, submitQuizLoading: true, submitQuizError: null}
     case 'CLEAR_SUBMIT_QUIZ':
-      return {...state, submitQuiz: null, submitQuizLoading: false, submitQuizError: null} 
+      return {...state, submitQuiz: null, submitQuizLoading: false, submitQuizError: null}
     case 'SUBMIT_QUIZ_FAILURE':
-      return {...state, submitQuiz: null, submitQuizLoading: false, submitQuizError: action.payload} 
+      return {...state, submitQuiz: null, submitQuizLoading: false, submitQuizError: action.payload}
     case 'SUBMIT_QUIZ_FULFILLED':
-      return {...state, submitQuiz: action.payload.data, submitQuizLoading: false, submitQuizError: null} 
+      return {...state, submitQuiz: action.payload.data, submitQuizLoading: false, submitQuizError: null}
     default:
       break;
   }
