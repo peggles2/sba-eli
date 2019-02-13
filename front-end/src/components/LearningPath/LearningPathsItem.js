@@ -43,20 +43,28 @@ export class LearningPathsItem extends Component {
     };
   };
 
+
+  getCustomData(customData, field, defaultValue) {
+    if (!customData || !field){
+      return defaultValue;
+    }
+    return customData[field];
+  };
+
   render() {
-    const learningPathDescription = "Maybe it means something more - something we can't yet understand."
-    const learningPathImage = `/Image_Placeholder.png`;
+    const defaultDescription = "Maybe it means something more - something we can't yet understand."
+    const defaultImage = `/Image_Placeholder.png`;
 
     return (
       <Card className="learning-path-card" href={"/learning_paths/" + this.props.id}>
         <Image
-          src={learningPathImage}
+          src={this.getCustomData(this.props.custom_data, "thumbnail_url", defaultImage)}
           alt="Journey Image Placeholder"
         />
         <Card.Content>
           <Card.Header className="learning-path-item-header">{this.props.name}</Card.Header>
           <Card.Meta>{this.props.course_code}</Card.Meta>
-          <Card.Description>{learningPathDescription}</Card.Description>
+          <Card.Description>{this.getCustomData(this.props.custom_data, "description", defaultDescription)}</Card.Description>
         </Card.Content>
         {this.learningPathProgress()}
       </Card>
