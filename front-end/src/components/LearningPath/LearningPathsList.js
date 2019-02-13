@@ -27,7 +27,8 @@ export class LearningPathsList extends React.Component {
     const result = this.props.learningPaths.map(c => <LearningPathsItem key={c.id}
                                                                         id={c.id}
                                                                         name={c.name}
-                                                                        course_code={c.course_code} />
+                                                                        course_code={c.course_code}
+                                                                        custom_data={c.custom_data} />
     )
 
     return result;
