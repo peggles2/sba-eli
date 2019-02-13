@@ -22,8 +22,17 @@
   display: none;
 }
 
-.event-list-accordion-item .description {
-  padding-right: 20px;
+.event-list-accordion-item {
+  padding-left: 20px !important;
+
+  .description {
+    padding-right: 20px;
+  }
+
+  .tiny.image {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .topic-content-item-group {
