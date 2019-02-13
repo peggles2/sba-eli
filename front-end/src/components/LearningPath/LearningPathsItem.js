@@ -12,7 +12,7 @@ export class LearningPathsItem extends Component {
 
     const courseProgress = this.props.course_progress;
 
-    if(!courseProgress.error && courseProgress.requirement_completed_count) {
+    if(courseProgress && !courseProgress.error && courseProgress.requirement_completed_count) {
       completed = courseProgress.requirement_completed_count;
       return completed;
     } else {
@@ -25,7 +25,7 @@ export class LearningPathsItem extends Component {
 
     const courseProgress = this.props.course_progress;
 
-    if(!courseProgress.error && courseProgress.requirement_count) {
+    if(courseProgress && !courseProgress.error && courseProgress.requirement_count) {
       total = courseProgress.requirement_count;
       return total;
     } else {

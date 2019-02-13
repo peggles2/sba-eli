@@ -25,12 +25,14 @@ export class LearningPathResume extends Component {
     let complete = 0;
     let total = 0;
 
-    const courseProgress = this.props.learningPathProgress.course_progress;
+    if (this.props.learningPathProgress) {
+      const courseProgress = this.props.learningPathProgress.course_progress;
 
-    if(courseProgress) {
-      complete = courseProgress.requirement_completed_count;
-      total = courseProgress.requirement_count;
-    };
+      if(courseProgress) {
+        complete = courseProgress.requirement_completed_count;
+        total = courseProgress.requirement_count;
+      };
+    }
 
     return (
       <LearningPathProgress complete={complete} total={total} />
