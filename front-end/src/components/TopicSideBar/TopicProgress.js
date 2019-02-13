@@ -3,43 +3,19 @@ import { Grid, Icon, Progress } from "semantic-ui-react";
 import RegisterButton from "../Buttons/RegisterButton";
 
 import { connect } from "react-redux";
-import { getProgressOfLearningPath } from "../../actions/learningPathActions";
 
 export class TopicProgress extends Component {
-  componentDidMount() {
-    if(this.props.isUserLoggedIn) {
-      const id = this.props.course_id;
-      this.props.getProgressOfLearningPath(id);
-    };
-  };
-
-  getCompletedTopics() {
-    if(this.props.learningPathProgressError) {
-      return 0;
-    } else {
-      return this.props.learningPathProgress.course_progress.requirement_completed_count;
-    }
-  };
-
-  getTotalTopics() {
-    if(this.props.learningPathProgressError) {
-      return this.props.topicsTotal;
-    } else {
-      return this.props.learningPathProgress.course_progress.requirement_count;
-    }
-  };
 
   renderForSessionState() {
     const { isUserLoggedIn } = this.props;
     if (isUserLoggedIn) {
-      const topicsComplete = this.getCompletedTopics();
-      const topicsTotal = this.getTotalTopics();
+      const { topicsComplete, topicsTotal } = this.props;
       const pathComplete = topicsComplete === topicsTotal;
       if (pathComplete) {
         //display "you completed your journey!"
         return (
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column className="topic-progress-finished">
               <Icon
                 name="image"
                 size="large"
@@ -87,7 +63,7 @@ export class TopicProgress extends Component {
       return (
         <React.Fragment>
           <Grid.Row>
-            <Grid.Column textAlign={"center"}>
+            <Grid.Column className="topic-progress-track-row" textAlign={"center"}>
               <Icon
                 name="image"
                 size="large"
@@ -120,15 +96,7 @@ export class TopicProgress extends Component {
 const mapStateToProps = store => {
   return {
     isUserLoggedIn: store.login.isUserLoggedIn,
-    learningPathProgress: store.learningPath.learningPathProgress,
-    learningPathProgressError: store.learningPath.learningPathProgressError,
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getProgressOfLearningPath: (id) => { dispatch(getProgressOfLearningPath(id)) },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopicProgress);
+export default connect(mapStateToProps)(TopicProgress);
