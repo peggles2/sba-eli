@@ -1,21 +1,21 @@
 import React, { Component } from "react";
-import { Grid, Icon, Progress, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Grid, Icon, Progress } from "semantic-ui-react";
+import RegisterButton from "../Buttons/RegisterButton";
 
-export default class TopicProgress extends Component {
-  state = { isLoggedIn: true };
+import { connect } from "react-redux";
+
+export class TopicProgress extends Component {
 
   renderForSessionState() {
-    const { isLoggedIn } = this.state;
-    if (isLoggedIn) {
-      //show progress bar or completed journey
+    const { isUserLoggedIn } = this.props;
+    if (isUserLoggedIn) {
       const { topicsComplete, topicsTotal } = this.props;
-      const pathComplete = topicsComplete === topicsTotal; //Logic for path complete
+      const pathComplete = topicsComplete === topicsTotal;
       if (pathComplete) {
         //display "you completed your journey!"
         return (
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column className="topic-progress-finished">
               <Icon
                 name="image"
                 size="large"
@@ -63,7 +63,7 @@ export default class TopicProgress extends Component {
       return (
         <React.Fragment>
           <Grid.Row>
-            <Grid.Column textAlign={"center"}>
+            <Grid.Column className="topic-progress-track-row" textAlign={"center"}>
               <Icon
                 name="image"
                 size="large"
@@ -74,9 +74,7 @@ export default class TopicProgress extends Component {
           </Grid.Row>
           <Grid.Row className={"topic-progress-register-row"}>
             <Grid.Column textAlign={"center"}>
-              <Link to={`/signup`}>
-                <Button primary>Register</Button>
-              </Link>
+              <RegisterButton />
             </Grid.Column>
           </Grid.Row>
         </React.Fragment>
@@ -92,5 +90,13 @@ export default class TopicProgress extends Component {
     return (
       <Grid className={"topic-progress"}>{this.renderForSessionState()}</Grid>
     );
-  }
-}
+  };
+};
+
+const mapStateToProps = store => {
+  return {
+    isUserLoggedIn: store.login.isUserLoggedIn,
+  };
+};
+
+export default connect(mapStateToProps)(TopicProgress);

@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2019_02_01_180344) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "abstract_courses", force: :cascade do |t|

@@ -96,7 +96,7 @@ export function getProgressOfLearningPath(id) {
     dispatch({
       type: "GET_PROGRESS_OF_LEARNING_PATH",
       payload: axios.get(`/learning_paths/${id}/check_progress`, axiosConfig(getState())),
-    });
+    })
   };
 };
 
@@ -110,9 +110,9 @@ export function getLatestUserEnrollment() {
         payload: axios.get(`users/${id}/enrollments/latest`, axiosConfig(getState())),
       }).then((res) => {
         if(res.value.data === null) {
-          dispatch({ type: "USER_HAS_NOT_STARTED_JOURNEY" });
+          return dispatch({ type: "USER_HAS_NOT_STARTED_JOURNEY" });
         } else {
-          dispatch({ type: "USER_HAS_STARTED_JOURNEY" });
+          return dispatch({ type: "USER_HAS_STARTED_JOURNEY" });
         };
       });
     };

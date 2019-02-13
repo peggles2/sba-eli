@@ -24,17 +24,16 @@ export default class TopicSideBar extends Component {
   renderTopicsList(topics = []) {
     const { activeIndex } = this.state;
     const { event_id } = this.props;
-
+    let topicsComplete = 0;
     if (topics.length) {
-      let topicsComplete = 0;
       return (
         <Container fluid className={"topic-container"}>
           <Accordion>
             {topics.map((topic, idx) => {
               let topicCircle = idx + 1;
               if (topic.completed_at) {
-                topicCircle = <Icon name="checkmark" />;
                 topicsComplete++;
+                topicCircle = <Icon name="checkmark" />;
               }
               return (
                 <React.Fragment key={"topicSidebar" + idx}>
@@ -63,6 +62,7 @@ export default class TopicSideBar extends Component {
           </Accordion>
 
           <TopicProgress
+            course_id={this.props.course_id}
             topicsComplete={topicsComplete}
             topicsTotal={topics.length}
           />
