@@ -25,6 +25,12 @@ export class NavigationLearningPath extends Component {
     this.fetchData();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.isUserLoggedIn !== prevProps.isUserLoggedIn) {
+      this.fetchData();
+    }
+  }
+
   fetchData() {
     this.props.dispatch(getLearningPaths());
   }
@@ -58,7 +64,8 @@ export class NavigationLearningPath extends Component {
 
 const mapStateToProps = store => {
   return {
-    learningPaths: store.learningPath.learningPaths
+    learningPaths: store.learningPath.learningPaths,
+    isUserLoggedIn: store.login.isUserLoggedIn
   };
 };
 
